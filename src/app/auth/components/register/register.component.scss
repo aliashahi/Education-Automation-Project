@@ -25,7 +25,6 @@ form {
 }
 mat-card {
   border-radius: 10px;
-
 }
 mat-card mat-card-title {
   font-weight: bold;
@@ -67,8 +66,9 @@ mat-card button {
 img {
   width: 75%;
 }
-#spin ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-  stroke:  #CA3A28;
+#spin ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #ca3a28;
 }
 mat-spinner {
   margin-top: 15px;

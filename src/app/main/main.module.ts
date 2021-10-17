@@ -1,14 +1,14 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { RouterModule, Routes } from "@angular/router";
-import { MainComponent } from "./container/main/main.component";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { MainComponent } from './container/main/main.component';
 const routes: Routes = [
   {
-    path: "main",
+    path: 'main',
     component: MainComponent,
   },
   {
-    path: "**",
+    path: '**',
     component: MainComponent,
   },
 ];
