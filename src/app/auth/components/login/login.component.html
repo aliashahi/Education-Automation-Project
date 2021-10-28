@@ -1,7 +1,7 @@
 <div
   class="
     main
-    min-h-screen
+    h-screen
     flex
     items-center
     justify-center
@@ -10,7 +10,7 @@
     px-4
     sm:px-6
     lg:px-8
-    bg-gray-100
+    bg-gray-100 bg-contain
   "
 >
   <img
@@ -28,12 +28,12 @@
       <input type="hidden" name="remember" value="true" />
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
-          <label for="email-address" class="sr-only">Email address</label>
+          <label for="username" class="not-sr-only">Username</label>
           <input
-            id="email-address"
-            name="email"
-            type="email"
-            autocomplete="email"
+            id="username"
+            name="username"
+            type="username"
+            autocomplete="username"
             required
             class="
               appearance-none
@@ -43,7 +43,6 @@
               w-full
               px-3
               py-2
-              my-4
               border border-gray-300
               placeholder-gray-500
               text-gray-900
@@ -52,12 +51,13 @@
               focus:border-indigo-500
               focus:z-10
               sm:text-sm
+              my-1
             "
-            placeholder="Email address"
+            placeholder="john.doe"
           />
         </div>
         <div>
-          <label for="password" class="sr-only">Password</label>
+          <label for="password" class="not-sr-only">Password</label>
           <input
             id="password"
             name="password"
@@ -80,9 +80,17 @@
               focus:border-indigo-500
               focus:z-10
               sm:text-sm
+              my-1
             "
             placeholder="Password"
           />
+        </div>
+        <div class="text-center py-2">
+          <mat-radio-group [selected]="first" class="flex justify-around">
+            <mat-radio-button #first value="S">Student</mat-radio-button>
+            <mat-radio-button value="T">Teacher</mat-radio-button>
+            <mat-radio-button value="M">Manager</mat-radio-button>
+          </mat-radio-group>
         </div>
       </div>
       <div class="flex items-center justify-between">
@@ -142,7 +150,7 @@
         >
           Sign in
         </button>
-        <div class="text-sm text-center pt-2">
+        <div class="text-sm text-start pt-2">
           <a
             [routerLink]="['/auth/register']"
             class="font-medium text-primary-700 hover:text-primary-800"

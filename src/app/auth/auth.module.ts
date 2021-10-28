@@ -4,6 +4,8 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { MatRadioModule } from '@angular/material/radio';
+
 const routes: Routes = [
   {
     path: 'login',
@@ -20,7 +22,12 @@ const routes: Routes = [
 ];
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(routes),
+    MatRadioModule,
+  ],
   exports: [LoginComponent, RegisterComponent],
 })
 export class AuthModule {}
