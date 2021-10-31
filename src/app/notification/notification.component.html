@@ -1,0 +1,41 @@
+<body>
+<div class="noti_im">
+  <img src="./assets/images/noti_imag.png" style="width: 100%; height: 100%">
+</div>  
+<div class="container">
+  <div class="not-title">
+    <h2>Notifications</h2>
+    <p>Write you notification, then click the submit button to save your notification</p>
+  </div>
+
+  <form action="/action_page.php">
+  <div class="row">
+    <div class="col-50">
+      <input type="text" name="subject" [(ngModel)]="title" placeholder="subject...">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-50">
+      <input type="text" id="explanation" name="explanation" [(ngModel)]="explanation" placeholder="Explanation..">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-50">
+      <textarea id="notifi" name="notifi" [(ngModel)]="notific" placeholder="Write something.." style="height:200px"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label class="select-file"><input type="file" id="myfile" name="myfile"></label>
+      <button (click)="submited()" type="submit" class="Submit">submit</button>
+    </div>
+  </div>
+  <div class="row">
+     <p *ngIf="mesage_active" class="mesage">{{mesage1}}{{mesage2}}</p> 
+  </div>
+  </form>
+</div>
+
+</body>
+
+
