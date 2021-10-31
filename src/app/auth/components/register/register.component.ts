@@ -9,6 +9,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  hidePass1 = true;
+  hidePass2 = true;
   forms = new FormGroup({
     username: new FormControl(null, [Validators.required]),
     first_name: new FormControl(null, [Validators.required]),

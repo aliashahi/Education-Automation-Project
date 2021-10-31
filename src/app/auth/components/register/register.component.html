@@ -97,8 +97,20 @@
             matInput
             placeholder="doe"
             formControlName="password"
+            [type]="hidePass1 ? 'password' : 'text'"
             required
           />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hidePass1 = !hidePass1"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePass1"
+          >
+            <mat-icon>{{
+              hidePass1 ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
           <mat-error
             *ngIf="
               forms.get('password')?.errors &&
@@ -113,8 +125,20 @@
             matInput
             placeholder="doe"
             formControlName="password2"
+            [type]="hidePass2 ? 'password' : 'text'"
             required
           />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hidePass2 = !hidePass2"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePass2"
+          >
+            <mat-icon>{{
+              hidePass2 ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
           <mat-error
             *ngIf="
               forms.get('password2')?.errors &&
@@ -131,7 +155,7 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="text-center py-2">
+      <div class="text-center" style="margin-top: 0">
         <mat-radio-group formControlName="role" class="flex justify-around">
           <mat-radio-button value="S">Student</mat-radio-button>
           <mat-radio-button value="T">Teacher</mat-radio-button>
