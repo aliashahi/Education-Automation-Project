@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  hide = true;
   forms = new FormGroup({
     username: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [
@@ -22,7 +23,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    localStorage.removeItem('Token');
+  }
 
   onLogin() {
     if (this.forms.valid) {

@@ -31,67 +31,57 @@
       action="#"
       method="POST"
     >
-      <input type="hidden" name="remember" value="true" />
       <div class="rounded-md shadow-sm -space-y-px">
-        <div>
-          <label for="username" class="not-sr-only">Username</label>
-          <input
-            id="username"
-            name="username"
-            type="username"
-            formControlName="username"
-            autocomplete="username"
-            required
-            class="
-              appearance-none
-              rounded-md
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-gray-300
-              placeholder-gray-500
-              text-gray-900
-              focus:outline-none
-              focus:ring-indigo-500
-              focus:border-indigo-500
-              focus:z-10
-              sm:text-sm
-              my-1
-            "
-            placeholder="john.doe"
-          />
+        <div class="w-full">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input
+              matInput
+              placeholder="john.doe"
+              formControlName="username"
+              required
+            />
+            <mat-error
+              *ngIf="
+                forms.get('username')?.errors &&
+                forms.get('username')?.hasError('required')
+              "
+              >username is required</mat-error
+            >
+          </mat-form-field>
         </div>
-        <div>
-          <label for="password" class="not-sr-only">Password</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            formControlName="password"
-            autocomplete="current-password"
-            required
-            class="
-              appearance-none
-              rounded-md
-              relative
-              block
-              w-full
-              px-3
-              py-2
-              border border-gray-300
-              placeholder-gray-500
-              text-gray-900
-              focus:outline-none
-              focus:ring-indigo-500
-              focus:border-indigo-500
-              focus:z-10
-              sm:text-sm
-              my-1
-            "
-            placeholder="Password"
-          />
+        <div class="w-full">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              formControlName="password"
+              [type]="hide ? 'password' : 'text'"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+            <mat-error
+              *ngIf="
+                forms.get('password')?.errors &&
+                forms.get('password')?.hasError('required')
+              "
+              >password is required</mat-error
+            >
+            <mat-error
+              *ngIf="
+                forms.get('password')?.errors &&
+                forms.get('password')?.hasError('minlength')
+              "
+              >password must be more than 6 character</mat-error
+            >
+          </mat-form-field>
         </div>
         <div class="text-center py-2">
           <mat-radio-group formControlName="role" class="flex justify-around">
@@ -150,6 +140,7 @@
             rounded-md
             text-white
             bg-primary-800
+            disabled:opacity-50
             hover:bg-primary-900
             focus:outline-none
             focus:ring-2
