@@ -2,3 +2,8 @@
   background: url("../../../../assets/images/background/bg1.jpg") no-repeat;
   background-size: cover;
 }
+
+input:focus {
+  border: none;
+  --tw-ring-color: white;
+}
