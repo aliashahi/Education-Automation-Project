@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'EAP-register',
@@ -9,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  private loginRef$!: Subscription;
   hidePass1 = true;
   hidePass2 = true;
   forms = new FormGroup({
@@ -36,12 +38,13 @@ export class RegisterComponent implements OnInit {
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
-      this.authService.register(this.forms.value).subscribe(
+      this.loginRef$ = this.authService.register(this.forms.value).subscribe(
         (response) => {
           this.router.navigate(['/auth/login']);
+          this.pendding = false;
+          this.forms.enable();
         },
-        (error) => {},
-        () => {
+        (error) => {
           this.pendding = false;
           this.forms.enable();
         }
@@ -51,5 +54,13 @@ export class RegisterComponent implements OnInit {
 
   onRedirectToLogin() {
     this.router.navigate(['/auth/login']);
+  }
+
+  onCancelRequest() {
+    if (this.pendding) {
+      this.pendding = false;
+      this.forms.enable();
+      this.loginRef$.unsubscribe();
+    }
   }
 }
