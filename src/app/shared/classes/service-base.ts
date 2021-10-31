@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
-import { Injector } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ParamDto } from './param.dto';
+import { Injector } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 export abstract class ServiceBase {
   private http: HttpClient;
@@ -11,33 +11,50 @@ export abstract class ServiceBase {
   }
 
   public get BaseUrl(): string {
-    return environment.ApiBaseUrl;
+    return environment.apiBaseUrl;
   }
 
-  post$(url: string, body?: any, params: ParamDto[] = []): Observable<any> {
+  protected post$(
+    url: string,
+    body: any,
+    params: ParamDto[] = []
+  ): Observable<any> {
     return this.http.post(
       this.BaseUrl + url + this.getSerializedParams(params),
       body
     );
   }
 
-  get$(url: string, params: ParamDto[] = []): Observable<any> {
+  protected get$(url: string, params: ParamDto[] = []): Observable<any> {
     return this.http.get(this.BaseUrl + url + this.getSerializedParams(params));
   }
 
-  delete$(url: string, params: ParamDto[] = []): Observable<any> {
+  protected get_normal$(url: string, params: ParamDto[] = []): Observable<any> {
+    return this.http.get(url + this.getSerializedParams(params));
+  }
+
+  protected delete$(url: string, params: ParamDto[] = []): Observable<any> {
     return this.http.delete(
       this.BaseUrl + url + this.getSerializedParams(params)
     );
   }
 
-  put$(url: string, body?: any, params: ParamDto[] = []): Observable<any> {
+  protected put$(
+    url: string,
+    body: any,
+    params: ParamDto[] = []
+  ): Observable<any> {
     return this.http.put(
       this.BaseUrl + url + this.getSerializedParams(params),
       body
     );
   }
-  patch$(url: string, body?: any, params: ParamDto[] = []): Observable<any> {
+
+  protected patch$(
+    url: string,
+    body: any,
+    params: ParamDto[] = []
+  ): Observable<any> {
     return this.http.patch(
       this.BaseUrl + url + this.getSerializedParams(params),
       body
@@ -46,8 +63,6 @@ export abstract class ServiceBase {
 
   private getSerializedParams(params: ParamDto[]) {
     if (!params || params.length == 0) return '';
-    return (
-      '?' + params.map((param) => `${param.value}=${param.value}`).join('&')
-    );
+    return '?' + params.map((param) => param.key + '=' + param.value).join('&');
   }
 }

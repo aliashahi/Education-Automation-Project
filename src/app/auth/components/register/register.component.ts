@@ -9,6 +9,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  hidePass1 = true;
+  hidePass2 = true;
   forms = new FormGroup({
     username: new FormControl(null, [Validators.required]),
     first_name: new FormControl(null, [Validators.required]),
@@ -34,12 +36,16 @@ export class RegisterComponent implements OnInit {
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
-      setTimeout(() => {
-        this.pendding = false;
-        this.forms.enable();
-        localStorage.setItem('Token', 'MY_JWT_TOKEN');
-        this.router.navigate(['/']);
-      }, 3000);
+      this.authService.register(this.forms.value).subscribe(
+        (response) => {
+          this.router.navigate(['/auth/login']);
+        },
+        (error) => {},
+        () => {
+          this.pendding = false;
+          this.forms.enable();
+        }
+      );
     }
   }
 

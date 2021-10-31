@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PipesModule } from './pipes/pipes.module';
 import { MaterialModule } from './modules/material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 const MODULES = [
   CommonModule,
@@ -11,6 +12,7 @@ const MODULES = [
   ReactiveFormsModule,
   MaterialModule,
   PipesModule,
+  HttpClientModule,
 ];
 
 @NgModule({
