@@ -34,12 +34,16 @@ export class RegisterComponent implements OnInit {
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
-      setTimeout(() => {
-        this.pendding = false;
-        this.forms.enable();
-        localStorage.setItem('Token', 'MY_JWT_TOKEN');
-        this.router.navigate(['/']);
-      }, 3000);
+      this.authService.register(this.forms.value).subscribe(
+        (response) => {
+          this.router.navigate(['/auth/login']);
+        },
+        (error) => {},
+        () => {
+          this.pendding = false;
+          this.forms.enable();
+        }
+      );
     }
   }
 
