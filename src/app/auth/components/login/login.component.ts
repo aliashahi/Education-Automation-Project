@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
       Validators.required,
       Validators.minLength(6),
     ]),
-    role: new FormControl('S'),
+    // role: new FormControl('S'),
     remember_me: new FormControl(false),
   });
   pendding = false;
@@ -31,12 +31,18 @@ export class LoginComponent implements OnInit {
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
-      setTimeout(() => {
-        this.pendding = false;
-        this.forms.enable();
-        localStorage.setItem('Token', 'MY_JWT_TOKEN');
-        this.router.navigate(['/']);
-      }, 3000);
+      this.authService.login(this.forms.value).subscribe(
+        (response) => {
+          localStorage.setItem('Token', response.access);
+          localStorage.setItem('Refresh', response.refresh);
+          this.router.navigate(['/']);
+        },
+        (error) => {},
+        () => {
+          this.pendding = false;
+          this.forms.enable();
+        }
+      );
     }
   }
 

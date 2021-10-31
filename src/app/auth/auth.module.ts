@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {
@@ -27,7 +29,9 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes),
     MatRadioModule,
+    HttpClientModule,
   ],
   exports: [LoginComponent, RegisterComponent],
+  providers: [AuthService],
 })
 export class AuthModule {}
