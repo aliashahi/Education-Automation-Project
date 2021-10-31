@@ -30,4 +30,8 @@ export class notificationComponent {
             this.mesage_active = false;
         }, 10000);
     }
+
+    getColor(){
+        return this.mesage2 === '' ? 'red' : 'green';
+    }
 }
