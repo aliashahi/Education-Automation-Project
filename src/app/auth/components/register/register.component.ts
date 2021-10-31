@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'EAP-register',
@@ -30,7 +31,11 @@ export class RegisterComponent implements OnInit {
   });
   pendding = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
 
@@ -45,6 +50,10 @@ export class RegisterComponent implements OnInit {
           this.forms.enable();
         },
         (error) => {
+          this._snackBar.open(error.error.detail, 'close', {
+            duration: 2500,
+            panelClass: 'DANGER',
+          });
           this.pendding = false;
           this.forms.enable();
         }
