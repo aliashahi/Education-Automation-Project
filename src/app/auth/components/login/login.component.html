@@ -112,14 +112,14 @@
           </label>
         </div>
 
-        <div class="text-sm">
+        <!-- <div class="text-sm">
           <a
             href="#"
             class="font-medium text-primary-700 hover:text-primary-800"
           >
             Forgot your password?
           </a>
-        </div>
+        </div> -->
       </div>
 
       <div>
@@ -146,9 +146,11 @@
             focus:ring-2
             focus:ring-offset-2
             focus:ring-indigo-500
+            text-center
           "
         >
-          Sign in
+          <span class="px-2"> Sign In </span>
+          <mat-spinner [diameter]="23" *ngIf="pendding"></mat-spinner>
         </button>
         <div class="text-sm text-start pt-2">
           <a

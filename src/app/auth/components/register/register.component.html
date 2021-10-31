@@ -23,158 +23,117 @@
         Register
       </h2>
     </div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
+    <form [formGroup]="forms" (ngSubmit)="onRegister()" class="mt-8 space-y-6">
       <input type="hidden" name="remember" value="true" />
-      <div class="rounded-md shadow-sm -space-y-px">
-        <div class="inline-block w-1/2">
-          <label for="first_name" class="not-sr-only">First Name</label>
+      <div class="w-full">
+        <mat-form-field class="w-1/2 pr-1" appearance="outline">
+          <mat-label>First Name</mat-label>
           <input
-            id="first_name"
-            name="first_name"
-            type="first_name"
-            autocomplete="first_name"
+            matInput
+            placeholder="john"
+            formControlName="first_name"
             required
-            class="
-              appearance-none
-              rounded-md
-              relative
-              block
-              w-full
-              mr-1
-              px-3
-              py-2
-              border border-gray-300
-              placeholder-gray-500
-              text-gray-900
-              focus:outline-none
-              focus:ring-indigo-500
-              focus:border-indigo-500
-              focus:z-10
-              sm:text-sm
-              my-1
-            "
-            placeholder="John"
           />
-        </div>
-        <div class="inline-block w-1/2">
-          <label for="last_name" class="not-sr-only">Last Name</label>
+          <mat-error
+            *ngIf="
+              forms.get('first_name')?.errors &&
+              forms.get('first_name')?.hasError('required')
+            "
+            >First name is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="w-1/2 pl-1" appearance="outline">
+          <mat-label>Last Name</mat-label>
           <input
-            id="last_name"
-            name="last_name"
-            type="last_name"
-            autocomplete="last_name"
+            matInput
+            placeholder="doe"
+            formControlName="last_name"
             required
-            class="
-              appearance-none
-              rounded-md
-              relative
-              block
-              w-full
-              ml-1
-              px-3
-              py-2
-              border border-gray-300
-              placeholder-gray-500
-              text-gray-900
-              focus:outline-none
-              focus:ring-indigo-500
-              focus:border-indigo-500
-              focus:z-10
-              sm:text-sm
-              my-1
-            "
-            placeholder="Doe"
           />
-        </div>
-        <label for="username" class="not-sr-only">Username</label>
-        <input
-          id="username"
-          name="username"
-          type="username"
-          autocomplete="username"
-          required
-          class="
-            appearance-none
-            rounded-md
-            relative
-            block
-            w-full
-            px-3
-            py-2
-            border border-gray-300
-            placeholder-gray-500
-            text-gray-900
-            focus:outline-none
-            focus:ring-indigo-500
-            focus:border-indigo-500
-            focus:z-10
-            sm:text-sm
-            my-1
-          "
-          placeholder="john.doe2312"
-        />
-      </div>
-      <div>
-        <label for="email-address" class="not-sr-only">Email Address</label>
-        <input
-          id="email-address"
-          name="email"
-          type="email"
-          autocomplete="email"
-          required
-          class="
-            appearance-none
-            rounded-md
-            relative
-            block
-            w-full
-            px-3
-            py-2
-            border border-gray-300
-            placeholder-gray-500
-            text-gray-900
-            focus:outline-none
-            focus:ring-indigo-500
-            focus:border-indigo-500
-            focus:z-10
-            sm:text-sm
-            my-1
-          "
-          placeholder="your@email.address"
-        />
-      </div>
-      <div>
-        <label for="password" class="not-sr-only">Password</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          autocomplete="current-password"
-          required
-          class="
-            appearance-none
-            rounded-md
-            relative
-            block
-            w-full
-            px-3
-            py-2
-            border border-gray-300
-            placeholder-gray-500
-            text-gray-900
-            focus:outline-none
-            focus:ring-indigo-500
-            focus:border-indigo-500
-            focus:z-10
-            sm:text-sm
-            my-1
-          "
-          placeholder="**********"
-        />
+          <mat-error
+            *ngIf="
+              forms.get('last_name')?.errors &&
+              forms.get('last_name')?.hasError('required')
+            "
+            >Last name is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            placeholder="doe"
+            formControlName="username"
+            required
+          />
+          <mat-error
+            *ngIf="
+              forms.get('username')?.errors &&
+              forms.get('username')?.hasError('required')
+            "
+            >Username is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="doe"
+            type="email"
+            formControlName="email"
+            required
+          />
+          <mat-error
+            *ngIf="
+              forms.get('email')?.errors &&
+              forms.get('email')?.hasError('required')
+            "
+            >email is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder="doe"
+            formControlName="password"
+            required
+          />
+          <mat-error
+            *ngIf="
+              forms.get('password')?.errors &&
+              forms.get('password')?.hasError('required')
+            "
+            >password is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Enter password again</mat-label>
+          <input
+            matInput
+            placeholder="doe"
+            formControlName="password2"
+            required
+          />
+          <mat-error
+            *ngIf="
+              forms.get('password2')?.errors &&
+              forms.get('password2')?.hasError('required')
+            "
+            >enter password again here</mat-error
+          >
+          <mat-error
+            *ngIf="
+              forms.get('password2')?.value &&
+              forms.get('password2')?.value != forms.get('password')?.value
+            "
+            >password is not the same
+          </mat-error>
+        </mat-form-field>
       </div>
       <div class="text-center py-2">
-        <mat-radio-group [selected]="first" class="flex justify-around">
-          <mat-radio-button #first value="S">Student</mat-radio-button>
+        <mat-radio-group formControlName="role" class="flex justify-around">
+          <mat-radio-button value="S">Student</mat-radio-button>
           <mat-radio-button value="T">Teacher</mat-radio-button>
           <mat-radio-button value="M">Manager</mat-radio-button>
         </mat-radio-group>
@@ -182,6 +141,7 @@
       <div>
         <button
           type="submit"
+          [disabled]="forms.invalid"
           class="
             group
             relative
@@ -196,15 +156,17 @@
             rounded-md
             text-white
             bg-primary-800
+            disabled:opacity-50
             hover:bg-primary-900
             focus:outline-none
             focus:ring-2
             focus:ring-offset-2
             focus:ring-indigo-500
+            text-center
           "
-          (click)="onRegister()"
         >
-          Sign Up
+          <span class="px-2"> Sign Up </span>
+          <mat-spinner [diameter]="23" *ngIf="!pendding"></mat-spinner>
         </button>
         <div class="text-sm text-start pt-2">
           <a
