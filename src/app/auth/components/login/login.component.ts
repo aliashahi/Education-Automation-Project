@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -23,7 +24,11 @@ export class LoginComponent implements OnInit {
   });
   pendding = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     localStorage.removeItem('Token');
@@ -42,6 +47,10 @@ export class LoginComponent implements OnInit {
           this.forms.enable();
         },
         (error) => {
+          this._snackBar.open(error.error.detail, 'close', {
+            duration: 2500,
+            panelClass: 'alert-danger',
+          });
           this.pendding = false;
           this.forms.enable();
         }

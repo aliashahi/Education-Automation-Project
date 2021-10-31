@@ -43,6 +43,7 @@ $Education-Automation-Project-theme: mat.define-light-theme(
 @import url("tailwindcss/base");
 @import url("tailwindcss/components");
 @import url("tailwindcss/utilities");
+@import url("./assets/style/alert.scss");
 html,
 body {
   height: 100%;
