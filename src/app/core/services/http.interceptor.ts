@@ -12,18 +12,14 @@ import { EMPTY, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class HttpsInterceptor implements HttpInterceptor {
   constructor(private alertSrvc: AlertService, private router: Router) {}
 
   intercept(
-    request: HttpRequest<unknown>,
+    request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log(1);
-
     if (!window.navigator.onLine) {
       this.alertSrvc.showSnackbar(
         'you are not connected to Internet ,Please check your connection!',
