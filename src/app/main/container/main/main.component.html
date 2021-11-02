@@ -1,1 +1,13 @@
-Wellcome
+<mat-drawer-container class="w-screen h-screen m-0 p-0">
+  <mat-drawer mode="side" opened class="w-2/12">
+    <EAP-sidenav></EAP-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <span class="bg-red-800 w-screen h-8">
+      <EAP-topnav></EAP-topnav>
+    </span>
+    <section>
+      <router-outlet></router-outlet>
+    </section>
+  </mat-drawer-content>
+</mat-drawer-container>

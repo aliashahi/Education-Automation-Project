@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './container/main/main.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { TopnavComponent } from './components/topnav/topnav.component';
+import { SharedModule } from '../shared/shared.module';
 const routes: Routes = [
   {
     path: 'main',
@@ -13,7 +16,12 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  declarations: [MainComponent],
-  imports: [CommonModule, RouterModule, RouterModule.forChild(routes)],
+  declarations: [MainComponent, SidenavComponent, TopnavComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    RouterModule.forChild(routes),
+    SharedModule,
+  ],
 })
 export class MainModule {}
