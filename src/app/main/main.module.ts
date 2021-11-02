@@ -6,7 +6,6 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { TopnavComponent } from './components/topnav/topnav.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatTreeModule } from '@angular/material/tree';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -14,8 +13,9 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: 'dashboard',
-        component: DashboardComponent,
+        path: 'manager',
+        loadChildren: () =>
+          import('../manager/manager.module').then((m) => m.ManagerModule),
       },
       {
         path: '**',
@@ -29,12 +29,7 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  declarations: [
-    MainComponent,
-    SidenavComponent,
-    TopnavComponent,
-    DashboardComponent,
-  ],
+  declarations: [MainComponent, SidenavComponent, TopnavComponent],
   imports: [
     CommonModule,
     RouterModule,
