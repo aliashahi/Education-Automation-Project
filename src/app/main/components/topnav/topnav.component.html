@@ -1,6 +1,70 @@
-<nav class="bg-green-400 h-14 w-full">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-  voluptatum voluptas iure laboriosam eveniet ratione, architecto placeat totam
-  sed quo exercitationem praesentium aut veniam voluptatem odit necessitatibus
-  minus beatae iusto.
+<nav class="bg-gray-300 h-14 w-full">
+  <ul class="flex h-full justify-end items-center">
+    <li
+      class="
+        p-2
+        mx-2
+        text-white
+        rounded-sm
+        hover:bg-secondary-500
+        cursor-pointer
+      "
+      [routerLink]="['/']"
+    >
+      Home
+    </li>
+    <li
+      class="
+        p-2
+        mx-2
+        text-white
+        rounded-sm
+        hover:bg-secondary-500
+        cursor-pointer
+      "
+    >
+      About Us
+    </li>
+    <li
+      class="
+        py-2
+        pr-0
+        ml-2
+        my-2
+        text-black
+        rounded-full
+        hover:text-yellow-600
+        cursor-pointer
+      "
+    >
+      <button mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button>
+    </li>
+    <li
+      class="
+        py-2
+        pr-0
+        ml-2
+        my-2
+        text-black
+        rounded-full
+        hover:text-red-600
+        cursor-pointer
+      "
+    >
+      <button mat-icon-button>
+        <mat-icon>power_settings_new</mat-icon>
+      </button>
+    </li>
+    <li
+      class="mx-2 text-white rounded-full hover:bg-secondary-500 cursor-pointer"
+    >
+      <img
+        class="w-12 h-12 rounded-full border-2 border-black"
+        src="../../../../assets/images/default_profile.png"
+        alt=""
+      />
+    </li>
+  </ul>
 </nav>

@@ -1,4 +1,4 @@
-<div class="h-full flex flex-col justify-between">
+<div class="h-full flex flex-col justify-between bg-gray-300">
   <div>
     <div
       class="p-2 flex justify-around items-center"
@@ -21,7 +21,7 @@
         <mat-tree-node
           *matTreeNodeDef="let node"
           matTreeNodeToggle
-          class="hover:bg-gray-300 cursor-pointer"
+          class="bg-gray-300 hover:bg-gray-400 cursor-pointer"
         >
           {{ node.name }}
         </mat-tree-node>
@@ -34,8 +34,8 @@
               justify-between
               pl-3
               cursor-pointer
-              bg-gray-50
-              hover:bg-gray-300
+              bg-gray-300
+              hover:bg-gray-400
             "
             matTreeNodeToggle
           >
@@ -53,6 +53,7 @@
           <!-- There is inline padding applied to this div using styles.
         This padding value depends on the mat-icon-button width.  -->
           <div
+            class="bg-gray-300"
             [class.example-tree-invisible]="!treeControl.isExpanded(node)"
             role="group"
           >
@@ -63,7 +64,7 @@
     </div>
   </div>
   <a
-    class="flex justify-around items-center p-2 py-3 bg-gray-700 cursor-pointer"
+    class="flex justify-around items-center p-2 py-3 bg-gray-500 cursor-pointer"
   >
     <!-- <button mat-icon-button> -->
     <mat-icon class="text-white">settings</mat-icon>
