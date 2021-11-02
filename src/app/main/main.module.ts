@@ -6,19 +6,35 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { TopnavComponent } from './components/topnav/topnav.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatTreeModule } from '@angular/material/tree';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
-    path: 'main',
+    path: '',
     component: MainComponent,
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'dashboard',
+      },
+    ],
   },
   {
     path: '**',
-    component: MainComponent,
+    redirectTo: '',
   },
 ];
 @NgModule({
-  declarations: [MainComponent, SidenavComponent, TopnavComponent],
+  declarations: [
+    MainComponent,
+    SidenavComponent,
+    TopnavComponent,
+    DashboardComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
