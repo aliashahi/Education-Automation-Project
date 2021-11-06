@@ -28,3 +28,12 @@
 .example-tree div[role="group"] > .mat-tree-node {
   padding-left: 20px;
 }
+
+mat-tree {
+  font-family: Poppins, Helvetica, sans-serif !important;
+}
+
+.active-route {
+  border-left: 4px solid #c6c6c6;
+  background-color: #0e7e8d;
+}
