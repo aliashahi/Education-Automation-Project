@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ManagerComponent } from './container/manager/manager.component';
 import { ManagerDashboardComponent } from './components/manager-dashboard/manager-dashboard.component';
+import { UserCreateComponent } from './components/user/user-create/user-create.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: ManagerDashboardComponent,
+      },
+      {
+        path: 'users-create',
+        component: UserCreateComponent,
       },
       {
         path: '**',
@@ -27,7 +32,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ManagerComponent, ManagerDashboardComponent],
+  declarations: [
+    ManagerComponent,
+    ManagerDashboardComponent,
+    UserCreateComponent,
+  ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
 })
 export class ManagerModule {}
