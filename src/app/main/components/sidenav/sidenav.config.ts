@@ -93,19 +93,19 @@ export const TREE_DATA: SidenavNode[] = [
           {
             name: 'create',
             icon: 'add',
-            url: '/manager/poll-create',
+            url: '/manager/analysis-poll-create',
             ACCESS: 'M',
           },
           {
             name: 'list',
             icon: 'list',
-            url: '/manager/poll-list',
+            url: '/manager/analysis-poll-list',
             ACCESS: 'M',
           },
           {
             name: 'reports',
             icon: 'summarize',
-            url: '/manager/poll-reports',
+            url: '/manager/analysis-poll-reports',
             ACCESS: 'M',
           },
         ],
