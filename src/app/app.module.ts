@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule, HttpsInterceptor } from './core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorComponent } from './utitlitiy/error/error.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ErrorComponent],
   imports: [
     BrowserModule,
     CoreModule,
