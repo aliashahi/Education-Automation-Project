@@ -50,10 +50,14 @@ export class RegisterComponent implements OnInit {
           this.forms.enable();
         },
         (error) => {
-          this._snackBar.open(error.error.detail, 'close', {
-            duration: 2500,
-            panelClass: 'DANGER',
-          });
+          this._snackBar.open(
+            'ERROR : please enter valid information',
+            'close',
+            {
+              duration: 2500,
+              panelClass: 'DANGER',
+            }
+          );
           this.pendding = false;
           this.forms.enable();
         }

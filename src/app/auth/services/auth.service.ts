@@ -8,10 +8,10 @@ export class AuthService extends ServiceBase {
   }
 
   public login(model: LoginDto) {
-    return this.post$('auth/jwt/create', model);
+    return this.post$('auth/jwt/create/', model);
   }
 
   public register(model: RegisterDto) {
-    return this.post$('auth/users', model);
+    return this.post$('auth/users/', model);
   }
 }
