@@ -8,6 +8,7 @@ import { UserCreateComponent } from './components/user/user-create/user-create.c
 import { ClassCreateComponent } from './components/class/class-create/class-create.component';
 import { ClassListComponent } from './components/class/class-list/class-list.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
+import { SelectedTeacherListComponent } from './components/class/class-create/selected-teacher-list/selected-teacher-list.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,7 @@ const routes: Routes = [
     ClassCreateComponent,
     ClassListComponent,
     UserListComponent,
+    SelectedTeacherListComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
 })

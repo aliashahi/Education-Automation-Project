@@ -92,31 +92,72 @@
           </div>
         </form>
       </mat-step>
-      <!-- <mat-step [stepControl]="teacher_info_form" [editable]="isEditable">
+      <mat-step [stepControl]="teacher_info_form" [editable]="isEditable">
         <form [formGroup]="teacher_info_form">
-          <ng-template matStepLabel>Location Information</ng-template>
-          <mat-form-field appearance="outline">
-            <mat-label>Address</mat-label>
-            <input
-              matInput
-              formControlName="secondCtrl"
-              placeholder="Ex. 1 Main St, New York, NY"
-              required
-            />
-          </mat-form-field>
           <div class="flex w-full justify-end">
-            <button mat-stroked-button matStepperPrevious>Back</button>
-            <button mat-stroked-button class="primary" matStepperNext>
-              Next
+            <button mat-button matStepperNext>Done</button>
+          </div>
+          <ng-template matStepLabel>Techers</ng-template>
+          <mat-form-field class="w-1/2" appearance="outline">
+            <mat-label>teacher name</mat-label>
+            <input
+              type="text"
+              placeholder="Mr. Jones"
+              matInput
+              formControlName="name"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let option of filteredOptions | async"
+                [value]="option"
+              >
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <div class="w-full flex justify-start mb-2">
+            <button
+              mat-stroked-button
+              class="mx-2"
+              color="warn"
+              *ngIf="editItem"
+              (click)="onCancelEdit()"
+            >
+              cancel edit
+            </button>
+            <button
+              mat-stroked-button
+              class="mx-2"
+              color="primary"
+              [disabled]="!teacher_info_form.get('name')?.value"
+              (click)="onInsertTeacher()"
+            >
+              Add
             </button>
           </div>
+          <EAP-selected-teacher-list
+            [dataSource]="teachers"
+            (event)="onEvent($event)"
+          ></EAP-selected-teacher-list>
         </form>
-      </mat-step> -->
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Weekly schedule</ng-template>
+        <div class="flex w-full justify-end">
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Students</ng-template>
+        <div class="flex w-full justify-end">
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <p class="text-green-600">You are now done.</p>
         <div class="flex w-full justify-end">
-          <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
       </mat-step>
