@@ -15,6 +15,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTableModule } from '@angular/material/table';
+
 const MODULES = [
   CommonModule,
   MatIconModule,
@@ -32,6 +35,8 @@ const MODULES = [
   MatSnackBarModule,
   MatStepperModule,
   MatRadioModule,
+  MatAutocompleteModule,
+  MatTableModule,
 ];
 
 @NgModule({

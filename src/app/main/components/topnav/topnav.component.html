@@ -1,4 +1,4 @@
-<nav class="sticky top-0 bg-gray-100 h-14 w-full">
+<nav class="sticky top-0 bg-gray-100 h-14 w-full z-50">
   <ul class="flex h-full justify-end items-center">
     <li
       class="
@@ -52,10 +52,15 @@
         hover:text-red-600
         cursor-pointer
       "
+      (click)="onLogout()"
     >
       <button mat-icon-button>
         <mat-icon>power_settings_new</mat-icon>
       </button>
+    </li>
+    <li class="p-2 mx-2 rounded-sm text-black cursor-pointer">
+      user_id:
+      {{ "-" | tokenDecoder: "user_id" }}
     </li>
     <li
       class="mx-2 text-white rounded-full hover:bg-secondary-500 cursor-pointer"

@@ -5,6 +5,10 @@ import { SharedModule } from '../shared/shared.module';
 import { ManagerComponent } from './container/manager/manager.component';
 import { ManagerDashboardComponent } from './components/manager-dashboard/manager-dashboard.component';
 import { UserCreateComponent } from './components/user/user-create/user-create.component';
+import { ClassCreateComponent } from './components/class/class-create/class-create.component';
+import { ClassListComponent } from './components/class/class-list/class-list.component';
+import { UserListComponent } from './components/user/user-list/user-list.component';
+import { SelectedTeacherListComponent } from './components/class/class-create/selected-teacher-list/selected-teacher-list.component';
 
 const routes: Routes = [
   {
@@ -16,8 +20,20 @@ const routes: Routes = [
         component: ManagerDashboardComponent,
       },
       {
-        path: 'users-create',
+        path: 'user-create',
         component: UserCreateComponent,
+      },
+      {
+        path: 'user-list',
+        component: UserListComponent,
+      },
+      {
+        path: 'class-create',
+        component: ClassCreateComponent,
+      },
+      {
+        path: 'class-list',
+        component: ClassListComponent,
       },
       {
         path: '**',
@@ -36,6 +52,10 @@ const routes: Routes = [
     ManagerComponent,
     ManagerDashboardComponent,
     UserCreateComponent,
+    ClassCreateComponent,
+    ClassListComponent,
+    UserListComponent,
+    SelectedTeacherListComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
 })

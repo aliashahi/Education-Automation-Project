@@ -16,32 +16,32 @@ export const TREE_DATA: SidenavNode[] = [
   },
   {
     name: 'User management',
-    url: '/manager/users',
+    url: '/manager/user',
     ACCESS: 'M',
     icon: 'people_alt',
     children: [
       {
         name: 'create',
         icon: 'add',
-        url: '/manager/users-create',
+        url: '/manager/user-create',
         ACCESS: 'M',
       },
       {
         name: 'list',
         icon: 'list',
-        url: '/manager/users-list',
+        url: '/manager/user-list',
         ACCESS: 'M',
       },
       {
         name: 'archive',
         icon: 'archive',
-        url: '/manager/users-archive',
+        url: '/manager/user-archive',
         ACCESS: 'M',
       },
       {
         name: 'reports',
         icon: 'summarize',
-        url: '/manager/users-reports',
+        url: '/manager/user-reports',
         ACCESS: 'M',
       },
     ],
