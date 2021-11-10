@@ -54,4 +54,8 @@ body {
   margin: 0;
 }
 
-
+textarea:focus,
+input:focus {
+  border: none;
+  --tw-ring-color: white !important;
+}
