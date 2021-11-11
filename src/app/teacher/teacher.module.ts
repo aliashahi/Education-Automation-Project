@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { TeacherComponent } from './container/teacher/teacher.component';
 import { TeacherDashboardComponent } from './components/teacher-dashboard/teacher-dashboard.component';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { TeacherClassComponent } from './components/teacher-class/teacher-class.component';
 const routes: Routes = [
   {
     path: '',
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: TeacherDashboardComponent,
+      },
+      {
+        path: 'class',
+        component: TeacherClassComponent
       },
       {
         path: '**',
@@ -27,7 +32,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TeacherComponent, TeacherDashboardComponent],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+  declarations: [TeacherComponent, TeacherDashboardComponent, TeacherClassComponent],
+  imports: [CommonModule, SharedModule, RouterModule.forChild(routes),MatDatepickerModule],
+
 })
 export class TeacherModule {}
