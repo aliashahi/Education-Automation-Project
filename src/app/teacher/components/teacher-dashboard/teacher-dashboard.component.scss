@@ -1,0 +1,186 @@
+.button-group {
+	position: relative;
+	right: 4.5%;
+	display: inline;
+	margin-top: 20px;
+}
+.button-group button {
+    width: 27.5%;
+    height: 60px;
+    margin-left: 1%;                     
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #d685f0;
+    float: right;
+}	
+ 
+
+.button-group .class-manaement-button:hover{
+	background-color: #d685f0;
+} 
+/*
+.row {
+	width: 100%;
+    height: 250px;
+    margin-top: 20px;
+    float: right;
+}
+*/
+
+.table-border {
+	background-color: white;
+	width: 56%;
+	height: 300px;
+	float: right;
+	margin-top: 20px;
+	margin-right: 1.25%;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+}
+.table-title {
+	padding: 15px;
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+table.schedule-table {
+	border-collapse: collapse;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	margin-right: 2.5%;
+	margin-left: 2.5%;
+	background-color: #f2f2f2;		
+	font-family: Arial, Helvetica, sans-serif;
+	width: 95%;
+	height: 240px;
+	float: right;
+}
+
+td, tr , th {
+	color: #2e2e2e;
+	border-bottom: 1px solid #ccc;
+	font-size: 12px;
+	text-align: center;
+	padding: 2px;
+}
+tr:hover {
+	background-color: #ecebf1;
+}
+th {
+	padding: 8px;
+	/*border-top: 4px solid #d685f0;*/
+}
+/*------------------------------------------------*/
+
+/*
+.clo-1 {
+	float: right;
+}
+*/
+/*---------------profile styling--------------- 
+.profile {
+	background-color: white;
+    width: 20%;
+    height: 250px;
+    margin-left: 20px;
+	margin-right: 15px;
+    border: 1px solid #ccc;
+    border-top: 4px solid #8f68e5;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+	float: right;
+}
+.teacher-name {
+	color: #8f68e5;
+	font-size: 20px;
+	margin: 10px;
+}
+.school-name {
+	font-size: 13px;
+	margin: 4px;
+}
+.class-name {
+	font-size: 13px;
+	margin: 4px;
+}
+.profile .pro-img {
+   border-radius: 50%;
+   margin-left: 75px;
+}
+------------------------------------------------*/
+
+.row {
+	position: relative;
+	right: 4.5%;
+	width: 100%;
+	height: 300px;
+	float: right;
+}
+.ann-box {
+	background-color: white;
+	width: 25%;
+	height: 300px;
+	float: right;
+	margin-top: 20px;
+	margin-left: 2%;
+	border: 1px solid #ccc;
+	/*border-top: 4px solid #8f68e5;*/
+	border-radius: 10px;
+	overflow-y: hidden;
+	/*height: 320px;*/
+}
+
+.ann-box .ann-box-title {
+	background-color: white;
+	height: 50px;
+	color: #8f68e5;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 15px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.ann-box-title .ti {
+	float: left;
+}
+
+.add-announcement a {
+	float: right;
+	font-size: 15px;
+    text-decoration: none; 
+}
+
+.ann {
+	background-color: white;
+	width: 100%;
+	height: 250px;
+	font-family: Arial, Helvetica, sans-serif;
+	overflow-y: scroll;	
+	overflow-x: hidden;
+}
+
+.ann::webkit-scrollbar {
+	display: none;
+}
+
+.ann .title {
+	color: #8f68e5;
+}
+.content {
+	width: 98.75%;
+    margin-left: 10px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.content a{
+	text-decoration: none;
+	font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+hr {
+	border: 1px solid #f2f2f2;
+}

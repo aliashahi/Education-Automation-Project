@@ -27,11 +27,18 @@ module.exports = {
           100: '#99e2b4',
         },
         item: {
-          1: '#ff595e',
-          2: '#ffca3a',
-          3: '#8ac926',
-          4: '#1982c4',
-          5: '#6a4c93'
+          primary: {
+            1: '#ffc700',
+            2: '#009ef7',
+            3: '#f1416c',
+            4: '#50cd89',
+          },
+          accent: {
+            1: '#fff8dd',
+            2: '#f1faff',
+            3: '#fff5f8',
+            4: '#fff5f8',
+          },
         },
         assent: '#ede7e3'
       }

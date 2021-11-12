@@ -1,0 +1,179 @@
+<div class="p-3 w-full h-full bg-gray-200">
+  <div class="w-full rounded-md bg-gray-300 p-2">
+    <mat-stepper linear #stepper>
+      <mat-step [stepControl]="personal_form" [editable]="isEditable">
+        <form [formGroup]="personal_form" class="mt-8 space-y-6">
+          <ng-template matStepLabel>Personal Information</ng-template>
+          <div class="w-full">
+            <mat-form-field class="w-1/2 pr-1" appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                placeholder="john"
+                formControlName="first_name"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  personal_form.get('first_name')?.errors &&
+                  personal_form.get('first_name')?.hasError('required')
+                "
+                >First name is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-1/2 pl-1" appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input
+                matInput
+                placeholder="doe"
+                formControlName="last_name"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  personal_form.get('last_name')?.errors &&
+                  personal_form.get('last_name')?.hasError('required')
+                "
+                >Last name is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="outline">
+              <mat-label>Username</mat-label>
+              <input
+                matInput
+                placeholder="doe"
+                formControlName="username"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  personal_form.get('username')?.errors &&
+                  personal_form.get('username')?.hasError('required')
+                "
+                >Username is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                placeholder="doe"
+                type="email"
+                formControlName="email"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  personal_form.get('email')?.errors &&
+                  personal_form.get('email')?.hasError('required')
+                "
+                >email is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-1/2 pl-1" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                placeholder="doe"
+                formControlName="password"
+                [type]="true ? 'password' : 'text'"
+                required
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="true"
+              >
+                <mat-icon>{{
+                  true ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+              <mat-error
+                *ngIf="
+                  personal_form.get('password')?.errors &&
+                  personal_form.get('password')?.hasError('required')
+                "
+                >password is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-1/2 pl-1" appearance="outline">
+              <mat-label>Enter password again</mat-label>
+              <input
+                matInput
+                placeholder="doe"
+                formControlName="password2"
+                [type]="true ? 'password' : 'text'"
+                required
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="true"
+              >
+                <mat-icon>{{
+                  true ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+              <mat-error
+                *ngIf="
+                  personal_form.get('password2')?.errors &&
+                  personal_form.get('password2')?.hasError('required')
+                "
+                >enter password again here</mat-error
+              >
+              <mat-error
+                *ngIf="
+                  personal_form.get('password2')?.value &&
+                  personal_form.get('password2')?.value !=
+                    personal_form.get('password')?.value
+                "
+                >password is not the same
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="text-center" style="margin-top: 0">
+            <mat-radio-group formControlName="role" class="flex justify-around">
+              <mat-radio-button value="S">Student</mat-radio-button>
+              <mat-radio-button value="T">Teacher</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="flex w-full justify-end">
+            <button mat-stroked-button class="primary" matStepperNext>
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Location Information</ng-template>
+          <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input
+              matInput
+              formControlName="secondCtrl"
+              placeholder="Ex. 1 Main St, New York, NY"
+              required
+            />
+          </mat-form-field>
+          <div class="flex w-full justify-end">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-stroked-button class="primary" matStepperNext>
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p class="text-green-600">You are now done.</p>
+        <div class="flex w-full justify-end">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>
