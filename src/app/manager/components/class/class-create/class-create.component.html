@@ -1,0 +1,166 @@
+<div class="p-3 w-full h-full bg-gray-200">
+  <div class="w-full rounded-md bg-gray-300 p-2">
+    <mat-stepper linear #stepper>
+      <mat-step [stepControl]="class_info_form" [editable]="isEditable">
+        <form [formGroup]="class_info_form" class="mt-8 space-y-6">
+          <ng-template matStepLabel>Class Information</ng-template>
+          <div class="w-full">
+            <mat-form-field class="w-full" appearance="outline">
+              <mat-label>Class Title</mat-label>
+              <input
+                matInput
+                placeholder="Grade A/1 "
+                formControlName="name"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  class_info_form.get('name')?.errors &&
+                  class_info_form.get('name')?.hasError('required')
+                "
+                >class title is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="outline">
+              <mat-label>capacity</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="30"
+                formControlName="capacity"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  class_info_form.get('capacity')?.errors &&
+                  class_info_form.get('capacity')?.hasError('required')
+                "
+                >capacity is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="outline">
+              <mat-label>description</mat-label>
+              <textarea
+                matInput
+                placeholder="doe"
+                formControlName="description"
+                required
+              ></textarea>
+              <mat-error
+                *ngIf="
+                  class_info_form.get('description')?.errors &&
+                  class_info_form.get('description')?.hasError('required')
+                "
+                >description is required</mat-error
+              >
+            </mat-form-field>
+            <div class="w-full" appearance="outline">
+              <mat-label>image</mat-label>
+              <div class="w-full flex flex-wrap">
+                <li
+                  class="
+                    p-1
+                    w-1/4
+                    h-1/4
+                    list-none
+                    inline-block
+                    hover:opacity-50
+                    cursor-pointer
+                    rounded-md
+                  "
+                  *ngFor="let item of imageList"
+                  (click)="onSelectImage('img' + item + '.jpg')"
+                >
+                  <img
+                    src="../../../../../assets/class-images/img{{ item }}.jpg"
+                    alt=""
+                    class="w-full h-full m-1 rounded-md"
+                    [class.border-2]="selectedImg == 'img' + item + '.jpg'"
+                    [class.border-secondary-700]="
+                      selectedImg == 'img' + item + '.jpg'
+                    "
+                    [class.border-dotted]="selectedImg == 'img' + item + '.jpg'"
+                  />
+                </li>
+              </div>
+            </div>
+          </div>
+          <div class="flex w-full justify-end">
+            <button mat-stroked-button class="primary" matStepperNext>
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="teacher_info_form" [editable]="isEditable">
+        <form [formGroup]="teacher_info_form">
+          <div class="flex w-full justify-end">
+            <button mat-button matStepperNext>Done</button>
+          </div>
+          <ng-template matStepLabel>Techers</ng-template>
+          <mat-form-field class="w-1/2" appearance="outline">
+            <mat-label>teacher name</mat-label>
+            <input
+              type="text"
+              placeholder="Mr. Jones"
+              matInput
+              formControlName="name"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let option of filteredOptions | async"
+                [value]="option"
+              >
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <div class="w-full flex justify-start mb-2">
+            <button
+              mat-stroked-button
+              class="mx-2"
+              color="warn"
+              *ngIf="editItem"
+              (click)="onCancelEdit()"
+            >
+              cancel edit
+            </button>
+            <button
+              mat-stroked-button
+              class="mx-2"
+              color="primary"
+              [disabled]="!teacher_info_form.get('name')?.value"
+              (click)="onInsertTeacher()"
+            >
+              Add
+            </button>
+          </div>
+          <EAP-selected-teacher-list
+            [dataSource]="teachers"
+            (event)="onEvent($event)"
+          ></EAP-selected-teacher-list>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Weekly schedule</ng-template>
+        <div class="flex w-full justify-end">
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Students</ng-template>
+        <div class="flex w-full justify-end">
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p class="text-green-600">You are now done.</p>
+        <div class="flex w-full justify-end">
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>

@@ -36,11 +36,11 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     //dev mode
-    localStorage.setItem('Token', 'response.access');
-    localStorage.setItem('Refresh', 'response.refresh');
-    this.router.navigate(['/']);
+    // localStorage.setItem('Token', 'response.access');
+    // localStorage.setItem('Refresh', 'response.refresh');
+    // this.router.navigate(['/']);
 
-    return;
+    // return;
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
