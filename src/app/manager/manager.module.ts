@@ -9,6 +9,7 @@ import { ClassCreateComponent } from './components/class/class-create/class-crea
 import { ClassListComponent } from './components/class/class-list/class-list.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { SelectedTeacherListComponent } from './components/class/class-create/selected-teacher-list/selected-teacher-list.component';
+import { FormBuilderModule } from '../shared/modules/form-builder';
 
 const routes: Routes = [
   {
@@ -57,6 +58,11 @@ const routes: Routes = [
     UserListComponent,
     SelectedTeacherListComponent,
   ],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormBuilderModule,
+    RouterModule.forChild(routes),
+  ],
 })
 export class ManagerModule {}

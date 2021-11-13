@@ -1,0 +1,16 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" id="filterForm">
+  <div
+    *ngFor="let field of configs"
+    [class]="field.class + ' px-1 inline-block'"
+  >
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>{{ field.label }}</mat-label>
+      <input
+        matInput
+        [placeholder]="field.placeholder || ''"
+        [formControlName]="field.id"
+        [required]="field.required || false"
+      />
+    </mat-form-field>
+  </div>
+</form>

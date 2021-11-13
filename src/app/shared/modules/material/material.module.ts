@@ -17,6 +17,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const MODULES = [
   CommonModule,
@@ -37,6 +39,8 @@ const MODULES = [
   MatRadioModule,
   MatAutocompleteModule,
   MatTableModule,
+  MatPaginatorModule,
+  MatExpansionModule,
 ];
 
 @NgModule({
