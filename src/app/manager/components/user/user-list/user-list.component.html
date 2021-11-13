@@ -67,6 +67,7 @@
   <mat-paginator
     [length]="pagination.length"
     [pageSize]="pagination.pageSize"
+    [pageSizeOptions]="pagination.pageSizeOptions"
     [pageIndex]="pagination.pageIndex"
     (page)="onPaginationChange($event)"
   ></mat-paginator>

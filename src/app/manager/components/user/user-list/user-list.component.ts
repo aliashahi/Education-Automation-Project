@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { MOCK_DATA } from 'src/app/manager/mock/user.mock';
+import { Pagination } from 'src/app/manager/models/pagination.model';
 import { User } from 'src/app/manager/models/user.model';
 import { FieldConfig } from 'src/app/shared/modules/form-builder';
 
@@ -24,10 +25,11 @@ export class UserListComponent implements OnInit {
   dataSource = MOCK_DATA;
   filterConfigs!: FieldConfig[];
   filterForm!: FormGroup;
-  pagination: PageEvent = {
+  pagination: Pagination = {
     length: 800,
     pageIndex: 0,
     pageSize: 10,
+    pageSizeOptions: [5, 10, 20, 40, 80, 160],
   };
   constructor() {}
 
@@ -51,7 +53,7 @@ export class UserListComponent implements OnInit {
   }
 
   onPaginationChange($event: PageEvent) {
-    this.pagination = $event;
+    this.pagination = { ...this.pagination, ...$event };
     this.getData({ ...$event });
   }
 
