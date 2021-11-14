@@ -6,12 +6,8 @@ import { TeacherComponent } from './container/teacher/teacher.component';
 import { TeacherDashboardComponent } from './components/teacher-dashboard/teacher-dashboard.component';
 
 import { AnnouncementComponent } from './components/announcement/announcement.component';
-import {FormsModule} from '@angular/forms';
-
-
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {TeacherClassComponent} from './components/teacher-class/teacher-class.component';
-import {TeacherClassesComponent} from './components/teacher-classes/teacher-classes.component';
+import { FormsModule } from '@angular/forms';
+import { TeacherClassComponent } from './components/teacher-class/teacher-class.component';
 const routes: Routes = [
   {
     path: '',
@@ -23,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'class',
-        component: TeacherClassComponent
+        component: TeacherClassComponent,
       },
       {
         path: '**',
@@ -38,8 +34,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TeacherComponent, TeacherDashboardComponent, AnnouncementComponent],
-  imports: [CommonModule, SharedModule,FormsModule, RouterModule.forChild(routes)],
-
+  declarations: [
+    TeacherComponent,
+    TeacherDashboardComponent,
+    AnnouncementComponent,
+    TeacherClassComponent,
+  ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    RouterModule.forChild(routes),
+  ],
 })
 export class TeacherModule {}
