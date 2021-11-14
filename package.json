@@ -22,16 +22,11 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "@tailwindcss/forms": "^0.3.4",
-<<<<<<< HEAD
     "autoprefixer": "^10.4.0",
     "postcss": "^8.3.11",
-=======
     "angular-calendar": "^0.28.28",
-    "autoprefixer": "^10.3.7",
     "date-fns": "^2.25.0",
     "jwt-decode": "^3.1.2",
-    "postcss": "^8.3.9",
->>>>>>> b227399c68dd15d1692a25b5dc4d8b579e4803ef
     "rxjs": "~6.6.0",
     "tailwindcss": "^2.2.17",
     "tslib": "^2.3.0",
