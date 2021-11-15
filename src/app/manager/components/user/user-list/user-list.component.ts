@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
-import { MOCK_DATA } from 'src/app/manager/mock/user.mock';
+import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
 import { Pagination } from 'src/app/manager/models/pagination.model';
 import { User } from 'src/app/manager/models/user.model';
 import { FieldConfig } from 'src/app/shared/modules/form-builder';
@@ -22,7 +22,7 @@ export class UserListComponent implements OnInit {
     'operation',
   ];
   panelOpenState = true;
-  dataSource = MOCK_DATA;
+  dataSource = USER_MOCK_DATA;
   filterConfigs!: FieldConfig[];
   filterForm!: FormGroup;
   pagination: Pagination = {
@@ -46,7 +46,7 @@ export class UserListComponent implements OnInit {
   ) {
     if (!model.pageIndex) model.pageIndex = 0;
     if (!model.pageSize) model.pageSize = 10;
-    this.dataSource = MOCK_DATA.slice(
+    this.dataSource = USER_MOCK_DATA.slice(
       model.pageSize * model.pageIndex,
       model.pageSize * (model.pageIndex + 1)
     );

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
+import { User } from 'src/app/manager/models/user.model';
 import { ACTION } from './selected-teacher-list/selected-teacher-list.component';
 
 @Component({
@@ -13,16 +15,18 @@ export class ClassCreateComponent implements OnInit {
   class_info_form!: FormGroup;
   teacher_info_form!: FormGroup;
   selectedImg: string = 'img1.jpg';
-  isEditable = false;
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions!: Observable<string[]>;
-  teachers: any[] = [];
+  isEditable = true;
+  options: User[] = [];
+  filteredOptions!: Observable<User[]>;
+  teachers: User[] = [];
   editItem!: any;
-  private _filter(value: string): string[] {
+  private _filter(value: string): User[] {
     const filterValue = (' ' || value).toLowerCase();
 
     return this.options.filter((option) =>
-      option.toLowerCase().includes(filterValue)
+      ((option.first_name || '') + (option.last_name || ''))
+        .toLowerCase()
+        .includes(filterValue)
     );
   }
 
@@ -33,6 +37,9 @@ export class ClassCreateComponent implements OnInit {
   }
   ngOnInit() {
     this.initClassInfoForm();
+    this.options = USER_MOCK_DATA;
+    console.log(USER_MOCK_DATA.length);
+    
     this.initTeacherSelectForm();
   }
 
@@ -52,11 +59,7 @@ export class ClassCreateComponent implements OnInit {
     this.teacher_info_form = new FormGroup({
       name: new FormControl(null),
     });
-    this.filteredOptions =
-      this.teacher_info_form.get('name')?.valueChanges.pipe(
-        startWith(''),
-        map((value) => this._filter(value))
-      ) || new Observable();
+    // this.filteredOptions = 
   }
 
   onCancelEdit() {
@@ -67,11 +70,10 @@ export class ClassCreateComponent implements OnInit {
   onInsertTeacher() {
     if (this.editItem) {
       this.teachers = this.teachers.map((i, index) => {
-        if (this.editItem.no == i.no) {
+        if (this.editItem.id == i.id) {
           return {
             ...i,
-            ...this.teacher_info_form.value,
-            no: index + 1,
+            ...this.teacher_info_form.value.name,
           };
         } else
           return {
@@ -84,9 +86,7 @@ export class ClassCreateComponent implements OnInit {
       this.teachers = [
         ...this.teachers,
         {
-          no: this.teachers.length + 1,
-          name: this.teacher_info_form.value.name,
-          field: 'Math',
+          ...this.teacher_info_form.value.name,
         },
       ];
     }
@@ -96,18 +96,11 @@ export class ClassCreateComponent implements OnInit {
   onEvent(event: { action: ACTION; item: any }) {
     switch (event.action) {
       case ACTION.DELETE:
-        this.teachers = this.teachers
-          .filter((i) => i.no != event.item.no)
-          .map((i, index) => {
-            return {
-              ...i,
-              no: index + 1,
-            };
-          });
+        this.teachers = this.teachers.filter((i) => i.id != event.item.id);
         break;
       case ACTION.EDIT:
-        let teacher = this.teachers.find((i) => i.no == event.item.no);
-        this.teacher_info_form.get('name')?.setValue(teacher.name);
+        let teacher = this.teachers.find((i) => i.id == event.item.id);
+        this.teacher_info_form.get('name')?.setValue(teacher);
         this.editItem = teacher;
         break;
     }

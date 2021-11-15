@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { User } from 'src/app/manager/models/user.model';
 
 @Component({
   selector: 'EAP-selected-teacher-list',
@@ -14,21 +15,30 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectedTeacherListComponent implements OnInit {
-  displayedColumns: string[] = ['no', 'name', 'field', 'operation'];
-  dataSource: any[] = [{ no: 1, name: 'Mr.Jones', field: 'Math' }];
-  @Input('dataSource') set setDataSource(value: any[]) {
+  displayedColumns: string[] = [
+    'id',
+    'username',
+    'last_name',
+    'first_name',
+    'role',
+    'gender',
+    'email',
+    'operation'
+  ];
+  dataSource: User[] = [];
+  @Input('dataSource') set setDataSource(value: User[]) {
     if (value) this.dataSource = value;
   }
-  @Output() event = new EventEmitter<{ action: ACTION; item: any }>();
+  @Output() event = new EventEmitter<{ action: ACTION; item: User }>();
   constructor() {}
 
   ngOnInit(): void {}
 
-  onDelete(item: any) {
+  onDelete(item: User) {
     this.event.emit({ action: ACTION.DELETE, item });
   }
 
-  onEdit(item: any) {
+  onEdit(item: User) {
     this.event.emit({ action: ACTION.EDIT, item });
   }
 }

@@ -95,26 +95,17 @@
       <mat-step [stepControl]="teacher_info_form" [editable]="isEditable">
         <form [formGroup]="teacher_info_form">
           <div class="flex w-full justify-end">
-            <button mat-button matStepperNext>Done</button>
+            <button mat-button color="warn" matStepperPrevious>Back</button>
+            <button mat-button color="primary" matStepperNext>Next</button>
           </div>
           <ng-template matStepLabel>Techers</ng-template>
           <mat-form-field class="w-1/2" appearance="outline">
             <mat-label>teacher name</mat-label>
-            <input
-              type="text"
-              placeholder="Mr. Jones"
-              matInput
-              formControlName="name"
-              [matAutocomplete]="auto"
-            />
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option
-                *ngFor="let option of filteredOptions | async"
-                [value]="option"
-              >
-                {{ option }}
+            <mat-select formControlName="name">
+              <mat-option *ngFor="let user of options" [value]="user">
+                {{ user.first_name + " " + user.last_name }}
               </mat-option>
-            </mat-autocomplete>
+            </mat-select>
           </mat-form-field>
           <div class="w-full flex justify-start mb-2">
             <button
@@ -145,13 +136,15 @@
       <mat-step>
         <ng-template matStepLabel>Weekly schedule</ng-template>
         <div class="flex w-full justify-end">
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button color="warn" matStepperPrevious>Back</button>
+          <button mat-button color="primary" matStepperNext>Next</button>
         </div>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Students</ng-template>
         <div class="flex w-full justify-end">
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button color="warn" matStepperPrevious>Back</button>
+          <button mat-button color="primary" matStepperNext>Next</button>
         </div>
       </mat-step>
       <mat-step>
