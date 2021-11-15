@@ -13,11 +13,13 @@ import { ACTION } from './selected-teacher-list/selected-teacher-list.component'
 export class ClassCreateComponent implements OnInit {
   class_info_form!: FormGroup;
   teacher_info_form!: FormGroup;
+  student_info_form!: FormGroup;
   selectedImg: string = 'img1.jpg';
   isEditable = true;
   options: User[] = [];
   filteredOptions!: Observable<User[]>;
   teachers: User[] = [];
+  students: User[] = [];
   editItem!: any;
   private _filter(value: string): User[] {
     const filterValue = (' ' || value).toLowerCase();
@@ -39,6 +41,7 @@ export class ClassCreateComponent implements OnInit {
     this.options = USER_MOCK_DATA;
 
     this.initTeacherSelectForm();
+    this.initStudentSelectForm();
   }
 
   onSelectImage(img: string) {
@@ -55,6 +58,12 @@ export class ClassCreateComponent implements OnInit {
 
   private initTeacherSelectForm() {
     this.teacher_info_form = new FormGroup({
+      name: new FormControl(null),
+    });
+  }
+
+  private initStudentSelectForm() {
+    this.student_info_form = new FormGroup({
       name: new FormControl(null),
     });
   }
