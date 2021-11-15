@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       Validators.minLength(6),
     ]),
-    role: new FormControl('S'),
+    // role: new FormControl('S'),
   });
   pendding = false;
 

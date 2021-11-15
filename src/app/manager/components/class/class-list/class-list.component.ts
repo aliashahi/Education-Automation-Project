@@ -11,5 +11,7 @@ export class ClassListComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  onDelete(){
+  }
 
 }

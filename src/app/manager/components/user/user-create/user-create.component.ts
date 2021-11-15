@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'EAP-user-create',
@@ -21,14 +26,20 @@ export class UserCreateComponent implements OnInit {
   }
 
   private init_personal_form() {
-    this.personal_form = this._formBuilder.group({
-      username: [null, Validators.required],
-      first_name: [null, Validators.required],
-      last_name: [null, Validators.required],
-      email: [null, Validators.required, Validators.email],
-      password: [null, Validators.required, Validators.minLength(6)],
-      password2: [null, Validators.required, Validators.minLength(6)],
-      role: ['S'],
+    this.personal_form = new FormGroup({
+      username: new FormControl(null, Validators.required),
+      first_name: new FormControl(null, Validators.required),
+      last_name: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      password2: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      role: new FormControl('S'),
     });
   }
 }

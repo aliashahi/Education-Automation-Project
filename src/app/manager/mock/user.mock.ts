@@ -1,6 +1,6 @@
 import { User } from '../models/user.model';
 
-export const MOCK_DATA: User[] = [
+export const USER_MOCK_DATA: User[] = [
   {
     id: 1,
     username: 'jmelross0',
