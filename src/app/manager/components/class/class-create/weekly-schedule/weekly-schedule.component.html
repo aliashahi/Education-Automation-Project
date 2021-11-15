@@ -1,0 +1,22 @@
+<div class="p-3">
+  <table class="w-full border-gray-700">
+    <tr>
+      <th></th>
+      <th class="border-1 p-2">07:30 to 09:00</th>
+      <th class="border-1 p-2">09:00 to 10:30</th>
+      <th class="border-1 p-2">10:30 to 12:00</th>
+      <th class="border-1 p-2">13:00 to 14:30</th>
+      <th class="border-1 p-2">14:30 to 16:00</th>
+      <th class="border-1 p-2">16:30 to 17:00</th>
+    </tr>
+    <tr *ngFor="let day of week; let i = index">
+      <th class="border-1 p-2 w-16">{{ day }}</th>
+      <td
+        class="border-1 p-2"
+        *ngFor="let time of scheduleMap[i]"
+        [ngClass]="{ selected: time.selected }"
+        (click)="time.selected = !time.selected"
+      ></td>
+    </tr>
+  </table>
+</div>

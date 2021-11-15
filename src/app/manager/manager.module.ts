@@ -10,6 +10,7 @@ import { ClassListComponent } from './components/class/class-list/class-list.com
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { SelectedTeacherListComponent } from './components/class/class-create/selected-teacher-list/selected-teacher-list.component';
 import { FormBuilderModule } from '../shared/modules/form-builder';
+import { WeeklyScheduleComponent } from './components/class/class-create/weekly-schedule/weekly-schedule.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,7 @@ const routes: Routes = [
     ClassListComponent,
     UserListComponent,
     SelectedTeacherListComponent,
+    WeeklyScheduleComponent,
   ],
   imports: [
     CommonModule,

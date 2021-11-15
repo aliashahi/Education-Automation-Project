@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/manager/models/user.model';
+import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ACTION } from './selected-teacher-list/selected-teacher-list.component';
 
 @Component({
@@ -38,8 +37,7 @@ export class ClassCreateComponent implements OnInit {
   ngOnInit() {
     this.initClassInfoForm();
     this.options = USER_MOCK_DATA;
-    console.log(USER_MOCK_DATA.length);
-    
+
     this.initTeacherSelectForm();
   }
 
@@ -59,7 +57,6 @@ export class ClassCreateComponent implements OnInit {
     this.teacher_info_form = new FormGroup({
       name: new FormControl(null),
     });
-    // this.filteredOptions = 
   }
 
   onCancelEdit() {
