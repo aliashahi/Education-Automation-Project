@@ -1,5 +1,17 @@
 <nav class="sticky top-0 bg-gray-100 h-14 w-full z-50">
   <ul class="flex h-full justify-end items-center">
+    <li class="p-2 mx-2 rounded-sm cursor-pointer" *ngIf="!isExpanded">
+      <mat-icon (click)="isExpanded = !isExpanded; isExpandedChange.emit(true)"
+        >menu</mat-icon
+      >
+    </li>
+    <li class="p-2 mx-2 rounded-sm">
+      <img
+        style="width: 100px"
+        src="../../../../assets/images/logo/logo_full.svg"
+        alt=""
+      />
+    </li>
     <li
       class="
         p-2
@@ -21,6 +33,7 @@
         text-secondary-500
         hover:bg-secondary-200 hover:text-white
         cursor-pointer
+        mr-auto
       "
     >
       About Us

@@ -1,14 +1,14 @@
 <mat-drawer-container class="w-screen h-screen m-0 p-0">
   <mat-drawer
     mode="side"
-    opened
+    [opened]="isExpanded"
     class="w-2/12 bg-secondary-900"
     style="border: none; background-color: #006775"
   >
-    <EAP-sidenav></EAP-sidenav>
+    <EAP-sidenav [(isExpanded)]="isExpanded"></EAP-sidenav>
   </mat-drawer>
   <mat-drawer-content>
-    <EAP-topnav></EAP-topnav>
+    <EAP-topnav [(isExpanded)]="isExpanded"></EAP-topnav>
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
