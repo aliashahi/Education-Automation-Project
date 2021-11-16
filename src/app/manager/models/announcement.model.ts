@@ -6,4 +6,5 @@ export interface Announcement {
   liked: number;
   seen: number;
   date: string;
+  time: string;
 }
