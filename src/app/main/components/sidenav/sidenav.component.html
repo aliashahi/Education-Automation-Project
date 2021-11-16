@@ -4,8 +4,15 @@
       class="p-2 flex justify-around items-center mb-14"
       style="width: -webkit-fill-available; padding: 10px 20px"
     >
-      <img src="../../../../assets/images/logo/logo_full.svg" alt="" />
-      <button mat-icon-button>
+      <img
+        style="width: 100px"
+        src="../../../../assets/images/logo/logo_full.svg"
+        alt=""
+      />
+      <button
+        mat-icon-button
+        (click)="isExpanded = !isExpanded; isExpandedChange.emit(isExpanded)"
+      >
         <mat-icon> menu </mat-icon>
       </button>
     </div>

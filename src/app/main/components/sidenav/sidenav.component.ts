@@ -1,5 +1,5 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { ActivatedRoute } from '@angular/router';
 import { SidenavNode, TREE_DATA } from './sidenav.config';
@@ -10,6 +10,9 @@ import { SidenavNode, TREE_DATA } from './sidenav.config';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
+  @Input() isExpanded: boolean = false;
+  @Output() isExpandedChange = new EventEmitter<boolean>();
+
   treeControl = new NestedTreeControl<SidenavNode>((node) => node.children);
   dataSource = new MatTreeNestedDataSource<SidenavNode>();
 
