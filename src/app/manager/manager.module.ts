@@ -12,6 +12,9 @@ import { SelectedTeacherListComponent } from './components/class/class-create/se
 import { FormBuilderModule } from '../shared/modules/form-builder';
 import { WeeklyScheduleComponent } from './components/class/class-create/weekly-schedule/weekly-schedule.component';
 import { ClassPreviewComponent } from './components/class/class-create/class-preview/class-preview.component';
+import { AnnouncementComponent } from './components/announcement/announcement.component';
+import { CreateAnnouncementComponent } from './components/announcement/create-announcement/create-announcement.component';
+import { AnnouncementListComponent } from './components/announcement/announcement-list/announcement-list.component';
 
 const routes: Routes = [
   {
@@ -39,6 +42,14 @@ const routes: Routes = [
         component: ClassListComponent,
       },
       {
+        path: 'announcement-create',
+        component: CreateAnnouncementComponent,
+      },
+      {
+        path: 'announcement-list',
+        component: AnnouncementListComponent,
+      },
+      {
         path: '**',
         redirectTo: 'dashboard',
       },
@@ -61,6 +72,9 @@ const routes: Routes = [
     SelectedTeacherListComponent,
     WeeklyScheduleComponent,
     ClassPreviewComponent,
+    AnnouncementComponent,
+    CreateAnnouncementComponent,
+    AnnouncementListComponent,
   ],
   imports: [
     CommonModule,

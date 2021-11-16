@@ -16,26 +16,38 @@ export const TREE_DATA: SidenavNode[] = [
   },
   {
     name: 'Create User',
-    icon: 'add',
+    icon: 'person_add',
     url: '/manager/user-create',
     ACCESS: 'M',
   },
   {
     name: 'User List',
-    icon: 'list',
+    icon: 'people',
     url: '/manager/user-list',
     ACCESS: 'M',
   },
   {
     name: 'Create Class',
-    icon: 'add',
+    icon: 'bookmark_add',
     url: '/manager/class-create',
     ACCESS: 'M',
   },
   {
     name: 'Class List',
-    icon: 'list',
+    icon: 'class',
     url: '/manager/class-list',
+    ACCESS: 'M',
+  },
+  {
+    name: 'Create Announcement',
+    icon: 'send',
+    url: '/manager/announcement-create',
+    ACCESS: 'M',
+  },
+  {
+    name: 'Announcement List',
+    icon: 'campaign',
+    url: '/manager/announcement-list',
     ACCESS: 'M',
   },
   // {
