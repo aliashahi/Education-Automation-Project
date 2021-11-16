@@ -14,6 +14,7 @@ import { WeeklyScheduleComponent } from './components/class/class-create/weekly-
 import { ClassPreviewComponent } from './components/class/class-create/class-preview/class-preview.component';
 import { AnnouncementCreateComponent } from './components/announcement/announcement-create/announcement-create.component';
 import { AnnouncementListComponent } from './components/announcement/announcement-list/announcement-list.component';
+import { AlertService } from '../shared/modules/alert/alert.service';
 
 const routes: Routes = [
   {
@@ -80,5 +81,6 @@ const routes: Routes = [
     FormBuilderModule,
     RouterModule.forChild(routes),
   ],
+  providers: [AlertService],
 })
 export class ManagerModule {}
