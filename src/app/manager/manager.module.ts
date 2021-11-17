@@ -15,7 +15,7 @@ import { ClassPreviewComponent } from './components/class/class-create/class-pre
 import { AnnouncementCreateComponent } from './components/announcement/announcement-create/announcement-create.component';
 import { AnnouncementListComponent } from './components/announcement/announcement-list/announcement-list.component';
 import { AlertService } from '../shared/modules/alert/alert.service';
-
+import { NgApexchartsModule } from 'ng-apexcharts';
 const routes: Routes = [
   {
     path: '',
@@ -79,6 +79,7 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     FormBuilderModule,
+    NgApexchartsModule,
     RouterModule.forChild(routes),
   ],
   providers: [AlertService],

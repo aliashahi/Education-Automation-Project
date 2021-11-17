@@ -18,6 +18,7 @@ module.exports = {
         secondary: {
           900: '#036666',
           800: '#14746f',
+          750: '#0e7e8d',
           700: '#248277',
           600: '#358f80',
           500: '#469d89',
@@ -37,7 +38,7 @@ module.exports = {
             1: '#fff8dd',
             2: '#f1faff',
             3: '#fff5f8',
-            4: '#fff5f8',
+            4: '#e3fff1',
           },
         },
         assent: '#ede7e3'

@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode';
   name: 'tokenDecoder',
 })
 export class TokenDecoderPipe implements PipeTransform {
-  transform(defaultValue: any, key: string): any {
+  transform(defaultValue: string, key: string): any {
     let token = localStorage.getItem('Token');
     try {
       if (token) {

@@ -94,7 +94,8 @@ body {
 }
 
 textarea:focus,
-input:focus {
+select:focus,
+input:focus { 
   border: none;
   --tw-ring-color: white !important;
 }
