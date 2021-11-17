@@ -1,4 +1,4 @@
-<div class="container w-full flex justify-around">
+<div class="container w-full p-4 py-14 flex justify-around">
   <article class="w-full p-2">
     <div
       class="
@@ -12,8 +12,8 @@
         justify-end
       "
     >
-      <div style="font-size: 75px" class="p-8">12</div>
-      <h3 class="opacity-75">Homeworks Left!</h3>
+      <div style="font-size: 75px" class="p-8">653</div>
+      <h3 class="opacity-75">Students</h3>
     </div>
   </article>
   <article class="w-full p-2">
@@ -29,8 +29,8 @@
         justify-end
       "
     >
-      <div style="font-size: 75px" class="p-8">7</div>
-      <h3 class="opacity-75">Octobor 2021</h3>
+      <div style="font-size: 75px" class="p-8">36</div>
+      <h3 class="opacity-75">Teachers</h3>
     </div>
   </article>
   <article class="w-full p-2">
@@ -46,8 +46,8 @@
         justify-end
       "
     >
-      <div style="font-size: 75px" class="p-8">57</div>
-      <h3 class="opacity-75">Until Midterm</h3>
+      <div style="font-size: 75px" class="p-8">135</div>
+      <h3 class="opacity-75">Online!</h3>
     </div>
   </article>
   <article class="w-full p-2">
@@ -63,8 +63,28 @@
         justify-end
       "
     >
-      <div style="font-size: 75px" class="p-8">6</div>
-      <h3 class="opacity-75">Absent :(</h3>
+      <div style="font-size: 75px" class="p-8">129</div>
+      <h3 class="opacity-75">Announcement</h3>
     </div>
   </article>
+</div>
+<div class="w-full flex p-4">
+  <div style="flex: 60%">
+    <apx-chart
+      [series]="areaChart.series"
+      [chart]="areaChart.chart"
+      [xaxis]="areaChart.xaxis"
+      [stroke]="areaChart.stroke"
+      [tooltip]="areaChart.tooltip"
+      [dataLabels]="areaChart.dataLabels"
+    ></apx-chart>
+  </div>
+  <div style="flex: 40%">
+    <apx-chart
+      [series]="pieChart.series"
+      [chart]="pieChart.chart"
+      [labels]="pieChart.labels"
+      [responsive]="pieChart.responsive"
+    ></apx-chart>
+  </div>
 </div>

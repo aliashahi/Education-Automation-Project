@@ -38,7 +38,7 @@ module.exports = {
             1: '#fff8dd',
             2: '#f1faff',
             3: '#fff5f8',
-            4: '#fff5f8',
+            4: '#e3fff1',
           },
         },
         assent: '#ede7e3'
