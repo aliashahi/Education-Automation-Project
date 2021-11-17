@@ -1,10 +1,13 @@
+import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
-import { Pagination } from 'src/app/manager/models/pagination.model';
 import { User } from 'src/app/manager/models/user.model';
+import { ConfirmDialog } from 'src/app/shared/modules/confirm';
+import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
 import { FieldConfig } from 'src/app/shared/modules/form-builder';
+import { Pagination } from 'src/app/manager/models/pagination.model';
+import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 
 @Component({
   selector: 'EAP-user-list',
@@ -12,6 +15,13 @@ import { FieldConfig } from 'src/app/shared/modules/form-builder';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
+  searchModel: {
+    first_name?: string;
+    last_name?: string;
+    username?: string;
+    email?: string;
+  } = {};
+
   displayedColumns: string[] = [
     'id',
     'first_name',
@@ -22,7 +32,9 @@ export class UserListComponent implements OnInit {
     'operation',
   ];
   panelOpenState = true;
-  dataSource = USER_MOCK_DATA;
+  allData = USER_MOCK_DATA;
+  filteredData = USER_MOCK_DATA;
+  dataSource: User[] = [];
   filterConfigs!: FieldConfig[];
   filterForm!: FormGroup;
   pagination: Pagination = {
@@ -31,10 +43,9 @@ export class UserListComponent implements OnInit {
     pageSize: 10,
     pageSizeOptions: [5, 10, 20, 40, 80, 160],
   };
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.initFilterForm();
     this.getData();
   }
 
@@ -46,7 +57,7 @@ export class UserListComponent implements OnInit {
   ) {
     if (!model.pageIndex) model.pageIndex = 0;
     if (!model.pageSize) model.pageSize = 10;
-    this.dataSource = USER_MOCK_DATA.slice(
+    this.dataSource = this.filteredData.slice(
       model.pageSize * model.pageIndex,
       model.pageSize * (model.pageIndex + 1)
     );
@@ -57,32 +68,39 @@ export class UserListComponent implements OnInit {
     this.getData({ ...$event });
   }
 
-  onDelete(user: User) {}
+  onFilterUsers() {
+    this.filteredData = this.allData.filter((user) => {
+      return (
+        user.first_name
+          ?.toLowerCase()
+          .includes((this.searchModel.first_name || '').toLowerCase()) &&
+        user.last_name
+          ?.toLowerCase()
+          .includes((this.searchModel.last_name || '').toLowerCase()) &&
+        user.username
+          ?.toLowerCase()
+          .includes((this.searchModel.username || '').toLowerCase()) &&
+        user.email
+          ?.toLowerCase()
+          .includes((this.searchModel.email || '').toLowerCase())
+      );
+    });
+    this.onPaginationChange(this.pagination);
+  }
+
+  onDelete(user: User) {
+    this.dialog.open(ConfirmDialog, {
+      data: <ConfirmDialogDto>{
+        cancelText: 'close',
+        submitText: 'delete',
+        message: 'Are you Sure?',
+        submitFn: () => {
+          this.allData = this.allData.filter((i) => i.id != user.id);
+          this.onFilterUsers();
+        },
+      },
+    });
+  }
 
   onInfo(user: User) {}
-
-  private initFilterForm() {
-    this.filterForm = new FormGroup({
-      name: new FormControl(null),
-      id: new FormControl(null),
-      role: new FormControl(null),
-    });
-    this.filterConfigs = [
-      {
-        id: 'name',
-        label: 'Name',
-        class: 'w-1/2',
-      },
-      {
-        id: 'id',
-        label: 'No.',
-        class: 'w-1/2',
-      },
-      {
-        id: 'role',
-        label: 'Role',
-        class: 'w-1/2',
-      },
-    ];
-  }
 }

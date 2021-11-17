@@ -37,6 +37,25 @@
           >subtitle is required</mat-error
         >
       </mat-form-field>
+      <mat-form-field class="w-1/2 pr-2" appearance="outline">
+        <mat-label>Group</mat-label>
+        <mat-select
+          formControlName="group"
+          multiple
+          style="padding: 0; border: none"
+        >
+          <mat-option *ngFor="let group of groups" [value]="group.value">
+            {{ group.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+            announcement_form.get('group')?.errors &&
+            announcement_form.get('group')?.hasError('required')
+          "
+          >group is required</mat-error
+        >
+      </mat-form-field>
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>description</mat-label>
         <textarea
