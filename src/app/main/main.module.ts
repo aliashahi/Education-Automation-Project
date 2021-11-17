@@ -29,13 +29,13 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'dashboard',
+        redirectTo: 'manager',
       },
     ],
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'manager',
   },
 ];
 @NgModule({
