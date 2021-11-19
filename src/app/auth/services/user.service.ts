@@ -16,6 +16,10 @@ export class UserService extends ServiceBase {
     return this.post$('auth/users/', model);
   }
 
+  public getMyInfo() {
+    return this.get$('auth/users/me/');
+  }
+
   public getStudents(model: UserSearchDto) {
     return this.get$('school/students/', this.createParamList(model));
   }

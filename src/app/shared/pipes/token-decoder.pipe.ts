@@ -5,13 +5,23 @@ import jwt_decode from 'jwt-decode';
 })
 export class TokenDecoderPipe implements PipeTransform {
   transform(defaultValue: string, key: string): any {
-    let token = localStorage.getItem('Token');
-    try {
-      if (token) {
-        let decoded: any = jwt_decode(token);
-        if (decoded[key]) return decoded[key];
+    let user: any = localStorage.getItem('USER_INFO');
+    if (user) {
+      try {
+        user = JSON.parse(user);
+        return user.first_name + ' ' + user.last_name;
+      } catch {
+        return defaultValue;
       }
-    } catch {}
+    }
+
+    // let token = localStorage.getItem('Token');
+    // try {
+    //   if (token) {
+    //     let decoded: any = jwt_decode(token);
+    //     if (decoded[key]) return decoded[key];
+    //   }
+    // } catch {}
     return defaultValue;
   }
 }
