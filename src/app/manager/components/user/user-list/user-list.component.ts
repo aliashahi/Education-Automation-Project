@@ -5,10 +5,11 @@ import { PageEvent } from '@angular/material/paginator';
 import { User } from 'src/app/manager/models/user.model';
 import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
+import { UserSearchDto } from 'src/app/auth/services/user.dto';
+import { UserService } from 'src/app/auth/services/user.service';
 import { FieldConfig } from 'src/app/shared/modules/form-builder';
 import { Pagination } from 'src/app/manager/models/pagination.model';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
-import { UserService } from 'src/app/auth/services/user.service';
 
 @Component({
   selector: 'EAP-user-list',
@@ -16,12 +17,7 @@ import { UserService } from 'src/app/auth/services/user.service';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-  searchModel: {
-    first_name?: string;
-    last_name?: string;
-    username?: string;
-    email?: string;
-  } = {};
+  searchModel: UserSearchDto = {};
 
   displayedColumns: string[] = [
     'id',
@@ -50,23 +46,16 @@ export class UserListComponent implements OnInit {
     this.getData();
   }
 
-  private getData(
-    model: Partial<{ pageSize: number; pageIndex: number }> = {
-      pageIndex: 0,
-      pageSize: 10,
-    }
-  ) {
-    if (!model.pageIndex) model.pageIndex = 0;
-    if (!model.pageSize) model.pageSize = 10;
-    this.dataSource = this.filteredData.slice(
-      model.pageSize * model.pageIndex,
-      model.pageSize * (model.pageIndex + 1)
-    );
+  private getData() {
+    this.userSrv.getStudents({ ...this.searchModel }).subscribe((res) => {
+      this.allData = res.map((i: any) => i.user);
+      this.onFilterUsers();
+    });
   }
 
   onPaginationChange($event: PageEvent) {
     this.pagination = { ...this.pagination, ...$event };
-    this.getData({ ...$event });
+    this.getData();
   }
 
   onFilterUsers() {
@@ -86,7 +75,12 @@ export class UserListComponent implements OnInit {
           .includes((this.searchModel.email || '').toLowerCase())
       );
     });
-    this.onPaginationChange(this.pagination);
+    if (!this.pagination.pageIndex) this.pagination.pageIndex = 0;
+    if (!this.pagination.pageSize) this.pagination.pageSize = 10;
+    this.dataSource = this.filteredData.slice(
+      this.pagination.pageSize * this.pagination.pageIndex,
+      this.pagination.pageSize * (this.pagination.pageIndex + 1)
+    );
   }
 
   onDelete(user: User) {

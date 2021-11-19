@@ -27,11 +27,12 @@ export class HttpsInterceptor implements HttpInterceptor {
       );
       return EMPTY;
     }
+
     let token = localStorage.getItem('Token');
     if (token == null || token == undefined) token = '';
     let tokenizedRequest = request.clone({
       setHeaders: {
-        Authentication: `Bearer ${token}`,
+        Authorization: `JWT ${token}`,
         'Content-Type': 'application/json',
       },
     });
@@ -49,7 +50,7 @@ export class HttpsInterceptor implements HttpInterceptor {
 
     if (error instanceof HttpErrorResponse && error.status === 401) {
       this.alertSrvc.showToaster('Your Session has been Expired!', 'DANGER');
-      if (!environment.devMode) this.router.navigate(['/auth/login']);
+      // if (!environment.devMode) this.router.navigate(['/auth/login']);
       return EMPTY;
     }
 
@@ -59,10 +60,22 @@ export class HttpsInterceptor implements HttpInterceptor {
     }
 
     if (error instanceof HttpErrorResponse && error.status === 400) {
+      this.create400ErrorMessage(error).forEach((e) => {
+        this.alertSrvc.showToaster(e, 'DANGER');
+      });
       return EMPTY;
     }
 
     this.alertSrvc.showToaster('Something went Wrong !!!', 'DANGER');
     return throwError(error);
+  }
+
+  private create400ErrorMessage(error: HttpErrorResponse): string[] {
+    let list: string[] = [];
+    Object.entries(error.error).forEach((e) => {
+      if (typeof e[1] == 'string') list.push(String(e[1]));
+      if (Array.isArray(e[1])) list.push(...e[1]);
+    });
+    return list;
   }
 }
