@@ -6,7 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 const routes: Routes = [
   {
@@ -32,6 +32,6 @@ const routes: Routes = [
     HttpClientModule,
   ],
   exports: [LoginComponent, RegisterComponent],
-  providers: [AuthService],
+  providers: [UserService],
 })
 export class AuthModule {}

@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
 @Component({
   selector: 'EAP-register',
@@ -33,8 +33,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
-    private _snackBar: MatSnackBar
+    private userSrv: UserService,
+    private alertSrv: AlertService
   ) {}
 
   ngOnInit(): void {}
@@ -43,21 +43,14 @@ export class RegisterComponent implements OnInit {
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
-      this.loginRef$ = this.authService.register(this.forms.value).subscribe(
+      this.loginRef$ = this.userSrv.register(this.forms.value).subscribe(
         (response) => {
           this.router.navigate(['/auth/login']);
           this.pendding = false;
           this.forms.enable();
         },
         (error) => {
-          this._snackBar.open(
-            'ERROR : please enter valid information',
-            'close',
-            {
-              duration: 2500,
-              panelClass: 'DANGER',
-            }
-          );
+          this.alertSrv.showToaster('please enter valid information', 'DANGER');
           this.pendding = false;
           this.forms.enable();
         }

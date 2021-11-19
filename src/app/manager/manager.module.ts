@@ -16,6 +16,9 @@ import { AnnouncementCreateComponent } from './components/announcement/announcem
 import { AnnouncementListComponent } from './components/announcement/announcement-list/announcement-list.component';
 import { AlertService } from '../shared/modules/alert/alert.service';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { UserService } from '../auth/services/user.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpsInterceptor } from '../core';
 const routes: Routes = [
   {
     path: '',
@@ -82,6 +85,14 @@ const routes: Routes = [
     NgApexchartsModule,
     RouterModule.forChild(routes),
   ],
-  providers: [AlertService],
+  providers: [
+    AlertService,
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpsInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class ManagerModule {}

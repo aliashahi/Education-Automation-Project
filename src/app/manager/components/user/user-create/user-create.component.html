@@ -37,7 +37,7 @@
                 >Last name is required</mat-error
               >
             </mat-form-field>
-            <mat-form-field class="w-full" appearance="outline">
+            <mat-form-field class="w-1/2 pr-1" appearance="outline">
               <mat-label>Username</mat-label>
               <input
                 matInput
@@ -53,7 +53,7 @@
                 >Username is required</mat-error
               >
             </mat-form-field>
-            <mat-form-field class="w-full" appearance="outline">
+            <mat-form-field class="w-1/2 pl-1" appearance="outline">
               <mat-label>Email</mat-label>
               <input
                 matInput
@@ -133,15 +133,26 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="text-center" style="margin-top: 0">
+          <div class="w-1/2 text-center" style="margin-top: 0">
             <mat-radio-group formControlName="role" class="flex justify-around">
               <mat-radio-button value="S">Student</mat-radio-button>
               <mat-radio-button value="T">Teacher</mat-radio-button>
             </mat-radio-group>
           </div>
           <div class="flex w-full justify-end">
-            <button mat-stroked-button class="primary" matStepperNext>
-              Next
+            <button
+              mat-raised-button
+              class="
+                bg-green-600
+                text-white
+                hover:bg-green-700 hover:text-white
+                disabled:opacity-50
+              "
+              type="submit"
+              [disabled]="personal_form.invalid || pendding"
+              (click)="onRegisterUser(stepper)"
+            >
+              Create user
             </button>
           </div>
         </form>
