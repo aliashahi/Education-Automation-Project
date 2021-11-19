@@ -24,7 +24,7 @@ var KTLayoutSubheader = function() {
             _element = KTUtil.getById(id);
 
             if (!_element) {
-                return;
+
             }
 		},
 

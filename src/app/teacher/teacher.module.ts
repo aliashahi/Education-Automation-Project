@@ -23,13 +23,14 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'dashboard',
+        component: ErrorComponent,
       },
     ],
   },
   {
     path: '**',
-    redirectTo: '',
+    component: ErrorComponent,
+    // redirectTo: '',
   },
 ];
 

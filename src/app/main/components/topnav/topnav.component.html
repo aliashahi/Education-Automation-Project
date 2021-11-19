@@ -1,4 +1,4 @@
-<nav class="sticky top-0 bg-gray-100 h-14 w-full z-50">
+<nav class="sticky top-0 bg-gray-100 h-14 w-full z-50 mb-2 shadow">
   <ul class="flex h-full justify-end items-center">
     <li class="p-2 mx-2 rounded-sm cursor-pointer" *ngIf="!isExpanded">
       <mat-icon (click)="isExpanded = !isExpanded; isExpandedChange.emit(true)"
@@ -14,14 +14,27 @@
     </li>
     <!-- <li
       class="
-        p-2
-        mx-2
-        rounded-sm
-        text-secondary-500
-        hover:bg-secondary-200 hover:text-white
-        cursor-pointer
-      "
+         p-2
+         flex-none
+         mx-2
+         rounded-sm
+         "
+    >
+      <p class="font-semibold text-lg">
+        {{NavTitle}}
+      </p>
+    </li>
+    <li class="flex-grow"></li>
+    <li
       [routerLink]="['/']"
+      class="
+         p-2
+         mx-2
+         rounded-sm
+         text-secondary-500
+         hover:bg-secondary-200 hover:text-white
+         cursor-pointer
+         "
     >
       Home
     </li>
@@ -79,9 +92,9 @@
       #menuTrigger="matMenuTrigger"
     >
       <img
+        alt=""
         class="w-12 h-12 rounded-full border-2 border-black"
         src="../../../../assets/images/default_profile.png"
-        alt=""
       />
     </li>
   </ul>

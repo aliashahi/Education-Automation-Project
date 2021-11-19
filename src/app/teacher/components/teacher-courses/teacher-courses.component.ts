@@ -8,7 +8,6 @@ import {TopnavComponent} from '../../../main/components/topnav/topnav.component'
   styleUrls: ['./teacher-courses.component.scss']
 })
 export class TeacherCoursesComponent implements OnInit {
-
   @Output() messageEvent = new EventEmitter<string>();
   constructor() {
 this.sendMessage();
