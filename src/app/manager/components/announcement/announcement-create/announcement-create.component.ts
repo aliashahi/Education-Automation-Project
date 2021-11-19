@@ -31,7 +31,7 @@ export class AnnouncementCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.alertService.showSnackbar('Announcement Created!!!', 'SUCCESS');
+    this.alertService.showToaster('Announcement Created!!!', 'SUCCESS');
     setTimeout(() => {
       this.router.navigate(['/manager/announcement-list']);
     }, 1000);

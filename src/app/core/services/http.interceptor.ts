@@ -21,7 +21,7 @@ export class HttpsInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (!window.navigator.onLine) {
-      this.alertSrvc.showSnackbar(
+      this.alertSrvc.showToaster(
         'you are not connected to Internet ,Please check your connection!',
         'DANGER'
       );
@@ -43,18 +43,18 @@ export class HttpsInterceptor implements HttpInterceptor {
 
   errorHandler(error: HttpErrorResponse) {
     if (error instanceof HttpErrorResponse && error.status === 404) {
-      this.alertSrvc.showSnackbar('Not Found Error!', 'DANGER');
+      this.alertSrvc.showToaster('Not Found Error!', 'DANGER');
       return EMPTY;
     }
 
     if (error instanceof HttpErrorResponse && error.status === 401) {
-      this.alertSrvc.showSnackbar('Your Session has been Expired!', 'DANGER');
+      this.alertSrvc.showToaster('Your Session has been Expired!', 'DANGER');
       if (!environment.devMode) this.router.navigate(['/auth/login']);
       return EMPTY;
     }
 
     if (error instanceof HttpErrorResponse && error.status === 403) {
-      this.alertSrvc.showSnackbar('You are not Authorized!', 'DANGER');
+      this.alertSrvc.showToaster('You are not Authorized!', 'DANGER');
       return EMPTY;
     }
 
@@ -62,7 +62,7 @@ export class HttpsInterceptor implements HttpInterceptor {
       return EMPTY;
     }
 
-    this.alertSrvc.showSnackbar('Something went Wrong !!!', 'DANGER');
+    this.alertSrvc.showToaster('Something went Wrong !!!', 'DANGER');
     return throwError(error);
   }
 }

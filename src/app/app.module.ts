@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule, HttpsInterceptor } from './core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorComponent } from './utitlitiy/error/error.component';
-
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [AppComponent, ErrorComponent],
   imports: [
@@ -15,6 +15,7 @@ import { ErrorComponent } from './utitlitiy/error/error.component';
     CoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {

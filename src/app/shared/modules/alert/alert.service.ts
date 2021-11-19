@@ -1,21 +1,33 @@
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AlertType } from './models/alert-type';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AlertService {
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private toastr: ToastrService) {}
 
-  showSnackbar(
+  showToaster(
     message: string,
     type: AlertType = 'INFO',
     duration: number = 5500
   ) {
     duration = Math.floor((message.length / 5) * 500);
-    this._snackBar.open(message, '', {
-      duration: duration > 3000 ? duration : 3000,
-    });
+    duration = duration > 3000 ? duration : 3000;
+    switch (type) {
+      case 'DANGER':
+        this.toastr.error(message, 'ERROR', { timeOut: duration });
+        break;
+      case 'SUCCESS':
+        this.toastr.success(message, 'SUCCESS', { timeOut: duration });
+        break;
+      case 'WARNING':
+        this.toastr.warning(message, 'WARNNING', { timeOut: duration });
+        break;
+      case 'INFO':
+        this.toastr.info(message, 'INFO', { timeOut: duration });
+        break;
+    }
   }
 }

@@ -49,7 +49,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": ["node_modules/ngx-toastr/toastr.css","src/styles.scss"],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js"
             ]
@@ -114,7 +114,7 @@
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss","*.css"],
+            "styles": ["node_modules/ngx-toastr/toastr.css","src/styles.scss","*.css"],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js"
             ]
