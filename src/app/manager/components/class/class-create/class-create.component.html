@@ -94,20 +94,24 @@
       </mat-step>
       <mat-step [stepControl]="teacher_info_form" [editable]="isEditable">
         <form [formGroup]="teacher_info_form">
-          <div class="flex w-full justify-end">
-            <button mat-button color="warn" matStepperPrevious>Back</button>
-            <button mat-button color="primary" matStepperNext>Next</button>
-          </div>
           <ng-template matStepLabel>Techers</ng-template>
           <mat-form-field class="w-1/2" appearance="outline">
             <mat-label>teacher name</mat-label>
-            <mat-select formControlName="name">
+            <mat-select
+              formControlName="name"
+              multiple
+              style="border-color: white; padding: 0px"
+            >
               <mat-option *ngFor="let user of options" [value]="user">
                 {{ user.first_name + " " + user.last_name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <div class="w-full flex justify-start mb-2">
+          <div class="flex w-full justify-end">
+            <button mat-button color="warn" matStepperPrevious>Back</button>
+            <button mat-button color="primary" matStepperNext>Next</button>
+          </div>
+          <!-- <div class="w-full flex justify-start mb-2">
             <button
               mat-stroked-button
               class="mx-2"
@@ -130,7 +134,7 @@
           <EAP-selected-teacher-list
             [dataSource]="teachers"
             (event)="onEvent($event)"
-          ></EAP-selected-teacher-list>
+          ></EAP-selected-teacher-list> -->
         </form>
       </mat-step>
       <mat-step>
@@ -143,20 +147,24 @@
       </mat-step>
       <mat-step>
         <form [formGroup]="student_info_form">
-          <div class="flex w-full justify-end">
-            <button mat-button color="warn" matStepperPrevious>Back</button>
-            <button mat-button color="primary" matStepperNext>Next</button>
-          </div>
           <ng-template matStepLabel>Students</ng-template>
           <mat-form-field class="w-1/2" appearance="outline">
             <mat-label>student name</mat-label>
-            <mat-select formControlName="name">
+            <mat-select
+              formControlName="name"
+              multiple
+              style="border-color: white; padding: 0px"
+            >
               <mat-option *ngFor="let user of options" [value]="user">
                 {{ user.first_name + " " + user.last_name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <div class="w-full flex justify-start mb-2">
+          <div class="flex w-full justify-end">
+            <button mat-button color="warn" matStepperPrevious>Back</button>
+            <button mat-button color="primary" matStepperNext>Next</button>
+          </div>
+          <!-- <div class="w-full flex justify-start mb-2">
             <button
               mat-stroked-button
               class="mx-2"
@@ -179,14 +187,14 @@
           <EAP-selected-teacher-list
             [dataSource]="students"
             (event)="onEvent($event)"
-          ></EAP-selected-teacher-list>
+          ></EAP-selected-teacher-list> -->
         </form>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>overview</ng-template>
         <p>class_info_form:{{ class_info_form.value | json }}</p>
-        <p>teachers:{{ teachers | json }}</p>
-        <p>students:{{ students | json }}</p>
+        <p>teachers:{{ teacher_info_form.value | json }}</p>
+        <p>students:{{ student_info_form.value | json }}</p>
         <div class="flex w-full justify-end">
           <button mat-button color="warn" matStepperPrevious>Back</button>
           <button mat-button color="primary" matStepperNext>Done</button>
@@ -194,7 +202,7 @@
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
-        <p class="text-green-600">You are now done.</p>
+        <p class="text-green-600">Class created Successfully!</p>
         <div class="flex w-full justify-end">
           <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
