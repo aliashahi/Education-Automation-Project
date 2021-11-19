@@ -8,6 +8,7 @@ import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
 import { FieldConfig } from 'src/app/shared/modules/form-builder';
 import { Pagination } from 'src/app/manager/models/pagination.model';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
+import { UserService } from 'src/app/auth/services/user.service';
 
 @Component({
   selector: 'EAP-user-list',
@@ -43,7 +44,7 @@ export class UserListComponent implements OnInit {
     pageSize: 10,
     pageSizeOptions: [5, 10, 20, 40, 80, 160],
   };
-  constructor(private dialog: MatDialog) {}
+  constructor(private userSrv: UserService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getData();

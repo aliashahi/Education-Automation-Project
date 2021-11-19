@@ -25,7 +25,7 @@ export class UserCreateComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private authSrv: UserService,
+    private userSrv: UserService,
     private alertSrv: AlertService
   ) {}
 
@@ -57,7 +57,7 @@ export class UserCreateComponent implements OnInit {
   onRegisterUser(stepper: MatStepper) {
     this.personal_form.disable();
     this.pendding = true;
-    this.authSrv.register(this.personal_form.value).subscribe(
+    this.userSrv.register(this.personal_form.value).subscribe(
       (res) => {
         this.user = res;
         this.alertSrv.showToaster('User created Successfully!', 'SUCCESS');

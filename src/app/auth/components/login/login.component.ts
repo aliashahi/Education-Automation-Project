@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private UserService: UserService,
+    private userSrv: UserService,
     private alertSrv: AlertService
   ) {}
 
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
-      this.loginRef$ = this.UserService.login(this.forms.value).subscribe(
+      this.loginRef$ = this.userSrv.login(this.forms.value).subscribe(
         (response) => {
           localStorage.setItem('Token', response.access);
           localStorage.setItem('Refresh', response.refresh);

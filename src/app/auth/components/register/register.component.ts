@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private UserService: UserService,
+    private userSrv: UserService,
     private alertSrv: AlertService
   ) {}
 
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
-      this.loginRef$ = this.UserService.register(this.forms.value).subscribe(
+      this.loginRef$ = this.userSrv.register(this.forms.value).subscribe(
         (response) => {
           this.router.navigate(['/auth/login']);
           this.pendding = false;
