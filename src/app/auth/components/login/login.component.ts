@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
-import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'EAP-login',
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
+    private UserService: UserService,
     private alertSrv: AlertService
   ) {}
 
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
-      this.loginRef$ = this.authService.login(this.forms.value).subscribe(
+      this.loginRef$ = this.UserService.login(this.forms.value).subscribe(
         (response) => {
           localStorage.setItem('Token', response.access);
           localStorage.setItem('Refresh', response.refresh);

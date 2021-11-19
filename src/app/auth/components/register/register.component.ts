@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
+    private UserService: UserService,
     private alertSrv: AlertService
   ) {}
 
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
-      this.loginRef$ = this.authService.register(this.forms.value).subscribe(
+      this.loginRef$ = this.UserService.register(this.forms.value).subscribe(
         (response) => {
           this.router.navigate(['/auth/login']);
           this.pendding = false;

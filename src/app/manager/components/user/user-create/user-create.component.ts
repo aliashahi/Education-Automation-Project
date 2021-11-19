@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { UserService } from 'src/app/auth/services/user.service';
 import { User } from 'src/app/manager/models/user.model';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
@@ -14,7 +14,7 @@ import { AlertService } from 'src/app/shared/modules/alert/alert.service';
   selector: 'EAP-user-create',
   templateUrl: './user-create.component.html',
   styleUrls: ['./user-create.component.scss'],
-  providers: [AuthService],
+  providers: [UserService],
 })
 export class UserCreateComponent implements OnInit {
   personal_form!: FormGroup;
@@ -25,7 +25,7 @@ export class UserCreateComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private authSrv: AuthService,
+    private authSrv: UserService,
     private alertSrv: AlertService
   ) {}
 
