@@ -140,8 +140,13 @@
             </mat-radio-group>
           </div>
           <div class="flex w-full justify-end">
-            <button mat-stroked-button class="primary" matStepperNext>
-              Next
+            <button
+              mat-raised-button
+              class="bg-green-600 text-white hover:bg-green-700 hover:text-white"
+              type="submit"
+              (click)="onRegisterUser(stepper)"
+            >
+              Create user
             </button>
           </div>
         </form>

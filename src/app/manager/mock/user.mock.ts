@@ -6530,6 +6530,7 @@ export const USER_MOCK_DATA: User[] = [
     id: 726,
     username: 'cmcginnk5',
     first_name: 'Carole',
+    last_name: 'Carole',
     email: 'cmcginnk5@mozilla.org',
     gender: 'Non-binary',
     role: 'STUDENT',

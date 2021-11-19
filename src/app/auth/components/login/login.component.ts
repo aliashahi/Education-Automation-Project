@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private _snackBar: MatSnackBar
+    private alertSrv: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -48,15 +48,16 @@ export class LoginComponent implements OnInit {
         (response) => {
           localStorage.setItem('Token', response.access);
           localStorage.setItem('Refresh', response.refresh);
+          this.alertSrv.showToaster(
+            'You are Successfully loged in!',
+            'SUCCESS'
+          );
           this.router.navigate(['/']);
           this.pendding = false;
           this.forms.enable();
         },
         (error) => {
-          this._snackBar.open(error.error.detail, 'close', {
-            duration: 2500,
-            panelClass: 'alert-danger',
-          });
+          this.alertSrv.showToaster(error.error.detail, 'DANGER');
           this.pendding = false;
           this.forms.enable();
         }
