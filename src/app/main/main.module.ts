@@ -10,6 +10,7 @@ import { AlertService } from '../shared/modules/alert/alert.service';
 import { UserService } from '../auth/services/user.service';
 import { HttpsInterceptor } from '../core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AccessGuard } from '../core/gaurd/access.guard';
 
 const routes: Routes = [
   {
@@ -20,16 +21,19 @@ const routes: Routes = [
         path: 'manager',
         loadChildren: () =>
           import('../manager/manager.module').then((m) => m.ManagerModule),
+        canActivate: [AccessGuard],
       },
       {
         path: 'teacher',
         loadChildren: () =>
           import('../teacher/teacher.module').then((m) => m.TeacherModule),
+        canActivate: [AccessGuard],
       },
       {
         path: 'student',
         loadChildren: () =>
           import('../student/student.module').then((m) => m.StudentModule),
+        canActivate: [AccessGuard],
       },
       {
         path: '**',
