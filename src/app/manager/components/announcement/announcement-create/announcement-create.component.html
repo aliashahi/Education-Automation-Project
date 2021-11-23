@@ -76,16 +76,8 @@
       </div>
       <div class="flex w-full justify-end">
         <button
-          style="margin: auto 10px"
-          [routerLink]="['/manager/announcement-list']"
-          mat-stroked-button
-          color="warn"
-        >
-          close
-        </button>
-        <button
           [disabled]="announcement_form.invalid"
-          class="p-2"
+          class="px-2"
           mat-raised-button
           color="primary"
           (click)="onSubmit()"

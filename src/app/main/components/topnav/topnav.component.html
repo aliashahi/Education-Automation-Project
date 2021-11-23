@@ -54,28 +54,12 @@
         <mat-icon>notifications</mat-icon>
       </button>
     </li>
-    <li
-      class="
-        py-2
-        pr-0
-        ml-2
-        my-2
-        text-black
-        rounded-full
-        hover:text-red-600
-        cursor-pointer
-      "
-      (click)="onLogout()"
-    >
-      <button mat-icon-button>
-        <mat-icon>power_settings_new</mat-icon>
-      </button>
-    </li>
     <li class="p-2 mx-2 rounded-sm text-black cursor-pointer">
-      {{ "-" | tokenDecoder: "user_id" }}
+      {{ "-" | tokenDecoder: "username" }}
     </li>
     <li
       class="mx-2 text-white rounded-full hover:bg-secondary-500 cursor-pointer"
+      [matMenuTriggerFor]="menu"
     >
       <img
         class="w-12 h-12 rounded-full border-2 border-black"
@@ -85,3 +69,32 @@
     </li>
   </ul>
 </nav>
+
+<mat-menu #menu="matMenu">
+  <div
+    mat-menu-item
+    disableRipple
+    class="menu-item"
+    style="height: 320px; width: 200px"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="flex flex-col justify-center items-center p-2 h-full">
+      <img
+        class="w-22 h-22 rounded-full border-2 border-black"
+        src="../../../../assets/images/default_profile.png"
+        alt=""
+      />
+      <b style="height: 22px">
+        {{ "-" | tokenDecoder: "username" }}
+      </b>
+      {{ "-" | tokenDecoder: "email" }}
+      <button mat-stroked-button class="mt-auto mb-2">
+        <mat-icon>edit</mat-icon>Edit profile
+      </button>
+      <button mat-stroked-button color="warn" (click)="onLogout()">
+        <mat-icon color="warn">logout</mat-icon>
+        logout
+      </button>
+    </div>
+  </div>
+</mat-menu>

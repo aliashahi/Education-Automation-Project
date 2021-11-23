@@ -21,6 +21,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatMenuModule } from '@angular/material/menu';
 
 const MODULES = [
   CommonModule,
@@ -45,6 +46,7 @@ const MODULES = [
   MatExpansionModule,
   MatSelectModule,
   MatButtonToggleModule,
+  MatMenuModule,
 ];
 
 @NgModule({
