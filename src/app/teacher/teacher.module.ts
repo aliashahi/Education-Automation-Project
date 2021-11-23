@@ -4,10 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { TeacherComponent } from './container/teacher/teacher.component';
 import { TeacherDashboardComponent } from './components/teacher-dashboard/teacher-dashboard.component';
-
 import { AnnouncementComponent } from './components/announcement/announcement.component';
 import { FormsModule } from '@angular/forms';
-import { TeacherClassComponent } from './components/teacher-class/teacher-class.component';
+import { TeacherClassesComponent } from './components/teacher-classes/teacher-classes.component';
+import { ErrorComponent } from '../utitlitiy/error/error.component';
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'class',
-        component: TeacherClassComponent,
+        component: TeacherClassesComponent,
       },
       {
         path: '**',
@@ -39,7 +39,7 @@ const routes: Routes = [
     TeacherComponent,
     TeacherDashboardComponent,
     AnnouncementComponent,
-    TeacherClassComponent,
+    TeacherClassesComponent,
   ],
   imports: [
     CommonModule,
