@@ -9,7 +9,7 @@ export class TokenDecoderPipe implements PipeTransform {
     if (user) {
       try {
         user = JSON.parse(user);
-        return user.first_name + ' ' + user.last_name;
+        return user[key];
       } catch {
         return defaultValue;
       }

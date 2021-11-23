@@ -1,97 +1,90 @@
-<div class="w-full p-2">
-  <h2>Create Announcement :</h2>
-  <form
-    [formGroup]="announcement_form"
-    class="mt-8 space-y-6 bg-white p-2 rounded-lg"
-  >
-    <div class="w-full">
-      <mat-form-field class="w-full" appearance="outline">
-        <mat-label>Title</mat-label>
-        <input
-          matInput
-          placeholder="announcement 1"
-          formControlName="title"
-          required
-        />
-        <mat-error
-          *ngIf="
-            announcement_form.get('title')?.errors &&
-            announcement_form.get('title')?.hasError('required')
-          "
-          >title is required</mat-error
+<div class="p-3 w-full h-full bg-gray-200">
+  <div class="w-full p-2 bg-white">
+    <form
+      [formGroup]="announcement_form"
+      class="mt-8 space-y-6 bg-white p-2 rounded-lg"
+    >
+      <div class="w-full">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            placeholder="announcement 1"
+            formControlName="title"
+            required
+          />
+          <mat-error
+            *ngIf="
+              announcement_form.get('title')?.errors &&
+              announcement_form.get('title')?.hasError('required')
+            "
+            >title is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Subtitle</mat-label>
+          <input
+            matInput
+            placeholder="subtitle 1"
+            formControlName="subtitle"
+            required
+          />
+          <mat-error
+            *ngIf="
+              announcement_form.get('subtitle')?.errors &&
+              announcement_form.get('subtitle')?.hasError('required')
+            "
+            >subtitle is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="w-1/2 pr-2" appearance="outline">
+          <mat-label>Group</mat-label>
+          <mat-select
+            formControlName="group"
+            multiple
+            style="padding: 0; border: none"
+          >
+            <mat-option *ngFor="let group of groups" [value]="group.value">
+              {{ group.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              announcement_form.get('group')?.errors &&
+              announcement_form.get('group')?.hasError('required')
+            "
+            >group is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>description</mat-label>
+          <textarea
+            matInput
+            placeholder="doe"
+            formControlName="description"
+            required
+            rows="5"
+          ></textarea>
+          <mat-error
+            *ngIf="
+              announcement_form.get('description')?.errors &&
+              announcement_form.get('description')?.hasError('required')
+            "
+            >description is required</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="flex w-full justify-end">
+        <button
+          [disabled]="announcement_form.invalid"
+          class="px-2"
+          mat-raised-button
+          color="primary"
+          (click)="onSubmit()"
         >
-      </mat-form-field>
-      <mat-form-field class="w-full" appearance="outline">
-        <mat-label>Subtitle</mat-label>
-        <input
-          matInput
-          placeholder="subtitle 1"
-          formControlName="subtitle"
-          required
-        />
-        <mat-error
-          *ngIf="
-            announcement_form.get('subtitle')?.errors &&
-            announcement_form.get('subtitle')?.hasError('required')
-          "
-          >subtitle is required</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field class="w-1/2 pr-2" appearance="outline">
-        <mat-label>Group</mat-label>
-        <mat-select
-          formControlName="group"
-          multiple
-          style="padding: 0; border: none"
-        >
-          <mat-option *ngFor="let group of groups" [value]="group.value">
-            {{ group.label }}
-          </mat-option>
-        </mat-select>
-        <mat-error
-          *ngIf="
-            announcement_form.get('group')?.errors &&
-            announcement_form.get('group')?.hasError('required')
-          "
-          >group is required</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field class="w-full" appearance="outline">
-        <mat-label>description</mat-label>
-        <textarea
-          matInput
-          placeholder="doe"
-          formControlName="description"
-          required
-          rows="5"
-        ></textarea>
-        <mat-error
-          *ngIf="
-            announcement_form.get('description')?.errors &&
-            announcement_form.get('description')?.hasError('required')
-          "
-          >description is required</mat-error
-        >
-      </mat-form-field>
-    </div>
-    <div class="flex w-full justify-end">
-      <button
-        style="margin: auto 10px"
-        [routerLink]="['/manager/announcement-list']"
-        mat-stroked-button
-        color="warn"
-      >
-        close
-      </button>
-      <button
-        [disabled]="announcement_form.invalid"
-        class="p-2"
-        mat-raised-button
-        color="primary"
-        (click)="onSubmit()"
-      >
-        submit
-      </button>
-    </div>
-  </form>
+          submit
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

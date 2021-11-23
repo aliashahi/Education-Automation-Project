@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>Edit Profile</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="personal_form" class="mt-8 space-y-6">
+    <div class="w-full">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          placeholder="john"
+          formControlName="first_name"
+          required
+        />
+        <mat-error
+          *ngIf="
+                personal_form.get('first_name')?.errors &&
+                personal_form.get('first_name')?.hasError('required')
+              "
+          >First name is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input
+          matInput
+          placeholder="doe"
+          formControlName="last_name"
+          required
+        />
+        <mat-error
+          *ngIf="
+                personal_form.get('last_name')?.errors &&
+                personal_form.get('last_name')?.hasError('required')
+              "
+          >Last name is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="doe"
+          type="email"
+          formControlName="email"
+          required
+        />
+        <mat-error
+          *ngIf="
+                personal_form.get('email')?.errors &&
+                personal_form.get('email')?.hasError('required')
+              "
+          >email is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button
+    mat-raised-button
+    cdkFocusInitial
+    [disabled]="personal_form.invalid || pendding"
+    class="
+      mx-2
+      bg-green-600
+      text-white
+      hover:bg-green-700 hover:text-white
+      disabled:opacity-50
+    "
+    (click)="onUpdateUser()"
+  >
+    Submit
+  </button>
+</mat-dialog-actions>

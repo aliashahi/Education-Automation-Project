@@ -50,7 +50,8 @@ export class HttpsInterceptor implements HttpInterceptor {
 
     if (error instanceof HttpErrorResponse && error.status === 401) {
       this.alertSrvc.showToaster('Your Session has been Expired!', 'DANGER');
-      // if (!environment.devMode) this.router.navigate(['/auth/login']);
+      // if (!environment.devMode) 
+      this.router.navigate(['/auth/login']);
       return EMPTY;
     }
 

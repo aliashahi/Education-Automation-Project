@@ -11,3 +11,24 @@ th,
 td {
   text-align: center !important;
 }
+
+  .mat-header-row.progress {
+    border: none;
+    max-height: 4px;
+    min-height: 4px;
+    height: 0;
+    margin-top: -4px;
+    background-color: transparent;
+    .mat-header-cell {
+      border: 0;
+      padding: 0;
+    }
+
+    mat-progress-bar {
+      transition: height 0.3s, opacity 0.25s linear;
+      &:not(.show) {
+        height: 0;
+        opacity: 0;
+      }
+    }
+  }

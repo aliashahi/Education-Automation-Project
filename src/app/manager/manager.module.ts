@@ -9,7 +9,7 @@ import { ClassCreateComponent } from './components/class/class-create/class-crea
 import { ClassListComponent } from './components/class/class-list/class-list.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { SelectedTeacherListComponent } from './components/class/class-create/selected-teacher-list/selected-teacher-list.component';
-import { FormBuilderModule } from '../shared/modules/form-builder';
+// import { FormBuilderModule } from '../shared/modules/form-builder';
 import { WeeklyScheduleComponent } from './components/class/class-create/weekly-schedule/weekly-schedule.component';
 import { ClassPreviewComponent } from './components/class/class-create/class-preview/class-preview.component';
 import { AnnouncementCreateComponent } from './components/announcement/announcement-create/announcement-create.component';
@@ -81,7 +81,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    FormBuilderModule,
+    // FormBuilderModule,
     NgApexchartsModule,
     RouterModule.forChild(routes),
   ],

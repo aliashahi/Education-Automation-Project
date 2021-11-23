@@ -138,7 +138,19 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="progress">
+      <td
+        mat-header-cell
+        *matHeaderCellDef
+        [attr.colspan]="displayedColumns.length"
+      >
+        <mat-progress-bar mode="indeterminate" *ngIf="pendding">
+        </mat-progress-bar>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="['progress']" style="height: 0px"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
   <mat-paginator

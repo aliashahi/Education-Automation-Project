@@ -54,141 +54,25 @@
                 >description is required</mat-error
               >
             </mat-form-field>
-            <div class="w-full" appearance="outline">
-              <mat-label>image</mat-label>
-              <div class="w-full flex flex-wrap">
-                <li
-                  class="
-                    p-1
-                    w-1/4
-                    h-1/4
-                    list-none
-                    inline-block
-                    hover:opacity-50
-                    cursor-pointer
-                    rounded-md
-                  "
-                  *ngFor="let item of imageList"
-                  (click)="onSelectImage('img' + item + '.jpg')"
-                >
-                  <img
-                    src="../../../../../assets/class-images/img{{ item }}.jpg"
-                    alt=""
-                    class="w-full h-full m-1 rounded-md"
-                    [class.border-2]="selectedImg == 'img' + item + '.jpg'"
-                    [class.border-secondary-700]="
-                      selectedImg == 'img' + item + '.jpg'
-                    "
-                    [class.border-dotted]="selectedImg == 'img' + item + '.jpg'"
-                  />
-                </li>
-              </div>
-            </div>
           </div>
           <div class="flex w-full justify-end">
-            <button mat-stroked-button class="primary" matStepperNext>
+            <button mat-raised-button color="primary" matStepperNext>
               Next
             </button>
           </div>
-        </form>
-      </mat-step>
-      <mat-step [stepControl]="teacher_info_form" [editable]="isEditable">
-        <form [formGroup]="teacher_info_form">
-          <ng-template matStepLabel>Techers</ng-template>
-          <mat-form-field class="w-1/2" appearance="outline">
-            <mat-label>teacher name</mat-label>
-            <mat-select
-              formControlName="name"
-              multiple
-              style="border-color: white; padding: 0px"
-            >
-              <mat-option *ngFor="let user of options" [value]="user">
-                {{ user.first_name + " " + user.last_name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div class="flex w-full justify-end">
-            <button mat-button color="warn" matStepperPrevious>Back</button>
-            <button mat-button color="primary" matStepperNext>Next</button>
-          </div>
-          <!-- <div class="w-full flex justify-start mb-2">
-            <button
-              mat-stroked-button
-              class="mx-2"
-              color="warn"
-              *ngIf="editItem"
-              (click)="onCancelEdit()"
-            >
-              cancel edit
-            </button>
-            <button
-              mat-stroked-button
-              class="mx-2"
-              color="primary"
-              [disabled]="!teacher_info_form.get('name')?.value"
-              (click)="onInsertTeacher()"
-            >
-              Add
-            </button>
-          </div>
-          <EAP-selected-teacher-list
-            [dataSource]="teachers"
-            (event)="onEvent($event)"
-          ></EAP-selected-teacher-list> -->
         </form>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Weekly schedule</ng-template>
         <EAP-weekly-schedule></EAP-weekly-schedule>
         <div class="flex w-full justify-end">
-          <button mat-button color="warn" matStepperPrevious>Back</button>
-          <button mat-button color="primary" matStepperNext>Next</button>
+          <button mat-raised-button color="warn" matStepperPrevious>
+            Back
+          </button>
+          <button mat-raised-button color="primary" class="mx-2" matStepperNext>
+            Next
+          </button>
         </div>
-      </mat-step>
-      <mat-step>
-        <form [formGroup]="student_info_form">
-          <ng-template matStepLabel>Students</ng-template>
-          <mat-form-field class="w-1/2" appearance="outline">
-            <mat-label>student name</mat-label>
-            <mat-select
-              formControlName="name"
-              multiple
-              style="border-color: white; padding: 0px"
-            >
-              <mat-option *ngFor="let user of options" [value]="user">
-                {{ user.first_name + " " + user.last_name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div class="flex w-full justify-end">
-            <button mat-button color="warn" matStepperPrevious>Back</button>
-            <button mat-button color="primary" matStepperNext>Next</button>
-          </div>
-          <!-- <div class="w-full flex justify-start mb-2">
-            <button
-              mat-stroked-button
-              class="mx-2"
-              color="warn"
-              *ngIf="editItem"
-              (click)="onCancelEdit()"
-            >
-              cancel edit
-            </button>
-            <button
-              mat-stroked-button
-              class="mx-2"
-              color="primary"
-              [disabled]="!student_info_form.get('name')?.value"
-              (click)="onInsertTeacher()"
-            >
-              Add
-            </button>
-          </div>
-          <EAP-selected-teacher-list
-            [dataSource]="students"
-            (event)="onEvent($event)"
-          ></EAP-selected-teacher-list> -->
-        </form>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>overview</ng-template>
@@ -196,15 +80,21 @@
         <p>teachers:{{ teacher_info_form.value | json }}</p>
         <p>students:{{ student_info_form.value | json }}</p>
         <div class="flex w-full justify-end">
-          <button mat-button color="warn" matStepperPrevious>Back</button>
-          <button mat-button color="primary" matStepperNext>Done</button>
+          <button mat-raised-button color="warn" matStepperPrevious>
+            Back
+          </button>
+          <button mat-raised-button color="primary" class="mx-2" matStepperNext>
+            Done
+          </button>
         </div>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <p class="text-green-600">Class created Successfully!</p>
         <div class="flex w-full justify-end">
-          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button mat-raised-button color="warn" (click)="stepper.reset()">
+            Reset
+          </button>
         </div>
       </mat-step>
     </mat-stepper>

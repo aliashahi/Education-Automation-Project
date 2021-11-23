@@ -1,8 +1,16 @@
 export interface RegisterDto {
+  first_name: string;
+  last_name: string;
+  email: string;
   username: string;
   password: string;
   role: string;
-  remember_me: string;
+}
+
+export interface UpdateProfileDto {
+  first_name: string;
+  last_name: string;
+  email: string;
 }
 
 export interface LoginDto {

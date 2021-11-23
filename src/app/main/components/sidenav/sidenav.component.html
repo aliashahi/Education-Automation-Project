@@ -6,14 +6,14 @@
     >
       <img
         style="width: 100px"
-        src="../../../../assets/images/logo/logo_full.svg"
+        src="../../../../assets/images/logo/logo_full_sidenav.svg"
         alt=""
       />
       <button
         mat-icon-button
         (click)="isExpanded = !isExpanded; isExpandedChange.emit(isExpanded)"
       >
-        <mat-icon> menu </mat-icon>
+        <mat-icon class="text-white"> menu </mat-icon>
       </button>
     </div>
     <div class="w-full overflow-hidden">
@@ -73,12 +73,4 @@
       </mat-tree>
     </div>
   </div>
-  <button mat-button class="items-center p-2 py-3">
-    <span class="flex justify-start p-2 items-center">
-      <mat-icon class="text-white">settings</mat-icon>
-      <span class="text-white pl-4">Settings</span>
-    </span>
-    <!-- <button mat-icon-button> -->
-    <!-- </button> -->
-  </button>
 </div>

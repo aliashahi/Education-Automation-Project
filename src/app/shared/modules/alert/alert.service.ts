@@ -17,16 +17,28 @@ export class AlertService {
     duration = duration > 3000 ? duration : 3000;
     switch (type) {
       case 'DANGER':
-        this.toastr.error(message, 'ERROR', { timeOut: duration });
+        this.toastr.error(message, 'ERROR', {
+          timeOut: duration,
+          positionClass: 'toast-bottom-right',
+        });
         break;
       case 'SUCCESS':
-        this.toastr.success(message, 'SUCCESS', { timeOut: duration });
+        this.toastr.success(message, 'SUCCESS', {
+          timeOut: duration,
+          positionClass: 'toast-bottom-right',
+        });
         break;
       case 'WARNING':
-        this.toastr.warning(message, 'WARNNING', { timeOut: duration });
+        this.toastr.warning(message, 'WARNNING', {
+          timeOut: duration,
+          positionClass: 'toast-bottom-right',
+        });
         break;
       case 'INFO':
-        this.toastr.info(message, 'INFO', { timeOut: duration });
+        this.toastr.info(message, 'INFO', {
+          timeOut: duration,
+          positionClass: 'toast-bottom-right',
+        });
         break;
     }
   }

@@ -7,7 +7,6 @@ import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
 import { UserSearchDto } from 'src/app/auth/services/user.dto';
 import { UserService } from 'src/app/auth/services/user.service';
-import { FieldConfig } from 'src/app/shared/modules/form-builder';
 import { Pagination } from 'src/app/manager/models/pagination.model';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 
@@ -17,6 +16,7 @@ import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
+  pendding: boolean = false;
   searchModel: UserSearchDto = {};
 
   displayedColumns: string[] = [
@@ -32,7 +32,6 @@ export class UserListComponent implements OnInit {
   allData = USER_MOCK_DATA;
   filteredData = USER_MOCK_DATA;
   dataSource: User[] = [];
-  filterConfigs!: FieldConfig[];
   filterForm!: FormGroup;
   pagination: Pagination = {
     length: 800,
@@ -47,10 +46,15 @@ export class UserListComponent implements OnInit {
   }
 
   private getData() {
-    this.userSrv.getStudents({ ...this.searchModel }).subscribe((res) => {
-      this.allData = res.map((i: any) => i.user);
-      this.onFilterUsers();
-    });
+    this.pendding = true;
+    this.userSrv.getStudents({ ...this.searchModel }).subscribe(
+      (res) => {
+        this.allData = res.map((i: any) => i.user);
+        this.onFilterUsers();
+      },
+      () => {},
+      () => (this.pendding = false)
+    );
   }
 
   onPaginationChange($event: PageEvent) {

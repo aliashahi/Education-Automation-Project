@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/manager/models/user.model';
+import { UserService } from 'src/app/auth/services/user.service';
+import { SUBJECT_MOCK_DATA } from 'src/app/manager/mock/subject.mock';
 
 @Component({
   selector: 'EAP-weekly-schedule',
@@ -12,19 +15,25 @@ export class WeeklyScheduleComponent implements OnInit {
     'Wednesday',
     'Thursday',
     'Friday',
-    'Saturday',
-    'Sunday',
+    // 'Saturday',
+    // 'Sunday',
   ];
 
   scheduleMap: any[] = [];
 
-  constructor() {}
+  techers: User[] = [];
+  subjects = SUBJECT_MOCK_DATA;
+
+  constructor(private userSrv: UserService) {}
 
   ngOnInit(): void {
     this.scheduleMap = Array.from({ length: 7 }, (_, i) => {
       return Array.from({ length: 6 }, (_, j) => {
         return { selected: false, i, j };
       });
+    });
+    this.userSrv.getTeachers({}).subscribe((res) => {
+      this.techers = res.map((i: any) => i.user);
     });
   }
 }
