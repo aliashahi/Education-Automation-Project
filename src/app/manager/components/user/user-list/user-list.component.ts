@@ -17,6 +17,7 @@ import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
+  pendding: boolean = false;
   searchModel: UserSearchDto = {};
 
   displayedColumns: string[] = [
@@ -47,10 +48,15 @@ export class UserListComponent implements OnInit {
   }
 
   private getData() {
-    this.userSrv.getStudents({ ...this.searchModel }).subscribe((res) => {
-      this.allData = res.map((i: any) => i.user);
-      this.onFilterUsers();
-    });
+    this.pendding = true;
+    this.userSrv.getStudents({ ...this.searchModel }).subscribe(
+      (res) => {
+        this.allData = res.map((i: any) => i.user);
+        this.onFilterUsers();
+      },
+      () => {},
+      () => (this.pendding = false)
+    );
   }
 
   onPaginationChange($event: PageEvent) {

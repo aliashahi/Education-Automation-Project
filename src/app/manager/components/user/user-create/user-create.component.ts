@@ -17,7 +17,37 @@ export class UserCreateComponent implements OnInit {
   pendding = false;
   user!: User;
 
-  constructor(private userSrv: UserService, private alertSrv: AlertService) {}
+  constructor(private userSrv: UserService, private alertSrv: AlertService) {
+    // let user = USER_MOCK_DATA[0];
+    // let index = 0;
+    // this.insertFakeUser(user, index);
+  }
+
+  // insertFakeUser(user: User, index: number) {
+  //   this.userSrv
+  //     .register({
+  //       first_name: user.first_name,
+  //       last_name: user.last_name,
+  //       username: user.username,
+  //       password: 'ILOVEDJANGO',
+  //       password2: 'ILOVEDJANGO',
+  //       email: user.email,
+  //       role: 'T',
+  //     })
+  //     .subscribe(
+  //       () => {},
+  //       () => {},
+  //       () => {
+  //         if (index + 1 < 10) {
+  //           index++;
+  //           this.insertFakeUser(
+  //             USER_MOCK_DATA[USER_MOCK_DATA.length - index],
+  //             index
+  //           );
+  //         }
+  //       }
+  //     );
+  // }
 
   ngOnInit() {
     this.init_personal_form();

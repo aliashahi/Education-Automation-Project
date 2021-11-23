@@ -95,7 +95,7 @@ body {
 
 textarea:focus,
 select:focus,
-input:focus { 
+input:focus {
   border: none;
   --tw-ring-color: white !important;
 }
@@ -114,3 +114,22 @@ body {
   border-width: 1px;
 }
 //////////////
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
