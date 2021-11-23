@@ -4,8 +4,13 @@ export interface RegisterDto {
   email: string;
   username: string;
   password: string;
-  password2: string;
   role: string;
+}
+
+export interface UpdateProfileDto {
+  first_name: string;
+  last_name: string;
+  email: string;
 }
 
 export interface LoginDto {

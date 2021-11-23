@@ -1,2 +1,2 @@
-export * from './date-hnadler.pipe';
+export * from './date-handler.pipe';
 export * from './pipes.module';

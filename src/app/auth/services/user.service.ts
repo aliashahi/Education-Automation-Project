@@ -1,4 +1,4 @@
-import { LoginDto, RegisterDto } from './login.dto';
+import { LoginDto, RegisterDto, UpdateProfileDto } from './login.dto';
 import { Injectable, Injector } from '@angular/core';
 import { ServiceBase } from 'src/app/shared/classes/service-base';
 import { UserSearchDto } from './user.dto';
@@ -14,6 +14,10 @@ export class UserService extends ServiceBase {
 
   public register(model: RegisterDto) {
     return this.post$('auth/users/', model);
+  }
+
+  public updateProfile(model: UpdateProfileDto) {
+    return this.put$('auth/users/me/', model);
   }
 
   public getMyInfo() {

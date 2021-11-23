@@ -97,41 +97,6 @@
                 >password is required</mat-error
               >
             </mat-form-field>
-            <mat-form-field class="w-1/2 pl-1" appearance="outline">
-              <mat-label>Enter password again</mat-label>
-              <input
-                matInput
-                placeholder="doe"
-                formControlName="password2"
-                [type]="true ? 'password' : 'text'"
-                required
-              />
-              <button
-                mat-icon-button
-                matSuffix
-                [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="true"
-              >
-                <mat-icon>{{
-                  true ? "visibility_off" : "visibility"
-                }}</mat-icon>
-              </button>
-              <mat-error
-                *ngIf="
-                  personal_form.get('password2')?.errors &&
-                  personal_form.get('password2')?.hasError('required')
-                "
-                >enter password again here</mat-error
-              >
-              <mat-error
-                *ngIf="
-                  personal_form.get('password2')?.value &&
-                  personal_form.get('password2')?.value !=
-                    personal_form.get('password')?.value
-                "
-                >password is not the same
-              </mat-error>
-            </mat-form-field>
           </div>
           <div class="w-1/2 text-center" style="margin-top: 0">
             <mat-radio-group formControlName="role" class="flex justify-around">
@@ -159,7 +124,7 @@
       </mat-step>
       <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
         <form [formGroup]="secondFormGroup">
-          <ng-template matStepLabel>Location Information</ng-template>
+          <ng-template matStepLabel>Extra Information</ng-template>
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>Address</mat-label>
             <input

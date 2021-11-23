@@ -47,6 +47,12 @@ export class SidenavComponent implements OnInit {
     if (this.ACCESS_LIST.includes(localStorage.getItem('ACCESS_TYPE') || 'S')) {
       access_type = <ACCESS_TYPE>localStorage.getItem('ACCESS_TYPE') || 'S';
     }
+    if (
+      !this.ACCESS_LIST.includes(
+        localStorage.getItem('ACCESS_TYPE') || 'UNKNOWN'
+      )
+    )
+      localStorage.setItem('ACCESS_TYPE', 'S');
     this.dataSource.data = SIDENAV_CONFIG.filter(
       (nav) => nav.ACCESS == access_type
     );

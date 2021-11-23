@@ -66,10 +66,6 @@ export class UserCreateComponent implements OnInit {
         Validators.required,
         Validators.minLength(6),
       ]),
-      password2: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
       role: new FormControl('S'),
     });
   }

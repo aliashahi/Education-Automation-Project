@@ -11,6 +11,7 @@ import { UserService } from '../auth/services/user.service';
 import { HttpsInterceptor } from '../core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccessGuard } from '../core/gaurd/access.guard';
+import { ProfileDialog } from './components/profile-dialog/profile.dialog';
 
 const routes: Routes = [
   {
@@ -47,7 +48,12 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  declarations: [MainComponent, SidenavComponent, TopnavComponent],
+  declarations: [
+    MainComponent,
+    SidenavComponent,
+    TopnavComponent,
+    ProfileDialog,
+  ],
   imports: [
     CommonModule,
     RouterModule,
