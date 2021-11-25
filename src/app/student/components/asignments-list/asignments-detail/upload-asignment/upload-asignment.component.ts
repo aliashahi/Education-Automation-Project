@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
+import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
 @Component({
   selector: 'EAP-upload-asignment',
@@ -11,8 +12,8 @@ export class UploadAsignmentComponent implements OnInit {
   loading = false;
   avatarUrl?: string;
 
-  constructor() {}
-  
+  constructor(private alertSrv: AlertService) {}
+
   ngOnInit(): void {}
 
   beforeUpload = (
@@ -23,13 +24,13 @@ export class UploadAsignmentComponent implements OnInit {
       const isJpgOrPng =
         file.type === 'image/jpeg' || file.type === 'image/png';
       if (!isJpgOrPng) {
-        // this.msg.error('You can only upload JPG file!');
+        this.alertSrv.showToaster('You can only upload JPG file!', 'WARNING');
         observer.complete();
         return;
       }
       const isLt2M = file.size! / 1024 / 1024 < 2;
       if (!isLt2M) {
-        // this.msg.error('Image must smaller than 2MB!');
+        this.alertSrv.showToaster('Image must smaller than 2MB!', 'WARNING');
         observer.complete();
         return;
       }
@@ -56,7 +57,7 @@ export class UploadAsignmentComponent implements OnInit {
         });
         break;
       case 'error':
-        // this.msg.error('Network error');
+        this.alertSrv.showToaster('Network error', 'WARNING');
         this.loading = false;
         break;
     }
