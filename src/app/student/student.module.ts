@@ -5,6 +5,8 @@ import { SharedModule } from '../shared/shared.module';
 import { StudentComponent } from './container/student/student.component';
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { AsignmentsListComponent } from './components/asignments-list/asignments-list.component';
+import { AsignmentsDetailComponent } from './components/asignments-list/asignments-detail/asignments-detail.component';
+import { UploadAsignmentComponent } from './components/asignments-list/asignments-detail/upload-asignment/upload-asignment.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,8 @@ const routes: Routes = [
     StudentComponent,
     StudentDashboardComponent,
     AsignmentsListComponent,
+    AsignmentsDetailComponent,
+    UploadAsignmentComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
 })

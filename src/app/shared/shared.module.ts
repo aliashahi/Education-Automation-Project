@@ -6,15 +6,19 @@ import { PipesModule } from './pipes/pipes.module';
 import { MaterialModule } from './modules/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmModule } from './modules/confirm';
+import { ZorroAntdModule } from './modules/ng-zorro-antd/ng-zorro-antd.module';
+import { DirectivesModule } from './directives/directives.module';
 
 const MODULES = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
   MaterialModule,
+  ZorroAntdModule,
   PipesModule,
   HttpClientModule,
   ConfirmModule,
+  DirectivesModule,
 ];
 
 @NgModule({
