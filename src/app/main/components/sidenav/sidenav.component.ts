@@ -2,6 +2,7 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { ACCESS_TYPE } from 'src/app/core/types/access.type';
 import { SidenavNode, SIDENAV_CONFIG } from './sidenav.config';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { TokenDecoderPipe } from 'src/app/shared/pipes/token-decoder.pipe';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -18,8 +19,7 @@ export class SidenavComponent implements OnInit {
   treeControl = new NestedTreeControl<SidenavNode>((node) => node.children);
   dataSource = new MatTreeNestedDataSource<SidenavNode>();
 
-  constructor() {
-    // this.dataSource.data = SIDENAV_CONFIG;
+  constructor(private tokenDecoder: TokenDecoderPipe) {
     this.doNavigateOnStorageChange();
     window.addEventListener(
       'storage',
@@ -44,12 +44,15 @@ export class SidenavComponent implements OnInit {
 
   private doNavigateOnStorageChange() {
     let access_type: ACCESS_TYPE = 'S';
-    if (this.ACCESS_LIST.includes(localStorage.getItem('ACCESS_TYPE') || 'S')) {
-      access_type = <ACCESS_TYPE>localStorage.getItem('ACCESS_TYPE') || 'S';
+    if (
+      this.ACCESS_LIST.includes(this.tokenDecoder.transform('S', 'role') || 'S')
+    ) {
+      access_type =
+        <ACCESS_TYPE>this.tokenDecoder.transform('S', 'role') || 'S';
     }
     if (
       !this.ACCESS_LIST.includes(
-        localStorage.getItem('ACCESS_TYPE') || 'UNKNOWN'
+        this.tokenDecoder.transform('S', 'role') || 'UNKNOWN'
       )
     )
       localStorage.setItem('ACCESS_TYPE', 'S');

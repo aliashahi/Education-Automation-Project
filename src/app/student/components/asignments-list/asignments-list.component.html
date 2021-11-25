@@ -1,0 +1,58 @@
+<div class="p-3 w-full h-full bg-gray-200">
+  <div class="w-full p-2 bg-white">
+    <mat-stepper
+      class="asignments-stepper"
+      orientation="vertical"
+      [linear]="false"
+      #stepper
+    >
+      <mat-step *ngFor="let week of weeks">
+        <ng-template matStepperIcon="error" matStepLabel
+          >Week {{ week.week_id }} ({{
+            week.asignments.length
+          }}
+          asignments)</ng-template
+        >
+        <mat-list>
+          <ng-container
+            *ngFor="let asignment of week.asignments; let i = index"
+          >
+            <mat-list-item class="flex justify-between my-2">
+              <span class="text-lg font-bold"
+                >{{ asignment.title }}
+                <span
+                  class="status"
+                  [class.submitted]="asignment.status === 'Submitted'"
+                  [class.not-submitted]="asignment.status == 'Not Submitted'"
+                  [class.expired]="asignment.status == 'Expired'"
+                  >{{ asignment.status }}</span
+                >
+                <span
+                  class="text-xs font-normal text-gray-600 flex items-center"
+                >
+                  {{ asignment.short_desc }}
+                </span>
+              </span>
+              <span class="text-sm text-gray-400 flex items-center">
+                {{ asignment.expire_date }} (<span
+                  class="font-bold text-lg pr-2"
+                  >{{ asignment.left_days }}</span
+                >
+                days left!)
+                <button
+                  mat-icon-button
+                  class="flex justify-center items-center mx-2"
+                >
+                  <mat-icon class="mx-4 text-black cursor-pointer"
+                    >forward_to_inbox</mat-icon
+                  >
+                </button>
+              </span>
+            </mat-list-item>
+            <mat-divider *ngIf="i != week.asignments.length - 1"></mat-divider>
+          </ng-container>
+        </mat-list>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>

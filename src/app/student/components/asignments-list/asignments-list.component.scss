@@ -1,0 +1,33 @@
+.asignments-stepper ::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #248277 !important;
+}
+.asignments-stepper ::ng-deep .mat-list-item-content {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.asignments-stepper
+  ::ng-deep
+  .mat-step-header
+  .mat-step-icon
+  .mat-step-icon-content {
+  display: none !important;
+}
+
+.status {
+  color: white;
+  padding: 7px 10px;
+  border-radius: 8px;
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: 400;
+}
+.submitted {
+  background-color: green;
+}
+.not-submitted {
+  background-color: #6b7280;
+}
+.expired {
+  background-color: #dc2626;
+}
