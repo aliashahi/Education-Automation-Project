@@ -1,0 +1,52 @@
+<nz-page-header
+  class="site-page-header"
+  (nzBack)="onBack()"
+  nzBackIcon
+  nzTitle="{{ asignment.title }}"
+  nzSubtitle="{{ asignment.short_desc }}"
+>
+  <nz-page-header-extra>
+    <button
+      mat-raised-button
+      class="
+        bg-green-600
+        text-white
+        hover:bg-green-700 hover:text-white
+        disabled:opacity-50
+      "
+    >
+      Submit asignment
+    </button>
+  </nz-page-header-extra>
+</nz-page-header>
+<div class="w-full">
+  <nz-divider [nzText]="text1" nzOrientation="left">
+    <ng-template #text1>
+      <span class="flex justify-center items-center">
+        <i nz-icon nzType="edit" class="px-2"></i>
+        Write your answer
+      </span>
+    </ng-template>
+  </nz-divider>
+  <mat-form-field class="w-full" appearance="outline">
+    <textarea
+      matInput
+      placeholder="type your solutions ... "
+      rows="15"
+    ></textarea>
+  </mat-form-field>
+</div>
+
+<div class="w-full">
+  <nz-divider [nzText]="text" nzOrientation="left">
+    <ng-template #text>
+      <span class="flex justify-center items-center">
+        <i nz-icon nzType="upload" class="px-2"></i>
+        Upload Files
+      </span>
+    </ng-template>
+  </nz-divider>
+  <div class="w-full border-gray-100 border-2 p-2 rounded-md">
+    <EAP-upload-asignment></EAP-upload-asignment>
+  </div>
+</div>

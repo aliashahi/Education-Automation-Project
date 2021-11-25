@@ -67,7 +67,7 @@
       *ngIf="!pendding"
     >
       <span>
-        {{ "-" | tokenDecoder: "username" }}
+        {{ "-" | userInfo: "username" }}
       </span>
       <span class="text-xs text-gray-400">
         {{ "-" | tokenDecoder: "role" | ACCESS }}
@@ -105,17 +105,22 @@
         alt=""
       />
       <b style="height: 22px">
-        {{ "-" | tokenDecoder: "username" }}
+        {{ "-" | userInfo: "username" | longTextCutter: 15 }}
       </b>
-      {{ "-" | tokenDecoder: "email" }}
+      {{ "-" | userInfo: "email" | longTextCutter: 18 }}
       <button
         mat-stroked-button
         (click)="onEditProfile(menuTrigger)"
-        class="mt-auto mb-2"
+        class="mt-auto mb-2 w-full"
       >
         <mat-icon>edit</mat-icon>Edit profile
       </button>
-      <button mat-stroked-button color="warn" (click)="onLogout()">
+      <button
+        class="w-full"
+        mat-stroked-button
+        color="warn"
+        (click)="onLogout()"
+      >
         <mat-icon color="warn">logout</mat-icon>
         logout
       </button>

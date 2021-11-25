@@ -7,6 +7,7 @@ import {
   ActivatedRouteSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TokenDecoderPipe } from 'src/app/shared/pipes/token-decoder.pipe';
 import { ACCESS_TYPE } from '../types/access.type';
 
 @Injectable({
@@ -15,7 +16,7 @@ import { ACCESS_TYPE } from '../types/access.type';
 export class AccessGuard implements CanActivate {
   readonly ACCESS_LIST = ['M', 'S', 'T'];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private tokenDecoder: TokenDecoderPipe) {
     window.addEventListener(
       'storage',
       this.doNavigateOnStorageChange.bind(this)
@@ -31,8 +32,11 @@ export class AccessGuard implements CanActivate {
     | boolean
     | UrlTree {
     let access_type: ACCESS_TYPE = 'S';
-    if (this.ACCESS_LIST.includes(localStorage.getItem('ACCESS_TYPE') || 'S')) {
-      access_type = <ACCESS_TYPE>localStorage.getItem('ACCESS_TYPE') || 'S';
+    if (
+      this.ACCESS_LIST.includes(this.tokenDecoder.transform('S', 'role') || 'S')
+    ) {
+      access_type =
+        <ACCESS_TYPE>this.tokenDecoder.transform('S', 'role') || 'S';
     }
     if (state.url.includes('manager') && access_type != 'M') {
       this.doNavigation(access_type);
@@ -65,12 +69,15 @@ export class AccessGuard implements CanActivate {
 
   private doNavigateOnStorageChange() {
     let access_type: ACCESS_TYPE = 'S';
-    if (this.ACCESS_LIST.includes(localStorage.getItem('ACCESS_TYPE') || 'S')) {
-      access_type = <ACCESS_TYPE>localStorage.getItem('ACCESS_TYPE') || 'S';
+    if (
+      this.ACCESS_LIST.includes(this.tokenDecoder.transform('S', 'role') || 'S')
+    ) {
+      access_type =
+        <ACCESS_TYPE>this.tokenDecoder.transform('S', 'role') || 'S';
     }
     if (
       !this.ACCESS_LIST.includes(
-        localStorage.getItem('ACCESS_TYPE') || 'UNKNOWN'
+        this.tokenDecoder.transform('S', 'role') || 'UNKNOWN'
       )
     )
       localStorage.setItem('ACCESS_TYPE', 'S');
