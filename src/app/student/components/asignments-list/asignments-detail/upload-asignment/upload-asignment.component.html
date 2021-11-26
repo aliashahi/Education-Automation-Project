@@ -1,7 +1,7 @@
 <nz-upload
   class="avatar-uploader"
-  nzAction="https://www.google.com/"
-  nzName="avatar"
+  nzAction="http://localhost:3000/uploads"
+  nzName="avatar" 
   nzListType="picture-card"
   [nzShowUploadList]="true"
   [nzBeforeUpload]="beforeUpload"
@@ -13,3 +13,4 @@
   </ng-container>
   <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
 </nz-upload>
+  

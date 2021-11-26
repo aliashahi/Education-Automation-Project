@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
@@ -44,7 +44,8 @@ export class UploadAsignmentComponent implements OnInit {
     reader.readAsDataURL(img);
   }
 
-  handleChange(info: { file: NzUploadFile }): void {
+  handleChange(info: NzUploadChangeParam): void {
+    if (info.type == 'success') console.log(info.file.response.url);
     switch (info.file.status) {
       case 'uploading':
         this.loading = true;
