@@ -26,8 +26,6 @@ export class ClassListComponent implements OnInit {
       this._filter.bind(this, this.searchedValue)
     );
   }
-  onDelete(){
-  }
 
   onEdit(item: Class) {}
 
