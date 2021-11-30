@@ -7,9 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule, HttpsInterceptor } from './core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorComponent } from './utitlitiy/error/error.component';
+import { RollcallComponent } from './components/teacher/rollcall/rollcall.component';
 
 @NgModule({
-  declarations: [AppComponent, ErrorComponent],
+  declarations: [AppComponent, ErrorComponent, RollcallComponent],
   imports: [
     BrowserModule,
     CoreModule,

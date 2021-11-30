@@ -8,8 +8,8 @@ import { AnnouncementComponent } from './components/announcement/announcement.co
 import {FormsModule} from '@angular/forms';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { RollcallComponent } from './components/rollcall/rollcall.component';
 //import { TeacherClassComponent } from './components/teacher-class/teacher-class.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -36,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TeacherComponent, TeacherDashboardComponent, AnnouncementComponent],
+  declarations: [TeacherComponent, TeacherDashboardComponent, AnnouncementComponent, RollcallComponent],
   imports: [CommonModule, SharedModule,FormsModule, RouterModule.forChild(routes),MatDatepickerModule],
 })
 export class TeacherModule {}
