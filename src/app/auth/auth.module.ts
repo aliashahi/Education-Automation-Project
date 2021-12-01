@@ -6,8 +6,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { UserService } from './services/user.service';
-import { AlertService } from '../shared/modules/alert/alert.service';
 import { HttpsInterceptor } from '../core';
 
 const routes: Routes = [
@@ -35,8 +33,6 @@ const routes: Routes = [
   ],
   exports: [LoginComponent, RegisterComponent],
   providers: [
-    AlertService,
-    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpsInterceptor,

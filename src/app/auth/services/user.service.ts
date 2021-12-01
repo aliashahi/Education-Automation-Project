@@ -2,7 +2,9 @@ import { LoginDto, RegisterDto, UpdateProfileDto } from './login.dto';
 import { Injectable, Injector } from '@angular/core';
 import { ServiceBase } from 'src/app/shared/classes/service-base';
 import { UserSearchDto } from './user.dto';
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService extends ServiceBase {
   constructor(injector: Injector) {
     super(injector);

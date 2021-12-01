@@ -9,14 +9,11 @@ import { ClassCreateComponent } from './components/class/class-create/class-crea
 import { ClassListComponent } from './components/class/class-list/class-list.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { SelectedTeacherListComponent } from './components/class/class-create/selected-teacher-list/selected-teacher-list.component';
-// import { FormBuilderModule } from '../shared/modules/form-builder';
 import { WeeklyScheduleComponent } from './components/class/class-create/weekly-schedule/weekly-schedule.component';
 import { ClassPreviewComponent } from './components/class/class-create/class-preview/class-preview.component';
 import { AnnouncementCreateComponent } from './components/announcement/announcement-create/announcement-create.component';
 import { AnnouncementListComponent } from './components/announcement/announcement-list/announcement-list.component';
-import { AlertService } from '../shared/modules/alert/alert.service';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { UserService } from '../auth/services/user.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpsInterceptor } from '../core';
 const routes: Routes = [
@@ -81,13 +78,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    // FormBuilderModule,
     NgApexchartsModule,
     RouterModule.forChild(routes),
   ],
   providers: [
-    AlertService,
-    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpsInterceptor,

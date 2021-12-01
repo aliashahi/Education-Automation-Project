@@ -62,8 +62,6 @@ const routes: Routes = [
     MatTreeModule,
   ],
   providers: [
-    AlertService,
-    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpsInterceptor,
