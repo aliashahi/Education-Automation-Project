@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -7,9 +6,9 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
 import { catchError, retry } from 'rxjs/operators';
 import { EMPTY, Observable, throwError } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
 @Injectable()
@@ -44,13 +43,12 @@ export class HttpsInterceptor implements HttpInterceptor {
 
   errorHandler(error: HttpErrorResponse) {
     if (error instanceof HttpErrorResponse && error.status === 404) {
-      this.alertSrvc.showToaster('Not Found Error!', 'DANGER');
+      this.alertSrvc.showToaster('Not Found!', 'DANGER');
       return EMPTY;
     }
 
     if (error instanceof HttpErrorResponse && error.status === 401) {
-      this.alertSrvc.showToaster('Your Session has been Expired!', 'DANGER');
-      // if (!environment.devMode) 
+      this.alertSrvc.showToaster(error.error.detail, 'DANGER');
       this.router.navigate(['/auth/login']);
       return EMPTY;
     }

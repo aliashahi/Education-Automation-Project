@@ -53,10 +53,9 @@ export class LoginComponent implements OnInit {
             'SUCCESS'
           );
           this.router.navigate(['/']);
-          this.pendding = false;
-          this.forms.enable();
         },
-        (error) => {
+        (error) => {},
+        () => {
           this.pendding = false;
           this.forms.enable();
         }
