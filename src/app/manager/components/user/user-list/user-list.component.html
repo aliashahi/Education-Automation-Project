@@ -87,7 +87,7 @@
     />
   </div>
 </div>
-<div class="container">
+<div class="container" *ngIf="dataSource.length > 0; else noData">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
@@ -161,3 +161,8 @@
     (page)="onPaginationChange($event)"
   ></mat-paginator>
 </div>
+<ng-template #noData>
+  <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
+    <img src="../../../../../assets/images/no_data.png" alt="" />
+  </div>
+</ng-template>
