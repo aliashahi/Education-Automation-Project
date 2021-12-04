@@ -6,8 +6,6 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { TopnavComponent } from './components/topnav/topnav.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatTreeModule } from '@angular/material/tree';
-import { AlertService } from '../shared/modules/alert/alert.service';
-import { UserService } from '../auth/services/user.service';
 import { HttpsInterceptor } from '../core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccessGuard } from '../core/gaurd/access.guard';

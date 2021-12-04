@@ -5,7 +5,7 @@
         <form [formGroup]="class_info_form" class="mt-8 space-y-6">
           <ng-template matStepLabel>Class Information</ng-template>
           <div class="w-full">
-            <mat-form-field class="w-full" appearance="outline">
+            <mat-form-field class="w-1/2 pr-2" appearance="outline">
               <mat-label>Class Title</mat-label>
               <input
                 matInput
@@ -21,21 +21,81 @@
                 >class title is required</mat-error
               >
             </mat-form-field>
-            <mat-form-field class="w-full" appearance="outline">
-              <mat-label>capacity</mat-label>
-              <input
-                matInput
-                type="number"
-                placeholder="30"
-                formControlName="capacity"
-                required
-              />
+            <mat-form-field class="w-1/2 pl-2" appearance="outline">
+              <mat-label>Class Grade</mat-label>
+              <mat-select formControlName="grade" name="grade">
+                <mat-option
+                  *ngFor="let grade of getClassGrades"
+                  [value]="grade.value"
+                >
+                  {{ grade.label }}
+                </mat-option>
+              </mat-select>
               <mat-error
                 *ngIf="
-                  class_info_form.get('capacity')?.errors &&
-                  class_info_form.get('capacity')?.hasError('required')
+                  class_info_form.get('grade')?.errors &&
+                  class_info_form.get('grade')?.hasError('required')
                 "
-                >capacity is required</mat-error
+                >grade is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-1/2 pr-2" appearance="outline">
+              <mat-label>status</mat-label>
+              <mat-select formControlName="status" name="status">
+                <mat-option
+                  *ngFor="let status of getClassStatus"
+                  [value]="status.value"
+                >
+                  {{ status.label }}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="
+                  class_info_form.get('status')?.errors &&
+                  class_info_form.get('status')?.hasError('required')
+                "
+                >status is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="w-1/2 pl-2" appearance="outline">
+              <mat-label>Enter a date range</mat-label>
+              <mat-date-range-input
+                [formGroup]="class_info_form"
+                [rangePicker]="picker"
+              >
+                <input
+                  matStartDate
+                  formControlName="startClassDate"
+                  placeholder="Start date"
+                />
+                <input
+                  matEndDate
+                  formControlName="endClassDate"
+                  placeholder="End date"
+                />
+              </mat-date-range-input>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+              <mat-error
+                *ngIf="
+                  class_info_form.get('startClassDate')?.errors &&
+                  class_info_form
+                    .get('startClassDate')
+                    ?.hasError('matStartDateInvalid')
+                "
+                >Invalid start date</mat-error
+              >
+              <mat-error
+                *ngIf="
+                  class_info_form.get('endClassDate')?.errors &&
+                  class_info_form
+                    .get('endClassDate')
+                    ?.hasError('matEndDateInvalid')
+                "
+                >Invalid end date</mat-error
               >
             </mat-form-field>
             <mat-form-field class="w-full" appearance="outline">
@@ -56,7 +116,12 @@
             </mat-form-field>
           </div>
           <div class="flex w-full justify-end">
-            <button mat-raised-button color="primary" matStepperNext>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="class_info_form.invalid || pendding"
+              (click)="onSubmitBaseInfo(stepper)"
+            >
               Next
             </button>
           </div>

@@ -104,13 +104,13 @@
         style="display: flex !important"
       >
         <span>
-          {{ item.title | longTextCutter: 30 }}
+          {{ item.name | longTextCutter: 30 }}
         </span>
         <mat-card-subtitle
           class="contents text-right"
           style="display: contents !important; font-size: 12px"
         >
-          {{ item.start_date }} to {{ item.end_date }}
+          {{ item.startClassDate }} to {{ item.endClassDate }}
         </mat-card-subtitle>
       </mat-card-title>
       <mat-card-subtitle>Grade : {{ item.grade }}</mat-card-subtitle>
@@ -129,6 +129,5 @@
 <ng-template #noData>
   <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
     <img src="../../../../../assets/images/no_data.png" alt="" />
-    no Data found!
   </div>
 </ng-template>

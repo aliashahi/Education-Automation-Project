@@ -4,6 +4,7 @@ import { Class } from 'src/app/manager/models/class.model';
 import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { ClassService } from 'src/app/shared/services/class.service';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
+import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
 @Component({
   selector: 'EAP-class-list',
@@ -17,7 +18,11 @@ export class ClassListComponent implements OnInit {
   endDate!: string;
   allData: Class[] = [];
   filteredData: Class[] = [];
-  constructor(private dialog: MatDialog, private classSrv: ClassService) {}
+  constructor(
+    private dialog: MatDialog,
+    private classSrv: ClassService,
+    private alertSrv: AlertService
+  ) {}
 
   ngOnInit(): void {
     this.getData();
@@ -26,6 +31,7 @@ export class ClassListComponent implements OnInit {
   private getData() {
     this.classSrv.getClassList({}).subscribe((response: Class[]) => {
       this.allData = response;
+      this.onFilterAnnouncements();
     });
   }
 
@@ -42,10 +48,12 @@ export class ClassListComponent implements OnInit {
       data: <ConfirmDialogDto>{
         cancelText: 'close',
         submitText: 'delete',
-        message: 'Are you Sure?',
+        message: 'Are you Sure ?',
         submitFn: () => {
-          this.allData = this.allData.filter((i) => i.id != item.id);
-          this.onFilterAnnouncements();
+          this.classSrv.deleteClass(item.id).subscribe((response) => {
+            this.alertSrv.showToaster('Class deleted Successfully!', 'SUCCESS');
+            this.getData();
+          });
         },
       },
     });
@@ -53,19 +61,19 @@ export class ClassListComponent implements OnInit {
 
   private _filter(searched: string, item: Class): boolean {
     return (
-      (item.description
+      item.description
         .toLocaleLowerCase()
         .includes((searched || '').toLocaleLowerCase()) ||
-        item.title
-          .toLocaleLowerCase()
-          .includes((searched || '').toLocaleLowerCase()) ||
-        item.grade == (!isNaN(+searched) ? 10 : +searched)) &&
-      (new Date(item.start_date) >=
-        new Date((this.startDate || '').split('-').join('/')) ||
-        !this.startDate) &&
-      (new Date(item.end_date) <=
-        new Date((this.endDate || '').split('-').join('/')) ||
-        !this.endDate)
+      item.name
+        .toLocaleLowerCase()
+        .includes((searched || '').toLocaleLowerCase()) ||
+      (item.grade.includes(searched) &&
+        (new Date(item.startClassDate) >=
+          new Date((this.startDate || '').split('-').join('/')) ||
+          !this.startDate) &&
+        (new Date(item.endClassDate) <=
+          new Date((this.endDate || '').split('-').join('/')) ||
+          !this.endDate))
     );
   }
 }

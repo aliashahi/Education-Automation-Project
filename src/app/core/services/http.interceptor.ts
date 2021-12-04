@@ -11,7 +11,9 @@ import { catchError, retry } from 'rxjs/operators';
 import { EMPTY, Observable, throwError } from 'rxjs';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class HttpsInterceptor implements HttpInterceptor {
   constructor(private alertSrvc: AlertService, private router: Router) {}
 

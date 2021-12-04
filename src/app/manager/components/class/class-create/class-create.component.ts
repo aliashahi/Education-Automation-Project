@@ -1,8 +1,14 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { MatStepper } from '@angular/material/stepper';
 import { User } from 'src/app/manager/models/user.model';
 import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
+import { GRADES } from 'src/app/manager/constants/grades.constant';
+import { createDateFormat } from 'src/app/shared/utils/date.utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ClassService } from 'src/app/shared/services/class.service';
+import { CLASS_STATUS } from 'src/app/manager/constants/status.constant';
+import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { ACTION } from './selected-teacher-list/selected-teacher-list.component';
 
 @Component({
@@ -14,28 +20,30 @@ export class ClassCreateComponent implements OnInit {
   class_info_form!: FormGroup;
   teacher_info_form!: FormGroup;
   student_info_form!: FormGroup;
-  selectedImg: string = 'img1.jpg';
   isEditable = true;
   options: User[] = [];
   filteredOptions!: Observable<User[]>;
   teachers: User[] = [];
   students: User[] = [];
   editItem!: any;
-  private _filter(value: string): User[] {
-    const filterValue = (' ' || value).toLowerCase();
+  pendding: boolean = false;
 
-    return this.options.filter((option) =>
-      ((option.first_name || '') + (option.last_name || ''))
-        .toLowerCase()
-        .includes(filterValue)
-    );
+  constructor(private classSrv: ClassService, private alertSrv: AlertService) {}
+
+  public get getClassStatus(): {
+    label: string;
+    value: string;
+  }[] {
+    return CLASS_STATUS;
   }
 
-  constructor() {}
-
-  get imageList() {
-    return [1, 2, 3, 4, 5, 6, 7, 8];
+  public get getClassGrades(): {
+    label: string;
+    value: number;
+  }[] {
+    return GRADES;
   }
+
   ngOnInit() {
     this.initClassInfoForm();
     this.options = USER_MOCK_DATA;
@@ -44,15 +52,39 @@ export class ClassCreateComponent implements OnInit {
     this.initStudentSelectForm();
   }
 
-  onSelectImage(img: string) {
-    this.selectedImg = img;
+  onSubmitBaseInfo(stepper: MatStepper) {
+    let model = {
+      ...this.class_info_form.value,
+      startClassDate: createDateFormat(
+        this.class_info_form.value.startClassDate as Date
+      ),
+      endClassDate: createDateFormat(
+        this.class_info_form.value.endClassDate as Date
+      ),
+    };
+    this.pendding = true;
+    this.class_info_form.disable();
+    this.classSrv.createClass(model).subscribe(
+      (response) => {
+        this.alertSrv.showToaster('Class Created Successfully!', 'SUCCESS');
+        stepper.next();
+      },
+      (error) => {},
+      () => {
+        this.class_info_form.enable();
+        this.pendding = false;
+      }
+    );
   }
 
   private initClassInfoForm() {
     this.class_info_form = new FormGroup({
       name: new FormControl('Grade A/1', Validators.required),
+      grade: new FormControl(1, Validators.required),
+      status: new FormControl('ACT', Validators.required),
+      startClassDate: new FormControl(new Date(), Validators.required),
+      endClassDate: new FormControl(new Date(), Validators.required),
       description: new FormControl('no desc', Validators.required),
-      capacity: new FormControl(30, [Validators.min(0), Validators.max(100)]),
     });
   }
 

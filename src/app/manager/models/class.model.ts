@@ -2,11 +2,10 @@ import { User } from './user.model';
 
 export interface Class {
   id: number;
-  title: string;
-  description: string;
-  grade: number;
-  students?: User[];
+  name: string;
+  grade: string;
   status: string;
-  start_date: string;
-  end_date: string;
+  description: string;
+  startClassDate: string;
+  endClassDate: string;
 }

@@ -20,4 +20,8 @@ export class ClassService extends ServiceBase {
   createClass(searchModel: Class) {
     return this.post$('school/classes/', searchModel);
   }
+
+  deleteClass(id: number) {
+    return this.delete$('school/classes/' + id);
+  }
 }
