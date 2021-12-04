@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Class } from 'src/app/manager/models/class.model';
 import { ConfirmDialog } from 'src/app/shared/modules/confirm';
-import { CLASS_MOCK_DATA } from 'src/app/manager/mock/class.mock';
+import { ClassService } from 'src/app/shared/services/class.service';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 
 @Component({
@@ -15,11 +15,19 @@ export class ClassListComponent implements OnInit {
   searchedValue!: string;
   startDate!: string;
   endDate!: string;
-  allData = CLASS_MOCK_DATA;
-  filteredData = CLASS_MOCK_DATA;
-  constructor(private dialog: MatDialog) {}
+  allData: Class[] = [];
+  filteredData: Class[] = [];
+  constructor(private dialog: MatDialog, private classSrv: ClassService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  private getData() {
+    this.classSrv.getClassList({}).subscribe((response: Class[]) => {
+      this.allData = response;
+    });
+  }
 
   onFilterAnnouncements() {
     this.filteredData = this.allData.filter(

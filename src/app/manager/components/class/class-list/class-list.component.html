@@ -89,7 +89,10 @@
     </mat-button-toggle>
   </mat-button-toggle-group>
 </div>
-<div class="w-full p-2 flex flex-wrap">
+<div
+  class="w-full p-2 flex flex-wrap"
+  *ngIf="filteredData.length > 0; else noData"
+>
   <div
     *ngFor="let item of filteredData"
     class="p-2"
@@ -123,3 +126,9 @@
     </mat-card>
   </div>
 </div>
+<ng-template #noData>
+  <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
+    <img src="../../../../../assets/images/no_data.png" alt="" />
+    no Data found!
+  </div>
+</ng-template>
