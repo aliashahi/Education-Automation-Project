@@ -8,6 +8,7 @@ import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
 import { UserSearchDto } from 'src/app/auth/services/user.dto';
 import { UserService } from 'src/app/auth/services/user.service';
 import { Pagination } from 'src/app/manager/models/pagination.model';
+import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 
 @Component({
@@ -39,7 +40,11 @@ export class UserListComponent implements OnInit {
     pageSize: 10,
     pageSizeOptions: [5, 10, 20, 40, 80, 160],
   };
-  constructor(private userSrv: UserService, private dialog: MatDialog) {}
+  constructor(
+    private userSrv: UserService,
+    private dialog: MatDialog,
+    private alertSrv: AlertService
+  ) {}
 
   ngOnInit(): void {
     this.getData();
@@ -94,8 +99,10 @@ export class UserListComponent implements OnInit {
         submitText: 'delete',
         message: 'Are you Sure?',
         submitFn: () => {
-          this.allData = this.allData.filter((i) => i.id != user.id);
-          this.onFilterUsers();
+          this.userSrv.deleteUser(user.id).subscribe((res) => {
+            this.alertSrv.showToaster('User Deleted Successfully!', 'SUCCESS');
+            this.getData();
+          });
         },
       },
     });

@@ -22,6 +22,10 @@ export class UserService extends ServiceBase {
     return this.put$('auth/users/me/', model);
   }
 
+  public deleteUser(id: number) {
+    return this.delete$('auth/users/' + id);
+  }
+
   public getMyInfo() {
     return this.get$('auth/users/me/');
   }

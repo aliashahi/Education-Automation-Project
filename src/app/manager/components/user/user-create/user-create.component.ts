@@ -30,15 +30,15 @@ export class UserCreateComponent implements OnInit {
   //       last_name: user.last_name,
   //       username: user.username,
   //       password: 'ILOVEDJANGO',
-  //       password2: 'ILOVEDJANGO',
+  //       // password2: 'ILOVEDJANGO',
   //       email: user.email,
-  //       role: 'T',
+  //       role: Math.floor(Math.random() * 1000) % 10 == 0 ? 'T' : 'S',
   //     })
   //     .subscribe(
   //       () => {},
   //       () => {},
   //       () => {
-  //         if (index + 1 < 10) {
+  //         if (index + 1 < 800) {
   //           index++;
   //           this.insertFakeUser(
   //             USER_MOCK_DATA[USER_MOCK_DATA.length - index],
