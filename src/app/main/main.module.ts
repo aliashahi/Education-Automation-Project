@@ -10,6 +10,7 @@ import { HttpsInterceptor } from '../core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccessGuard } from '../core/gaurd/access.guard';
 import { ProfileDialog } from './components/profile-dialog/profile.dialog';
+import { LoadingBarComponent } from './components/loading-bar/loading-bar.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ const routes: Routes = [
     SidenavComponent,
     TopnavComponent,
     ProfileDialog,
+    LoadingBarComponent,
   ],
   imports: [
     CommonModule,
