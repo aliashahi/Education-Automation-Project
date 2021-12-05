@@ -1,65 +1,128 @@
 <h2 mat-dialog-title>Edit Profile</h2>
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="personal_form" class="mt-8 space-y-6">
-    <div class="w-full">
-      <mat-form-field class="w-full" appearance="outline">
-        <mat-label>First Name</mat-label>
-        <input
-          matInput
-          placeholder="john"
-          formControlName="first_name"
-          required
-        />
-        <mat-error
-          *ngIf="
-                personal_form.get('first_name')?.errors &&
-                personal_form.get('first_name')?.hasError('required')
-              "
-          >First name is required</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field class="w-full" appearance="outline">
-        <mat-label>Last Name</mat-label>
-        <input
-          matInput
-          placeholder="doe"
-          formControlName="last_name"
-          required
-        />
-        <mat-error
-          *ngIf="
-                personal_form.get('last_name')?.errors &&
-                personal_form.get('last_name')?.hasError('required')
-              "
-          >Last name is required</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field class="w-full" appearance="outline">
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          placeholder="doe"
-          type="email"
-          formControlName="email"
-          required
-        />
-        <mat-error
-          *ngIf="
-                personal_form.get('email')?.errors &&
-                personal_form.get('email')?.hasError('required')
-              "
-          >email is required</mat-error
-        >
-      </mat-form-field>
-    </div>
-  </form>
+  <mat-tab-group [(selectedIndex)]="tabIndex">
+    <mat-tab label="Profile">
+      <form [formGroup]="user_form" class="mt-8 space-y-6">
+        <div class="w-full">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input
+              matInput
+              placeholder="john"
+              formControlName="first_name"
+              required
+            />
+            <mat-error
+              *ngIf="
+                    user_form.get('first_name')?.errors &&
+                    user_form.get('first_name')?.hasError('required')
+                  "
+              >First name is required</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input
+              matInput
+              placeholder="doe"
+              formControlName="last_name"
+              required
+            />
+            <mat-error
+              *ngIf="
+                    user_form.get('last_name')?.errors &&
+                    user_form.get('last_name')?.hasError('required')
+                  "
+              >Last name is required</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="doe"
+              type="email"
+              formControlName="email"
+              required
+            />
+            <mat-error
+              *ngIf="
+                    user_form.get('email')?.errors &&
+                    user_form.get('email')?.hasError('required')
+                  "
+              >email is required</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-tab>
+    <mat-tab label="Extra information">
+      <form [formGroup]="extra_form" class="mt-8 space-y-6">
+        <div class="w-full">
+          <mat-form-field class="w-1/2 pr-2" appearance="outline">
+            <mat-label>National ID</mat-label>
+            <input
+              matInput
+              placeholder="1234343434"
+              formControlName="nationalId"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field class="w-1/2 pl-2" appearance="outline">
+            <mat-label>Birth Date</mat-label>
+            <input
+              matInput
+              formControlName="birthDate"
+              [matDatepicker]="picker"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="w-1/2 pr-2" appearance="outline">
+            <mat-label>phone Number</mat-label>
+            <input
+              matInput
+              placeholder="021 33432101"
+              type="tel"
+              formControlName="phoneNumber"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field class="w-1/2 pl-2" appearance="outline">
+            <mat-label>mobile Number</mat-label>
+            <input
+              matInput
+              placeholder="0912 123 4567"
+              type="tel"
+              formControlName="mobileNumber"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Address</mat-label>
+            <textarea
+              matInput
+              placeholder="17 Shahrivar St."
+              formControlName="address"
+              rows="5"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button mat-dialog-close>Cancel</button>
   <button
+    *ngIf="tabIndex==0"
     mat-raised-button
     cdkFocusInitial
-    [disabled]="personal_form.invalid || pendding"
+    [disabled]="user_form.invalid || pendding"
     class="
       mx-2
       bg-green-600
@@ -67,8 +130,24 @@
       hover:bg-green-700 hover:text-white
       disabled:opacity-50
     "
-    (click)="onUpdateUser()"
+    (click)="onUpdateUserInfo()"
   >
-    Submit
+    Submit Info
+  </button>
+  <button
+    *ngIf="tabIndex==1"
+    mat-raised-button
+    cdkFocusInitial
+    [disabled]="extra_form.invalid || pendding"
+    class="
+      mx-2
+      bg-green-600
+      text-white
+      hover:bg-green-700 hover:text-white
+      disabled:opacity-50
+    "
+    (click)="onUpdateUserExtraInfo()"
+  >
+    Submit Extra
   </button>
 </mat-dialog-actions>
