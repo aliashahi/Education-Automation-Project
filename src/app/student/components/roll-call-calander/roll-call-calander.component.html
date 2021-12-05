@@ -1,0 +1,52 @@
+<div class="grid col-auto grid-cols-2">
+  <div
+    class="m-2 p-2 bg-secondary-100 shadow-lg rounded-lg"
+    *ngFor="let month of rollCallMonths"
+  >
+    <h3 class="font-bold text-center">
+      {{ month.monthTitle }} {{ month.year }}
+    </h3>
+    <div class="grid col-auto grid-cols-7">
+      <span
+        class="
+          m-1
+          p-2
+          text-lg
+          rounded-lg
+          text-center
+          font-weight-bold
+          bg-secondary-300
+        "
+        *ngFor="let weekDay of week"
+        >{{ weekDay }}</span
+      >
+      <ng-container *ngFor="let day of month.days; let i = index">
+        <span
+          class="p-2 m-1 rounded-lg text-center dropdown"
+          [ngClass]="{
+            'cursor-pointer bg-secondary-200 hover:bg-secondary-300':
+              day.dayNumber != null
+          }"
+          [class.absent]="day.wasAbsent && i % 7 != 6"
+        >
+          <span class="x">
+            {{ day.dayNumber ?? "" }}
+          </span>
+          <div
+            class="dropdown-content"
+            *ngIf="day.dayNumber != null && i % 7 != 6"
+          >
+            <h2>
+              {{ day.dayNumber }} of {{ month.monthTitle }} {{ month.year }}
+            </h2>
+            <a
+              class="aTag bg-gray-200 block p-4 text-left"
+              *ngFor="let e of day.events"
+              >{{ e }}</a
+            >
+          </div>
+        </span>
+      </ng-container>
+    </div>
+  </div>
+</div>

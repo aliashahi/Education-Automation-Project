@@ -7,6 +7,7 @@ import { StudentDashboardComponent } from './components/student-dashboard/studen
 import { AsignmentsListComponent } from './components/asignments-list/asignments-list.component';
 import { AsignmentsDetailComponent } from './components/asignments-list/asignments-detail/asignments-detail.component';
 import { UploadAsignmentComponent } from './components/asignments-list/asignments-detail/upload-asignment/upload-asignment.component';
+import { RollCallCalanderComponent } from './components/roll-call-calander/roll-call-calander.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'asignments',
         component: AsignmentsListComponent,
+      },
+      {
+        path: 'roll-call',
+        component: RollCallCalanderComponent,
       },
       {
         path: '**',
@@ -40,6 +45,7 @@ const routes: Routes = [
     AsignmentsListComponent,
     AsignmentsDetailComponent,
     UploadAsignmentComponent,
+    RollCallCalanderComponent
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
 })
