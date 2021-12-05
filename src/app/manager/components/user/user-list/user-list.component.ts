@@ -99,10 +99,18 @@ export class UserListComponent implements OnInit {
         submitText: 'delete',
         message: 'Are you Sure?',
         submitFn: () => {
-          this.userSrv.deleteUser(user.id).subscribe((res) => {
-            this.alertSrv.showToaster('User Deleted Successfully!', 'SUCCESS');
-            this.getData();
-          });
+          this.pendding = true;
+          this.userSrv.deleteUser(user.id).subscribe(
+            (res) => {
+              this.alertSrv.showToaster(
+                'User Deleted Successfully!',
+                'SUCCESS'
+              );
+              this.getData();
+            },
+            (e) => {},
+            () => (this.pendding = false)
+          );
         },
       },
     });
