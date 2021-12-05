@@ -127,7 +127,9 @@
   </div>
 </div>
 <ng-template #noData>
-  <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
-    <img src="../../../../../assets/images/no_data.png" alt="" />
-  </div>
+  <loading-section [loading]="pendding">
+    <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
+      <img src="../../../../../assets/images/no_data.png" alt="" />
+    </div>
+  </loading-section>
 </ng-template>

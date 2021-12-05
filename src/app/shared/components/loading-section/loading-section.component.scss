@@ -1,0 +1,19 @@
+.load-label {
+  animation: x 4s infinite;
+  color: gray;
+}
+
+@keyframes x {
+  0% {
+    opacity: 1;
+    letter-spacing: 1px;
+  }
+  50% {
+    opacity: 0.1;
+    letter-spacing: 3px;
+  }
+  100% {
+    opacity: 1;
+    letter-spacing: 1px;
+  }
+}

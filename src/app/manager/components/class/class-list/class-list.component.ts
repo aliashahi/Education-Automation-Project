@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Class } from 'src/app/manager/models/class.model';
 import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { ClassService } from 'src/app/shared/services/class.service';
-import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
+import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 
 @Component({
   selector: 'EAP-class-list',
@@ -18,6 +18,7 @@ export class ClassListComponent implements OnInit {
   endDate!: string;
   allData: Class[] = [];
   filteredData: Class[] = [];
+  pendding: boolean = false;
   constructor(
     private dialog: MatDialog,
     private classSrv: ClassService,
@@ -29,10 +30,15 @@ export class ClassListComponent implements OnInit {
   }
 
   private getData() {
-    this.classSrv.getClassList({}).subscribe((response: Class[]) => {
-      this.allData = response;
-      this.onFilterAnnouncements();
-    });
+    this.pendding = true;
+    this.classSrv.getClassList({}).subscribe(
+      (response: Class[]) => {
+        this.allData = response;
+        this.onFilterAnnouncements();
+      },
+      (e) => {},
+      () => (this.pendding = false)
+    );
   }
 
   onFilterAnnouncements() {
@@ -50,10 +56,18 @@ export class ClassListComponent implements OnInit {
         submitText: 'delete',
         message: 'Are you Sure ?',
         submitFn: () => {
-          this.classSrv.deleteClass(item.id).subscribe((response) => {
-            this.alertSrv.showToaster('Class deleted Successfully!', 'SUCCESS');
-            this.getData();
-          });
+          this.pendding = true;
+          this.classSrv.deleteClass(item.id).subscribe(
+            (response) => {
+              this.alertSrv.showToaster(
+                'Class deleted Successfully!',
+                'SUCCESS'
+              );
+              this.getData();
+            },
+            (e) => {},
+            () => (this.pendding = false)
+          );
         },
       },
     });
