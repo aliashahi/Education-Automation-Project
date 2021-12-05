@@ -45,7 +45,9 @@ export class HttpsInterceptor implements HttpInterceptor {
     this.loadingSrv.show();
     return next.handle(tokenizedRequest).pipe(
       retry(0),
-      tap((i) => this.loadingSrv.hide()),
+      tap((i) => {
+        if (i.type != 0) this.loadingSrv.hide();
+      }),
       catchError((error: HttpErrorResponse) => this.errorHandler(error))
     );
   }
