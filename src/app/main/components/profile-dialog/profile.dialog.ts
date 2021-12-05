@@ -124,7 +124,6 @@ export class ProfileDialog implements OnInit {
           ...this.extra_form.value,
           profileImage: null,
           id: this.tokenPipe.transform('S', 'user_id'),
-          user: this.tokenPipe.transform('S', 'user_id'),
           birthDate: createDateFormat(this.extra_form.value.birthDate),
         },
         userType
