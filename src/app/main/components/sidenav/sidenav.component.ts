@@ -50,12 +50,12 @@ export class SidenavComponent implements OnInit {
       access_type =
         <ACCESS_TYPE>this.tokenDecoder.transform('S', 'role') || 'S';
     }
-    if (
-      !this.ACCESS_LIST.includes(
-        this.tokenDecoder.transform('S', 'role') || 'UNKNOWN'
-      )
-    )
-      localStorage.setItem('ACCESS_TYPE', 'S');
+    // if (
+    //   !this.ACCESS_LIST.includes(
+    //     this.tokenDecoder.transform('S', 'role') || 'UNKNOWN'
+    //   )
+    // )
+    //   localStorage.setItem('ACCESS_TYPE', 'S');
     this.dataSource.data = SIDENAV_CONFIG.filter(
       (nav) => nav.ACCESS == access_type
     );

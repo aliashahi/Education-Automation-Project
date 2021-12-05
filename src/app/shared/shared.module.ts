@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConfirmModule } from './modules/confirm';
 import { ZorroAntdModule } from './modules/ng-zorro-antd/ng-zorro-antd.module';
 import { DirectivesModule } from './directives/directives.module';
+import { LoadingSectionComponent } from './components/loading-section/loading-section.component';
 
 const MODULES = [
   CommonModule,
@@ -23,6 +24,7 @@ const MODULES = [
 
 @NgModule({
   imports: [...MODULES],
-  exports: [...MODULES],
+  exports: [...MODULES, LoadingSectionComponent],
+  declarations: [LoadingSectionComponent],
 })
 export class SharedModule {}

@@ -7,13 +7,20 @@ import {
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, tap } from 'rxjs/operators';
 import { EMPTY, Observable, throwError } from 'rxjs';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class HttpsInterceptor implements HttpInterceptor {
-  constructor(private alertSrvc: AlertService, private router: Router) {}
+  constructor(
+    private alertSrvc: AlertService,
+    private router: Router,
+    private loadingSrv: LoadingService
+  ) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -35,8 +42,12 @@ export class HttpsInterceptor implements HttpInterceptor {
         'Content-Type': 'application/json',
       },
     });
+    this.loadingSrv.show();
     return next.handle(tokenizedRequest).pipe(
       retry(0),
+      tap((i) => {
+        if (i.type != 0) this.loadingSrv.hide();
+      }),
       catchError((error: HttpErrorResponse) => this.errorHandler(error))
     );
   }

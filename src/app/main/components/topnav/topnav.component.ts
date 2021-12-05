@@ -26,7 +26,7 @@ export class TopnavComponent implements OnInit {
     this.pendding = true;
     this.userSrv.getMyInfo().subscribe((res) => {
       localStorage.setItem('USER_INFO', JSON.stringify(res));
-      localStorage.setItem('ACCESS_TYPE', res.role);
+      // localStorage.setItem('ACCESS_TYPE', res.role);
       this.pendding = false;
     });
   }
