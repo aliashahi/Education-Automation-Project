@@ -33,7 +33,7 @@ export class AnnouncementService extends ServiceBase {
   }
 
   createAnnouncements(searchModel: Class) {
-    return this.post$(`${this._AnnouncementBaseUrl}/create/`, searchModel);
+    return this.post$(`${this._AnnouncementBaseUrl}/create`, searchModel);
   }
 
   deleteAnnouncements(id: number) {
