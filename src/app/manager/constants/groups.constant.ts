@@ -1,6 +1,6 @@
 export const GROUPS: { value: string; label: string }[] = [
-  { value: 'TEACHERS', label: 'Teachers' },
-  { value: 'STUDENTS', label: 'Students' },
-  { value: 'CLASS', label: 'Class' },
-  { value: 'GRADE', label: 'Grade' },
+  { value: 'Tea', label: 'Teachers' },
+  { value: 'Stu', label: 'Students' },
+  { value: 'cla', label: 'Class' },
+  { value: 'Gra', label: 'Grade' },
 ];
