@@ -60,7 +60,6 @@ export class HttpsInterceptor implements HttpInterceptor {
 
     if (error instanceof HttpErrorResponse && error.status === 401) {
       this.alertSrvc.showToaster(error.error.detail, 'DANGER');
-      this.router.navigate(['/auth/login']);
       return EMPTY;
     }
 

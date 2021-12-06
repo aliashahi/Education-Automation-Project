@@ -20,24 +20,28 @@ export class AlertService {
         this.toastr.error(message, 'ERROR', {
           timeOut: duration,
           positionClass: 'toast-bottom-right',
+          progressBar: true,
         });
         break;
       case 'SUCCESS':
         this.toastr.success(message, 'SUCCESS', {
           timeOut: duration,
           positionClass: 'toast-bottom-right',
+          progressBar: true,
         });
         break;
       case 'WARNING':
         this.toastr.warning(message, 'WARNNING', {
           timeOut: duration,
           positionClass: 'toast-bottom-right',
+          progressBar: true,
         });
         break;
       case 'INFO':
         this.toastr.info(message, 'INFO', {
           timeOut: duration,
           positionClass: 'toast-bottom-right',
+          progressBar: true,
         });
         break;
     }

@@ -4,6 +4,7 @@ import { ANNOUNCEMENT_MOCK_DATA } from 'src/app/manager/mock/announcement.mock';
 import { Announcement } from 'src/app/manager/models/announcement.model';
 import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
+import { AnnouncementService } from 'src/app/shared/services/announcement.service';
 
 @Component({
   selector: 'EAP-announcement-list',
@@ -15,11 +16,30 @@ export class AnnouncementListComponent implements OnInit {
   searchedValue!: string;
   startDate!: string;
   endDate!: string;
-  allData = ANNOUNCEMENT_MOCK_DATA;
-  filteredData = ANNOUNCEMENT_MOCK_DATA;
-  constructor(private dialog: MatDialog) {}
+  allData: Announcement[] = [];
+  filteredData: Announcement[] = [];
+  pendding: boolean = false;
+  constructor(private dialog: MatDialog, private annSrv: AnnouncementService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  private getData() {
+    this.pendding = true;
+    this.allData = [];
+    this.filteredData = [];
+    this.annSrv.getAnnouncements({}).subscribe(
+      (res) => {
+        this.allData = res;
+        this.onFilterAnnouncements();
+      },
+      (e) => {},
+      () => {
+        this.pendding = false;
+      }
+    );
+  }
 
   onFilterAnnouncements() {
     this.filteredData = this.allData.filter(
@@ -36,8 +56,16 @@ export class AnnouncementListComponent implements OnInit {
         submitText: 'delete',
         message: 'Are you Sure?',
         submitFn: () => {
-          this.allData = this.allData.filter((i) => i.id != item.id);
-          this.onFilterAnnouncements();
+          this.pendding = true;
+          this.annSrv.deleteAnnouncements(item.id).subscribe(
+            (res) => {
+              this.getData();
+            },
+            (e) => {},
+            () => {
+              this.pendding = false;
+            }
+          );
         },
       },
     });

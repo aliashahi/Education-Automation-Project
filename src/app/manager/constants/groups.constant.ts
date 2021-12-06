@@ -1,5 +1,6 @@
-export const GROUPS: { value: number; label: string }[] = [
-  { value: 1, label: 'Teachers' },
-  { value: 2, label: 'Students' },
-  { value: 3, label: 'Parents' },
+export const GROUPS: { value: string; label: string }[] = [
+  { value: 'TEACHERS', label: 'Teachers' },
+  { value: 'STUDENTS', label: 'Students' },
+  { value: 'CLASS', label: 'Class' },
+  { value: 'GRADE', label: 'Grade' },
 ];

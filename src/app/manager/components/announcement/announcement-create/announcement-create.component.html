@@ -22,26 +22,9 @@
           >
         </mat-form-field>
         <mat-form-field class="w-full" appearance="outline">
-          <mat-label>Subtitle</mat-label>
-          <input
-            matInput
-            placeholder="subtitle 1"
-            formControlName="subtitle"
-            required
-          />
-          <mat-error
-            *ngIf="
-              announcement_form.get('subtitle')?.errors &&
-              announcement_form.get('subtitle')?.hasError('required')
-            "
-            >subtitle is required</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field class="w-1/2 pr-2" appearance="outline">
           <mat-label>Group</mat-label>
           <mat-select
             formControlName="group"
-            multiple
             style="padding: 0; border: none"
           >
             <mat-option *ngFor="let group of groups" [value]="group.value">
@@ -55,6 +38,102 @@
             "
             >group is required</mat-error
           >
+        </mat-form-field>
+        <mat-form-field class="w-1/2 pr-2" appearance="outline">
+          <mat-label>Start date</mat-label>
+          <input
+            matInput
+            formControlName="start_date"
+            [matDatepicker]="picker1"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+          <mat-error
+            *ngIf="
+              announcement_form.get('start_date')?.errors &&
+              announcement_form.get('start_date')?.hasError('required')
+            "
+            >Start date is required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="w-1/2 pl-2" appearance="outline">
+          <mat-label>Expire date</mat-label>
+          <input
+            matInput
+            formControlName="expire_date"
+            [matDatepicker]="picker2"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+          <mat-error
+            *ngIf="
+              announcement_form.get('expire_date')?.errors &&
+              announcement_form.get('expire_date')?.hasError('required')
+            "
+            >Expire date is required</mat-error
+          >
+        </mat-form-field>
+        <mat-checkbox class="w-1/4 pr-2" formControlName="allTeachers">
+          all Teachers
+        </mat-checkbox>
+        <mat-form-field class="w-3/4 pl-2" appearance="outline">
+          <mat-label>teachers</mat-label>
+          <mat-select
+            formControlName="teachers"
+            multiple
+            [disabled]="announcement_form.value.allTeachers"
+            style="padding: 0; border: none"
+          >
+            <mat-option
+              *ngFor="let teacher of teachers"
+              [value]="teacher.value"
+            >
+              {{ teacher.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-checkbox class="w-1/4 pr-2" formControlName="allClasses">
+          all Classes
+        </mat-checkbox>
+        <mat-form-field class="w-3/4 pl-2" appearance="outline">
+          <mat-label>classes</mat-label>
+          <mat-select
+            formControlName="classes"
+            multiple
+            [disabled]="announcement_form.value.allClasses"
+            style="padding: 0; border: none"
+          >
+            <mat-option *ngFor="let class of classes" [value]="class.value">
+              {{ class.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-checkbox class="w-1/4 pr-2" formControlName="allStudents">
+          all Students
+        </mat-checkbox>
+        <mat-form-field class="w-3/4 pl-2" appearance="outline">
+          <mat-label>students</mat-label>
+          <mat-select
+            formControlName="students"
+            multiple
+            [disabled]="announcement_form.value.allStudents"
+            style="padding: 0; border: none"
+          >
+            <mat-option
+              *ngFor="let student of students"
+              [value]="student.value"
+            >
+              {{ student.label }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field class="w-full" appearance="outline">
           <mat-label>description</mat-label>
@@ -76,13 +155,18 @@
       </div>
       <div class="flex w-full justify-end">
         <button
-          [disabled]="announcement_form.invalid"
-          class="px-2"
           mat-raised-button
-          color="primary"
+          class="
+            bg-green-600
+            text-white
+            hover:bg-green-700 hover:text-white
+            disabled:opacity-50
+          "
+          type="submit"
+          [disabled]="announcement_form.invalid || pendding"
           (click)="onSubmit()"
         >
-          submit
+          Submit
         </button>
       </div>
     </form>
