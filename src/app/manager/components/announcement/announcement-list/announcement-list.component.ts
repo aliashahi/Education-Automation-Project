@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { Announcement } from 'src/app/manager/models/announcement.model';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
-import { ConfirmDialog } from 'src/app/shared/modules/confirm';
-import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 import { AnnouncementService } from 'src/app/shared/services/announcement.service';
+import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 
 @Component({
   selector: 'EAP-announcement-list',

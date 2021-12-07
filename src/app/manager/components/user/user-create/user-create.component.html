@@ -76,17 +76,17 @@
                 matInput
                 placeholder="doe"
                 formControlName="password"
-                [type]="true ? 'password' : 'text'"
+                [type]="hidePass ? 'password' : 'text'"
                 required
               />
               <button
                 mat-icon-button
                 matSuffix
                 [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="true"
+                [attr.aria-pressed]="hidePass"
               >
-                <mat-icon>{{
-                  true ? "visibility_off" : "visibility"
+                <mat-icon (click)="hidePass = !hidePass">{{
+                  hidePass ? "visibility_off" : "visibility"
                 }}</mat-icon>
               </button>
               <mat-error
@@ -97,12 +97,19 @@
                 >password is required</mat-error
               >
             </mat-form-field>
-          </div>
-          <div class="w-1/2 text-center" style="margin-top: 0">
-            <mat-radio-group formControlName="role" class="flex justify-around">
-              <mat-radio-button value="S">Student</mat-radio-button>
-              <mat-radio-button value="T">Teacher</mat-radio-button>
-            </mat-radio-group>
+            <div
+              class="inline-block w-1/2 pr-2 text-center"
+              style="margin-top: 0"
+            >
+              <mat-radio-group
+                formControlName="role"
+                class="flex justify-around"
+              >
+                <mat-radio-button value="S">Student</mat-radio-button>
+                <mat-radio-button value="T">Teacher</mat-radio-button>
+                <mat-radio-button value="M">Manager</mat-radio-button>
+              </mat-radio-group>
+            </div>
           </div>
           <div class="flex w-full justify-end">
             <button

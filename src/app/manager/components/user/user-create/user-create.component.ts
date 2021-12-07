@@ -18,6 +18,7 @@ export class UserCreateComponent implements OnInit {
   isEditable = false;
   pendding = false;
   user!: User;
+  hidePass: boolean = true;
 
   constructor(
     private userSrv: UserService,
