@@ -50,7 +50,12 @@ export class AnnouncementCreateComponent implements OnInit {
       });
     });
     this.classSrv.getClassList({}).subscribe((res) => {
-      console.log(1, res);
+      this.classes = res.map((i: any) => {
+        return {
+          label: i.name,
+          value: i.id,
+        };
+      });
     });
   }
 
