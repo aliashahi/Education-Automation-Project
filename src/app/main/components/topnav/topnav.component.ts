@@ -1,10 +1,10 @@
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { ProfileDialog } from '../profile-dialog/profile.dialog';
 import { UserService } from 'src/app/auth/services/user.service';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ProfileDialog } from '../profile-dialog/profile.dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'EAP-topnav',
@@ -17,9 +17,9 @@ export class TopnavComponent implements OnInit {
   pendding: boolean = false;
   constructor(
     private router: Router,
+    private dialog: MatDialog,
     private userSrv: UserService,
-    private alertSrv: AlertService,
-    private dialog: MatDialog
+    private alertSrv: AlertService
   ) {}
 
   ngOnInit(): void {

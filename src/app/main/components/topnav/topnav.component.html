@@ -95,19 +95,18 @@
     style="height: 320px; width: 200px"
     (click)="$event.stopPropagation()"
   >
-    <div
-      class="flex flex-col justify-center items-center p-2 h-full"
-      *ngIf="!pendding"
-    >
+    <div class="flex flex-col justify-center items-center p-2 h-full">
       <img
         class="w-22 h-22 rounded-full border-2 border-black"
         src="../../../../assets/images/default_profile.png"
         alt=""
       />
-      <b style="height: 22px">
+      <b style="height: 22px" *ngIf="!pendding">
         {{ "-" | userInfo: "username" | longTextCutter: 15 }}
       </b>
-      {{ "-" | userInfo: "email" | longTextCutter: 18 }}
+      <p *ngIf="!pendding">
+        {{ "-" | userInfo: "email" | longTextCutter: 18 }}
+      </p>
       <button
         mat-stroked-button
         (click)="onEditProfile(menuTrigger)"
