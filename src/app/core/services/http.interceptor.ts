@@ -53,6 +53,7 @@ export class HttpsInterceptor implements HttpInterceptor {
   }
 
   errorHandler(error: HttpErrorResponse) {
+    this.loadingSrv.hide();
     if (error instanceof HttpErrorResponse && error.status === 404) {
       this.alertSrvc.showToaster('Not Found!', 'DANGER');
       return EMPTY;
