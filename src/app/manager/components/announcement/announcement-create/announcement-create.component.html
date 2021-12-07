@@ -21,24 +21,6 @@
             >title is required</mat-error
           >
         </mat-form-field>
-        <mat-form-field class="w-full" appearance="outline">
-          <mat-label>Group</mat-label>
-          <mat-select
-            formControlName="group"
-            style="padding: 0; border: none"
-          >
-            <mat-option *ngFor="let group of groups" [value]="group.value">
-              {{ group.label }}
-            </mat-option>
-          </mat-select>
-          <mat-error
-            *ngIf="
-              announcement_form.get('group')?.errors &&
-              announcement_form.get('group')?.hasError('required')
-            "
-            >group is required</mat-error
-          >
-        </mat-form-field>
         <mat-form-field class="w-1/2 pr-2" appearance="outline">
           <mat-label>Start date</mat-label>
           <input
@@ -81,60 +63,81 @@
             >Expire date is required</mat-error
           >
         </mat-form-field>
-        <mat-checkbox class="w-1/4 pr-2" formControlName="allTeachers">
-          all Teachers
-        </mat-checkbox>
-        <mat-form-field class="w-3/4 pl-2" appearance="outline">
-          <mat-label>teachers</mat-label>
-          <mat-select
-            formControlName="teachers"
-            multiple
-            [disabled]="announcement_form.value.allTeachers"
-            style="padding: 0; border: none"
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Group</mat-label>
+          <mat-select formControlName="group" style="padding: 0; border: none">
+            <mat-option *ngFor="let group of groups" [value]="group.value">
+              {{ group.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              announcement_form.get('group')?.errors &&
+              announcement_form.get('group')?.hasError('required')
+            "
+            >group is required</mat-error
           >
-            <mat-option
-              *ngFor="let teacher of teachers"
-              [value]="teacher.value"
+        </mat-form-field>
+        <ng-container *ngIf="announcement_form.value.group == 'Tea'">
+          <mat-checkbox class="w-1/4 pr-2" formControlName="allTeachers">
+            all Teachers
+          </mat-checkbox>
+          <mat-form-field class="w-3/4 pl-2" appearance="outline">
+            <mat-label>teachers</mat-label>
+            <mat-select
+              formControlName="teachers"
+              multiple
+              [disabled]="announcement_form.value.allTeachers"
+              style="padding: 0; border: none"
             >
-              {{ teacher.label }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-checkbox class="w-1/4 pr-2" formControlName="allClasses">
-          all Classes
-        </mat-checkbox>
-        <mat-form-field class="w-3/4 pl-2" appearance="outline">
-          <mat-label>classes</mat-label>
-          <mat-select
-            formControlName="classes"
-            multiple
-            [disabled]="announcement_form.value.allClasses"
-            style="padding: 0; border: none"
-          >
-            <mat-option *ngFor="let class of classes" [value]="class.value">
-              {{ class.label }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-checkbox class="w-1/4 pr-2" formControlName="allStudents">
-          all Students
-        </mat-checkbox>
-        <mat-form-field class="w-3/4 pl-2" appearance="outline">
-          <mat-label>students</mat-label>
-          <mat-select
-            formControlName="students"
-            multiple
-            [disabled]="announcement_form.value.allStudents"
-            style="padding: 0; border: none"
-          >
-            <mat-option
-              *ngFor="let student of students"
-              [value]="student.value"
+              <mat-option
+                *ngFor="let teacher of teachers"
+                [value]="teacher.value"
+              >
+                {{ teacher.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="announcement_form.value.group == 'Stu'">
+          <mat-checkbox class="w-1/4 pr-2" formControlName="allStudents">
+            all Students
+          </mat-checkbox>
+          <mat-form-field class="w-3/4 pl-2" appearance="outline">
+            <mat-label>students</mat-label>
+            <mat-select
+              formControlName="students"
+              multiple
+              [disabled]="announcement_form.value.allStudents"
+              style="padding: 0; border: none"
             >
-              {{ student.label }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+              <mat-option
+                *ngFor="let student of students"
+                [value]="student.value"
+              >
+                {{ student.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="announcement_form.value.group == 'cla'">
+          <mat-checkbox class="w-1/4 pr-2" formControlName="allClasses">
+            all Classes
+          </mat-checkbox>
+          <mat-form-field class="w-3/4 pl-2" appearance="outline">
+            <mat-label>classes</mat-label>
+            <mat-select
+              formControlName="classes"
+              multiple
+              [disabled]="announcement_form.value.allClasses"
+              style="padding: 0; border: none"
+            >
+              <mat-option *ngFor="let class of classes" [value]="class.value">
+                {{ class.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
         <mat-form-field class="w-full" appearance="outline">
           <mat-label>description</mat-label>
           <textarea
