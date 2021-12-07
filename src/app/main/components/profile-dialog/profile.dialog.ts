@@ -13,18 +13,18 @@ import { TokenDecoderPipe } from 'src/app/shared/pipes/token-decoder.pipe';
   styleUrls: ['./profile.dialog.scss'],
 })
 export class ProfileDialog implements OnInit {
-  pendding: boolean = false;
+  user!: User;
+  extraInfo!: any;
   tabIndex: number = 0;
   user_form!: FormGroup;
   extra_form!: FormGroup;
-  user!: User;
-  extraInfo!: any;
+  pendding: boolean = false;
 
   constructor(
-    public dialogRef: MatDialogRef<ProfileDialog>,
     private userSrv: UserService,
     private alertSrv: AlertService,
-    private tokenPipe: TokenDecoderPipe
+    private tokenPipe: TokenDecoderPipe,
+    public dialogRef: MatDialogRef<ProfileDialog>
   ) {}
 
   ngOnInit() {
@@ -62,9 +62,9 @@ export class ProfileDialog implements OnInit {
 
   private init_user_form() {
     this.user_form = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      first_name: new FormControl(null, Validators.required),
       last_name: new FormControl(null, Validators.required),
+      first_name: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
     });
   }
 
@@ -73,25 +73,21 @@ export class ProfileDialog implements OnInit {
       nationalId: new FormControl(null, [
         Validators.minLength(10),
         Validators.maxLength(10),
-        Validators.required,
       ]),
       birthDate: new FormControl(
         new Date(
           new Date().getFullYear() - 21,
           new Date().getMonth(),
           new Date().getDay()
-        ),
-        Validators.required
+        )
       ),
       phoneNumber: new FormControl(null, [
         Validators.minLength(11),
         Validators.maxLength(11),
-        Validators.required,
       ]),
       mobileNumber: new FormControl(null, [
         Validators.minLength(11),
         Validators.maxLength(11),
-        Validators.required,
       ]),
       address: new FormControl(null, Validators.required),
     });
