@@ -26,7 +26,7 @@ export class TeacherDashboardComponent implements OnInit {
  
 
   clickme(){
-    this.route.navigate(['/announcement']);
+    this.route.navigate(['/teacher/rollcall']);
   }
 
  
