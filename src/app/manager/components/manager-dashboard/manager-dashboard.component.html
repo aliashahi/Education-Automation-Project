@@ -1,75 +1,73 @@
-<div class="container w-full p-4 py-14 flex justify-around">
-  <article class="w-full p-2">
-    <div
-      class="
-        w-full
-        h-full
-        bg-item-accent-1
-        text-item-primary-1
-        rounded-md
-        flex flex-col
-        items-center
-        justify-end
-      "
-    >
-      <div style="font-size: 75px" class="p-8">653</div>
-      <h3 class="opacity-75">Students</h3>
-    </div>
-  </article>
-  <article class="w-full p-2">
-    <div
-      class="
-        w-full
-        h-full
-        bg-item-accent-2
-        text-item-primary-2
-        rounded-md
-        flex flex-col
-        items-center
-        justify-end
-      "
-    >
-      <div style="font-size: 75px" class="p-8">36</div>
-      <h3 class="opacity-75">Teachers</h3>
-    </div>
-  </article>
-  <article class="w-full p-2">
-    <div
-      class="
-        w-full
-        h-full
-        bg-item-accent-3
-        text-item-primary-3
-        rounded-md
-        flex flex-col
-        items-center
-        justify-end
-      "
-    >
-      <div style="font-size: 75px" class="p-8">135</div>
-      <h3 class="opacity-75">Online!</h3>
-    </div>
-  </article>
-  <article class="w-full p-2">
-    <div
-      class="
-        w-full
-        h-full
-        bg-item-accent-4
-        text-item-primary-4
-        rounded-md
-        flex flex-col
-        items-center
-        justify-end
-      "
-    >
-      <div style="font-size: 75px" class="p-8">129</div>
-      <h3 class="opacity-75">Announcement</h3>
-    </div>
-  </article>
-</div>
-<div class="w-full flex p-4">
-  <div style="flex: 60%">
+<ng-template #cards>
+  <div class="container w-full p-4 py-4 flex justify-around">
+    <article class="w-full p-2 rounded-lg shadow-2xl bg-item-accent-1">
+      <div
+        class="
+          w-full
+          h-full
+          text-item-primary-1
+          rounded-md
+          flex flex-col
+          items-center
+          justify-end
+        "
+      >
+        <div style="font-size: 75px" class="p-8">653</div>
+        <h3 class="opacity-75">Students</h3>
+      </div>
+    </article>
+    <article class="w-full p-2 rounded-lg shadow-2xl bg-item-accent-2">
+      <div
+        class="
+          w-full
+          h-full
+          text-item-primary-2
+          rounded-md
+          flex flex-col
+          items-center
+          justify-end
+        "
+      >
+        <div style="font-size: 75px" class="p-8">36</div>
+        <h3 class="opacity-75">Teachers</h3>
+      </div>
+    </article>
+    <article class="w-full p-2 rounded-lg shadow-2xl bg-item-accent-3">
+      <div
+        class="
+          w-full
+          h-full
+          text-item-primary-3
+          rounded-md
+          flex flex-col
+          items-center
+          justify-end
+        "
+      >
+        <div style="font-size: 75px" class="p-8">135</div>
+        <h3 class="opacity-75">Online!</h3>
+      </div>
+    </article>
+    <article class="w-full p-2 rounded-lg shadow-2xl bg-item-accent-4">
+      <div
+        class="
+          w-full
+          h-full
+          text-item-primary-4
+          rounded-md
+          flex flex-col
+          items-center
+          justify-end
+        "
+      >
+        <div style="font-size: 75px" class="p-8">129</div>
+        <h3 class="opacity-75">Announcement</h3>
+      </div>
+    </article>
+  </div>
+</ng-template>
+<ng-template #chart1>
+  <div class="chart rounded-lg shadow-2xl bg-green-200">
     <apx-chart
       [series]="areaChart.series"
       [chart]="areaChart.chart"
@@ -79,7 +77,9 @@
       [dataLabels]="areaChart.dataLabels"
     ></apx-chart>
   </div>
-  <div style="flex: 40%">
+</ng-template>
+<ng-template #chart2>
+  <div class="chart rounded-lg shadow-2xl bg-green-200">
     <apx-chart
       [series]="pieChart.series"
       [chart]="pieChart.chart"
@@ -87,4 +87,40 @@
       [responsive]="pieChart.responsive"
     ></apx-chart>
   </div>
+</ng-template>
+<div class="bg-gray-100">
+  <div class="w-full head">
+    <div class="head-bg"></div>
+    <div class="head-content bg-gray-100">
+      <div class="profile">
+        <img src="../../../../assets/images/default_profile.png" alt="" />
+      </div>
+      <div class="caption">
+        <h1>Ali Akbar Shahi</h1>
+        <h3>Full-Stack Developer</h3>
+      </div>
+      <div class="action mat-typography">
+        <button mat-raised-button color="primary">
+          <mat-icon>edit</mat-icon>
+          Edit Profile
+        </button>
+        <button mat-stroked-button color="warn">
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+  <mat-tab-group [selectedIndex]="0">
+    <mat-tab label="School Data">
+      <ng-container *ngTemplateOutlet="cards"></ng-container>
+    </mat-tab>
+    <mat-tab label="Students Analysis">
+      <ng-container *ngTemplateOutlet="chart1"></ng-container>
+    </mat-tab>
+    <mat-tab label="Teachers">
+      <ng-container *ngTemplateOutlet="chart2"></ng-container>
+    </mat-tab>
+    <mat-tab label="Announcement"></mat-tab>
+  </mat-tab-group>
 </div>

@@ -11,15 +11,15 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
 import { LoadingSectionComponent } from './components/loading-section/loading-section.component';
 
 const MODULES = [
-FormsModule,
-PipesModule,
-CommonModule,
-ConfirmModule,
-MaterialModule,
-ZorroAntdModule,
-HttpClientModule,
-DirectivesModule,
-ReactiveFormsModule,
+  FormsModule,
+  PipesModule,
+  CommonModule,
+  ConfirmModule,
+  MaterialModule,
+  ZorroAntdModule,
+  HttpClientModule,
+  DirectivesModule,
+  ReactiveFormsModule,
 ];
 
 const COMPONENTS = [LoadingSectionComponent, SplashScreenComponent];
