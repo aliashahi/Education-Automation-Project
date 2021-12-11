@@ -48,11 +48,13 @@ export class HttpsInterceptor implements HttpInterceptor {
       tap((i) => {
         if (i.type != 0) this.loadingSrv.hide();
       }),
-      catchError((error: HttpErrorResponse) => this.errorHandler(error))
+      catchError((error: HttpErrorResponse) =>
+        this.errorHandler(error, tokenizedRequest)
+      )
     );
   }
 
-  errorHandler(error: HttpErrorResponse) {
+  errorHandler(error: HttpErrorResponse, request: HttpRequest<any>) {
     this.loadingSrv.hide();
     if (error instanceof HttpErrorResponse && error.status === 404) {
       this.alertSrvc.showToaster('Not Found!', 'DANGER');
@@ -61,6 +63,8 @@ export class HttpsInterceptor implements HttpInterceptor {
 
     if (error instanceof HttpErrorResponse && error.status === 401) {
       this.alertSrvc.showToaster(error.error.detail, 'DANGER');
+      if (!this.router.url.includes('auth'))
+        this.router.navigate(['auth/login']);
       return EMPTY;
     }
 
