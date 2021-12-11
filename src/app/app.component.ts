@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'EAP-root',
@@ -7,7 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   showSplash = true;
-  constructor() {
+  constructor(private router: Router) {
+    if (!localStorage.getItem('Token')) this.router.navigate(['auth/login']);
     setTimeout(() => {
       this.showSplash = false;
     }, 3000);
