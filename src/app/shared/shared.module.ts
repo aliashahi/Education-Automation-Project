@@ -13,7 +13,6 @@ import { LoadingSectionComponent } from './components/loading-section/loading-se
 const MODULES = [
   FormsModule,
   PipesModule,
-  CommonModule,
   ConfirmModule,
   MaterialModule,
   ZorroAntdModule,
@@ -26,7 +25,7 @@ const COMPONENTS = [LoadingSectionComponent, SplashScreenComponent];
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [...MODULES],
+  imports: [CommonModule, ...MODULES],
   exports: [...MODULES, ...COMPONENTS],
 })
 export class SharedModule {}
