@@ -13,6 +13,10 @@ import { RollcallComponent } from './components/rollcall/rollcall.component';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal'; 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedAnnService } from './services/shared-ann.service';
+
+
+
 
 const routes: Routes = [
   {
@@ -64,5 +68,6 @@ const routes: Routes = [
     MDBBootstrapModule.forRoot(),
     RouterModule.forChild(routes),
   ],
+  providers: [SharedAnnService],
 })
 export class TeacherModule {}

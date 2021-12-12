@@ -1,5 +1,6 @@
 import { Component, Renderer2, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
-//import {SharedService } from '../../service/shared.service';
+import { SharedAnnService } from '../../services/shared-ann.service';
+
 
 @Component({
   selector: 'EAP-announcement',
@@ -9,14 +10,6 @@ import { Component, Renderer2, ElementRef, ViewChild, AfterViewInit, OnInit } fr
 export class AnnouncementComponent implements OnInit {
     @ViewChild('addannoun')
     private divAnnoun = {} as ElementRef;
-    message : string = '';
-    constructor(private renderer: Renderer2) {}
-    
-    addText(){
-      const text = this.renderer.createText('ya aba abd allah');
-      this.renderer.appendChild(this.divAnnoun.nativeElement, text);
-      
-    }
 
     title : string = '';
     explanation : string = '';
@@ -25,6 +18,22 @@ export class AnnouncementComponent implements OnInit {
     mesage2 : string = "Your notification has been saved";
     isEmpty = true;
     mesage_active = false;
+
+    message : string = '';
+    //tit:String;
+    list:any;
+    constructor(private renderer: Renderer2, private _userData: SharedAnnService) {
+      
+    
+    }
+    
+    addText(){
+      const text = this.renderer.createText('ya aba abd allah');
+      this.renderer.appendChild(this.divAnnoun.nativeElement, text);
+      
+    }
+
+    
 /*
     newMessage() {
       this.sharedService.nextMessage("Second Message")
@@ -45,25 +54,21 @@ export class AnnouncementComponent implements OnInit {
             this.mesage1 = '';
             this.mesage2 = "Your notification has been saved";
             this.mesage_active = true;
-            this.title = '';
-            this.explanation = ''; 
-            this.notific = '';
         }
         setTimeout(() => {
             this.mesage_active = false;
         }, 10000);
+       this.addAnnouncement();
     }
     
     
     addAnnouncement(){
-    
+      this.list = [
+        {name:'Anu',age:'20'}
+      ]
+      this.list.push({name: this.title, age: this.notific});
+      this._userData.setUserData(this.list);
     }
-
-    getColor(){
-        return this.isEmpty== true ? 'green' : 'green';
-    }  
- 
-
 
   ngOnInit(): void {
   }

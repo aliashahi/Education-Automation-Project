@@ -36,7 +36,7 @@ export class RollcallComponent implements OnInit {
     @ViewChild('selfClosingAlert', { static: false })
     selfClosingAlert!: NgbAlert;
   
-    public changeSuccessMessage() { this._success.next(`- Saved successfully.`); }
+    public changeSuccessMessage() { this._success.next(` Saved successfully.`); }
 
     //---------
 
