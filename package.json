@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
+    "rebase": "node ./rebase.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html,component.html}\""
@@ -54,6 +55,7 @@
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
+    "simple-git": "^2.31.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "prettier": "^2.4.1",
     "typescript": "~4.3.5"

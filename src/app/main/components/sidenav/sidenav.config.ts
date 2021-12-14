@@ -35,6 +35,12 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     ACCESS: 'M',
   },
   {
+    name: 'Manage Meetings',
+    icon: 'bookmark_add',
+    url: '/manager/meeting-create',
+    ACCESS: 'M',
+  },
+  {
     name: 'Class List',
     icon: 'class',
     url: '/manager/class-list',

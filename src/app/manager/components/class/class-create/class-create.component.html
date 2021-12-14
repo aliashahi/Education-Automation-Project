@@ -129,35 +129,42 @@
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Weekly schedule</ng-template>
-        <EAP-weekly-schedule></EAP-weekly-schedule>
+        <EAP-weekly-schedule
+          *ngIf="showWeekSchedule && classId != 0"
+          [classId]="classId"
+          [(scheduleData)]="scheduleData"
+        ></EAP-weekly-schedule>
         <div class="flex w-full justify-end">
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="openDefineMeetingDialog()"
+            class="mx-2"
+          >
+            add Meeting
+          </button>
           <button mat-raised-button color="warn" matStepperPrevious>
             Back
           </button>
-          <button mat-raised-button color="primary" class="mx-2" matStepperNext>
+          <button
+            mat-raised-button
+            color="primary"
+            class="mx-2"
+            (click)="onSubmitSchedule(stepper)"
+          >
             Next
           </button>
         </div>
       </mat-step>
-      <!-- <mat-step>
-        <ng-template matStepLabel>overview</ng-template>
-        <p>class_info_form:{{ class_info_form.value | json }}</p>
-        <p>teachers:{{ teacher_info_form.value | json }}</p>
-        <p>students:{{ student_info_form.value | json }}</p>
-        <div class="flex w-full justify-end">
-          <button mat-raised-button color="warn" matStepperPrevious>
-            Back
-          </button>
-          <button mat-raised-button color="primary" class="mx-2" matStepperNext>
-            Done
-          </button>
-        </div>
-      </mat-step> -->
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <p class="text-green-600">Class created Successfully!</p>
         <div class="flex w-full justify-end">
-          <button mat-raised-button color="warn" (click)="stepper.reset()">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="stepper.reset(); resetSchedule()"
+          >
             Reset
           </button>
         </div>
