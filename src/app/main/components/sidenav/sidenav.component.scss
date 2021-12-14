@@ -2,40 +2,34 @@
   background-color: transparent;
 }
 
-.example-tree-invisible {
-  display: none;
-}
-
-.example-tree ul,
-.example-tree li {
-  margin-top: 0;
-  margin-bottom: 0;
-  list-style-type: none;
-}
-
-/*
-   * This padding sets alignment of the nested nodes.
-   */
-.example-tree .mat-nested-tree-node div[role="group"] {
-  // padding-left: 20px;
-  font-size: small;
-}
-
-/*
-* Padding for leaf nodes.
-* Leaf nodes need to have padding so as to align with other non-leaf nodes
-* under the same parent.
-*/
-.example-tree div[role="group"] > .mat-tree-node {
-  // padding-left: 20px;
-  font-size: small;
-}
-
-mat-tree {
-  font-family: Poppins, Helvetica, sans-serif !important;
-}
-
 .active-route {
-  border-left: 4px solid #c6c6c6;
-  background-color: #0d6f7c;
+  background-color: rgb(213, 255, 241);
+  color: #207b5e;
+}
+
+.navi {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 5px 20px;
+  padding: 12px 20px;
+  // background-color: #ffe5e5;
+  border-radius: 6px;
+  mat-icon {
+    margin-right: 10px;
+  }
+  &:hover {
+    background-color: rgb(213, 255, 241);
+    color: #207b5e;
+  }
+}
+
+.divider {
+  margin: auto !important;
+  width: 200px !important;
+}
+
+.company {
+  color: #045936;
+  font-size: 16px;
 }

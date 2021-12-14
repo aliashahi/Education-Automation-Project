@@ -6,6 +6,7 @@ export interface SidenavNode {
   icon: string;
   ACCESS: ACCESS_TYPE;
   children?: SidenavNode[];
+  hasDividerAfter?: boolean;
 }
 
 export const SIDENAV_CONFIG: SidenavNode[] = [
@@ -15,6 +16,7 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     url: '/manager/dashboard',
     ACCESS: 'M',
     icon: 'dashboard',
+    hasDividerAfter: true,
   },
   {
     name: 'Create User',
