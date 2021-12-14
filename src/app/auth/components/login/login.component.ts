@@ -31,7 +31,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    localStorage.removeItem('Token');
+    if (localStorage.getItem('Token')) {
+      this.router.navigate(['/']);
+    }
   }
 
   onLogin() {
@@ -53,9 +55,6 @@ export class LoginComponent implements OnInit {
             'SUCCESS'
           );
           this.router.navigate(['/']);
-          setTimeout(() => {
-            location.reload();
-          }, 1000);
         },
         (error) => {},
         () => {
