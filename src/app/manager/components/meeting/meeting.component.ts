@@ -59,7 +59,7 @@ export class MeetingComponent implements OnInit {
     this.pending = true;
     this.meetingSrv.createMeeting(this.meeting_form.value).subscribe(
       (res) => {
-        console.log(res);
+        this.alertSrv.showToaster('Meeting Added Successfully!', 'SUCCESS');
         this.getData();
       },
       (e) => {},

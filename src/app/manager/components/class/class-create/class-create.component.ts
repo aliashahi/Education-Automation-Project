@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { User } from 'src/app/manager/models/user.model';
 import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
@@ -8,8 +9,11 @@ import { createDateFormat } from 'src/app/shared/utils/date.utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClassService } from 'src/app/shared/services/class.service';
 import { CLASS_STATUS } from 'src/app/manager/constants/status.constant';
+import { MeetingService } from 'src/app/shared/services/meeting.service';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
+import { ScheduleDataDto } from 'src/app/manager/models/schedule-data.dto';
 import { ACTION } from './selected-teacher-list/selected-teacher-list.component';
+import { DefineMeetingsDialog } from './weekly-schedule/define-meetings-dialog/define-meetings.dialog';
 
 @Component({
   selector: 'EAP-class-create',
@@ -27,8 +31,16 @@ export class ClassCreateComponent implements OnInit {
   students: User[] = [];
   editItem!: any;
   pendding: boolean = false;
+  showWeekSchedule: boolean = true;
+  scheduleData: ScheduleDataDto[] = [];
+  classId: number = 0;
 
-  constructor(private classSrv: ClassService, private alertSrv: AlertService) {}
+  constructor(
+    private dialog: MatDialog,
+    private classSrv: ClassService,
+    private alertSrv: AlertService,
+    private meetSrv: MeetingService
+  ) {}
 
   public get getClassStatus(): {
     label: string;
@@ -66,6 +78,7 @@ export class ClassCreateComponent implements OnInit {
     this.class_info_form.disable();
     this.classSrv.createClass(model).subscribe(
       (response) => {
+        this.classId = response.id;
         this.alertSrv.showToaster('Class Created Successfully!', 'SUCCESS');
         stepper.next();
       },
@@ -142,5 +155,63 @@ export class ClassCreateComponent implements OnInit {
         this.editItem = teacher;
         break;
     }
+  }
+
+  onSubmitSchedule(stepper: MatStepper) {
+    this.pendding = true;
+    let pendingCount = 0;
+    this.updateSchedule(
+      { ...this.scheduleData[pendingCount] },
+      pendingCount,
+      stepper
+    );
+  }
+
+  private updateSchedule(
+    data: ScheduleDataDto,
+    pendingCount: number,
+    stepper: MatStepper
+  ) {
+    this.meetSrv.updateClassSchedue(data).subscribe(
+      (res) => {
+        if (pendingCount != this.scheduleData.length - 1) {
+          pendingCount++;
+          this.updateSchedule(
+            this.scheduleData[pendingCount],
+            pendingCount,
+            stepper
+          );
+        }
+      },
+      (e) => {},
+      () => {
+        if (pendingCount == this.scheduleData.length - 1) {
+          this.alertSrv.showToaster(
+            'Schedules Successfully Updated!',
+            'SUCCESS'
+          );
+          stepper.next();
+          this.pendding = false;
+        }
+      }
+    );
+  }
+
+  openDefineMeetingDialog() {
+    this.showWeekSchedule = false;
+    this.dialog
+      .open(DefineMeetingsDialog, {
+        width: '90vw',
+      })
+      .afterClosed()
+      .subscribe((_) => {
+        this.showWeekSchedule = true;
+      });
+  }
+
+  resetSchedule() {
+    this.showWeekSchedule = false;
+    this.scheduleData = [];
+    this.showWeekSchedule = true;
   }
 }

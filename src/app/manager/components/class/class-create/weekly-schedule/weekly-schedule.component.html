@@ -1,39 +1,48 @@
-<div class="p-3 overflow-scroll" id="scheduleContainer">
+<div class="p-3" id="scheduleContainer">
   <table class="w-full border-gray-700">
     <tr>
       <th></th>
-      <th class="border-1 p-2 bg-gray-300">07:30 to 09:00</th>
-      <th class="border-1 p-2 bg-gray-300">09:00 to 10:30</th>
-      <th class="border-1 p-2 bg-gray-300">10:30 to 12:00</th>
-      <th class="border-1 p-2 bg-gray-300">13:00 to 14:30</th>
-      <th class="border-1 p-2 bg-gray-300">14:30 to 16:00</th>
-      <th class="border-1 p-2 bg-gray-300">16:30 to 17:00</th>
+      <th class="border-1 p-2 bg-secondary-300" *ngFor="let time of times">
+        {{ time }}
+      </th>
     </tr>
-    <tr *ngFor="let day of week; let i = index">
-      <th class="border-1 p-2 w-16 bg-gray-300">{{ day }}</th>
+    <tr *ngFor="let day of days; let i = index">
+      <th class="border-1 p-2 w-16 bg-secondary-300">{{ day }}</th>
       <td
         class="border-1 p-2"
         *ngFor="let time of scheduleMap[i]; let j = index"
         [ngClass]="{ selected: time.teacher && time.subject }"
         (click)="time.day = i; time.time = j"
+        [style.background-color]="!time.isEnable ? '#dedede' : null"
       >
-        <mat-form-field appearance="outline">
-          <mat-select [(ngModel)]="time.teacher">
-            <mat-option *ngFor="let teacher of techers" [value]="teacher.id">
-              {{ teacher.first_name + " " + teacher.last_name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-select [(ngModel)]="time.subject">
-            <mat-option
-              *ngFor="let subject of subjects"
-              [value]="subject.value"
+        <ng-container *ngIf="time.isEnable; else notDefiend">
+          <mat-form-field appearance="outline">
+            <mat-select
+              [(ngModel)]="time.teacher"
+              (valueChange)="onChangeValue()"
             >
-              {{ subject.label }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+              <mat-option *ngFor="let teacher of techers" [value]="teacher.id">
+                {{ teacher.first_name + " " + teacher.last_name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-select
+              [(ngModel)]="time.subject"
+              (valueChange)="onChangeValue()"
+            >
+              <mat-option
+                *ngFor="let subject of subjects"
+                [value]="subject.value"
+              >
+                {{ subject.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+        <ng-template #notDefiend>
+          <span style="font-size: 18px; font-weight: 100"> not defined ! </span>
+        </ng-template>
       </td>
     </tr>
   </table>

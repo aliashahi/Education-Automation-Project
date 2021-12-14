@@ -1,5 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { Class } from 'src/app/manager/models/class.model';
+import { ScheduleDataDto } from 'src/app/manager/models/schedule-data.dto';
 import { ServiceBase } from '../classes/service-base';
 
 @Injectable({
@@ -20,5 +21,9 @@ export class MeetingService extends ServiceBase {
 
   deleteMeeting(id: number) {
     return this.delete$('school/meeting/' + id);
+  }
+
+  updateClassSchedue(data: ScheduleDataDto) {
+    return this.post$('school/schedules/', data);
   }
 }
