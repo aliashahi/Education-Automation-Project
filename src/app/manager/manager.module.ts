@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
+import { HttpsInterceptor } from '../core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from '../shared/shared.module';
+import { RouterModule, Routes } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ManagerComponent } from './container/manager/manager.component';
-import { ManagerDashboardComponent } from './components/manager-dashboard/manager-dashboard.component';
+import { MeetingComponent } from './components/meeting/meeting.component';
+import { UserListComponent } from './components/user/user-list/user-list.component';
+import { ClassListComponent } from './components/class/class-list/class-list.component';
 import { UserCreateComponent } from './components/user/user-create/user-create.component';
 import { ClassCreateComponent } from './components/class/class-create/class-create.component';
-import { ClassListComponent } from './components/class/class-list/class-list.component';
-import { UserListComponent } from './components/user/user-list/user-list.component';
-import { SelectedTeacherListComponent } from './components/class/class-create/selected-teacher-list/selected-teacher-list.component';
-import { WeeklyScheduleComponent } from './components/class/class-create/weekly-schedule/weekly-schedule.component';
+import { ManagerDashboardComponent } from './components/manager-dashboard/manager-dashboard.component';
 import { ClassPreviewComponent } from './components/class/class-create/class-preview/class-preview.component';
-import { AnnouncementCreateComponent } from './components/announcement/announcement-create/announcement-create.component';
+import { WeeklyScheduleComponent } from './components/class/class-create/weekly-schedule/weekly-schedule.component';
 import { AnnouncementListComponent } from './components/announcement/announcement-list/announcement-list.component';
-import { NgApexchartsModule } from 'ng-apexcharts';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpsInterceptor } from '../core';
+import { AnnouncementCreateComponent } from './components/announcement/announcement-create/announcement-create.component';
+import { DefineMeetingsDialog } from './components/class/class-create/weekly-schedule/define-meetings-dialog/define-meetings.dialog';
+import { SelectedTeacherListComponent } from './components/class/class-create/selected-teacher-list/selected-teacher-list.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -32,6 +35,10 @@ const routes: Routes = [
       {
         path: 'user-list',
         component: UserListComponent,
+      },
+      {
+        path: 'meeting-create',
+        component: MeetingComponent,
       },
       {
         path: 'class-create',
@@ -64,16 +71,18 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ManagerComponent,
-    ManagerDashboardComponent,
-    UserCreateComponent,
-    ClassCreateComponent,
-    ClassListComponent,
+    MeetingComponent,
     UserListComponent,
-    SelectedTeacherListComponent,
-    WeeklyScheduleComponent,
+    ClassListComponent,
+    UserCreateComponent,
+    DefineMeetingsDialog,
+    ClassCreateComponent,
     ClassPreviewComponent,
-    AnnouncementCreateComponent,
+    WeeklyScheduleComponent,
+    ManagerDashboardComponent,
     AnnouncementListComponent,
+    AnnouncementCreateComponent,
+    SelectedTeacherListComponent,
   ],
   imports: [
     CommonModule,
