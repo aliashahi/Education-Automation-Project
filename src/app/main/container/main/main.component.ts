@@ -9,9 +9,11 @@ export class MainComponent implements OnInit {
   isExpanded = true;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isExpanded = localStorage.getItem('FOLDED') == 'true' ? true : false;
+  }
 
-  logger(event: boolean) {
-    console.log(event);
+  logger() {
+    localStorage.setItem('FOLDED', this.isExpanded.toString());
   }
 }
