@@ -54,7 +54,15 @@ export class LoginComponent implements OnInit {
             'You are Successfully loged in!',
             'SUCCESS'
           );
-          this.router.navigate(['/']);
+          this.userSrv.getMyInfo().subscribe(
+            (res) => {
+              localStorage.setItem('USER_INFO', JSON.stringify(res));
+            },
+            (e) => {},
+            () => {
+              this.router.navigate(['/']);
+            }
+          );
         },
         (error) => {},
         () => {

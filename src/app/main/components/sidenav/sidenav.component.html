@@ -1,42 +1,86 @@
-<div class="w-full h-full bg-white flex flex-col">
-  <div
-    class="p-2 flex justify-start items-center mb-2 mx-2"
-    style="width: -webkit-fill-available; padding: 10px 20px"
-  >
-    <img
-      style="width: 55px"
-      src="../../../../assets/images/logo/logo_icon.jpg"
-      alt=""
-    />
-    <img
-      style="width: 100px"
-      src="../../../../assets/images/logo/logo_full.svg"
-      alt=""
-    />
-    <button
-      style="margin-left: auto"
-      mat-icon-button
-      (click)="isExpanded = !isExpanded; isExpandedChange.emit(isExpanded)"
+<ng-container *ngIf="isExpanded; else noExpand">
+  <div class="w-full h-full bg-white flex flex-col">
+    <div
+      class="p-2 flex justify-start items-center mb-2 mx-2"
+      style="width: -webkit-fill-available; padding: 10px 20px"
     >
-      <mat-icon> menu </mat-icon>
-    </button>
-  </div>
-  <div>
-    <ng-container *ngFor="let item of data">
-      <a
-        class="navi"
-        [routerLink]="[item.url]"
-        [routerLinkActive]="'active-route'"
+      <img
+        style="width: 55px"
+        src="../../../../assets/images/logo/logo_icon.jpg"
+        alt=""
+      />
+      <img
+        style="width: 100px"
+        src="../../../../assets/images/logo/logo_full.svg"
+        alt=""
+      />
+      <button
+        style="margin-left: auto"
+        mat-icon-button
+        (click)="isExpanded = !isExpanded; isExpandedChange.emit(isExpanded)"
       >
-        <mat-icon>
-          {{ item.icon }}
-        </mat-icon>
-        {{ item.name }}</a
+        <mat-icon> menu </mat-icon>
+      </button>
+    </div>
+    <div>
+      <ng-container *ngFor="let item of data">
+        <a
+          class="navi"
+          [routerLink]="[item.url]"
+          [routerLinkActive]="'active-route'"
+        >
+          <mat-icon>
+            {{ item.icon }}
+          </mat-icon>
+          {{ item.name }}</a
+        >
+        <mat-divider class="divider" *ngIf="item.hasDividerAfter"></mat-divider>
+      </ng-container>
+    </div>
+    <div class="p-2 mb-2 mt-auto text-center">
+      Powered by <span class="company"> DEVELOVER &copy; </span>
+    </div>
+  </div>
+</ng-container>
+<ng-template #noExpand>
+  <div class="w-full h-full bg-white flex flex-col">
+    <div
+      class="p-2 flex justify-start flex-col items-center mb-2 mx-2"
+      style="width: -webkit-fill-available; padding: 10px 20px"
+    >
+      <img
+        style="width: 55px"
+        src="../../../../assets/images/logo/logo_icon.jpg"
+        alt=""
+      />
+      <button
+        mat-icon-button
+        (click)="isExpanded = !isExpanded; isExpandedChange.emit(isExpanded)"
       >
-      <mat-divider class="divider" *ngIf="item.hasDividerAfter"></mat-divider>
-    </ng-container>
+        <mat-icon> menu </mat-icon>
+      </button>
+    </div>
+    <div>
+      <ng-container *ngFor="let item of data">
+        <a
+          class="navi p-[12px]"
+          [routerLink]="[item.url]"
+          [routerLinkActive]="'active-route'"
+          to
+          matTooltip="{{ item.name }}"
+          matTooltipPosition="right"
+        >
+          <mat-icon>
+            {{ item.icon }}
+          </mat-icon></a
+        >
+        <mat-divider class="divider" *ngIf="item.hasDividerAfter"></mat-divider>
+      </ng-container>
+    </div>
+    <div class="p-2 mb-2 mt-auto text-center" style="font-size: 10px">
+      Powered <br />
+      by <br />
+      <span class="company" style="font-size: 12px"> DEVELOVER&copy; </span>
+    </div>
   </div>
-  <div class="p-2 mb-2 mt-auto text-center">
-    Powered by <span class="company"> DEVELOVER &copy; </span>
-  </div>
-</div>
+</ng-template>

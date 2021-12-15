@@ -2,14 +2,21 @@
 <mat-drawer-container class="w-screen h-screen m-0 p-0">
   <mat-drawer
     mode="side"
-    [opened]="isExpanded"
+    [opened]="true"
+    [ngClass]="{ 'w-[90px]': !isExpanded }"
     class="w-[250px] bg-gray-100"
     style="border: none"
   >
-    <EAP-sidenav [(isExpanded)]="isExpanded"></EAP-sidenav>
+    <EAP-sidenav
+      [(isExpanded)]="isExpanded"
+      (isExpandedChange)="logger($event)"
+    ></EAP-sidenav>
   </mat-drawer>
-  <mat-drawer-content>
-    <EAP-topnav [(isExpanded)]="isExpanded"></EAP-topnav>
+  <mat-drawer-content [style.margin-left.px]="isExpanded ? 250 : 90">
+    <EAP-topnav
+      [(isExpanded)]="isExpanded"
+      (isExpandedChange)="logger($event)"
+    ></EAP-topnav>
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

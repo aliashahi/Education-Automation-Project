@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  isExpanded = true;
+  isExpanded = false;
   constructor() {}
 
   ngOnInit(): void {}
+
+  logger(event: boolean) {
+    console.log(event);
+  }
 }
