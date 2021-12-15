@@ -31,8 +31,6 @@ export class StudentAnnouncementsComponent implements OnInit {
 
   private getData() {
     this.pendding = true;
-    this.allData = [];
-    this.filteredData = [];
     this.annSrv.getAnnouncements({}).subscribe(
       (res) => {
         this.allData = res;

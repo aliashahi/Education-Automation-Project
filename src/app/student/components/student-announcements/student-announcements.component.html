@@ -96,33 +96,33 @@
   <div
     *ngFor="let item of filteredData"
     class="p-2"
-    [ngClass]="{ 'w-1/3': showKind == 'grid', 'w-full': showKind == 'list' }"
+    [ngClass]="{ 'w-1/2': showKind == 'grid', 'w-full': showKind == 'list' }"
   >
-    <mat-card style="height: 250px" class="flex flex-col">
-      <mat-card-title
-        class="flex justify-between"
-        style="display: flex !important"
-      >
-        <span>
-          {{ item.title | longTextCutter: 30 }}
-        </span>
-        <mat-card-subtitle
-          class="contents text-right"
-          style="display: contents !important; font-size: 12px"
-        >
-          {{ item.date }} &nbsp;&nbsp; {{ item.time }}
-        </mat-card-subtitle>
-      </mat-card-title>
-      <mat-card-subtitle>{{
-        item.subtitle | longTextCutter
-      }}</mat-card-subtitle>
-      {{ item.description | longTextCutter }}
-      <mat-card-actions class="mt-auto" align="end">
-        <button mat-icon-button color="warn" (click)="onDelete(item)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-card-actions>
-    </mat-card>
+    <div
+      class="card glass lg:card-side text-neutral-content"
+      [ngClass]="{
+        'lg:card-columns': showKind == 'grid',
+        'lg:card-side': showKind == 'list'
+      }"
+    >
+      <figure class="p-2">
+        <img src="https://picsum.photos/300/200" class="rounded-lg shadow-lg" />
+      </figure>
+      <div class="max-w-md card-body text-black">
+        <h2 class="card-title">{{ item.title | longTextCutter: 30 }}</h2>
+        <p style="text-overflow: ellipsis">
+          {{ item.description | longTextCutter }}
+        </p>
+        <div class="card-actions">
+          <button
+            (click)="onDelete(item)"
+            class="btn glass bg-red-300 rounded-full text-red-600"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <ng-template #noData>

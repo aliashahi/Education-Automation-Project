@@ -9,13 +9,13 @@
   >
     <EAP-sidenav
       [(isExpanded)]="isExpanded"
-      (isExpandedChange)="logger($event)"
+      (isExpandedChange)="logger()"
     ></EAP-sidenav>
   </mat-drawer>
   <mat-drawer-content [style.margin-left.px]="isExpanded ? 250 : 90">
     <EAP-topnav
       [(isExpanded)]="isExpanded"
-      (isExpandedChange)="logger($event)"
+      (isExpandedChange)="logger()"
     ></EAP-topnav>
     <router-outlet></router-outlet>
   </mat-drawer-content>
