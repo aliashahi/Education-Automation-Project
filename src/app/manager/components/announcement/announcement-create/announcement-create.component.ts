@@ -8,6 +8,7 @@ import { ClassService } from 'src/app/shared/services/class.service';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { AnnouncementService } from 'src/app/shared/services/announcement.service';
 import { SelectDto } from 'src/app/shared/models/select.dto';
+import { ANNOUNCEMENT_MOCK_DATA } from 'src/app/manager/mock/announcement.mock';
 
 @Component({
   selector: 'EAP-announcement-create',
@@ -55,6 +56,7 @@ export class AnnouncementCreateComponent implements OnInit {
         };
       });
     });
+    // this.mock(0);
   }
 
   private initAnnouncementForm() {
@@ -96,4 +98,26 @@ export class AnnouncementCreateComponent implements OnInit {
         }
       );
   }
+
+  // mock(index: number) {
+  //   if (index > 100) return;
+  //   let i = ANNOUNCEMENT_MOCK_DATA[index];
+  //   this.annSrv
+  //     .createAnnouncements({
+  //       title: i.title,
+  //       description: i.description,
+  //       group: ['Tea', 'Stu', 'cla'][Math.floor(Math.random() * 3)],
+  //       start_date: i.date.split('/').join('-'),
+  //       expire_date: i.date.split('/').join('-'),
+  //       allTeachers: Math.floor(Math.random() * 3) % 4 == 2,
+  //       teachers: [],
+  //       allStudents: Math.floor(Math.random() * 3) % 4 == 2,
+  //       students: [],
+  //       allClasses: Math.floor(Math.random() * 3) % 4 == 2,
+  //       classes: [],
+  //     })
+  //     .subscribe((res) => {
+  //       this.mock(index + 1);
+  //     });
+  // }
 }

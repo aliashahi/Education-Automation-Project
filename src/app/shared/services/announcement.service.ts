@@ -32,7 +32,7 @@ export class AnnouncementService extends ServiceBase {
     return this.get$(`${this._AnnouncementBaseUrl}/list/${id}`);
   }
 
-  createAnnouncements(searchModel: Class) {
+  createAnnouncements(searchModel: any) {
     return this.post$(`${this._AnnouncementBaseUrl}/create`, searchModel);
   }
 
