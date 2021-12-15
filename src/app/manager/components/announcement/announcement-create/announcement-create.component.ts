@@ -7,10 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClassService } from 'src/app/shared/services/class.service';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { AnnouncementService } from 'src/app/shared/services/announcement.service';
-interface SelectDto {
-  label: string;
-  value: number | string;
-}
+import { SelectDto } from 'src/app/shared/models/select.dto';
+
 @Component({
   selector: 'EAP-announcement-create',
   templateUrl: './announcement-create.component.html',

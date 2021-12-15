@@ -8,6 +8,7 @@ import { AsignmentsListComponent } from './components/asignments-list/asignments
 import { AsignmentsDetailComponent } from './components/asignments-list/asignments-detail/asignments-detail.component';
 import { UploadAsignmentComponent } from './components/asignments-list/asignments-detail/upload-asignment/upload-asignment.component';
 import { RollCallCalanderComponent } from './components/roll-call-calander/roll-call-calander.component';
+import { StudentAnnouncementsComponent } from './components/student-announcements/student-announcements.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: 'roll-call',
         component: RollCallCalanderComponent,
+      },
+      {
+        path: 'announcement',
+        component: StudentAnnouncementsComponent,
       },
       {
         path: '**',
@@ -45,7 +50,8 @@ const routes: Routes = [
     AsignmentsListComponent,
     AsignmentsDetailComponent,
     UploadAsignmentComponent,
-    RollCallCalanderComponent
+    RollCallCalanderComponent,
+    StudentAnnouncementsComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
 })
