@@ -17,6 +17,10 @@ export class ClassService extends ServiceBase {
     return this.get$('school/classes/', this.createParamList(searchModel));
   }
 
+  getClassById(id: number) {
+    return this.get$(`school/classes/${id}`);
+  }
+
   createClass(searchModel: Class) {
     return this.post$('school/classes/', searchModel);
   }
