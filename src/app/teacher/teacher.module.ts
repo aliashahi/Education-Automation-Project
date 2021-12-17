@@ -3,18 +3,17 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedAnnService } from './services/shared-ann.service';
 import { TeacherComponent } from './container/teacher/teacher.component';
+import { RollcallComponent } from './components/rollcall/rollcall.component';
 import { ClassListComponent } from './components/class-list/class-list.component';
 import { AnnouncementComponent } from './components/announcement/announcement.component';
 import { TeacherClassComponent } from './components/teacher-class/teacher-class.component';
-import { RollcallComponent } from './components/rollcall/rollcall.component';
-
-import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SharedAnnService } from './services/shared-ann.service';
-
 import { TeacherDashboardComponent } from './components/teacher-dashboard/teacher-dashboard.component';
+
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 const routes: Routes = [
   {
@@ -38,7 +37,7 @@ const routes: Routes = [
         component: AnnouncementComponent,
       },
       {
-        path: 'rollcall',
+        path: 'roll-call',
         component: RollcallComponent,
       },
       {
@@ -63,10 +62,10 @@ const routes: Routes = [
     ClassListComponent,
   ],
   imports: [
+    NgbModule,
+    FormsModule,
     CommonModule,
     SharedModule,
-    FormsModule,
-    NgbModule,
     ModalModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     RouterModule.forChild(routes),
