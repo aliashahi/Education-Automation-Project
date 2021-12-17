@@ -52,7 +52,7 @@ export class TeacherDashboardComponent implements OnInit {
  
 
   clickme(){
-    this.route.navigate(['/teacher/rollcall']);
+    this.route.navigate(['/teacher/roll-call']);
   }
 
   updateList(id: number, property: string, event: any) {
@@ -71,6 +71,7 @@ export class TeacherDashboardComponent implements OnInit {
  
   ngOnInit(): void {
     this.list = this._userData.getUserData();
+   if(this.list) 
     this.personList.push({id: 11, tit: this.list[1].name, ann: 24});
   }
 }
