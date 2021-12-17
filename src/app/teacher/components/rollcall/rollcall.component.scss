@@ -1,0 +1,93 @@
+.alert1 {
+    background-color: rgba($color: #46fd8c, $alpha: 0.3);
+    width: 62%;
+    margin-left: 2%;
+}
+.container {
+    width: 80%;
+    margin-left: 1%;
+    margin-bottom: 20px;
+}
+.row1 {
+    width: 64%;
+    margin-left: 1%;
+}
+.title {
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 1%;
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+}
+.current-time {
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    float: right;
+}
+
+.message {
+    margin-top: 5px;
+    margin-left: 1%;
+    width: 70%;
+    height: 40px;
+    float: left;
+}
+/*------------------------------------------------*/
+.md-form {
+    width: 100%;
+    margin-top: 10px;
+    /*margin-left: 1%;*/
+    float: left;
+}
+.row {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.search-input {
+    width: 74%;
+    height: 40px;
+    margin-right: 10px;
+    margin-left: 1%;
+    border: 1px solid #ccc;
+	border-radius: 10px;
+    float: left;
+}
+.save {
+    height: 40px;
+    float: left;
+}
+table.rollcall-list {
+	border-collapse: collapse;
+	border: 1px solid #ccc;
+    border-top: 1px solid rgb(44, 157, 250);
+	border-radius: 10px;
+	margin-left: 1%;
+    margin-top: 10px;	
+	font-family: Arial, Helvetica, sans-serif;
+	width: 78%;
+    float: left;
+}
+
+thead, tbody {
+    border: 1px solid #ccc;
+	border-radius: 10px;
+}
+
+td, tr , th {
+    background-color: white;
+    color:  #2e2e2e;
+	border-bottom: 1px solid #ccc;
+	font-size: 12px;
+	text-align: center;
+	padding: 2px;
+}
+th {
+    font-size: 16px;
+    color: rgb(26, 25, 25);
+}
+
+hr {
+	border: 1px solid #f2f2f2;
+}
