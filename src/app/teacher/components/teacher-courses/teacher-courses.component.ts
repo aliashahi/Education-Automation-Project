@@ -1,24 +1,19 @@
-import { Component, Output, EventEmitter , OnInit } from '@angular/core';
-import {TopnavComponent} from '../../../main/components/topnav/topnav.component'
-
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'EAP-teacher-courses',
   templateUrl: './teacher-courses.component.html',
-  styleUrls: ['./teacher-courses.component.scss']
+  styleUrls: ['./teacher-courses.component.scss'],
 })
 export class TeacherCoursesComponent implements OnInit {
-
   @Output() messageEvent = new EventEmitter<string>();
   constructor() {
-this.sendMessage();
+    this.sendMessage();
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   sendMessage() {
-    this.messageEvent.emit('dsafdsa')
+    this.messageEvent.emit('dsafdsa');
   }
 }

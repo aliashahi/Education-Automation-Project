@@ -8,4 +8,7 @@ export interface Class {
   description: string;
   startClassDate: string;
   endClassDate: string;
+  image?: string;
+  schedules?: any[];
+  students?: any[];
 }

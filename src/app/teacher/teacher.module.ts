@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
-import { TeacherComponent } from './container/teacher/teacher.component';
-import { TeacherDashboardComponent } from './components/teacher-dashboard/teacher-dashboard.component';
-
-import { AnnouncementComponent } from './components/announcement/announcement.component';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+import { RouterModule, Routes } from '@angular/router';
+import { TeacherComponent } from './container/teacher/teacher.component';
+import { ClassListComponent } from './components/class-list/class-list.component';
+import { AnnouncementComponent } from './components/announcement/announcement.component';
 import { TeacherClassComponent } from './components/teacher-class/teacher-class.component';
 import { RollcallComponent } from './components/rollcall/rollcall.component';
 
-import { ModalModule, BsModalService } from 'ngx-bootstrap/modal'; 
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedAnnService } from './services/shared-ann.service';
 
-
-
+import { TeacherDashboardComponent } from './components/teacher-dashboard/teacher-dashboard.component';
 
 const routes: Routes = [
   {
@@ -28,7 +26,11 @@ const routes: Routes = [
         component: TeacherDashboardComponent,
       },
       {
-        path: 'class',
+        path: 'class-list',
+        component: ClassListComponent,
+      },
+      {
+        path: 'class/:id',
         component: TeacherClassComponent,
       },
       {
@@ -58,6 +60,7 @@ const routes: Routes = [
     AnnouncementComponent,
     TeacherClassComponent,
     RollcallComponent,
+    ClassListComponent,
   ],
   imports: [
     CommonModule,
