@@ -94,7 +94,7 @@
   *ngIf="filteredData.length > 0; else noData"
 >
   <div
-    *ngFor="let item of filteredData"
+    *ngFor="let item of filteredData; let i = index"
     class="p-2"
     [ngClass]="{ 'w-1/2': showKind == 'grid', 'w-full': showKind == 'list' }"
   >
@@ -106,7 +106,10 @@
       }"
     >
       <figure class="p-2">
-        <img src="https://picsum.photos/300/200" class="rounded-lg shadow-lg" />
+        <img
+          src="https://picsum.photos/300/200?random={{ i + 1 }}"
+          class="rounded-lg shadow-lg"
+        />
       </figure>
       <div class="max-w-md card-body text-black">
         <h2 class="card-title">{{ item.title | longTextCutter: 30 }}</h2>
