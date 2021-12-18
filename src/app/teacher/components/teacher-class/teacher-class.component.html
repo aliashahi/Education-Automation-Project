@@ -8,13 +8,32 @@
 </nz-page-header>
 <hr />
 <mat-tab-group class="px-2">
-  <mat-tab label="Schedule">
-
-  </mat-tab>
+  <mat-tab label="Schedule"> </mat-tab>
   <mat-tab label="Students">
     <ng-template matTabContent> </ng-template>
   </mat-tab>
   <mat-tab label="Roll Call">
     <ng-template matTabContent> </ng-template>
+  </mat-tab>
+  <mat-tab label="Resources">
+    <ng-template matTabContent>
+      <div class="w-full p-2 bg-gray-100 border-[1px] border-gray-100">
+        <nz-upload
+          nzAction="https://www.localhost:8000"
+          nzListType="picture"
+          [(nzFileList)]="fileList"
+        >
+          <button mat-raised-button>
+            <i nz-icon nzType="upload"></i>
+            Upload
+          </button>
+        </nz-upload>
+      </div>
+      <ng-container *ngIf="fileList.length == 0">
+        <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
+          <img src="../../../../assets/images/no_data.png" alt="" />
+        </div>
+      </ng-container>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>
