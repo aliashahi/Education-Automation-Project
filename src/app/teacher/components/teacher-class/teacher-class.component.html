@@ -8,7 +8,17 @@
 </nz-page-header>
 <hr />
 <mat-tab-group class="px-2">
-  <mat-tab label="Schedule"> </mat-tab>
+  <mat-tab label="Schedule">
+    <EAP-view-schedule
+      *ngIf="class?.schedules; else noSchedule"
+      [scheduleData]="class?.schedules"
+    ></EAP-view-schedule>
+    <ng-template #noSchedule>
+      <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
+        <img src="../../../../assets/images/no_data.png" alt="" />
+      </div>
+    </ng-template>
+  </mat-tab>
   <mat-tab label="Students">
     <ng-template matTabContent> </ng-template>
   </mat-tab>

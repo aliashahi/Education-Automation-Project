@@ -1,0 +1,20 @@
+<div class="p-3 rounded-lg" id="scheduleContainer">
+  <table class="w-full border-gray-700 rounded-lg">
+    <tr>
+      <th></th>
+      <th class="border-1 p-2 bg-secondary-300" *ngFor="let time of times">
+        {{ time }}
+      </th>
+    </tr>
+    <tr *ngFor="let day of days; let i = index">
+      <th class="border-1 p-2 w-16 bg-secondary-300">{{ day }}</th>
+      <td
+        class="border-1 p-2"
+        *ngFor="let time of scheduleMap[i]"
+        [ngClass]="{ selected: time.show }"
+      >
+          {{ time.subject | classSubject }}
+      </td>
+    </tr>
+  </table>
+</div>
