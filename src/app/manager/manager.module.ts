@@ -45,6 +45,10 @@ const routes: Routes = [
         component: ClassCreateComponent,
       },
       {
+        path: 'class-create/:id',
+        component: ClassCreateComponent,
+      },
+      {
         path: 'class-list',
         component: ClassListComponent,
       },

@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
@@ -12,7 +13,6 @@ import { CLASS_STATUS } from 'src/app/manager/constants/status.constant';
 import { MeetingService } from 'src/app/shared/services/meeting.service';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { ScheduleDataDto } from 'src/app/manager/models/schedule-data.dto';
-import { ACTION } from './selected-teacher-list/selected-teacher-list.component';
 import { DefineMeetingsDialog } from './weekly-schedule/define-meetings-dialog/define-meetings.dialog';
 
 @Component({
@@ -34,12 +34,14 @@ export class ClassCreateComponent implements OnInit {
   showWeekSchedule: boolean = true;
   scheduleData: ScheduleDataDto[] = [];
   classId: number = 0;
+  imageUrl!: string;
 
   constructor(
     private dialog: MatDialog,
     private classSrv: ClassService,
     private alertSrv: AlertService,
-    private meetSrv: MeetingService
+    private meetSrv: MeetingService,
+    private activeRoute: ActivatedRoute
   ) {}
 
   public get getClassStatus(): {
@@ -59,9 +61,37 @@ export class ClassCreateComponent implements OnInit {
   ngOnInit() {
     this.initClassInfoForm();
     this.options = USER_MOCK_DATA;
-
     this.initTeacherSelectForm();
     this.initStudentSelectForm();
+    this.checkAndStartEditMode();
+  }
+
+  private checkAndStartEditMode() {
+    if (this.activeRoute.snapshot.params.id) {
+      this.classId = this.activeRoute.snapshot.params.id;
+      this.pendding = true;
+      this.class_info_form.disable();
+      this.classSrv.getClassById(this.classId).subscribe(
+        (res) => {
+          this.class_info_form.setValue({
+            name: res.name,
+            grade: +res.grade,
+            status: res.status,
+            image: res.image,
+            startClassDate: res.startClassDate,
+            endClassDate: res.endClassDate,
+            description: res.description,
+          });
+          this.scheduleData = res.schedules;
+          this.pendding = false;
+          this.class_info_form.enable();
+        },
+        (error) => {
+          this.pendding = false;
+          this.class_info_form.enable();
+        }
+      );
+    }
   }
 
   onSubmitBaseInfo(stepper: MatStepper) {
@@ -76,28 +106,46 @@ export class ClassCreateComponent implements OnInit {
     };
     this.pendding = true;
     this.class_info_form.disable();
-    this.classSrv.createClass(model).subscribe(
-      (response) => {
-        this.classId = response.id;
-        this.alertSrv.showToaster('Class Created Successfully!', 'SUCCESS');
-        stepper.next();
-      },
-      (error) => {},
-      () => {
-        this.class_info_form.enable();
-        this.pendding = false;
-      }
-    );
+    if (this.classId)
+      this.classSrv.updateClass(this.classId, model).subscribe(
+        (response) => {
+          this.classId = response.id;
+          this.alertSrv.showToaster('Class Updated Successfully!', 'SUCCESS');
+          stepper.next();
+        },
+        (error) => {
+          this.class_info_form.enable();
+          this.pendding = false;
+        },
+        () => {
+          this.class_info_form.enable();
+          this.pendding = false;
+        }
+      );
+    else
+      this.classSrv.createClass(model).subscribe(
+        (response) => {
+          this.classId = response.id;
+          this.alertSrv.showToaster('Class Created Successfully!', 'SUCCESS');
+          stepper.next();
+        },
+        (error) => {},
+        () => {
+          this.class_info_form.enable();
+          this.pendding = false;
+        }
+      );
   }
 
   private initClassInfoForm() {
     this.class_info_form = new FormGroup({
-      name: new FormControl('Grade A/1', Validators.required),
       grade: new FormControl(1, Validators.required),
       status: new FormControl('ACT', Validators.required),
-      startClassDate: new FormControl(new Date(), Validators.required),
-      endClassDate: new FormControl(new Date(), Validators.required),
+      name: new FormControl('Grade A/1', Validators.required),
+      image: new FormControl(null),
       description: new FormControl('no desc', Validators.required),
+      endClassDate: new FormControl(new Date(), Validators.required),
+      startClassDate: new FormControl(new Date(), Validators.required),
     });
   }
 
@@ -113,7 +161,7 @@ export class ClassCreateComponent implements OnInit {
     });
   }
 
-  onCancelEdit() {
+  private onCancelEdit() {
     this.editItem = null;
     this.teacher_info_form.reset();
   }
@@ -168,6 +216,28 @@ export class ClassCreateComponent implements OnInit {
       .subscribe((_) => {
         this.showWeekSchedule = true;
       });
+  }
+
+  upload(event: any) {
+    if (!event[0] || event[0].length == 0) return;
+    else if (event[0].type.match(/image\/*/) == null) {
+      this.alertSrv.showToaster(
+        'please upload a image with right format!',
+        'WARNING'
+      );
+      return;
+    } else if (event.length > 1) {
+      this.alertSrv.showToaster(
+        'please upload just a single image!',
+        'WARNING'
+      );
+      return;
+    }
+    let form = new FormData();
+    form.append('image', event[0]);
+    this.classSrv
+      .patchClassImage(this.classId, form)
+      .subscribe((res: any) => {});
   }
 
   resetSchedule() {

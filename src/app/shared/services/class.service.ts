@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
-import { Class } from 'src/app/manager/models/class.model';
 import { ServiceBase } from '../classes/service-base';
+import { Class } from 'src/app/manager/models/class.model';
 interface ClassSearchDto {
   name?: string;
 }
@@ -21,8 +21,16 @@ export class ClassService extends ServiceBase {
     return this.get$(`school/classes/${id}`);
   }
 
-  createClass(searchModel: Class) {
-    return this.post$('school/classes/', searchModel);
+  createClass(model: Class) {
+    return this.post$('school/classes/', model);
+  }
+
+  updateClass(id: number, model: Class) {
+    return this.put$(`school/classes/${id}`, model);
+  }
+
+  patchClassImage(id: number, model: FormData) {
+    return this.patch$(`school/classes/${id}`, model);
   }
 
   deleteClass(id: number) {

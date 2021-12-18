@@ -46,10 +46,15 @@ export class WeeklyScheduleComponent implements OnInit {
   private createScheduleMap(res: Meeting[]): any[] {
     return Array.from({ length: this.days.length }, (_, i) => {
       return Array.from({ length: this.times.length }, (_, j) => {
+        let schedule: any = this.scheduleData.find((s) =>
+          s.times.map((t: any) => t.id).includes(this.getTimeId(res, i, j))
+        );
         return {
           selected: false,
           i,
           j,
+          teacher: schedule && schedule.teacher ? schedule.teacher.id : null,
+          subject: schedule ? schedule.subject : null,
           timeId: this.getTimeId(res, i, j),
           isEnable: this.checkIsEnable(res, i, j),
         };

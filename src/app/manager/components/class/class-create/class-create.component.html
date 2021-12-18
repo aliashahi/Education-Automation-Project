@@ -1,6 +1,6 @@
 <div class="p-3 w-full h-full bg-gray-200">
   <div class="w-full rounded-md p-2">
-    <mat-stepper linear #stepper>
+    <mat-stepper [linear]="!!!classId" #stepper>
       <mat-step [stepControl]="class_info_form" [editable]="isEditable">
         <form [formGroup]="class_info_form" class="mt-8 space-y-6">
           <ng-template matStepLabel>Class Information</ng-template>
@@ -114,47 +114,74 @@
                 >description is required</mat-error
               >
             </mat-form-field>
+            <ng-container *ngIf="classId">
+              <div class="getImage">
+                <div
+                  class="dragField"
+                  (click)="input.click()"
+                  (fileDropped)="upload($event)"
+                  DragDropFileUpload
+                >
+                  <h3>choose a image for class</h3>
+                  <h6>(you can also drag and drop)</h6>
+                </div>
+                <input
+                  class="inputField"
+                  #input
+                  (change)="upload($event)"
+                  type="file"
+                />
+              </div>
+            </ng-container>
           </div>
           <div class="flex w-full justify-end">
             <button
               mat-raised-button
+              class="
+                bg-green-600
+                text-white
+                hover:bg-green-700 hover:text-white
+                disabled:opacity-50
+              "
               color="primary"
               [disabled]="class_info_form.invalid || pendding"
               (click)="onSubmitBaseInfo(stepper)"
             >
-              Next
+              {{ classId ? "update" : "create" }}
             </button>
           </div>
         </form>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Weekly schedule</ng-template>
-        <EAP-weekly-schedule
-          *ngIf="showWeekSchedule && classId != 0"
-          [classId]="classId"
-          [(scheduleData)]="scheduleData"
-        ></EAP-weekly-schedule>
-        <div class="flex w-full justify-end">
-          <button
-            mat-raised-button
-            color="accent"
-            (click)="openDefineMeetingDialog()"
-            class="mx-2"
-          >
-            add Meeting
-          </button>
-          <button mat-raised-button color="warn" matStepperPrevious>
-            Back
-          </button>
-          <button
-            mat-raised-button
-            color="primary"
-            class="mx-2"
-            (click)="onSubmitSchedule(stepper)"
-          >
-            Next
-          </button>
-        </div>
+        <ng-template matStepContent>
+          <EAP-weekly-schedule
+            *ngIf="showWeekSchedule && classId != 0"
+            [classId]="classId"
+            [(scheduleData)]="scheduleData"
+          ></EAP-weekly-schedule>
+          <div class="flex w-full justify-end">
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="openDefineMeetingDialog()"
+              class="mx-2"
+            >
+              add Meeting
+            </button>
+            <button mat-raised-button color="warn" matStepperPrevious>
+              Back
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              class="mx-2"
+              (click)="onSubmitSchedule(stepper)"
+            >
+              Next
+            </button>
+          </div>
+        </ng-template>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
