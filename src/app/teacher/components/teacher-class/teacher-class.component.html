@@ -20,7 +20,9 @@
     </ng-template>
   </mat-tab>
   <mat-tab label="Students">
-    <ng-template matTabContent> </ng-template>
+    <ng-template matTabContent>
+      <EAP-view-students [students]="class?.students"></EAP-view-students>
+    </ng-template>
   </mat-tab>
   <mat-tab label="Roll Call">
     <ng-template matTabContent> </ng-template>

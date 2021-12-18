@@ -1,0 +1,47 @@
+<div class="overflow-x-auto p-2">
+  <table class="table w-full rounded-lg">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>
+          <div class="flex items-center space-x-3">
+            <div class="avatar">
+              <div class="w-12 h-12 mask mask-squircle">
+                <img
+                  *ngIf="student.profileImage; else noAvatar"
+                  src="{{ student.profileImage }}"
+                />
+
+                <ng-template #noAvatar>
+                  <img src="../../../../../assets/images/default_profile.png" />
+                </ng-template>
+              </div>
+            </div>
+            <div>
+              <div class="font-bold">
+                {{ student.user.first_name }} {{ student.user.last_name }}
+              </div>
+              <div class="text-sm opacity-50">{{ student.user.username }}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          {{ student.user.email }}
+        </td>
+        <th>
+          <button
+            class="btn border-0 bg-secondary-200 text-secondary-700 btn-xs"
+          >
+            details
+          </button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>

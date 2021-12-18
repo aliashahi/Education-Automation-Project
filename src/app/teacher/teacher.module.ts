@@ -15,6 +15,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ViewScheduleComponent } from './components/teacher-class/view-schedule/view-schedule.component';
+import { ViewStudentsComponent } from './components/teacher-class/view-students/view-students.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,7 @@ const routes: Routes = [
     RollcallComponent,
     ClassListComponent,
     ViewScheduleComponent,
+    ViewStudentsComponent,
   ],
   imports: [
     NgbModule,
