@@ -1,93 +1,20 @@
-<div class="container w-full flex justify-around">
-  <div class="pl-2 grid grid-cols-4 grid-row-2 gap-6">
-    <div class="shadow rounded">
-      <div class="text text-lg shadow-sm bg-blue-200 rounded pl-2 py-1">Exercises</div>
-      <ul class="divide-y-2 divide-gray-400">
-        <li class="flex justify-between p-3 hover:bg-gray-100 hover:text-black">
-          View List Item
-          <mat-icon aria-label="Example home icon" class="text-black-400">assignment</mat-icon>
-        </li>
-        <li class="flex justify-between p-3 hover:bg-gray-100 hover:text-black">
-          Edit List Item
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-black-400" fill="none" viewBox="0 0 24 24"
-               stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-          </svg>
-        </li>
-        <li class="flex items-center justify-between p-3 hover:bg-gray-100 hover:text-black">
-          Messages
-          <span class="px-2 py-1 text-sm text-black-400 bg-gray-400 rounded-full">+1</span>
-        </li>
-      </ul>
+<nz-page-header
+  class="site-page-header"
+  (nzBack)="onBack()"
+  nzBackIcon
+  nzTitle="{{ class?.name }}"
+  nzSubtitle="{{ class?.status | classStatus }}"
+>
+</nz-page-header>
+<hr />
+<mat-tab-group class="px-2">
+  <mat-tab label="Schedule">
 
-
-    </div>
-    <div class="col-span-2 shadow rounded">
-      <figure class="bg-gray-100 rounded-xl p-8">
-        <img class="w-32 h-32 rounded-full mx-auto" src="/assets/images/logo/logo_full.svg" alt="" width="384"
-             height="512">
-        <div class="pt-6 space-y-4">
-          <blockquote>
-            <p class="text-lg font-semibold">
-              “Tailwind CSS is the only framework that I've seen scale
-              on large teams. It’s easy to customize, adapts to any design,
-              and the build size is tiny.”
-            </p>
-          </blockquote>
-          <figcaption class="font-medium">
-            <div>
-              Sarah Dayan
-            </div>
-            <div>
-              Staff Engineer, Algolia
-            </div>
-          </figcaption>
-        </div>
-      </figure>
-    </div>
-    <div class="shadow rounded"><!--      Anouncements-->
-      <div class="text text-lg shadow-sm bg-blue-200 rounded pl-2 py-1">Anouncements</div>
-
-      <ul>
-        <li *ngFor="let person of [1,2,3,4,5]"
-            class="flex justify-between p-3 hover:bg-gray-100 hover:text-black">
-          View List Item
-          <mat-icon aria-label="Example home icon" class="text-black-400">Assignments</mat-icon>
-        </li>
-      </ul>
-
-    </div>
-    <div class="shadow rounded">
-      <div class="text text-lg shadow-sm bg-blue-200 rounded pl-2 py-1">Lecture Sources</div>
-
-      <ul>
-        <li *ngFor="let person of [1,2,3,4,5]"
-            class="flex justify-between p-3 hover:bg-gray-100 hover:text-black">
-          View List Item
-          <mat-icon aria-label="Example home icon" class="text-black-400">assignment</mat-icon>
-        </li>
-      </ul>
-    </div>
-    <div class="shadow rounded">
-      <div class="text text-lg shadow-sm bg-blue-200 rounded pl-2 py-1" >Participants</div>
-
-      <ul>
-        <li *ngFor="let person of [1,2,3,4,5]"  class="flex justify-between p-3 hover:bg-gray-100 hover:text-black">
-          View List Item
-          <mat-icon aria-label="Example home icon" class="text-black-400">assignment</mat-icon>
-        </li>
-      </ul></div>
-    <div class="shadow rounded">
-      <div class="text text-lg shadow-sm bg-blue-200 rounded pl-2 py-1" >Events</div>
-      <ul>
-        <li *ngFor="let person of [1,2,3,4,5]"  class="flex justify-between p-3 hover:bg-gray-100 hover:text-black">
-          View List Item
-          <mat-icon aria-label="Example home icon" class="text-black-400">assignment</mat-icon>
-        </li>
-      </ul></div>
-    <div class="shadow rounded">7</div>
-  </div>
-</div>
-
-
+  </mat-tab>
+  <mat-tab label="Students">
+    <ng-template matTabContent> </ng-template>
+  </mat-tab>
+  <mat-tab label="Roll Call">
+    <ng-template matTabContent> </ng-template>
+  </mat-tab>
+</mat-tab-group>

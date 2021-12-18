@@ -118,45 +118,6 @@ export class ClassCreateComponent implements OnInit {
     this.teacher_info_form.reset();
   }
 
-  onInsertTeacher() {
-    if (this.editItem) {
-      this.teachers = this.teachers.map((i, index) => {
-        if (this.editItem.id == i.id) {
-          return {
-            ...i,
-            ...this.teacher_info_form.value.name,
-          };
-        } else
-          return {
-            ...i,
-            no: index + 1,
-          };
-      });
-      this.editItem = null;
-    } else {
-      this.teachers = [
-        ...this.teachers,
-        {
-          ...this.teacher_info_form.value.name,
-        },
-      ];
-    }
-    this.teacher_info_form.reset();
-  }
-
-  onEvent(event: { action: ACTION; item: any }) {
-    switch (event.action) {
-      case ACTION.DELETE:
-        this.teachers = this.teachers.filter((i) => i.id != event.item.id);
-        break;
-      case ACTION.EDIT:
-        let teacher = this.teachers.find((i) => i.id == event.item.id);
-        this.teacher_info_form.get('name')?.setValue(teacher);
-        this.editItem = teacher;
-        break;
-    }
-  }
-
   onSubmitSchedule(stepper: MatStepper) {
     this.pendding = true;
     let pendingCount = 0;

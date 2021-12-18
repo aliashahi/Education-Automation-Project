@@ -37,7 +37,9 @@ export class WeeklyScheduleComponent implements OnInit {
       this.scheduleMap = this.createScheduleMap(res);
     });
     this.userSrv.getTeachers({}).subscribe((res) => {
-      this.techers = res.map((i: any) => i.user);
+      this.techers = res.map((i: any) => {
+        return { ...i.user, id: i.id };
+      });
     });
   }
 
