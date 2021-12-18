@@ -6,6 +6,7 @@ import { LongTextCutterPipe } from './long-text-cutter.pipe';
 import { AccessPipe } from './access.pipe';
 import { UserInfoPipe } from './user-info.pipe';
 import { ClassStatusPipe } from './classStatus.pipe';
+import { ClassSubjectPipe } from './classSubject.pipe';
 
 const PIPES = [
   AccessPipe,
@@ -14,6 +15,7 @@ const PIPES = [
   TokenDecoderPipe,
   LongTextCutterPipe,
   ClassStatusPipe,
+  ClassSubjectPipe,
 ];
 
 @NgModule({

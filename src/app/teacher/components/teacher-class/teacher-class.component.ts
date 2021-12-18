@@ -1,5 +1,6 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Class } from 'src/app/manager/models/class.model';
 import { ClassService } from 'src/app/shared/services/class.service';
 
@@ -11,6 +12,7 @@ import { ClassService } from 'src/app/shared/services/class.service';
 export class TeacherClassComponent implements OnInit {
   private _classId!: number;
   class!: Class;
+  fileList: NzUploadFile[] = [];
   constructor(
     activatedRoute: ActivatedRoute,
     private classSrv: ClassService,

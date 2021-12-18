@@ -14,6 +14,7 @@ import { TeacherDashboardComponent } from './components/teacher-dashboard/teache
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ViewScheduleComponent } from './components/teacher-class/view-schedule/view-schedule.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,7 @@ const routes: Routes = [
     TeacherClassComponent,
     RollcallComponent,
     ClassListComponent,
+    ViewScheduleComponent,
   ],
   imports: [
     NgbModule,
