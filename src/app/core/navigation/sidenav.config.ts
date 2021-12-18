@@ -31,15 +31,15 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     ACCESS: 'M',
   },
   {
-    name: 'Create Class',
-    icon: 'bookmark_add',
-    url: '/manager/class-create',
+    name: 'Manage Meetings',
+    icon: 'watch_later',
+    url: '/manager/meeting-create',
     ACCESS: 'M',
   },
   {
-    name: 'Manage Meetings',
+    name: 'Create Class',
     icon: 'bookmark_add',
-    url: '/manager/meeting-create',
+    url: '/manager/class-create',
     ACCESS: 'M',
   },
   {

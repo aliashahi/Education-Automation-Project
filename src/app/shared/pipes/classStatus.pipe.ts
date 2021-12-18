@@ -5,7 +5,7 @@ import { CLASS_STATUS } from 'src/app/manager/constants/status.constant';
   name: 'classStatus',
 })
 export class ClassStatusPipe implements PipeTransform {
-  transform(value: string): any {
+  transform(value?: string): any {
     return CLASS_STATUS.find((i) => i.value == value)?.label || '-';
   }
 }
