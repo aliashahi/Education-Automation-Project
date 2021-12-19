@@ -96,7 +96,7 @@
   <div
     *ngFor="let item of filteredData; let i = index"
     class="p-2"
-    [ngClass]="{ 'w-1/2': showKind == 'grid', 'w-full': showKind == 'list' }"
+    [ngClass]="{ 'w-full sm:w-1/2 md:w-1/3 xl:w-1/4': showKind == 'grid', 'w-full': showKind == 'list' }"
   >
     <div
       class="card glass lg:card-side text-neutral-content"
