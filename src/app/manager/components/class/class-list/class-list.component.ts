@@ -32,8 +32,8 @@ export class ClassListComponent implements OnInit {
   private getData() {
     this.pendding = true;
     this.classSrv.getClassList({}).subscribe(
-      (response: Class[]) => {
-        this.allData = response;
+      (response: any) => {
+        this.allData = response.results;
         this.onFilterAnnouncements();
       },
       (e) => {},
