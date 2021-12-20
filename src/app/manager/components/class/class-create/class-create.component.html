@@ -184,6 +184,28 @@
         </ng-template>
       </mat-step>
       <mat-step>
+        <ng-template matStepLabel>Asign Students</ng-template>
+        <ng-template matStepContent>
+          <EAP-asign-students
+            *ngIf="classId"
+            [classId]="classId"
+          ></EAP-asign-students>
+          <div class="flex w-full justify-end">
+            <button mat-raised-button color="warn" matStepperPrevious>
+              Back
+            </button>
+            <button
+              mat-raised-button
+              matStepperNext
+              color="primary"
+              class="mx-2"
+            >
+              Next
+            </button>
+          </div>
+        </ng-template>
+      </mat-step>
+      <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <p class="text-green-600">Class created Successfully!</p>
         <div class="flex w-full justify-end">

@@ -67,4 +67,8 @@ export class UserService extends ServiceBase {
   public getManagers(model: UserSearchDto) {
     return this.get$('school/managers/', this.createParamList(model));
   }
+
+  public addStudentsToClass(id: number, model: any) {
+    return this.put$(`school/students/${id}`, model);
+  }
 }
