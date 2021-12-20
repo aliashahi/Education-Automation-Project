@@ -72,7 +72,7 @@ export class UserListComponent implements OnInit {
     }
     subject.subscribe(
       (res) => {
-        this.allData = res.map((i: any) => i.user);
+        this.allData = res.results.map((i: any) => i.user);
         this.onFilterUsers();
       },
       () => {},

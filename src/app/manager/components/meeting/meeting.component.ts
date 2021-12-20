@@ -28,7 +28,16 @@ export class MeetingComponent implements OnInit {
     private dialog: MatDialog,
     private alertSrv: AlertService,
     private meetingSrv: MeetingService
-  ) {}
+  ) {
+    // this.mockData(MEETING_MOCK[0], 0);
+  }
+
+  // mockData(model: any, index: number) {
+  //   this.meetingSrv.createMeeting(model).subscribe((res) => {
+  //     if (MEETING_MOCK.length != index + 1)
+  //       this.mockData(MEETING_MOCK[index + 1], index + 1);
+  //   });
+  // }
 
   ngOnInit(): void {
     WEEK_DAYS.forEach((i) => {
@@ -46,7 +55,7 @@ export class MeetingComponent implements OnInit {
     this.pending = true;
     this.meetingSrv.getMeetings({}).subscribe(
       (res) => {
-        this.data = res;
+        this.data = res.results;
       },
       (e) => {},
       () => {
