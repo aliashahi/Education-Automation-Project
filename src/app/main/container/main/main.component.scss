@@ -2,6 +2,6 @@
   transition: all 500ms;
 }
 
-.mat-drawer-inner-container {
+:host::ng-deep.mat-drawer-inner-container {
   overflow: hidden;
 }

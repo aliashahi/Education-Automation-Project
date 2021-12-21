@@ -71,4 +71,17 @@ export class UserService extends ServiceBase {
   public addStudentsToClass(id: number, model: any) {
     return this.put$(`school/students/${id}`, model);
   }
+
+  public getUserById(id: number, access: string) {
+    let user = 'students';
+    switch (access) {
+      case 'M':
+        user = 'managers';
+        break;
+      case 'T':
+        user = 'teachers';
+        break;
+    }
+    return this.get$(`school/${user}/${id}/`);
+  }
 }
