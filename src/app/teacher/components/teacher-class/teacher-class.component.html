@@ -9,7 +9,7 @@
 <hr />
 <mat-tab-group class="px-2">
   <mat-tab label="Weeks">
-    <EAP-view-weeks></EAP-view-weeks>
+    <EAP-view-weeks *ngIf="class" [class]="class"></EAP-view-weeks>
   </mat-tab>
   <mat-tab label="Schedule">
     <ng-template matTabContent>

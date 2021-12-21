@@ -8,13 +8,34 @@
           [linear]="false"
           #stepper
         >
-          <mat-step *ngFor="let week of weeks">
-            <ng-template matStepperIcon="error" matStepLabel
-              >Week {{ week.week_id }} ({{
-                week.asignments.length
-              }}
-              asignments)</ng-template
-            >
+          <mat-step *ngFor="let week of weeks; let i = index">
+            <ng-template matStepperIcon="error" matStepLabel>
+              <div class="w-full flex justify-between">
+                <span>
+                  Week {{ i + 1 }} ({{
+                    week.asignments.length != 0 ? week.asignments.length : "no "
+                  }}
+                  asignments)
+                  <p style="font-size: 10px" class="text-gray-500">
+                    {{ week.start_date | date }} - {{ week.end_date | date }}
+                  </p>
+                </span>
+                <span>
+                  <button
+                    mat-mini-fab
+                    class="
+                      bg-green-600
+                      text-white
+                      hover:bg-green-700 hover:text-white
+                      disabled:opacity-50
+                    "
+                    (click)="onAddAsignment(week)"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </span>
+              </div>
+            </ng-template>
             <mat-list>
               <ng-container
                 *ngFor="let asignment of week.asignments; let i = index"

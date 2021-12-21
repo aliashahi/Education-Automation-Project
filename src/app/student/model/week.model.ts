@@ -14,5 +14,7 @@ export interface Asignment {
 }
 export interface Week {
   week_id: number;
+  start_date?: Date;
+  end_date?: Date;
   asignments: Asignment[];
 }
