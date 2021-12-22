@@ -3,12 +3,13 @@
   (nzBack)="onBack()"
   nzBackIcon
   nzTitle="{{ asignment.title }}"
-  nzSubtitle="{{ asignment.short_desc }}"
+  nzSubtitle="{{ asignment.description }}"
 >
   <nz-page-header-extra>
     <button
       mat-raised-button
-      [disabled]="form.invalid"
+      [disabled]="form.invalid || !file || pending"
+      (click)="onSubmit()"
       class="
         bg-green-600
         text-white
@@ -23,36 +24,39 @@
 <div>
   <form [formGroup]="form" class="mt-8 space-y-6">
     <div class="w-full">
-      <mat-form-field class="w-1/2 pr-1" appearance="outline">
-        <mat-label>Start Date</mat-label>
+      <mat-form-field class="w-1/2 px-2" appearance="outline">
+        <mat-label>Title</mat-label>
         <input
           matInput
-          formControlName="start_date"
-          type="datetime-local"
+          formControlName="title"
+          type="text"
           required
+          [disabled]="pending"
         />
         <mat-error
           *ngIf="
-            form.get('start_date')?.errors &&
-            form.get('start_date')?.hasError('required')
+            form.get('title')?.errors && form.get('title')?.hasError('required')
           "
-          >start date is required</mat-error
+          >title is required</mat-error
         >
       </mat-form-field>
-      <mat-form-field class="w-1/2 pl-1" appearance="outline">
-        <mat-label>End Date</mat-label>
+      <mat-form-field class="w-1/2 px-2" appearance="outline">
+        <mat-label>Deadline</mat-label>
         <input
           matInput
-          formControlName="end_date"
+          [disabled]="pending"
+          [min]="minDeadline"
+          formControlName="deadline"
           type="datetime-local"
           required
+          id="datefield"
         />
         <mat-error
           *ngIf="
-            form.get('end_date')?.errors &&
-            form.get('end_date')?.hasError('required')
+            form.get('deadline')?.errors &&
+            form.get('deadline')?.hasError('required')
           "
-          >end date is required</mat-error
+          >deadline is required</mat-error
         >
       </mat-form-field>
     </div>
@@ -87,13 +91,17 @@
       </span>
     </ng-template>
   </nz-divider>
-  <mat-form-field class="w-full" appearance="outline">
-    <textarea
-      matInput
-      placeholder="type your Asignment ... "
-      rows="15"
-    ></textarea>
-  </mat-form-field>
+  <form [formGroup]="form">
+    <mat-form-field class="w-full" appearance="outline">
+      <textarea
+        matInput
+        [disabled]="pending"
+        formControlName="description"
+        placeholder="type your Asignment ... "
+        rows="15"
+      ></textarea>
+    </mat-form-field>
+  </form>
 </div>
 <div class="w-full">
   <nz-divider [nzText]="text" nzOrientation="left">
@@ -105,6 +113,36 @@
     </ng-template>
   </nz-divider>
   <div class="w-full border-gray-100 border-2 p-2 rounded-md">
-    <EAP-teacher-upload-asignment></EAP-teacher-upload-asignment>
+    <div class="getImage w-80 h-80 m-2">
+      <div
+        class="
+          dragField
+          p-2
+          rounded-lg
+          w-full
+          h-full
+          flex
+          justify-center
+          items-center
+          border-dotted border-2 border-gray-400
+        "
+        [ngClass]="{ 'bg-secondary-100': file }"
+        (click)="input.click()"
+        (fileDropped)="upload($event, 1)"
+        DragDropFileUpload
+      >
+        <span class="block text-center pe-auto">
+          <h2>choose a file to upload</h2>
+          <h6>(you can also drag and drop)</h6>
+          <h6 *ngIf="file">File :{{ file?.name }}</h6>
+        </span>
+      </div>
+      <input
+        class="inputField"
+        #input
+        (change)="upload($event, 2)"
+        type="file"
+      />
+    </div>
   </div>
 </div>
