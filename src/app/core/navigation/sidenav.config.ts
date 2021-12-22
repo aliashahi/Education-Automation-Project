@@ -121,7 +121,7 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     name: 'Resources',
     url: '/student/resources',
     ACCESS: 'S',
-    icon: 'rule',
+    icon: 'attach_file',
   },
   //STUDENT END
 ];
