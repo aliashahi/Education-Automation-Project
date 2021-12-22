@@ -19,6 +19,7 @@ import { ViewStudentsComponent } from './components/teacher-class/view-students/
 import { ViewWeeksComponent } from './components/teacher-class/view-weeks/view-weeks.component';
 import { TeacherUploadAsignmentComponent } from './components/teacher-class/view-weeks/teacher-asignments-detail/teacher-upload-asignment/teacher-upload-asignment.component';
 import { TeacherAsignmentsDetailComponent } from './components/teacher-class/view-weeks/teacher-asignments-detail/teacher-asignments-detail.component';
+import { ViewResourcesComponent } from './components/teacher-class/view-resources/view-resources.component';
 
 const routes: Routes = [
   {
@@ -70,6 +71,7 @@ const routes: Routes = [
     ViewWeeksComponent,
     TeacherUploadAsignmentComponent,
     TeacherAsignmentsDetailComponent,
+    ViewResourcesComponent,
   ],
   imports: [
     NgbModule,
