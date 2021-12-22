@@ -31,6 +31,10 @@ export class AsignStudentsComponent implements OnInit {
     this.pending = true;
     this.userSrv.getStudents({}).subscribe((res) => {
       this.dataSource.data = res.results;
+      let inClass = res.results.filter(
+        (i: any) => i.classroom && i.classroom.id == this.classId
+      );
+      this.selection.select(...inClass);
     });
   }
 
@@ -40,6 +44,8 @@ export class AsignStudentsComponent implements OnInit {
     this.userSrv
       .addStudentsToClass(this.selection.selected[index].id, {
         ...this.selection.selected[index],
+        ...this.selection.selected[index].user,
+        id: undefined,
         user: this.selection.selected[index].user.id,
         classroom: this.classId,
       })

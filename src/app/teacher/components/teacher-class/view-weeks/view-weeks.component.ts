@@ -1,12 +1,9 @@
-import { addDays } from 'date-fns';
+import { addDays, differenceInSeconds } from 'date-fns';
 import { Component, Input, OnInit } from '@angular/core';
 import { Class } from 'src/app/manager/models/class.model';
-import {
-  Asignment,
-  ASIGNMENT_STATUS,
-  Week,
-} from 'src/app/student/model/week.model';
+import { Asignment, Week } from 'src/app/student/model/week.model';
 import { ASIGNMENTS_MOCK_DATA } from 'src/app/student/mocks/asignments.mock';
+import { AssignmentService } from 'src/app/shared/services/assignment.service';
 
 @Component({
   selector: 'EAP-view-weeks',
@@ -18,34 +15,55 @@ export class ViewWeeksComponent implements OnInit {
   @Input() class!: Class;
   selectedAsignment?: Asignment;
   tabIndex: number = 0;
+
+  pending = false;
+
+  constructor(private assignmentSrv: AssignmentService) {}
+
   ngOnInit(): void {
     this.initData();
   }
 
   private initData() {
-    let s_date = new Date(this.class.startClassDate);
-    let e_date = new Date(this.class.endClassDate);
-    let w: Week[] = [];
-    while (s_date < e_date) {
-      w.push({
-        week_id: w.length,
-        start_date: s_date,
-        end_date: addDays(s_date, 6),
-        asignments: [],
-      });
-      s_date = addDays(s_date, 7);
-    }
-    this.weeks = w;
+    this.pending = true;
+    this.assignmentSrv.getAssignments(this.class.id, {}).subscribe(
+      (res) => {
+        this.pending = false;
+        let all_assignments: Asignment[] = res.results;
+        let s_date = new Date(this.class.startClassDate);
+        let e_date = new Date(this.class.endClassDate);
+        let w: Week[] = [];
+        let assignments: Asignment[] = [];
+        while (s_date < e_date) {
+          assignments = [];
+          assignments = all_assignments.filter((i) => {
+            if (
+              differenceInSeconds(new Date(i.deadline), s_date) > 0 &&
+              differenceInSeconds(addDays(s_date, 6), new Date(i.deadline)) > 0
+            )
+              return true;
+            else return false;
+          });
+          w.push({
+            week_id: w.length,
+            start_date: s_date,
+            end_date: addDays(s_date, 6),
+            asignments: assignments,
+          });
+          s_date = addDays(s_date, 7);
+        }
+        this.weeks = w;
+      },
+      (e) => (this.pending = false)
+    );
   }
 
-  onAddAsignment(week: Week) {
+  onAddAsignment() {
     this.selectedAsignment = {
       id: -1,
       title: '',
-      status: ASIGNMENT_STATUS.NOT_SUBMITED,
-      left_days: -1,
-      short_desc: '',
-      expire_date: new Date().toDateString(),
+      file: '',
+      deadline: '',
     };
     this.tabIndex = 1;
   }
@@ -55,8 +73,11 @@ export class ViewWeeksComponent implements OnInit {
     this.tabIndex = 1;
   }
 
-  getBackFromDetail() {
+  getBackFromDetail(reload: boolean) {
     this.selectedAsignment = undefined;
     this.tabIndex = 0;
+    if (reload) {
+      this.ngOnInit();
+    }
   }
 }

@@ -1,0 +1,135 @@
+<mat-expansion-panel [expanded]="false">
+  <mat-expansion-panel-header>
+    <mat-panel-title> add Resources </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div
+    class="
+      w-[100%
+      -
+      40px]
+      flex
+      items-center
+      rounded-lg
+      bg-gray-100
+      p-2
+      m-5
+      border-[1px] border-solid border-gray-600
+    "
+  >
+    <div class="getImage w-80 h-80 m-2">
+      <div
+        class="
+          dragField
+          p-2
+          rounded-lg
+          w-full
+          h-full
+          flex
+          justify-center
+          items-center
+          border-dotted border-2 border-gray-400
+        "
+        [ngClass]="{ 'bg-secondary-100': file }"
+        (click)="input.click()"
+        (fileDropped)="upload($event, 1)"
+        DragDropFileUpload
+      >
+        <span class="block text-center pe-auto">
+          <h2>choose a file to upload</h2>
+          <h6>(you can also drag and drop)</h6>
+          <h6 *ngIf="file">File :{{ file?.name }}</h6>
+        </span>
+      </div>
+      <input
+        class="inputField"
+        #input
+        (change)="upload($event, 2)"
+        type="file"
+      />
+    </div>
+    <div class="flex-1">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="title" required [disabled]="pending" />
+      </mat-form-field>
+      <mat-form-field class="w-full" appearance="outline">
+        <textarea
+          matInput
+          [disabled]="pending"
+          [(ngModel)]="desc"
+          placeholder="description "
+          rows="15"
+        ></textarea>
+      </mat-form-field>
+      <div class="flex w-full">
+        <button
+          class="btn btn-primary ml-auto"
+          [disabled]="!file || !title || pending"
+          (click)="onSubmit()"
+        >
+          Add Resource
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-expansion-panel>
+
+<mat-progress-bar mode="indeterminate" *ngIf="pending"></mat-progress-bar>
+<div
+  class="
+    w-[100%
+    -
+    40px]
+    flex
+    items-center
+    rounded-lg
+    bg-gray-100
+    p-2
+    m-5
+    border-[1px] border-solid border-secondary-100
+  "
+  *ngFor="let item of filesList"
+>
+  <div
+    class="
+      mr-4
+      w-60
+      mask mask-squircle
+      flex
+      justify-center
+      items-center
+      cursor-pointer
+    "
+  >
+    <img
+      (click)="onDownload(imageBaseUrl + item.file)"
+      *ngIf="!item.showPlaceholder; else noAvatar"
+      src="{{ imageBaseUrl + item.file }}"
+      (error)="item.showPlaceholder = true"
+    />
+    <ng-template #noAvatar>
+      <img
+        (click)="onDownload(imageBaseUrl + item.file)"
+        src="../../../../../assets/images/file-placeholder.jpg"
+      />
+    </ng-template>
+  </div>
+  <div>
+    <h1>{{ item.title }}</h1>
+    <p>
+      {{ item.description | longTextCutter }}
+    </p>
+  </div>
+  <div class="ml-auto w-10 flex flex-col justify-around items-center">
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="onDownload(imageBaseUrl + item.file)"
+    >
+      <mat-icon>download</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="onDelete(item.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

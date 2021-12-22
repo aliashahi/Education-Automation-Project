@@ -22,7 +22,7 @@
                 <mat-list-item class="flex justify-between my-2">
                   <span class="text-lg font-bold"
                     >{{ asignment.title }}
-                    <span
+                    <!-- <span
                       class="status"
                       [class.submitted]="asignment.status === 'Submitted'"
                       [class.not-submitted]="
@@ -30,7 +30,7 @@
                       "
                       [class.expired]="asignment.status == 'Expired'"
                       >{{ asignment.status }}</span
-                    >
+                    > -->
                     <span
                       class="
                         text-xs
@@ -40,13 +40,13 @@
                         items-center
                       "
                     >
-                      {{ asignment.short_desc }}
+                      {{ asignment.description }}
                     </span>
                   </span>
                   <span class="text-sm text-gray-400 flex items-center">
-                    {{ asignment.expire_date }} (<span
+                    {{ asignment.deadline | date }} (<span
                       class="font-bold text-lg pr-2"
-                      >{{ asignment.left_days }}</span
+                      >{{ "-" }}</span
                     >
                     days left!)
                     <button

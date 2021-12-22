@@ -17,8 +17,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ViewScheduleComponent } from './components/teacher-class/view-schedule/view-schedule.component';
 import { ViewStudentsComponent } from './components/teacher-class/view-students/view-students.component';
 import { ViewWeeksComponent } from './components/teacher-class/view-weeks/view-weeks.component';
-import { TeacherUploadAsignmentComponent } from './components/teacher-class/view-weeks/teacher-asignments-detail/teacher-upload-asignment/teacher-upload-asignment.component';
 import { TeacherAsignmentsDetailComponent } from './components/teacher-class/view-weeks/teacher-asignments-detail/teacher-asignments-detail.component';
+import { ViewResourcesComponent } from './components/teacher-class/view-resources/view-resources.component';
 
 const routes: Routes = [
   {
@@ -68,8 +68,8 @@ const routes: Routes = [
     ViewScheduleComponent,
     ViewStudentsComponent,
     ViewWeeksComponent,
-    TeacherUploadAsignmentComponent,
     TeacherAsignmentsDetailComponent,
+    ViewResourcesComponent,
   ],
   imports: [
     NgbModule,

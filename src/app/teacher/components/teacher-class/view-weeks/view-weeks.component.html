@@ -2,6 +2,21 @@
   <div class="w-full p-2 bg-white">
     <mat-tab-group header-less-tabs [(selectedIndex)]="tabIndex">
       <mat-tab label="First">
+        <div class="w-full flex">
+          <button
+            mat-stroked-button
+            class="
+              ml-auto
+              bg-green-600
+              text-white
+              hover:bg-green-700 hover:text-white
+              disabled:opacity-50
+            "
+            (click)="onAddAsignment()"
+          >
+            <mat-icon>add</mat-icon> add assignment
+          </button>
+        </div>
         <mat-stepper
           class="asignments-stepper"
           orientation="vertical"
@@ -20,20 +35,6 @@
                     {{ week.start_date | date }} - {{ week.end_date | date }}
                   </p>
                 </span>
-                <span>
-                  <button
-                    mat-mini-fab
-                    class="
-                      bg-green-600
-                      text-white
-                      hover:bg-green-700 hover:text-white
-                      disabled:opacity-50
-                    "
-                    (click)="onAddAsignment(week)"
-                  >
-                    <mat-icon>add</mat-icon>
-                  </button>
-                </span>
               </div>
             </ng-template>
             <mat-list>
@@ -43,7 +44,7 @@
                 <mat-list-item class="flex justify-between my-2">
                   <span class="text-lg font-bold"
                     >{{ asignment.title }}
-                    <span
+                    <!-- <span
                       class="status"
                       [class.submitted]="asignment.status === 'Submitted'"
                       [class.not-submitted]="
@@ -51,7 +52,7 @@
                       "
                       [class.expired]="asignment.status == 'Expired'"
                       >{{ asignment.status }}</span
-                    >
+                    > -->
                     <span
                       class="
                         text-xs
@@ -61,13 +62,13 @@
                         items-center
                       "
                     >
-                      {{ asignment.short_desc }}
+                      {{ asignment.description }}
                     </span>
                   </span>
                   <span class="text-sm text-gray-400 flex items-center">
-                    {{ asignment.expire_date }} (<span
+                    {{ asignment.deadline | date }} (<span
                       class="font-bold text-lg pr-2"
-                      >{{ asignment.left_days }}</span
+                      >{{ "-" }}</span
                     >
                     days left!)
                     <button
@@ -94,7 +95,8 @@
           <EAP-teacher-asignments-detail
             *ngIf="selectedAsignment"
             [asignment]="selectedAsignment"
-            (onBack)="getBackFromDetail()"
+            [classId]="class.id"
+            (onBack)="getBackFromDetail($event)"
           ></EAP-teacher-asignments-detail>
         </ng-template>
       </mat-tab>

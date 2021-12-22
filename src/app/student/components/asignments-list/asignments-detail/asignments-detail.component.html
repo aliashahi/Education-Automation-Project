@@ -3,7 +3,7 @@
   (nzBack)="onBack()"
   nzBackIcon
   nzTitle="{{ asignment.title }}"
-  nzSubtitle="{{ asignment.short_desc }}"
+  nzSubtitle="{{ asignment.description ?? '' | longTextCutter: 30 }}"
 >
   <nz-page-header-extra>
     <button

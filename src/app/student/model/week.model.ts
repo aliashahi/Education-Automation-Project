@@ -7,10 +7,11 @@ export enum ASIGNMENT_STATUS {
 export interface Asignment {
   id: number;
   title: string;
-  short_desc: string;
-  left_days: number;
-  expire_date: string;
-  status: ASIGNMENT_STATUS;
+  description?: string;
+  file: string;
+  created?: string;
+  deadline: string;
+  updated?: string;
 }
 export interface Week {
   week_id: number;

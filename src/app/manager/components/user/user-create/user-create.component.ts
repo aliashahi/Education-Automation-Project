@@ -6,6 +6,7 @@ import { createDateFormat } from 'src/app/shared/utils/date.utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { TokenDecoderPipe } from 'src/app/shared/pipes/token-decoder.pipe';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'EAP-user-create',
@@ -23,7 +24,7 @@ export class UserCreateComponent implements OnInit {
   constructor(
     private userSrv: UserService,
     private alertSrv: AlertService,
-    private tokenPipe: TokenDecoderPipe
+    private activeRoute: ActivatedRoute
   ) {
     // let user = USER_MOCK_DATA[0];
     // let index = 0;
@@ -59,6 +60,38 @@ export class UserCreateComponent implements OnInit {
   ngOnInit() {
     this.init_personal_form();
     this.init_extra_form();
+    this.checkAndStartEditMode();
+  }
+
+  private checkAndStartEditMode() {
+    if (this.activeRoute.snapshot.params.id) {
+      let id = this.activeRoute.snapshot.params.id;
+      let access = this.activeRoute.snapshot.params.access;
+      this.pendding = true;
+      this.personal_form.disable();
+      this.userSrv.getUserById(id, access).subscribe(
+        (res) => {
+          console.log(res);
+          let user = res.user;
+          this.user = res.user;
+          this.personal_form.setValue({
+            username: user.username,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email,
+            role: user.role,
+            password: '************',
+          });
+          // this.scheduleData = res.schedules;
+          this.pendding = false;
+          this.personal_form.enable();
+        },
+        (error) => {
+          this.pendding = false;
+          this.personal_form.enable();
+        }
+      );
+    }
   }
 
   private init_personal_form() {
@@ -123,20 +156,21 @@ export class UserCreateComponent implements OnInit {
   onupdateExtraInfo(stepper: MatStepper) {
     this.extra_form.disable();
     this.pendding = true;
-    let userType = this.tokenPipe.transform('S', 'role') || 'S';
+    let userType = this.user.role ?? 'S';
     this.userSrv
       .updateUserExtraInfo(
         {
           ...this.extra_form.value,
           profileImage: null,
-          id: this.user.id,
+          user: this.user.id,
           birthDate: createDateFormat(this.extra_form.value.birthDate),
         },
-        userType
+        <any>userType
       )
       .subscribe(
         (res) => {
           this.alertSrv.showToaster('User updated Successfully!', 'SUCCESS');
+          stepper.next();
         },
         (e) => {},
         () => {

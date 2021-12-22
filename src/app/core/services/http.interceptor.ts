@@ -49,7 +49,6 @@ export class HttpsInterceptor implements HttpInterceptor {
       tokenizedRequest = request.clone({
         setHeaders: {
           Authorization: `JWT ${token}`,
-          'Content-Type': 'application/json',
         },
       });
     this.loadingSrv.show();

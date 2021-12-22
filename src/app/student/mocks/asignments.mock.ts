@@ -1,6 +1,7 @@
 import { ASIGNMENT_STATUS, Week } from '../model/week.model';
 
-export const ASIGNMENTS_MOCK_DATA: Week[] = [
+export const ASIGNMENTS_MOCK_DATA: Week[] = [];
+const x = [
   {
     week_id: 1,
     asignments: [
