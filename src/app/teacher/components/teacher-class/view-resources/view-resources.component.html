@@ -16,7 +16,7 @@
       border-[1px] border-solid border-gray-600
     "
   >
-    <div class="getImage w-80 h-80 m-2">
+    <div class="getImage w-[100% - 1rem] h-80 m-2">
       <div
         class="
           dragField
@@ -29,7 +29,7 @@
           items-center
           border-dotted border-2 border-gray-400
         "
-        [ngClass]="{ 'bg-secondary-100': file }"
+        [ngClass]="{ 'bg-green-50': file }"
         (click)="input.click()"
         (fileDropped)="upload($event, 1)"
         DragDropFileUpload

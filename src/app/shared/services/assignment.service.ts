@@ -16,4 +16,11 @@ export class AssignmentService extends ServiceBase {
   getAssignments(classId: number, model: any) {
     return this.get$(`school/classes/${classId}/assignments/`, []);
   }
+
+  submitSubmission(classId: number, asignmentId: number, model: any) {
+    return this.post$(
+      `school/classes/${classId}/assignments/${asignmentId}/submissions/`,
+      model
+    );
+  }
 }
