@@ -17,7 +17,8 @@
         disabled:opacity-50
       "
     >
-      create asignment
+      {{ asignment.id != -1 ? "update" : "create" }}
+      asignment
     </button>
   </nz-page-header-extra>
 </nz-page-header>
@@ -70,7 +71,7 @@
       p-5
       mx-5
       rounded-lg
-      bg-secondary-100
+      bg-green-50
       border-2 border-dotted border-secondary-700
       text-secondary-900
       flex
@@ -112,8 +113,8 @@
       </span>
     </ng-template>
   </nz-divider>
-  <div class="w-full border-gray-100 border-2 p-2 rounded-md">
-    <div class="getImage w-80 h-80 m-2">
+  <div class="w-[100% - 20px] border-gray-100 border-2 p-2 rounded-md">
+    <div class="getImage w-[100% - 1rem] h-80 m-2">
       <div
         class="
           dragField
@@ -126,7 +127,7 @@
           items-center
           border-dotted border-2 border-gray-400
         "
-        [ngClass]="{ 'bg-secondary-100': file }"
+        [ngClass]="{ 'bg-green-50': file }"
         (click)="input.click()"
         (fileDropped)="upload($event, 1)"
         DragDropFileUpload

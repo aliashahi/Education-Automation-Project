@@ -2,7 +2,7 @@
   <div class="w-full p-2 bg-white">
     <mat-tab-group header-less-tabs [(selectedIndex)]="tabIndex">
       <mat-tab label="First">
-        <div class="w-full flex">
+        <div class="w-full flex p-2">
           <button
             mat-stroked-button
             class="
@@ -68,7 +68,7 @@
                   <span class="text-sm text-gray-400 flex items-center">
                     {{ asignment.deadline | date }} (<span
                       class="font-bold text-lg pr-2"
-                      >{{ "-" }}</span
+                      >{{ getLeftedDays(asignment.deadline) }}</span
                     >
                     days left!)
                     <button
@@ -77,8 +77,8 @@
                       (click)="showAsignmentDetails(asignment)"
                     >
                       <mat-icon class="mx-4 text-black cursor-pointer"
-                        >forward_to_inbox</mat-icon
-                      >
+                        >forward_to_inbox
+                      </mat-icon>
                     </button>
                   </span>
                 </mat-list-item>
