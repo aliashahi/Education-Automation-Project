@@ -140,10 +140,10 @@ export class ClassCreateComponent implements OnInit {
   private initClassInfoForm() {
     this.class_info_form = new FormGroup({
       grade: new FormControl(1, Validators.required),
-      status: new FormControl('ACT', Validators.required),
-      name: new FormControl('Grade A/1', Validators.required),
+      status: new FormControl('ACT'),
+      name: new FormControl('', Validators.required),
       image: new FormControl(null),
-      description: new FormControl('no desc', Validators.required),
+      description: new FormControl(''),
       endClassDate: new FormControl(new Date(), Validators.required),
       startClassDate: new FormControl(new Date(), Validators.required),
     });

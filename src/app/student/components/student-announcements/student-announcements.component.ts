@@ -85,13 +85,13 @@ export class StudentAnnouncementsComponent implements OnInit {
         item.title
           .toLocaleLowerCase()
           .includes((searched || '').toLocaleLowerCase()) ||
-        item.subtitle
+        item.title
           .toLocaleLowerCase()
           .includes((searched || '').toLocaleLowerCase())) &&
-      (new Date(item.date) >=
+      (new Date(item.expire_date ?? '') >=
         new Date((this.startDate || '').split('-').join('/')) ||
         !this.startDate) &&
-      (new Date(item.date) <=
+      (new Date(item.expire_date ?? '') <=
         new Date((this.endDate || '').split('-').join('/')) ||
         !this.endDate)
     );
