@@ -47,7 +47,7 @@ export class AsignStudentsComponent implements OnInit {
         ...this.selection.selected[index].user,
         id: undefined,
         user: this.selection.selected[index].user.id,
-        classroom: this.classId,
+        classroom: +this.classId,
       })
       .subscribe(
         (res) => {

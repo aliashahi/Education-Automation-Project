@@ -71,7 +71,6 @@ export class UserCreateComponent implements OnInit {
       this.personal_form.disable();
       this.userSrv.getUserById(id, access).subscribe(
         (res) => {
-          console.log(res);
           let user = res.user;
           this.user = res.user;
           this.personal_form.setValue({
@@ -158,13 +157,14 @@ export class UserCreateComponent implements OnInit {
     this.pendding = true;
     let userType = this.user.role ?? 'S';
     this.userSrv
-      .updateUserExtraInfo(
+      .updateUserExtraInfoById(
         {
           ...this.extra_form.value,
           profileImage: null,
           user: this.user.id,
           birthDate: createDateFormat(this.extra_form.value.birthDate),
         },
+        this.user.id,
         <any>userType
       )
       .subscribe(

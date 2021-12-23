@@ -19,27 +19,15 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     hasDividerAfter: true,
   },
   {
-    name: 'Create User',
-    icon: 'person_add',
-    url: '/manager/user-create',
-    ACCESS: 'M',
-  },
-  {
     name: 'User List',
     icon: 'people',
     url: '/manager/user-list',
     ACCESS: 'M',
   },
   {
-    name: 'Manage Meetings',
-    icon: 'watch_later',
-    url: '/manager/meeting-create',
-    ACCESS: 'M',
-  },
-  {
-    name: 'Create Class',
-    icon: 'bookmark_add',
-    url: '/manager/class-create',
+    name: 'Create User',
+    icon: 'person_add',
+    url: '/manager/user-create',
     ACCESS: 'M',
   },
   {
@@ -49,15 +37,27 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     ACCESS: 'M',
   },
   {
-    name: 'Create Announcement',
-    icon: 'send',
-    url: '/manager/announcement-create',
+    name: 'Create Class',
+    icon: 'bookmark_add',
+    url: '/manager/class-create',
+    ACCESS: 'M',
+  },
+  {
+    name: 'Manage Meetings',
+    icon: 'watch_later',
+    url: '/manager/meeting-create',
     ACCESS: 'M',
   },
   {
     name: 'Announcement List',
     icon: 'campaign',
     url: '/manager/announcement-list',
+    ACCESS: 'M',
+  },
+  {
+    name: 'Create Announcement',
+    icon: 'send',
+    url: '/manager/announcement-create',
     ACCESS: 'M',
   },
   //TEACHER CONFIG
@@ -74,16 +74,16 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     icon: 'class',
   },
   {
-    name: 'Create Announcement',
-    url: '/teacher/announcement-create',
-    ACCESS: 'T',
-    icon: 'send',
-  },
-  {
     name: 'Announcement list',
     url: '/teacher/announcement-list',
     ACCESS: 'T',
     icon: 'campaign',
+  },
+  {
+    name: 'Create Announcement',
+    url: '/teacher/announcement-create',
+    ACCESS: 'T',
+    icon: 'send',
   },
   {
     name: 'Roll Call',

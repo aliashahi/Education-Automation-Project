@@ -60,7 +60,10 @@ export class AnnouncementCreateComponent implements OnInit {
 
   private initAnnouncementForm() {
     this.announcement_form = new FormGroup({
-      title: new FormControl(null, Validators.required),
+      title: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
       description: new FormControl(null, Validators.required),
       group: new FormControl(null, Validators.required),
       start_date: new FormControl(new Date(), Validators.required),
@@ -89,10 +92,11 @@ export class AnnouncementCreateComponent implements OnInit {
           setTimeout(() => {
             this.router.navigate(['/manager/announcement-list']);
           }, 1000);
+          this.pendding = false;
+          this.announcement_form.enable();
         },
-        (e) => {},
-        () => {
-          this.pendding = true;
+        (e) => {
+          this.pendding = false;
           this.announcement_form.enable();
         }
       );

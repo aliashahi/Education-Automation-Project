@@ -48,6 +48,23 @@ export class UserService extends ServiceBase {
     return this.put$(`school/${user}/me/`, model);
   }
 
+  public updateUserExtraInfoById(
+    model: any,
+    userId: number,
+    userType: 'S' | 'T' | 'M'
+  ) {
+    let user = 'students';
+    switch (userType) {
+      case 'M':
+        user = 'managers';
+        break;
+      case 'T':
+        user = 'teachers';
+        break;
+    }
+    return this.put$(`school/${user}/${userId}/`, model);
+  }
+
   public deleteUser(id: number) {
     return this.delete$('auth/users/' + id);
   }
@@ -69,7 +86,7 @@ export class UserService extends ServiceBase {
   }
 
   public addStudentsToClass(id: number, model: any) {
-    return this.put$(`school/students/${id}`, model);
+    return this.put$(`school/students/${id}/`, model);
   }
 
   public getUserById(id: number, access: string) {

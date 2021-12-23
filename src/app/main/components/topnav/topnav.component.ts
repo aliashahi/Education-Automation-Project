@@ -36,6 +36,12 @@ export class TopnavComponent implements OnInit {
     this.dialog.open(ProfileDialog);
   }
 
+  navigateToAnnouncements() {
+    let access = this.router.url.split('/')[1];
+    if (!['manager', 'student', 'teacher'].includes(access)) access = 'student';
+    this.router.navigate(['', access, 'announcement-list']);
+  }
+
   onLogout() {
     localStorage.clear();
     this.alertSrv.showToaster('You loged out Successfully!', 'INFO');

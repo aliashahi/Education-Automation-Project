@@ -12,14 +12,14 @@
     p-2
   "
 >
-  <div class="flex items-center">
+  <div class="flex items-center w-full">
     <mat-select
       class="
         shadow
         appearance-none
         border
         rounded
-        w-full
+        w-1/6
         py-2
         px-3
         ml-3
@@ -43,7 +43,7 @@
         appearance-none
         border
         rounded
-        w-full
+        w-1/6
         py-2
         mx-2
         px-3
@@ -61,7 +61,7 @@
         appearance-none
         border
         rounded
-        w-full
+        w-1/6
         py-2
         px-3
         ml-3
@@ -79,10 +79,11 @@
         appearance-none
         border
         rounded
-        w-full
+        w-1/6
         py-2
         px-3
         ml-3
+        mr-auto
         text-gray-700
         leading-tight
         focus:outline-none focus:shadow-outline
@@ -91,9 +92,15 @@
       [(ngModel)]="searchModel.email"
       (input)="onFilterUsers()"
     />
+    <button
+      class="btn mx-3 border-0 bg-secondary-600 text-white"
+      [routerLink]="['', 'manager', 'user-create']"
+    >
+      create new user
+    </button>
   </div>
 </div>
-<div class="container" *ngIf="dataSource.length > 0; else noData">
+<div class="w-[100% - 32px] m-4" *ngIf="dataSource.length > 0; else noData">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
@@ -179,7 +186,7 @@
   </table>
   <mat-paginator
     [length]="filteredData.length"
-    [pageSize]="pagination.pageSize"
+    [pageSize]="pagination.pageSize"  
     [pageSizeOptions]="pagination.pageSizeOptions"
     [pageIndex]="pagination.pageIndex"
     (page)="onPaginationChange($event)"
