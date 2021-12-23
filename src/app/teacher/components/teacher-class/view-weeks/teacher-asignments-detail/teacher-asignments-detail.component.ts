@@ -51,6 +51,13 @@ export class TeacherAsignmentsDetailComponent implements OnInit {
       description: null,
       deadline: [new Date(), Validators.required],
     });
+    if (this.asignment.id != -1) {
+      this.form.setValue({
+        title: this.asignment.title ?? '',
+        description: this.asignment.description ?? '',
+        deadline: new Date(this.asignment.deadline),
+      });
+    }
     this.form.valueChanges.subscribe(this.onFormDataChange.bind(this));
   }
 

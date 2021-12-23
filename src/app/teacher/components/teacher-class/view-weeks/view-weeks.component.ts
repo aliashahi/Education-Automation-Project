@@ -1,4 +1,8 @@
-import { addDays, differenceInSeconds } from 'date-fns';
+import {
+  addDays,
+  differenceInCalendarDays,
+  differenceInSeconds,
+} from 'date-fns';
 import { Component, Input, OnInit } from '@angular/core';
 import { Class } from 'src/app/manager/models/class.model';
 import { Asignment, Week } from 'src/app/student/model/week.model';
@@ -22,6 +26,11 @@ export class ViewWeeksComponent implements OnInit {
 
   ngOnInit(): void {
     this.initData();
+  }
+
+  getLeftedDays(deadline: string): string {
+    let diff = differenceInCalendarDays(new Date(deadline), new Date());
+    return diff > 0 ? diff.toString() : '0';
   }
 
   private initData() {
