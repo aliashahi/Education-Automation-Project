@@ -1,5 +1,17 @@
 <nav class="sticky top-0 bg-gray-100 h-14 w-full z-50">
   <ul class="flex h-full justify-end items-center">
+    <li class="brodcrump pl-4">
+      <nz-breadcrumb>
+        <nz-breadcrumb-item
+          [routerLink]="[item.url]"
+          *ngFor="let item of breadcrump"
+        >
+          <a>
+            {{ item.name }}
+          </a>
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+    </li>
     <li
       class="
         py-2
@@ -12,7 +24,7 @@
         cursor-pointer
       "
     >
-      <button mat-icon-button (click)="navigateToAnnouncements()" >
+      <button mat-icon-button (click)="navigateToAnnouncements()">
         <mat-icon>notifications</mat-icon>
       </button>
     </li>

@@ -1,8 +1,9 @@
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { NavigationEnd, Router } from '@angular/router';
 import { ProfileDialog } from '../profile-dialog/profile.dialog';
 import { UserService } from 'src/app/auth/services/user.service';
+import { BreadcrumpPipe } from 'src/app/shared/pipes/breadcrump.pipe';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -15,19 +16,27 @@ export class TopnavComponent implements OnInit {
   @Input() isExpanded: boolean = false;
   @Output() isExpandedChange = new EventEmitter<boolean>();
   pendding: boolean = false;
+  breadcrump: { url: string; value: string; name: string }[] = [];
+
   constructor(
     private router: Router,
     private dialog: MatDialog,
     private userSrv: UserService,
-    private alertSrv: AlertService
+    private alertSrv: AlertService,
+    private breadcrumbPipe: BreadcrumpPipe
   ) {}
 
   ngOnInit(): void {
     this.pendding = true;
     this.userSrv.getMyInfo().subscribe((res) => {
       localStorage.setItem('USER_INFO', JSON.stringify(res));
-      // localStorage.setItem('ACCESS_TYPE', res.role);
       this.pendding = false;
+    });
+    this.breadcrump = this.breadcrumbPipe.transform([]);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.breadcrump = this.breadcrumbPipe.transform([]);
+      }
     });
   }
 

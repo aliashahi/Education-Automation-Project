@@ -125,3 +125,21 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
   },
   //STUDENT END
 ];
+
+export const BREADCRUMP_BASE = [
+  {
+    value: 'teacher',
+    name: 'Home',
+    url: '/teacher/dashboard',
+  },
+  {
+    value: 'manager',
+    name: 'Home',
+    url: '/manager/dashboard',
+  },
+  {
+    value: 'student',
+    name: 'Home',
+    url: '/student/dashboard',
+  },
+];
