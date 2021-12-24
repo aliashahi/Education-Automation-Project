@@ -85,12 +85,6 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     ACCESS: 'T',
     icon: 'send',
   },
-  {
-    name: 'Roll Call',
-    url: '/teacher/roll-call',
-    ACCESS: 'T',
-    icon: 'rule',
-  },
   //TEACHER END
   //STUDENT CONFIG
   {

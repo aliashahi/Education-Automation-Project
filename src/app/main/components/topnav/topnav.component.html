@@ -4,9 +4,9 @@
       <nz-breadcrumb>
         <nz-breadcrumb-item
           [routerLink]="[item.url]"
-          *ngFor="let item of breadcrump"
+          *ngFor="let item of breadcrump; let i = index"
         >
-          <a>
+          <a [ngClass]="{ 'text-2xl': i == breadcrump.length - 1 }">
             {{ item.name }}
           </a>
         </nz-breadcrumb-item>
