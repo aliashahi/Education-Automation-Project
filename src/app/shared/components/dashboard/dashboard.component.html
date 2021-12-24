@@ -1,0 +1,31 @@
+<div class="bg-gray-100">
+  <div class="w-full head">
+    <div class="head-bg"></div>
+    <div class="head-content bg-gray-100">
+      <div class="profile">
+        <img src="../../../../assets/images/default_profile.png" alt="" />
+      </div>
+      <div class="caption" *ngIf="true">
+        <h1>
+          {{ "-" | userInfo: "first_name" }} {{ "-" | userInfo: "last_name" }}
+        </h1>
+        <h3>
+          {{ "-" | tokenDecoder: "role" | ACCESS }} ({{
+            "-" | userInfo: "username"
+          }})
+        </h3>
+      </div>
+      <div class="action mat-typography">
+        <button mat-raised-button color="primary" (click)="onEditProfile()">
+          <mat-icon>edit</mat-icon>
+          Edit Profile
+        </button>
+        <button mat-stroked-button color="warn" (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+  <ng-content></ng-content>
+</div>
