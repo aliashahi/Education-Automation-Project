@@ -75,7 +75,9 @@ export class UserListComponent implements OnInit {
         this.allData = res.results.map((i: any) => i.user);
         this.onFilterUsers();
       },
-      () => {},
+      () => {
+        this.pendding = false;
+      },
       () => (this.pendding = false)
     );
   }
@@ -130,7 +132,9 @@ export class UserListComponent implements OnInit {
               );
               this.getData();
             },
-            (e) => {},
+            (e) => {
+              this.pendding = false;
+            },
             () => (this.pendding = false)
           );
         },

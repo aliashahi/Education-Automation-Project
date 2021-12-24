@@ -47,8 +47,8 @@ export class ViewWeeksComponent implements OnInit {
           assignments = [];
           assignments = all_assignments.filter((i) => {
             if (
-              differenceInSeconds(new Date(i.deadline), s_date) > 0 &&
-              differenceInSeconds(addDays(s_date, 6), new Date(i.deadline)) > 0
+              differenceInSeconds(new Date(i.deadline), s_date) >= 0 &&
+              differenceInSeconds(addDays(s_date, 6), new Date(i.deadline)) >= 0
             )
               return true;
             else return false;

@@ -36,7 +36,9 @@ export class StudentAnnouncementsComponent implements OnInit {
         this.allData = res;
         this.onFilterAnnouncements();
       },
-      (e) => {},
+      (e) => {
+        this.pendding = false;
+      },
       () => {
         this.pendding = false;
       }
@@ -67,7 +69,9 @@ export class StudentAnnouncementsComponent implements OnInit {
               );
               this.getData();
             },
-            (e) => {},
+            (e) => {
+              this.pendding = false;
+            },
             () => {
               this.pendding = false;
             }

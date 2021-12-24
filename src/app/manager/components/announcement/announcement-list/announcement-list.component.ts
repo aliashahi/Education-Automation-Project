@@ -35,9 +35,9 @@ export class AnnouncementListComponent implements OnInit {
       (res) => {
         this.allData = res;
         this.onFilterAnnouncements();
+        this.pendding = false;
       },
-      (e) => {},
-      () => {
+      (e) => {
         this.pendding = false;
       }
     );
@@ -65,12 +65,13 @@ export class AnnouncementListComponent implements OnInit {
                 'Announcement Deleted Successfully!',
                 'SUCCESS'
               );
+              this.pendding = false;
               this.getData();
             },
-            (e) => {},
-            () => {
+            (e) => {
               this.pendding = false;
-            }
+            },
+            () => {}
           );
         },
       },

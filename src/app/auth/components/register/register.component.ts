@@ -48,14 +48,14 @@ export class RegisterComponent implements OnInit {
           (response) => {
             this.alertSrv.showToaster('user created Successfully!', 'SUCCESS');
             this.router.navigate(['/auth/login']);
+            this.pendding = false;
+            this.forms.enable();
           },
           (error) => {
             this.alertSrv.showToaster(
               'please enter valid information',
               'DANGER'
             );
-          },
-          () => {
             this.pendding = false;
             this.forms.enable();
           }
