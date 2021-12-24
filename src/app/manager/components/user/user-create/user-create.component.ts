@@ -144,7 +144,10 @@ export class UserCreateComponent implements OnInit {
         this.alertSrv.showToaster('User created Successfully!', 'SUCCESS');
         stepper.next();
       },
-      (e) => {},
+      (e) => {
+        this.personal_form.enable();
+        this.pendding = false;
+      },
       () => {
         this.personal_form.enable();
         this.pendding = false;
@@ -172,7 +175,10 @@ export class UserCreateComponent implements OnInit {
           this.alertSrv.showToaster('User updated Successfully!', 'SUCCESS');
           stepper.next();
         },
-        (e) => {},
+        (e) => {
+          this.extra_form.enable();
+          this.pendding = false;
+        },
         () => {
           this.extra_form.enable();
           this.pendding = false;

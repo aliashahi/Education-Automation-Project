@@ -52,9 +52,9 @@ export class ProfileDialog implements OnInit {
             mobileNumber: this.extraInfo.mobileNumber,
             address: this.extraInfo.address,
           });
+          this.pendding = false;
         },
-        (e) => {},
-        () => {
+        (e) => {
           this.pendding = false;
         }
       );
@@ -101,9 +101,10 @@ export class ProfileDialog implements OnInit {
         this.alertSrv.showToaster('User updated Successfully!', 'SUCCESS');
         localStorage.setItem('USER_INFO', JSON.stringify(res));
         location.reload();
+        this.user_form.enable();
+        this.pendding = false;
       },
-      (e) => {},
-      () => {
+      (e) => {
         this.user_form.enable();
         this.pendding = false;
       }
@@ -127,9 +128,10 @@ export class ProfileDialog implements OnInit {
       .subscribe(
         (res) => {
           this.alertSrv.showToaster('User updated Successfully!', 'SUCCESS');
+          this.extra_form.enable();
+          this.pendding = false;
         },
-        (e) => {},
-        () => {
+        (e) => {
           this.extra_form.enable();
           this.pendding = false;
         }

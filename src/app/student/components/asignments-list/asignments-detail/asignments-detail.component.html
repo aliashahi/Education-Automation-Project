@@ -32,7 +32,7 @@
   <p class="m-1 p-3 border-2 border-gray-200 rounded-lg text-lg">
     {{ asignment.description }}
   </p>
-  <div class="border-1 border-gray-400 w-32 h-32 bg-gray-100">
+  <div class="border-1 border-gray-400 w-32 h-32 bg-gray-100 cursor-pointer">
     <img
       (click)="onDownload(imageBaseUrl + asignment.file)"
       src="../../../../../assets/images/file-placeholder.jpg"
@@ -84,9 +84,11 @@
       DragDropFileUpload
     >
       <span class="block text-center pe-auto">
-        <h2>choose a file to upload</h2>
+        <h2>
+          {{!file ?'choose a file to upload':'file Added :{{ file?.name}}'}}
+        </h2>
         <h6>(you can also drag and drop)</h6>
-        <h6 *ngIf="file">File :{{ file?.name }}</h6>
+        <mat-icon (click)="file = undefined">close</mat-icon>
       </span>
     </div>
     <input class="inputField" #input (change)="upload($event, 2)" type="file" />

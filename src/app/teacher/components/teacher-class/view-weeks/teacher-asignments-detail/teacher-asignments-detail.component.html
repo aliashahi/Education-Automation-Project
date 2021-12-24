@@ -133,9 +133,11 @@
         DragDropFileUpload
       >
         <span class="block text-center pe-auto">
-          <h2>choose a file to upload</h2>
+          <h2>
+            {{!file ?'choose a file to upload':'file Added :{{ file?.name}}'}}
+          </h2>
           <h6>(you can also drag and drop)</h6>
-          <h6 *ngIf="file">File :{{ file?.name }}</h6>
+          <mat-icon (click)="file = undefined">close</mat-icon>
         </span>
       </div>
       <input

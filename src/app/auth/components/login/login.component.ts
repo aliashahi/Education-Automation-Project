@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AlertService } from 'src/app/shared/modules/alert/alert.service';
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
 @Component({
   selector: 'EAP-login',
@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
       Validators.required,
       Validators.minLength(6),
     ]),
-    // role: new FormControl('S'),
     remember_me: new FormControl(false),
   });
   pendding = false;
@@ -37,12 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    //dev mode
-    // localStorage.setItem('Token', 'response.access');
-    // localStorage.setItem('Refresh', 'response.refresh');
-    // this.router.navigate(['/']);
-
-    // return;
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
@@ -58,17 +51,22 @@ export class LoginComponent implements OnInit {
             (res) => {
               localStorage.setItem('USER_INFO', JSON.stringify(res));
             },
-            (e) => {},
+            (e) => {
+              this.pendding = false;
+              this.forms.enable();
+            },
             () => {
               this.router.navigate(['/']);
+              this.pendding = false;
+              this.forms.enable();
             }
           );
         },
-        (error) => {},
-        () => {
+        (error) => {
           this.pendding = false;
           this.forms.enable();
-        }
+        },
+        () => {}
       );
     }
   }

@@ -56,9 +56,9 @@ export class MeetingComponent implements OnInit {
     this.meetingSrv.getMeetings({}).subscribe(
       (res) => {
         this.data = res.results;
+        this.pending = false;
       },
-      (e) => {},
-      () => {
+      (e) => {
         this.pending = false;
       }
     );
@@ -69,12 +69,12 @@ export class MeetingComponent implements OnInit {
     this.meetingSrv.createMeeting(this.meeting_form.value).subscribe(
       (res) => {
         this.alertSrv.showToaster('Meeting Added Successfully!', 'SUCCESS');
+        this.pending = false;
         this.getData();
       },
-      (e) => {},
-      () => {
+      (e) => {
         this.pending = false;
-      }
+      },
     );
   }
 
@@ -92,10 +92,12 @@ export class MeetingComponent implements OnInit {
                 'Meeting Deleted Successfully!',
                 'SUCCESS'
               );
+              this.pending = false;
               this.getData();
             },
-            (e) => {},
-            () => (this.pending = false)
+            (e) => {
+              this.pending = false;
+            }
           );
         },
       },

@@ -83,16 +83,19 @@ export class ViewResourcesComponent implements OnInit {
       data: {
         submitFn: () => {
           this.pending = true;
-          this.resourceSrv
-            .deleteClassResource(this.classId, id)
-            .subscribe((res) => {
+          this.resourceSrv.deleteClassResource(this.classId, id).subscribe(
+            (res) => {
               this.alertSrv.showToaster(
                 'Resource deleted Successfully!',
                 'SUCCESS'
               );
               this.pending = false;
               this.getData();
-            });
+            },
+            (e) => {
+              this.pending = false;
+            }
+          );
         },
       },
     });

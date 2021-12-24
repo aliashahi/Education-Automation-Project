@@ -129,7 +129,10 @@ export class ClassCreateComponent implements OnInit {
           this.alertSrv.showToaster('Class Created Successfully!', 'SUCCESS');
           stepper.next();
         },
-        (error) => {},
+        (error) => {
+          this.class_info_form.enable();
+          this.pendding = false;
+        },
         () => {
           this.class_info_form.enable();
           this.pendding = false;
@@ -192,7 +195,9 @@ export class ClassCreateComponent implements OnInit {
           );
         }
       },
-      (e) => {},
+      (e) => {
+        this.pendding = false;
+      },
       () => {
         if (pendingCount == this.scheduleData.length - 1) {
           this.alertSrv.showToaster(

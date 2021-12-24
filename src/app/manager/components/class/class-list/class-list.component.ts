@@ -35,9 +35,11 @@ export class ClassListComponent implements OnInit {
       (response: any) => {
         this.allData = response.results;
         this.onFilterAnnouncements();
+        this.pendding = false;
       },
-      (e) => {},
-      () => (this.pendding = false)
+      (e) => {
+        this.pendding = false;
+      }
     );
   }
 
@@ -63,10 +65,12 @@ export class ClassListComponent implements OnInit {
                 'Class deleted Successfully!',
                 'SUCCESS'
               );
+              this.pendding = false;
               this.getData();
             },
-            (e) => {},
-            () => (this.pendding = false)
+            (e) => {
+              this.pendding = false;
+            }
           );
         },
       },

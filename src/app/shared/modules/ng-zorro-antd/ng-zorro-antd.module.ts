@@ -7,6 +7,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 const MODULES = [
   CommonModule,
@@ -17,6 +18,7 @@ const MODULES = [
   NzCardModule,
   NzAvatarModule,
   NzBreadCrumbModule,
+  NzEmptyModule,
 ];
 
 @NgModule({

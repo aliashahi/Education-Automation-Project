@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import {
   addDays,
-  differenceInCalendarDays,
   differenceInSeconds,
+  differenceInCalendarDays,
 } from 'date-fns';
-import { Class } from 'src/app/manager/models/class.model';
-import { AssignmentService } from 'src/app/shared/services/assignment.service';
-import { ClassService } from 'src/app/shared/services/class.service';
-import { ASIGNMENTS_MOCK_DATA } from '../../mocks/asignments.mock';
+import { Component, OnInit } from '@angular/core';
 import { Asignment, Week } from '../../model/week.model';
+import { Class } from 'src/app/manager/models/class.model';
+import { ASIGNMENTS_MOCK_DATA } from '../../mocks/asignments.mock';
+import { ClassService } from 'src/app/shared/services/class.service';
+import { AssignmentService } from 'src/app/shared/services/assignment.service';
 
 @Component({
   selector: 'EAP-asignments-list',
@@ -59,8 +59,8 @@ export class AsignmentsListComponent implements OnInit {
           assignments = [];
           assignments = all_assignments.filter((i) => {
             if (
-              differenceInSeconds(new Date(i.deadline), s_date) > 0 &&
-              differenceInSeconds(addDays(s_date, 6), new Date(i.deadline)) > 0
+              differenceInSeconds(new Date(i.deadline), s_date) >= 0 &&
+              differenceInSeconds(addDays(s_date, 6), new Date(i.deadline)) >= 0
             )
               return true;
             else return false;

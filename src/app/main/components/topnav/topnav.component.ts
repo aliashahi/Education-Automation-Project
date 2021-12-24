@@ -28,14 +28,25 @@ export class TopnavComponent implements OnInit {
 
   ngOnInit(): void {
     this.pendding = true;
-    this.userSrv.getMyInfo().subscribe((res) => {
-      localStorage.setItem('USER_INFO', JSON.stringify(res));
-      this.pendding = false;
-    });
+    this.userSrv.getMyInfo().subscribe(
+      (res) => {
+        localStorage.setItem('USER_INFO', JSON.stringify(res));
+        this.pendding = false;
+      },
+      (e) => {
+        this.pendding = false;
+      }
+    );
     this.breadcrump = this.breadcrumbPipe.transform([]);
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.breadcrump = this.breadcrumbPipe.transform([]);
+        this.breadcrump = this.breadcrumbPipe.transform([]).map((i) => {
+          return {
+            name: i && i.name ? i.name : '',
+            url: i && i.url ? i.url : '',
+            value: i && i.value ? i.value : '',
+          };
+        });
       }
     });
   }
