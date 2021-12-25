@@ -1,55 +1,22 @@
-<div
-  class="
-    w-[100%
-    -
-    40px]
-    flex
-    items-center
-    rounded-lg
-    bg-gray-100
-    p-2
-    m-5
-    border-[1px] border-solid border-secondary-100
-  "
-  *ngFor="let item of filesList"
->
-  <div
-    class="
-      mr-4
-      w-60
-      mask mask-squircle
-      flex
-      justify-center
-      items-center
-      cursor-pointer
-    "
-  >
-    <img
-      (click)="onDownload(imageBaseUrl + item.file)"
-      *ngIf="!item.showPlaceholder; else noAvatar"
-      src="{{ imageBaseUrl + item.file }}"
-      (error)="item.showPlaceholder = true"
-    />
-    <ng-template #noAvatar>
-      <img
-        (click)="onDownload(imageBaseUrl + item.file)"
-        src="../../../../../assets/images/file-placeholder.jpg"
-      />
-    </ng-template>
-  </div>
-  <div>
-    <h1>{{ item.title }}</h1>
-    <p>
-      {{ item.description | longTextCutter }}
-    </p>
-  </div>
-  <div class="ml-auto w-10 flex flex-col justify-around items-center">
-    <button
-      mat-icon-button
-      color="primary"
-      (click)="onDownload(imageBaseUrl + item.file)"
-    >
-      <mat-icon>download</mat-icon>
-    </button>
-  </div>
-</div>
+<ng-container *ngIf="filesList.length != 0; else noData">
+  <nz-collapse class="m-4">
+    <ng-container *ngFor="let file of filesList">
+      <nz-collapse-panel [nzExtra]="extraTpl" [nzHeader]="file.title">
+        <p style="margin: 0; overflow: hidden; overflow-y: scroll">
+          {{ file.description }}
+        </p>
+      </nz-collapse-panel>
+      <ng-template #extraTpl>
+        <i
+          nz-icon
+          nzType="download"
+          nzTheme="outline"
+          (click)="onDownload(imageBaseUrl + file.file)"
+        ></i>
+      </ng-template>
+    </ng-container>
+  </nz-collapse>
+</ng-container>
+<ng-template #noData>
+  <nz-empty></nz-empty>
+</ng-template>

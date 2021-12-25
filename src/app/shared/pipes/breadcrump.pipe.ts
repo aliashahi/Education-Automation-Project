@@ -32,9 +32,18 @@ export class BreadcrumpPipe implements PipeTransform {
       ))._urlSegment.segments.map((i: any) => i.path);
       let res: any[] = [];
       url.forEach((element) => {
-        res.push(allUrl.find((i) => i.value == element));
+        let item = allUrl.find((i) => i.value == element);
+        res.push(
+          item
+            ? item
+            : {
+                url: '',
+                name: element,
+                value: element,
+              }
+        );
       });
-      return res;
+      return res.filter((i) => !!i);
     } catch {
       return [];
     }

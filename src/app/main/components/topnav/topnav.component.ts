@@ -37,17 +37,22 @@ export class TopnavComponent implements OnInit {
         this.pendding = false;
       }
     );
-    this.breadcrump = this.breadcrumbPipe.transform([]);
+
+    this.setBreadCrumps();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.breadcrump = this.breadcrumbPipe.transform([]).map((i) => {
-          return {
-            name: i && i.name ? i.name : '',
-            url: i && i.url ? i.url : '',
-            value: i && i.value ? i.value : '',
-          };
-        });
+        this.setBreadCrumps();
       }
+    });
+  }
+
+  private setBreadCrumps() {
+    this.breadcrump = this.breadcrumbPipe.transform([]).map((i) => {
+      return {
+        name: i && i.name ? i.name : '',
+        url: i && i.url ? i.url : '',
+        value: i && i.value ? i.value : '',
+      };
     });
   }
 

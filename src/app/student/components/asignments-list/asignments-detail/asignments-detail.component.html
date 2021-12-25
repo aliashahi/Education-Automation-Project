@@ -2,7 +2,7 @@
   class="site-page-header"
   (nzBack)="onBack()"
   nzBackIcon
-  nzTitle="asignment id : {{ asignment.id }}"
+  nzTitle="{{ asignment.title }}"
 >
   <nz-page-header-extra>
     <button
@@ -25,19 +25,25 @@
     <ng-template #text>
       <span class="flex justify-center items-center">
         <i nz-icon nzType="edit" class="px-2"></i>
-        {{ asignment.title }}
+        Question :
+        <span
+          class="cursor-pointer text-secondary-900"
+          (click)="onDownload(imageBaseUrl + asignment.file)"
+        >
+          (click to download resource
+          <i
+            nz-icon
+            nzType="download"
+            class="px-2 text-2xl text-secondary-750"
+          ></i
+          >)
+        </span>
       </span>
     </ng-template>
   </nz-divider>
   <p class="m-1 p-3 border-2 border-gray-200 rounded-lg text-lg">
     {{ asignment.description }}
   </p>
-  <div class="border-1 border-gray-400 w-32 h-32 bg-gray-100 cursor-pointer">
-    <img
-      (click)="onDownload(imageBaseUrl + asignment.file)"
-      src="../../../../../assets/images/file-placeholder.jpg"
-    />
-  </div>
 </div>
 <div class="w-full">
   <nz-divider [nzText]="text1" nzOrientation="left">
@@ -85,10 +91,20 @@
     >
       <span class="block text-center pe-auto">
         <h2>
-          {{!file ?'choose a file to upload':'file Added :{{ file?.name}}'}}
+          {{
+            !file
+              ? "choose a file to upload"
+              : "file Added :" + (file?.name ?? "")
+          }}
         </h2>
         <h6>(you can also drag and drop)</h6>
-        <mat-icon (click)="file = undefined">close</mat-icon>
+        <button
+          *ngIf="file"
+          mat-icon-button
+          (click)="$event.stopPropagation(); file = undefined"
+        >
+          <mat-icon class="cursor-pointer hover:scale-[0.1]">close </mat-icon>
+        </button>
       </span>
     </div>
     <input class="inputField" #input (change)="upload($event, 2)" type="file" />
