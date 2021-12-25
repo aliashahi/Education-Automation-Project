@@ -52,11 +52,11 @@
       [matMenuTriggerFor]="menu"
       #menuTrigger="matMenuTrigger"
     >
-      <img
-        class="w-12 h-12 rounded-full border-2 border-black"
-        src="../../../../assets/images/default_profile.png"
-        alt=""
-      />
+      <nz-avatar
+        class="w-12 h-12 rounded-full border-[1px] border-gray-500"
+        [nzSize]="35"
+        nzIcon="user"
+      ></nz-avatar>
     </li>
   </ul>
 </nav>
@@ -70,11 +70,7 @@
     (click)="$event.stopPropagation()"
   >
     <div class="flex flex-col justify-center items-center p-2 h-full">
-      <img
-        class="w-22 h-22 rounded-full border-2 border-black"
-        src="../../../../assets/images/default_profile.png"
-        alt=""
-      />
+      <nz-avatar [nzSize]="134" nzIcon="user"></nz-avatar>
       <b style="height: 22px" *ngIf="!pendding">
         {{ "-" | userInfo: "username" | longTextCutter: 15 }}
       </b>

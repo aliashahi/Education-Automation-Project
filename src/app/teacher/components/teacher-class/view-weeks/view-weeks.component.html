@@ -27,9 +27,18 @@
             <ng-template matStepperIcon="error" matStepLabel>
               <div class="w-full flex justify-between">
                 <span>
-                  Week {{ i + 1 }} ({{
-                    week.asignments.length != 0 ? week.asignments.length : "no "
-                  }}
+                  Week {{ i + 1 }} (<span
+                    class="{{
+                      week.asignments.length != 0
+                        ? 'text-xl text-green-700'
+                        : ''
+                    }}"
+                    >{{
+                      week.asignments.length != 0
+                        ? week.asignments.length
+                        : "no "
+                    }}</span
+                  >
                   asignments)
                   <p style="font-size: 10px" class="text-gray-500">
                     {{ week.start_date | date }} - {{ week.end_date | date }}
@@ -44,15 +53,6 @@
                 <mat-list-item class="flex justify-between my-2">
                   <span class="text-lg font-bold"
                     >{{ asignment.title }}
-                    <!-- <span
-                      class="status"
-                      [class.submitted]="asignment.status === 'Submitted'"
-                      [class.not-submitted]="
-                        asignment.status == 'Not Submitted'
-                      "
-                      [class.expired]="asignment.status == 'Expired'"
-                      >{{ asignment.status }}</span
-                    > -->
                     <span
                       class="
                         text-xs
@@ -62,7 +62,7 @@
                         items-center
                       "
                     >
-                      {{ asignment.description }}
+                      {{ asignment.description ?? "" | longTextCutter }}
                     </span>
                   </span>
                   <span class="text-sm text-gray-400 flex items-center">
@@ -76,7 +76,7 @@
                       class="flex justify-center items-center mx-2"
                       (click)="showAsignmentDetails(asignment)"
                     >
-                      <mat-icon class="mx-4 text-black cursor-pointer"
+                      <mat-icon class="mx-4 text-xl text-black cursor-pointer"
                         >forward_to_inbox
                       </mat-icon>
                     </button>

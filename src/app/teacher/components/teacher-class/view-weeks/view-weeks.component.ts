@@ -30,7 +30,7 @@ export class ViewWeeksComponent implements OnInit {
 
   getLeftedDays(deadline: string): string {
     let diff = differenceInCalendarDays(new Date(deadline), new Date());
-    return diff > 0 ? diff.toString() : '0';
+    return diff.toString();
   }
 
   private initData() {

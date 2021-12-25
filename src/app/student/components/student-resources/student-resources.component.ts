@@ -10,7 +10,7 @@ import { ResourceService } from 'src/app/shared/services/resource.service';
 })
 export class StudentResourcesComponent implements OnInit {
   classId!: number;
-  filesList!: Resource[];
+  filesList: Resource[] = [];
   // input data
 
   pending = false;

@@ -12,7 +12,7 @@ import { ResourceService } from 'src/app/shared/services/resource.service';
 })
 export class ViewResourcesComponent implements OnInit {
   @Input() classId!: number;
-  filesList!: Resource[];
+  filesList: Resource[] = [];
   // input data
   file?: File;
   title!: string | null;
