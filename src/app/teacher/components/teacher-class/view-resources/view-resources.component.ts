@@ -1,5 +1,6 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Component, Input, OnInit } from '@angular/core';
+import { FileDto } from 'src/app/shared/models/file.dto';
 import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { Resource } from 'src/app/teacher/models/resource.model';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
@@ -13,8 +14,10 @@ import { ResourceService } from 'src/app/shared/services/resource.service';
 export class ViewResourcesComponent implements OnInit {
   @Input() classId!: number;
   filesList: Resource[] = [];
+  files: FileDto[] = [];
+  fileToUpload: FileDto[] = [];
   // input data
-  file?: File;
+  // file?: File;
   title!: string | null;
   desc!: string | null;
 
@@ -38,6 +41,13 @@ export class ViewResourcesComponent implements OnInit {
     this.resourceSrv.getClassResources(this.classId).subscribe(
       (res) => {
         this.filesList = res.results;
+        this.files = res.results.map((i: any) => {
+          return {
+            id: i.id - 1,
+            name: i.file.split('/')[i.file.split('/').length - 1],
+            file: this.imageBaseUrl + i.file,
+          };
+        });
         this.pending = false;
       },
       (e) => {
@@ -48,13 +58,17 @@ export class ViewResourcesComponent implements OnInit {
 
   onSubmit() {
     let formData = new FormData();
-    formData.append('file', this.file ?? '', this.file?.name);
+    formData.append(
+      'file',
+      this.fileToUpload[0].file ?? '',
+      this.fileToUpload[0]?.name
+    );
     formData.append('title', this.title ?? '');
     formData.append('description', this.desc ?? '');
     this.pending = true;
     this.resourceSrv.uploadClassResourceFile(this.classId, formData).subscribe(
       (res) => {
-        this.file = undefined;
+        this.fileToUpload = [];
         this.title = null;
         this.desc = null;
         this.pending = false;
@@ -65,13 +79,6 @@ export class ViewResourcesComponent implements OnInit {
         this.pending = false;
       }
     );
-  }
-
-  upload(event: any, type = 1) {
-    if (this.pending) return;
-    if (type == 2) event = event.target.files;
-    if (!event[0] || event[0].length == 0) return;
-    this.file = event[0];
   }
 
   onDownload(url: string) {

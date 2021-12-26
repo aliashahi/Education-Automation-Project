@@ -1,0 +1,99 @@
+<div
+  class="
+    w-[100%
+    -
+    16px]
+    m-2
+    bg-gray-50
+    border-1 border-dashed
+    flex flex-wrap
+    overflow-hidden
+    p-2
+  "
+  [class.animate-pulse]="pending"
+>
+  <div
+    *ngFor="let file of files"
+    class="
+      h-28
+      w-28
+      m-2
+      px-2
+      flex
+      justify-center
+      items-center
+      border-1 border-gray-500
+      overflow-hidden
+      uploaded-item
+    "
+  >
+    <img
+      *ngIf="previewList.get(file.id); else noImg"
+      class="absolute h-28 w-28 z-0 hover:opacity-50"
+      src="{{ previewList.get(file.id) }}"
+      alt="no.image"
+      (error)="previewList.set(file.id, null)"
+    />
+    <ng-template #noImg>
+      <img
+        class="absolute h-28 w-28 z-0 transition-all opacity-30"
+        src="../../../../assets/images/file-placeholder.jpg"
+        alt="no.image"
+      />
+    </ng-template>
+    <i
+      nz-icon
+      nzType="delete"
+      *ngIf="hasDelete"
+      class="
+        z-[2]
+        hover:text-red-600
+        mx-2
+        scale-150
+        hover:scale-[2]
+        cursor-pointer
+      "
+      nzTheme="outline"
+      (click)="onDelete(file)"
+    ></i>
+    <i
+      nz-icon
+      *ngIf="hasDownload"
+      nzType="download"
+      class="
+        z-[2]
+        hover:text-blue-600
+        mx-2
+        scale-150
+        hover:scale-[2]
+        cursor-pointer
+      "
+      nzTheme="outline"
+      (click)="onDownload(file.file)"
+    ></i>
+  </div>
+  <div
+    *ngIf="hasUpload"
+    id="upload-box"
+    class="
+      h-28
+      w-28
+      m-2
+      p-2
+      flex flex-col
+      justify-center
+      items-center
+      border-1 border-gray-500
+      bg-gray-100
+      cursor-pointer
+      hover:text-secondary-900
+    "
+    (click)="input.click()"
+    (fileDropped)="upload($event, 1)"
+    DragDropFileUpload
+  >
+    <mat-icon class="hover:scale-105">add</mat-icon>
+    upload file
+    <input class="hidden" #input (change)="upload($event, 2)" type="file" />
+  </div>
+</div>

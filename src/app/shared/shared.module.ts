@@ -10,6 +10,7 @@ import { ZorroAntdModule } from './modules/ng-zorro-antd/ng-zorro-antd.module';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 import { LoadingSectionComponent } from './components/loading-section/loading-section.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 
 const MODULES = [
   FormsModule,
@@ -26,6 +27,7 @@ const COMPONENTS = [
   LoadingSectionComponent,
   SplashScreenComponent,
   DashboardComponent,
+  FileUploaderComponent,
 ];
 
 @NgModule({

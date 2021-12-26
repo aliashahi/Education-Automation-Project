@@ -13,12 +13,16 @@ export class DragDropFileUploadDirective {
   @Output() fileDropped = new EventEmitter<any>();
 
   @HostBinding('style.background-color') private background = '#f8f8f8';
+  @HostBinding('style.border') private border:
+    | '2px dashed red !important'
+    | '' = '';
 
   // Dragover Event
   @HostListener('dragover', ['$event']) dragOver(event: any) {
     event.preventDefault();
     event.stopPropagation();
-    this.background = '#bfbfbf';
+    this.background = '##dddddd !important';  
+    this.border = '2px dashed red !important';
   }
 
   // Dragleave Event
@@ -26,6 +30,7 @@ export class DragDropFileUploadDirective {
     event.preventDefault();
     event.stopPropagation();
     this.background = '#f8f8f8';
+    this.border = '';
   }
 
   // Drop Event
