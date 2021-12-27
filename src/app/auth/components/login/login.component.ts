@@ -49,14 +49,25 @@ export class LoginComponent implements OnInit {
           );
           this.userSrv.getMyInfo().subscribe(
             (res) => {
-              localStorage.setItem('USER_INFO', JSON.stringify(res));
+              this.userSrv.getUserFullInfo(res.id, res.role).subscribe(
+                (res2: any) => {
+                  localStorage.setItem(
+                    'USER_INFO',
+                    JSON.stringify({ ...res, ...res2 })
+                  );
+                  this.pendding = false;
+                  this.router.navigate(['/']);
+                  this.forms.enable();
+                },
+                (e) => {
+                  localStorage.setItem('USER_INFO', JSON.stringify({ ...res }));
+                  this.pendding = false;
+                  this.router.navigate(['/']);
+                  this.forms.enable();
+                }
+              );
             },
             (e) => {
-              this.pendding = false;
-              this.forms.enable();
-            },
-            () => {
-              this.router.navigate(['/']);
               this.pendding = false;
               this.forms.enable();
             }

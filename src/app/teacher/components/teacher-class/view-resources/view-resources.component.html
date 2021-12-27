@@ -3,18 +3,25 @@
     <ng-container *ngIf="filesList.length != 0; else noData">
       <nz-collapse class="m-4">
         <ng-container *ngFor="let file of filesList">
-          <nz-collapse-panel [nzExtra]="extraTpl" [nzHeader]="file.title">
+          <nz-collapse-panel
+            [nzActive]="true"
+            [nzExtra]="extraTpl"
+            [nzHeader]="file.title"
+          >
             <p style="margin: 0; overflow: hidden; overflow-y: scroll">
               {{ file.description }}
             </p>
+            <EAP-file-uploader
+              *ngIf="file.filesToShow"
+              [files]="file.filesToShow"
+              [maxCount]="1"
+              [hasDownload]="true"
+              [hasDelete]="false"
+              [pending]="pending"
+              [hasUpload]="false"
+            ></EAP-file-uploader>
           </nz-collapse-panel>
           <ng-template #extraTpl>
-            <i
-              nz-icon
-              nzType="download"
-              nzTheme="outline"
-              (click)="onDownload(imageBaseUrl + file.file)"
-            ></i>
             <i
               class="mx-4 text-red-600"
               nz-icon
@@ -59,55 +66,16 @@
             rows="15"
           ></textarea>
         </mat-form-field>
-        <div class="getImage w-[100% - 1rem] m-2">
-          <div
-            class="
-              dragField
-              p-2
-              rounded-lg
-              w-full
-              h-full
-              flex
-              justify-center
-              items-center
-              border-dotted border-2 border-gray-400
-            "
-            [ngClass]="{ 'bg-green-50': file }"
-            (click)="input.click()"
-            (fileDropped)="upload($event, 1)"
-            DragDropFileUpload
-          >
-            <span class="block text-center pe-auto">
-              <h2>
-                {{
-                  !file
-                    ? "choose a file to upload"
-                    : "file Added :" + (file?.name ?? "")
-                }}
-              </h2>
-              <h6>(you can also drag and drop)</h6>
-              <button
-                *ngIf="file"
-                mat-icon-button
-                (click)="$event.stopPropagation(); file = undefined"
-              >
-                <mat-icon class="cursor-pointer hover:scale-[0.1]"
-                  >close
-                </mat-icon>
-              </button>
-            </span>
-          </div>
-          <input
-            class="inputField"
-            #input
-            (change)="upload($event, 2)"
-            type="file"
-          />
-        </div>
+        <EAP-file-uploader
+          [(files)]="fileToUpload"
+          [maxCount]="1"
+          [hasDownload]="true"
+          [pending]="pending"
+        ></EAP-file-uploader>
         <div class="flex w-full">
           <button
             class="btn btn-primary ml-auto"
-            [disabled]="!file || !title || pending"
+            [disabled]="fileToUpload.length != 1 || !title || pending"
             (click)="onSubmit()"
           >
             Add Resource

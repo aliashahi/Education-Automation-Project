@@ -10,6 +10,11 @@ import { ProfileDialog } from 'src/app/main/components/profile-dialog/profile.di
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  gridStyle = {
+    width: '50%',
+    textAlign: 'center',
+  };
+  hasProfileImg: boolean = true;
   constructor(
     private router: Router,
     private dialog: MatDialog,

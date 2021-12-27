@@ -109,6 +109,10 @@
           </mat-form-field>
         </div>
       </form>
+      <EAP-upload-profile-image
+        [(file)]="file"
+        [url]="imageBaseUrl + fileUrl"
+      ></EAP-upload-profile-image>
     </mat-tab>
   </mat-tab-group>
 </mat-dialog-content>

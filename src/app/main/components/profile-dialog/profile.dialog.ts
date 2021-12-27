@@ -6,6 +6,7 @@ import { createDateFormat } from 'src/app/shared/utils/date.utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { TokenDecoderPipe } from 'src/app/shared/pipes/token-decoder.pipe';
+import { ResourceService } from 'src/app/shared/services/resource.service';
 
 @Component({
   selector: 'EAP-profile-dialog',
@@ -19,43 +20,62 @@ export class ProfileDialog implements OnInit {
   user_form!: FormGroup;
   extra_form!: FormGroup;
   pendding: boolean = false;
+  file!: File | string;
+  fileUrl: string = '';
+  needReload = false;
 
   constructor(
     private userSrv: UserService,
     private alertSrv: AlertService,
+    private resourceSrv: ResourceService,
     private tokenPipe: TokenDecoderPipe,
     public dialogRef: MatDialogRef<ProfileDialog>
   ) {}
 
+  public get imageBaseUrl(): string {
+    return this.resourceSrv.imageBaseUrl;
+  }
+
   ngOnInit() {
-    this.pendding = true;
+    this.dialogRef.afterClosed().subscribe((res) => {
+      if (this.needReload) location.reload();
+    });
     this.init_user_form();
     this.init_extra_form();
+    this.pendding = true;
+    this.user_form.disable();
+    this.extra_form.disable();
     this.userSrv
       .getUserFullInfo(
         this.tokenPipe.transform('0', 'user_id'),
         this.tokenPipe.transform('S', 'role')
       )
       .subscribe(
-        (res) => {
+        (res: any) => {
           this.user = res.user;
+          this.fileUrl = res.profileImage;
           this.extraInfo = { ...res, user: undefined };
           this.user_form.setValue({
-            first_name: this.user.first_name,
-            last_name: this.user.last_name,
-            email: this.user.email,
+            first_name: this.user.first_name ?? '',
+            last_name: this.user.last_name ?? '',
+            email: this.user.email ?? '',
           });
           this.extra_form.setValue({
-            nationalId: this.extraInfo.nationalId,
-            birthDate: this.extraInfo.birthDate,
-            phoneNumber: this.extraInfo.phoneNumber,
-            mobileNumber: this.extraInfo.mobileNumber,
-            address: this.extraInfo.address,
+            nationalId: this.extraInfo.nationalId ?? '',
+            birthDate: this.extraInfo.birthDate ?? '',
+            phoneNumber: this.extraInfo.phoneNumber ?? '',
+            mobileNumber: this.extraInfo.mobileNumber ?? '',
+            address: this.extraInfo.address ?? '',
           });
+          this.user_form.enable();
+          this.extra_form.enable();
           this.pendding = false;
         },
         (e) => {
+          this.user_form.enable();
+          this.extra_form.enable();
           this.pendding = false;
+          this.dialogRef.close();
         }
       );
   }
@@ -100,9 +120,9 @@ export class ProfileDialog implements OnInit {
       (res) => {
         this.alertSrv.showToaster('User updated Successfully!', 'SUCCESS');
         localStorage.setItem('USER_INFO', JSON.stringify(res));
-        location.reload();
         this.user_form.enable();
         this.pendding = false;
+        this.needReload = true;
       },
       (e) => {
         this.user_form.enable();
@@ -115,26 +135,31 @@ export class ProfileDialog implements OnInit {
     this.extra_form.disable();
     this.pendding = true;
     let userType = this.tokenPipe.transform('S', 'role') || 'S';
-    this.userSrv
-      .updateUserExtraInfo(
-        {
-          ...this.extra_form.value,
-          profileImage: null,
-          id: this.tokenPipe.transform('S', 'user_id'),
-          birthDate: createDateFormat(this.extra_form.value.birthDate),
-        },
-        userType
-      )
-      .subscribe(
-        (res) => {
-          this.alertSrv.showToaster('User updated Successfully!', 'SUCCESS');
-          this.extra_form.enable();
-          this.pendding = false;
-        },
-        (e) => {
-          this.extra_form.enable();
-          this.pendding = false;
-        }
-      );
+    let formData = new FormData();
+    let model = this.extra_form.value;
+    Object.entries({
+      id: this.user.id,
+      user: this.extraInfo.id,
+      profileImage: this.file,
+      nationalId: model.nationalId,
+      birthDate: createDateFormat(model.birthDate),
+      phoneNumber: model.phoneNumber,
+      mobileNumber: model.mobileNumber,
+      address: model.address,
+    }).forEach((i) => {
+      formData.append(i[0], i[1]);
+    });
+    this.userSrv.updateUserExtraInfo(formData, userType).subscribe(
+      (res) => {
+        this.alertSrv.showToaster('User updated Successfully!', 'SUCCESS');
+        this.extra_form.enable();
+        this.pendding = false;
+        this.needReload = true;
+      },
+      (e) => {
+        this.extra_form.enable();
+        this.pendding = false;
+      }
+    );
   }
 }

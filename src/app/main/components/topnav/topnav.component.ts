@@ -17,7 +17,7 @@ export class TopnavComponent implements OnInit {
   @Output() isExpandedChange = new EventEmitter<boolean>();
   pendding: boolean = false;
   breadcrump: { url: string; value: string; name: string }[] = [];
-
+  hasProfileImg: boolean = true;
   constructor(
     private router: Router,
     private dialog: MatDialog,
@@ -30,8 +30,19 @@ export class TopnavComponent implements OnInit {
     this.pendding = true;
     this.userSrv.getMyInfo().subscribe(
       (res) => {
-        localStorage.setItem('USER_INFO', JSON.stringify(res));
-        this.pendding = false;
+        this.userSrv.getUserFullInfo(res.id, res.role).subscribe(
+          (res2: any) => {
+            localStorage.setItem(
+              'USER_INFO',
+              JSON.stringify({ ...res, ...res2 })
+            );
+            this.pendding = false;
+          },
+          (e) => {
+            localStorage.setItem('USER_INFO', JSON.stringify({ ...res }));
+            this.pendding = false;
+          }
+        );
       },
       (e) => {
         this.pendding = false;
