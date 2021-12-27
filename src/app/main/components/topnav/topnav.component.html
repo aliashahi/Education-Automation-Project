@@ -48,15 +48,15 @@
       </span>
     </li>
     <li
-      class="mx-2 text-white rounded-full hover:bg-secondary-500 cursor-pointer"
+      class="mx-2 text-white rounded-full cursor-pointer"
       [matMenuTriggerFor]="menu"
       #menuTrigger="matMenuTrigger"
     >
-      <nz-avatar
-        class="w-12 h-12 rounded-full border-[1px] border-gray-500"
-        [nzSize]="35"
-        nzIcon="user"
-      ></nz-avatar>
+      <img
+        class="w-12 h-12 rounded-full border-2 border-gray-300"
+        src="../../../../assets/images/default_profile.png"
+        alt=""
+      />
     </li>
   </ul>
 </nav>
@@ -70,7 +70,11 @@
     (click)="$event.stopPropagation()"
   >
     <div class="flex flex-col justify-center items-center p-2 h-full">
-      <nz-avatar [nzSize]="134" nzIcon="user"></nz-avatar>
+      <img
+        class="w-22 h-22 rounded-full border-2 border-black"
+        src="../../../../assets/images/default_profile.png"
+        alt=""
+      />
       <b style="height: 22px" *ngIf="!pendding">
         {{ "-" | userInfo: "username" | longTextCutter: 15 }}
       </b>

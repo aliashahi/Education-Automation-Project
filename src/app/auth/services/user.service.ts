@@ -43,9 +43,9 @@ export class UserService extends ServiceBase {
       (res) => {
         let foundUser = res.results.find((i: any) => i.user.id == userId);
         if (foundUser)
-          this.get$(`school/${user}/${foundUser.id}`).subscribe(
+          this.get$(`school/${user}/me`).subscribe(
             (res2) => {
-              result.next(res2);
+              result.next({ ...res2, ...foundUser });
             },
             (e) => result.error(e)
           );
