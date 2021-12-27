@@ -8,15 +8,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./file-uploader.component.scss'],
 })
 export class FileUploaderComponent implements OnInit {
-  files: FileDto[] = [];
-  @Input('files') set _files(v: FileDto[]) {
+  filesToShow: FileDto[] = [];
+  @Input() set files(v: FileDto[]) {
     v.map((i) => {
       this.previewList.set(i.id, i.file);
     });
-    this.files = v;
+    this.filesToShow = v;
   }
 
-  @Output() _filesChange: EventEmitter<FileDto[]> = new EventEmitter<
+  @Output() filesChange: EventEmitter<FileDto[]> = new EventEmitter<
     FileDto[]
   >();
 
@@ -36,16 +36,16 @@ export class FileUploaderComponent implements OnInit {
   onDelete(file: FileDto) {
     if (this.pending) return;
     if (file.yet_to_upload) {
-      this.files = this.files.filter((i) => i.id != file.id);
+      this.filesToShow = this.filesToShow.filter((i) => i.id != file.id);
       this.previewList.delete(file.id);
-      this._filesChange.emit(this.files);
+      this.filesChange.emit(this.filesToShow);
     } else {
       this.onDeleteEvent.emit(file.id);
     }
   }
 
   upload(event: any, type = 1) {
-    if (this.maxCount != 0 && this.files.length == this.maxCount) return;
+    if (this.maxCount != 0 && this.filesToShow.length == this.maxCount) return;
     if (this.pending) return;
     if (type == 2) event = event.target.files;
     if (!event[0] || event[0].length == 0) return;
@@ -56,7 +56,7 @@ export class FileUploaderComponent implements OnInit {
       );
       return;
     }
-    this.createAPreview(event[0], this.files.length);
+    this.createAPreview(event[0], this.filesToShow.length);
   }
 
   onDownload(data: any) {
@@ -67,13 +67,13 @@ export class FileUploaderComponent implements OnInit {
     let reader = new FileReader();
     reader.onload = (e: any) => {
       this.previewList.set(id, e.target.result);
-      this.files.push({
-        id: this.files.length,
+      this.filesToShow.push({
+        id: this.filesToShow.length,
         file: file,
         name: file.name,
         yet_to_upload: true,
       });
-      this._filesChange.emit(this.files);
+      this.filesChange.emit(this.filesToShow);
     };
     reader.readAsDataURL(file);
   }

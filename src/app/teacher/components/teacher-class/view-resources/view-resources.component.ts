@@ -14,10 +14,7 @@ import { ResourceService } from 'src/app/shared/services/resource.service';
 export class ViewResourcesComponent implements OnInit {
   @Input() classId!: number;
   filesList: Resource[] = [];
-  files: FileDto[] = [];
   fileToUpload: FileDto[] = [];
-  // input data
-  // file?: File;
   title!: string | null;
   desc!: string | null;
 
@@ -40,12 +37,16 @@ export class ViewResourcesComponent implements OnInit {
     this.pending = true;
     this.resourceSrv.getClassResources(this.classId).subscribe(
       (res) => {
-        this.filesList = res.results;
-        this.files = res.results.map((i: any) => {
+        this.filesList = res.results.map((i: any) => {
           return {
-            id: i.id - 1,
-            name: i.file.split('/')[i.file.split('/').length - 1],
-            file: this.imageBaseUrl + i.file,
+            ...i,
+            filesToShow: [
+              {
+                id: i.id,
+                name: i.file.split('/')[i.file.split('/').length - 1],
+                file: this.imageBaseUrl + i.file,
+              },
+            ],
           };
         });
         this.pending = false;
