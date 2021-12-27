@@ -2,6 +2,7 @@ import { LoginDto, RegisterDto, UpdateProfileDto } from './login.dto';
 import { Injectable, Injector } from '@angular/core';
 import { ServiceBase } from 'src/app/shared/classes/service-base';
 import { UserSearchDto } from './user.dto';
+import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -24,15 +25,37 @@ export class UserService extends ServiceBase {
 
   getUserFullInfo(userId: number, userType: 'S' | 'T' | 'M' = 'S') {
     let user = 'students';
+    let subscription;
     switch (userType) {
       case 'M':
         user = 'managers';
+        subscription = this.getManagers({});
         break;
       case 'T':
         user = 'teachers';
+        subscription = this.getTeachers({});
         break;
+      default:
+        subscription = this.getStudents({});
     }
-    return this.get$(`school/${user}/${userId}`);
+    let result = new Subject();
+    subscription.subscribe(
+      (res) => {
+        let foundUser = res.results.find((i: any) => i.user.id == userId);
+        if (foundUser)
+          this.get$(`school/${user}/${foundUser.id}`).subscribe(
+            (res2) => {
+              result.next(res2);
+            },
+            (e) => result.error(e)
+          );
+        else result.error({});
+      },
+      (e) => {
+        result.error(e);
+      }
+    );
+    return result;
   }
 
   public updateUserExtraInfo(model: any, userType: 'S' | 'T' | 'M') {

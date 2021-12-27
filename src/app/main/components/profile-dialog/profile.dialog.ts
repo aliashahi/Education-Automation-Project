@@ -28,34 +28,44 @@ export class ProfileDialog implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.pendding = true;
+    this.dialogRef.afterClosed().subscribe((res) => {
+      location.reload();
+    });
     this.init_user_form();
     this.init_extra_form();
+    this.pendding = true;
+    this.user_form.disable();
+    this.extra_form.disable();
     this.userSrv
       .getUserFullInfo(
         this.tokenPipe.transform('0', 'user_id'),
         this.tokenPipe.transform('S', 'role')
       )
       .subscribe(
-        (res) => {
+        (res: any) => {
           this.user = res.user;
           this.extraInfo = { ...res, user: undefined };
           this.user_form.setValue({
-            first_name: this.user.first_name,
-            last_name: this.user.last_name,
-            email: this.user.email,
+            first_name: this.user.first_name ?? '',
+            last_name: this.user.last_name ?? '',
+            email: this.user.email ?? '',
           });
           this.extra_form.setValue({
-            nationalId: this.extraInfo.nationalId,
-            birthDate: this.extraInfo.birthDate,
-            phoneNumber: this.extraInfo.phoneNumber,
-            mobileNumber: this.extraInfo.mobileNumber,
-            address: this.extraInfo.address,
+            nationalId: this.extraInfo.nationalId ?? '',
+            birthDate: this.extraInfo.birthDate ?? '',
+            phoneNumber: this.extraInfo.phoneNumber ?? '',
+            mobileNumber: this.extraInfo.mobileNumber ?? '',
+            address: this.extraInfo.address ?? '',
           });
+          this.user_form.enable();
+          this.extra_form.enable();
           this.pendding = false;
         },
         (e) => {
+          this.user_form.enable();
+          this.extra_form.enable();
           this.pendding = false;
+          this.dialogRef.close();
         }
       );
   }
@@ -100,7 +110,6 @@ export class ProfileDialog implements OnInit {
       (res) => {
         this.alertSrv.showToaster('User updated Successfully!', 'SUCCESS');
         localStorage.setItem('USER_INFO', JSON.stringify(res));
-        location.reload();
         this.user_form.enable();
         this.pendding = false;
       },
@@ -120,7 +129,7 @@ export class ProfileDialog implements OnInit {
         {
           ...this.extra_form.value,
           profileImage: null,
-          id: this.tokenPipe.transform('S', 'user_id'),
+          id: this.extraInfo.id,
           birthDate: createDateFormat(this.extra_form.value.birthDate),
         },
         userType
