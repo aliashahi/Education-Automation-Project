@@ -111,13 +111,13 @@
       </form>
       <EAP-upload-profile-image
         [(file)]="file"
-        [url]="imageBaseUrl + fileUrl"
+        [url]=" getImageUrl()"
       ></EAP-upload-profile-image>
     </mat-tab>
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button mat-dialog-close>close</button>
   <button
     *ngIf="tabIndex==0"
     mat-raised-button

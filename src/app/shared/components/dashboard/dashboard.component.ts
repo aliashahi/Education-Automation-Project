@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from '../../modules/alert/alert.service';
 import { ProfileDialog } from 'src/app/main/components/profile-dialog/profile.dialog';
+import { ResourceService } from '../../services/resource.service';
+import { TokenDecoderPipe } from '../../pipes/token-decoder.pipe';
+import { UserInfoPipe } from '../../pipes/user-info.pipe';
 
 @Component({
   selector: 'EAP-dashboard',
@@ -18,8 +21,13 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private alertSrv: AlertService
+    private alertSrv: AlertService,
+    private userPipe: UserInfoPipe
   ) {}
+
+  getImageUrl(): string {
+    return this.userPipe.transform('', 'profileImage');
+  }
 
   ngOnInit(): void {}
 

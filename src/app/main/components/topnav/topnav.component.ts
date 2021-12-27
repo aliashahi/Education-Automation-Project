@@ -6,6 +6,7 @@ import { UserService } from 'src/app/auth/services/user.service';
 import { BreadcrumpPipe } from 'src/app/shared/pipes/breadcrump.pipe';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UserInfoPipe } from 'src/app/shared/pipes/user-info.pipe';
 
 @Component({
   selector: 'EAP-topnav',
@@ -22,9 +23,14 @@ export class TopnavComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private userSrv: UserService,
+    private userPipe: UserInfoPipe,
     private alertSrv: AlertService,
     private breadcrumbPipe: BreadcrumpPipe
   ) {}
+
+  getImageUrl(): string {
+    return this.userPipe.transform('', 'profileImage');
+  }
 
   ngOnInit(): void {
     this.pendding = true;

@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { TokenDecoderPipe } from 'src/app/shared/pipes/token-decoder.pipe';
 import { ResourceService } from 'src/app/shared/services/resource.service';
+import { UserInfoPipe } from 'src/app/shared/pipes/user-info.pipe';
 
 @Component({
   selector: 'EAP-profile-dialog',
@@ -29,11 +30,16 @@ export class ProfileDialog implements OnInit {
     private alertSrv: AlertService,
     private resourceSrv: ResourceService,
     private tokenPipe: TokenDecoderPipe,
+    private userPipe: UserInfoPipe,
     public dialogRef: MatDialogRef<ProfileDialog>
   ) {}
 
   public get imageBaseUrl(): string {
     return this.resourceSrv.imageBaseUrl;
+  }
+
+  getImageUrl(): string {
+    return this.userPipe.transform('', 'profileImage');
   }
 
   ngOnInit() {
@@ -138,8 +144,8 @@ export class ProfileDialog implements OnInit {
     let formData = new FormData();
     let model = this.extra_form.value;
     Object.entries({
-      id: this.user.id,
-      user: this.extraInfo.id,
+      user: this.user.id,
+      id: this.extraInfo.id,
       profileImage: this.file,
       nationalId: model.nationalId,
       birthDate: createDateFormat(model.birthDate),
