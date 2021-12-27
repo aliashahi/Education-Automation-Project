@@ -3,7 +3,15 @@
     <div class="head-bg"></div>
     <div class="head-content bg-gray-100">
       <div class="profile">
-        <img src="../../../../assets/images/default_profile.png" alt="" />
+        <img
+          *ngIf="hasProfileImg; else noImg"
+          src="{{ '' | tokenDecoder: 'profileImage' }}"
+          alt=""
+          (error)="hasProfileImg = false"
+        />
+        <ng-template #noImg>
+          <img src="../../../../assets/images/default_profile.png" alt="" />
+        </ng-template>
       </div>
       <div class="caption" *ngIf="true">
         <h1>
@@ -28,4 +36,94 @@
     </div>
   </div>
   <ng-content></ng-content>
+  <div class="w-full flex flex-wrap justify-around items-center">
+    <div class="w-[calc(25%-16px)] m-2 h-48 p-2">
+      <div
+        class="
+          w-full
+          h-full
+          bg-white bg-gradient-to-r
+          from-[#e8fffe]
+          via-[#b3fffd]
+          to-[#adf1ff]
+          rounded-lg
+          flex
+          items-center
+          justify-around
+          p-2
+          shadow-md
+        "
+      >
+        <h1 style="font-size: 100px">324</h1>
+        <h2 class="text-gray-600">Studnets are in School!</h2>
+      </div>
+    </div>
+    <div class="w-[calc(25%-16px)] m-2 h-48 p-2">
+      <div
+        class="
+          w-full
+          h-full
+          bg-white bg-gradient-to-r
+          from-[#e3fff6]
+          via-[#afffe4]
+          to-[#79ffd2]
+          rounded-lg
+          flex
+          items-center
+          justify-around
+          p-2
+          shadow-md
+        "
+      >
+        <h1 style="font-size: 100px">23</h1>
+        <h2 class="text-gray-600">Teachers are in School!</h2>
+      </div>
+    </div>
+    <div class="w-[calc(25%-16px)] m-2 h-48 p-2">
+      <div
+        class="
+          w-full
+          h-full
+          bg-white bg-gradient-to-r
+          from-[#ffd7d7]
+          via-[#ffc9c9]
+          to-[#ffa7a7]
+          rounded-lg
+          flex
+          items-center
+          justify-around
+          p-2
+          shadow-md
+        "
+      >
+        <h1 style="font-size: 100px">1</h1>
+        <h2 class="text-gray-600">Manager are in School!</h2>
+      </div>
+    </div>
+    <div class="w-[calc(25%-16px)] m-2 h-48 p-2">
+      <div
+        class="
+          w-full
+          h-full
+          bg-white bg-gradient-to-r
+          from-[#f0dcff]
+          via-[#e7c8ff]
+          to-[#d9a7ff]
+          rounded-lg
+          flex
+          items-center
+          justify-around
+          p-2
+          shadow-md
+        "
+      >
+        <h1 style="font-size: 100px">102</h1>
+        <h2 class="text-gray-600">Reward!</h2>
+      </div>
+    </div>
+  </div>
+  <div class="w-full flex justify-around items-center">
+    <EAP-apex-polar-area></EAP-apex-polar-area>
+    <EAP-apex-box-plot></EAP-apex-box-plot>
+  </div>
 </div>

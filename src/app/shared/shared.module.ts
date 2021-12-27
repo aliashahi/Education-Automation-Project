@@ -11,6 +11,9 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
 import { LoadingSectionComponent } from './components/loading-section/loading-section.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
+import { ApexPolarAreaComponent } from './components/dashboard/apex-polar-area/apex-polar-area.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { ApexBoxPlotComponent } from './components/dashboard/apex-box-plot/apex-box-plot.component';
 
 const MODULES = [
   FormsModule,
@@ -21,6 +24,7 @@ const MODULES = [
   HttpClientModule,
   DirectivesModule,
   ReactiveFormsModule,
+  NgApexchartsModule,
 ];
 
 const COMPONENTS = [
@@ -31,7 +35,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, ApexPolarAreaComponent, ApexBoxPlotComponent],
   imports: [CommonModule, ...MODULES],
   exports: [...MODULES, ...COMPONENTS],
 })

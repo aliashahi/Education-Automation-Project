@@ -53,10 +53,19 @@
       #menuTrigger="matMenuTrigger"
     >
       <img
+        *ngIf="hasProfileImg; else noImg"
         class="w-12 h-12 rounded-full border-2 border-gray-300"
-        src="../../../../assets/images/default_profile.png"
+        src="{{ '' | tokenDecoder: 'profileImage' }}"
         alt=""
+        (error)="hasProfileImg = false"
       />
+      <ng-template #noImg>
+        <img
+          src="../../../../assets/images/default_profile.png"
+          class="w-12 h-12 rounded-full border-2 border-gray-300"
+          alt=""
+        />
+      </ng-template>
     </li>
   </ul>
 </nav>
@@ -71,10 +80,19 @@
   >
     <div class="flex flex-col justify-center items-center p-2 h-full">
       <img
+        *ngIf="hasProfileImg; else noImg2"
         class="w-22 h-22 rounded-full border-2 border-black"
-        src="../../../../assets/images/default_profile.png"
+        src="{{ '' | tokenDecoder: 'profileImage' }}"
         alt=""
+        (error)="hasProfileImg = false"
       />
+      <ng-template #noImg2>
+        <img
+          class="w-22 h-22 rounded-full border-2 border-black"
+          src="../../../../assets/images/default_profile.png"
+          alt=""
+        />
+      </ng-template>
       <b style="height: 22px" *ngIf="!pendding">
         {{ "-" | userInfo: "username" | longTextCutter: 15 }}
       </b>
