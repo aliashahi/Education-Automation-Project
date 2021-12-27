@@ -5,7 +5,7 @@
       <div class="profile">
         <img
           *ngIf="hasProfileImg; else noImg"
-          src="{{ '' | tokenDecoder: 'profileImage' }}"
+          src="{{ getImageUrl() }}"
           alt=""
           (error)="hasProfileImg = false"
         />

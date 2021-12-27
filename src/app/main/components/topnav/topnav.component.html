@@ -55,7 +55,7 @@
       <img
         *ngIf="hasProfileImg; else noImg"
         class="w-12 h-12 rounded-full border-2 border-gray-300"
-        src="{{ '' | tokenDecoder: 'profileImage' }}"
+        src="{{ getImageUrl() }}"
         alt=""
         (error)="hasProfileImg = false"
       />
@@ -82,7 +82,7 @@
       <img
         *ngIf="hasProfileImg; else noImg2"
         class="w-22 h-22 rounded-full border-2 border-black"
-        src="{{ '' | tokenDecoder: 'profileImage' }}"
+        src="{{ getImageUrl() }}"
         alt=""
         (error)="hasProfileImg = false"
       />
@@ -100,11 +100,12 @@
         {{ "-" | userInfo: "email" | longTextCutter: 18 }}
       </p>
       <button
-        mat-stroked-button
+        mat-raised-button
+        color="primary"
         (click)="onEditProfile(menuTrigger)"
         class="mt-auto mb-2 w-full"
       >
-        <mat-icon>edit</mat-icon>Edit profile
+        <mat-icon class="text-white">edit</mat-icon>Edit profile
       </button>
       <button
         class="w-full"
