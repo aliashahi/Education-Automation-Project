@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ResourceService } from 'src/app/shared/services/resource.service';
 
 @Component({
   selector: 'EAP-upload-profile-image',
@@ -8,11 +9,23 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class UploadProfileImageComponent implements OnInit {
   @Input() file!: File | string;
   @Output() fileChange: EventEmitter<File | string> = new EventEmitter();
-  @Input() url!: string;
+  url!: string;
+  @Input('url') set setUrl(v: string) {
+    this.url = v;
+    this.handleFileFromUrl();
+  }
+
   showImage = true;
-  constructor() {}
+  constructor(private resourceSrv: ResourceService) {}
 
   ngOnInit(): void {}
+
+  private handleFileFromUrl() {
+    this.resourceSrv.getBlobFile(this.url).subscribe((res) => {
+      this.file = res;
+      this.fileChange.emit(this.file);
+    });
+  }
 
   upload(event: any, type = 1) {
     if (type == 2) event = event.target.files;

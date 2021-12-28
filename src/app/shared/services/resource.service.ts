@@ -28,4 +28,8 @@ export class ResourceService extends ServiceBase {
   deleteClassResource(classId: number, id: number) {
     return this.delete$(`school/classes/${classId}/resources/${id}`);
   }
+
+  getBlobFile(url: string) {
+    return this.getBlob$(url);
+  }
 }
