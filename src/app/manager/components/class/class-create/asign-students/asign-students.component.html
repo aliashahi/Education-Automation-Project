@@ -49,19 +49,13 @@
 <ng-template #noData>
   <loading-section [loading]="pending">
     <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
-      <nz-empty></nz-empty> 
+      <nz-empty></nz-empty>
     </div>
   </loading-section>
 </ng-template>
 
 <button
-  mat-raised-button
-  class="
-    text-white
-    bg-green-600
-    disabled:opacity-50
-    hover:bg-green-700 hover:text-white
-  "
+  class="btn border-0 bg-secondary-600 text-white"
   [disabled]="selection.selected.length == 0"
   (click)="addStudentsToClass()"
 >

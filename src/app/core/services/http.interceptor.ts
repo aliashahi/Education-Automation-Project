@@ -1,9 +1,9 @@
 import {
-HttpEvent,
-HttpHandler,
-HttpRequest,
-HttpInterceptor,
-HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpRequest,
+  HttpInterceptor,
+  HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
@@ -70,7 +70,8 @@ export class HttpsInterceptor implements HttpInterceptor {
       return EMPTY;
     }
     if (error instanceof HttpErrorResponse && error.status === 404) {
-      this.alertSrvc.showToaster('Not Found!', 'DANGER');
+      if (this.showMessage(request))
+        this.alertSrvc.showToaster('Not Found!', 'DANGER');
       return EMPTY;
     }
 
@@ -97,6 +98,10 @@ export class HttpsInterceptor implements HttpInterceptor {
 
     this.alertSrvc.showToaster('Something went Wrong !!!', 'DANGER');
     return EMPTY;
+  }
+
+  private showMessage(request: HttpRequest<any>): boolean {
+    return !!!request.url.includes('/media/');
   }
 
   private create400ErrorMessage(error: HttpErrorResponse): string[] {

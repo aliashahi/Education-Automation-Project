@@ -46,6 +46,7 @@ export class AsignStudentsComponent implements OnInit {
         ...this.selection.selected[index],
         ...this.selection.selected[index].user,
         id: undefined,
+        profileImage: null,
         user: this.selection.selected[index].user.id,
         classroom: +this.classId,
       })

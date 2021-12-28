@@ -76,18 +76,12 @@
       (input)="onFilterAnnouncements()"
     />
   </div>
-  <!-- <mat-button-toggle-group
-    name="fontStyle"
-    [(value)]="showKind"
-    aria-label="Font Style"
+  <button
+    class="btn border-0 mx-2 bg-secondary-600"
+    [routerLink]="['', 'manager', 'class-create']"
   >
-    <mat-button-toggle value="list">
-      <mat-icon>reorder</mat-icon>
-    </mat-button-toggle>
-    <mat-button-toggle value="grid">
-      <mat-icon>grid_view</mat-icon>
-    </mat-button-toggle>
-  </mat-button-toggle-group> -->
+    CREATE CLASS
+  </button>
 </div>
 <ng-container *ngIf="filteredData.length > 0; else noData">
   <div class="flex flex-wrap p-2">
@@ -128,6 +122,7 @@
             <button
               class="btn bg-red-500 h-m-8 h-8 border-0 mt-0"
               style="font-size: 10px; min-height: 2rem"
+              (click)="onDelete(class)"
             >
               Delete
             </button>
@@ -147,7 +142,7 @@
 <ng-template #noData>
   <loading-section [loading]="pendding">
     <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
-      <nz-empty></nz-empty> 
+      <nz-empty></nz-empty>
     </div>
   </loading-section>
 </ng-template>

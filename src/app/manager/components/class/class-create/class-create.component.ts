@@ -34,7 +34,9 @@ export class ClassCreateComponent implements OnInit {
   showWeekSchedule: boolean = true;
   scheduleData: ScheduleDataDto[] = [];
   classId: number = 0;
-  imageUrl!: string;
+
+  file!: File | string;
+  fileUrl: string = '';
 
   constructor(
     private dialog: MatDialog,
@@ -104,10 +106,22 @@ export class ClassCreateComponent implements OnInit {
         this.class_info_form.value.endClassDate as Date
       ),
     };
+    let formData = new FormData();
+    Object.entries({
+      name: model.name,
+      grade: model.grade,
+      image: this.file,
+      description: model.description,
+      status: model.status,
+      startClassDate: model.startClassDate,
+      endClassDate: model.endClassDate,
+    }).forEach((i) => {
+      formData.append(i[0], i[1]);
+    });
     this.pendding = true;
     this.class_info_form.disable();
     if (this.classId)
-      this.classSrv.updateClass(this.classId, model).subscribe(
+      this.classSrv.updateClass(this.classId, formData).subscribe(
         (response) => {
           this.classId = response.id;
           this.alertSrv.showToaster('Class Updated Successfully!', 'SUCCESS');
@@ -123,7 +137,7 @@ export class ClassCreateComponent implements OnInit {
         }
       );
     else
-      this.classSrv.createClass(model).subscribe(
+      this.classSrv.createClass(formData).subscribe(
         (response) => {
           this.classId = response.id;
           this.alertSrv.showToaster('Class Created Successfully!', 'SUCCESS');
@@ -164,11 +178,6 @@ export class ClassCreateComponent implements OnInit {
     });
   }
 
-  private onCancelEdit() {
-    this.editItem = null;
-    this.teacher_info_form.reset();
-  }
-
   onSubmitSchedule(stepper: MatStepper) {
     this.pendding = true;
     let pendingCount = 0;
@@ -193,13 +202,7 @@ export class ClassCreateComponent implements OnInit {
             pendingCount,
             stepper
           );
-        }
-      },
-      (e) => {
-        this.pendding = false;
-      },
-      () => {
-        if (pendingCount == this.scheduleData.length - 1) {
+        } else {
           this.alertSrv.showToaster(
             'Schedules Successfully Updated!',
             'SUCCESS'
@@ -207,6 +210,9 @@ export class ClassCreateComponent implements OnInit {
           stepper.next();
           this.pendding = false;
         }
+      },
+      (e) => {
+        this.pendding = false;
       }
     );
   }
@@ -221,28 +227,6 @@ export class ClassCreateComponent implements OnInit {
       .subscribe((_) => {
         this.showWeekSchedule = true;
       });
-  }
-
-  upload(event: any) {
-    if (!event[0] || event[0].length == 0) return;
-    else if (event[0].type.match(/image\/*/) == null) {
-      this.alertSrv.showToaster(
-        'please upload a image with right format!',
-        'WARNING'
-      );
-      return;
-    } else if (event.length > 1) {
-      this.alertSrv.showToaster(
-        'please upload just a single image!',
-        'WARNING'
-      );
-      return;
-    }
-    let form = new FormData();
-    form.append('image', event[0]);
-    this.classSrv
-      .patchClassImage(this.classId, form)
-      .subscribe((res: any) => {});
   }
 
   resetSchedule() {

@@ -70,7 +70,11 @@
                 >email is required</mat-error
               >
             </mat-form-field>
-            <mat-form-field class="w-1/2 pl-1" appearance="outline">
+            <mat-form-field
+              class="w-1/2 pl-1"
+              appearance="outline"
+              *ngIf="!user?.id"
+            >
               <mat-label>Password</mat-label>
               <input
                 matInput
@@ -186,6 +190,10 @@
               ></textarea>
             </mat-form-field>
           </div>
+          <EAP-upload-profile-image
+            [(file)]="file"
+            [url]="fileUrl"
+          ></EAP-upload-profile-image>
           <div class="flex w-full justify-end">
             <button
               mat-raised-button
@@ -208,7 +216,6 @@
         <ng-template matStepLabel>Done</ng-template>
         <p class="text-green-600">You are now done.</p>
         <div class="flex w-full justify-end">
-          <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
       </mat-step>

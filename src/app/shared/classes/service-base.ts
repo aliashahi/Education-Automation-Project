@@ -32,6 +32,10 @@ export abstract class ServiceBase {
     return this.http.get(this.BaseUrl + url + this.getSerializedParams(params));
   }
 
+  protected getBlob$(url: string): Observable<any> {
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
   protected delete$(url: string, params: ParamDto[] = []): Observable<any> {
     return this.http.delete(
       this.BaseUrl + url + this.getSerializedParams(params)

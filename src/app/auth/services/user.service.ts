@@ -77,15 +77,37 @@ export class UserService extends ServiceBase {
     userType: 'S' | 'T' | 'M'
   ) {
     let user = 'students';
+    let subscription;
     switch (userType) {
       case 'M':
         user = 'managers';
+        subscription = this.getManagers({});
         break;
       case 'T':
         user = 'teachers';
+        subscription = this.getTeachers({});
         break;
+      default:
+        subscription = this.getStudents({});
     }
-    return this.put$(`school/${user}/${userId}/`, model);
+    let result = new Subject();
+    subscription.subscribe(
+      (res) => {
+        let foundUser = res.results.find((i: any) => i.user.id == userId);
+        if (foundUser)
+          this.put$(`school/${user}/${foundUser.id}/`, model).subscribe(
+            (res2) => {
+              result.next({ ...res2, ...foundUser });
+            },
+            (e) => result.error(e)
+          );
+        else result.error({});
+      },
+      (e) => {
+        result.error(e);
+      }
+    );
+    return result;
   }
 
   public deleteUser(id: number) {
