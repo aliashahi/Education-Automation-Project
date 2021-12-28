@@ -8,7 +8,14 @@
   />
   <ng-template #noImg>
     <img
-      src="../../../../../assets/images/default_profile.png"
+      *ngIf="placeholder == 'PROFILE'"
+      src="../../../../assets/images/default_profile.png"
+      class="absolute h-36 w-36 z-[2] rounded-full"
+      alt=""
+    />
+    <img
+      *ngIf="placeholder == 'CLASS'"
+      src="../../../../assets/images/default_class-image.png"
       class="absolute h-36 w-36 z-[2] rounded-full"
       alt=""
     />

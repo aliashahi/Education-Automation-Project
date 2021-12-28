@@ -9,6 +9,7 @@ import { ResourceService } from 'src/app/shared/services/resource.service';
 })
 export class UploadProfileImageComponent implements OnInit {
   @Input() file!: File | string;
+  @Input() placeholder: 'PROFILE' | 'CLASS' = 'PROFILE';
   @Output() fileChange: EventEmitter<File | string> = new EventEmitter();
   url!: string;
   @Input('url') set setUrl(v: string) {
