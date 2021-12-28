@@ -34,7 +34,18 @@ export class StudentResourcesComponent implements OnInit {
           this.classId = res.results[0].id;
           this.resourceSrv.getClassResources(this.classId).subscribe(
             (res) => {
-              this.filesList = res.results;
+              this.filesList = res.results.map((i: any) => {
+                return {
+                  ...i,
+                  filesToShow: [
+                    {
+                      id: i.id,
+                      name: i.file.split('/')[i.file.split('/').length - 1],
+                      file: this.imageBaseUrl + i.file,
+                    },
+                  ],
+                };
+              });
               this.pending = false;
             },
             (e) => {

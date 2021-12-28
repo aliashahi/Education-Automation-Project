@@ -1,19 +1,20 @@
 <ng-container *ngIf="filesList.length != 0; else noData">
   <nz-collapse class="m-4">
     <ng-container *ngFor="let file of filesList">
-      <nz-collapse-panel [nzExtra]="extraTpl" [nzHeader]="file.title">
+      <nz-collapse-panel [nzActive]="true" [nzHeader]="file.title">
         <p style="margin: 0; overflow: hidden; overflow-y: scroll">
           {{ file.description }}
         </p>
+        <EAP-file-uploader
+          *ngIf="file.filesToShow"
+          [files]="file.filesToShow"
+          [maxCount]="1"
+          [hasDownload]="true"
+          [hasDelete]="false"
+          [pending]="pending"
+          [hasUpload]="false"
+        ></EAP-file-uploader>
       </nz-collapse-panel>
-      <ng-template #extraTpl>
-        <i
-          nz-icon
-          nzType="download"
-          nzTheme="outline"
-          (click)="onDownload(imageBaseUrl + file.file)"
-        ></i>
-      </ng-template>
     </ng-container>
   </nz-collapse>
 </ng-container>
