@@ -21,6 +21,7 @@ export class UserCreateComponent implements OnInit {
   hidePass: boolean = true;
   file!: File | string;
   fileUrl: string = '';
+  extraInfo: any = {};
   constructor(
     private userSrv: UserService,
     private alertSrv: AlertService,
@@ -42,6 +43,7 @@ export class UserCreateComponent implements OnInit {
       this.extra_form.disable();
       this.userSrv.getUserById(id, access).subscribe(
         (res) => {
+          this.extraInfo = res;
           let user = res.user;
           this.user = res.user;
           this.fileUrl = res.profileImage;
@@ -149,6 +151,7 @@ export class UserCreateComponent implements OnInit {
       phoneNumber: model.phoneNumber,
       mobileNumber: model.mobileNumber,
       address: model.address,
+      classroom: this.extraInfo.classroom ? this.extraInfo.classroom.id : null,
     }).forEach((i) => {
       formData.append(i[0], i[1]);
     });
@@ -157,7 +160,7 @@ export class UserCreateComponent implements OnInit {
       .subscribe(
         (res) => {
           this.alertSrv.showToaster('User updated Successfully!', 'SUCCESS');
-          stepper.next();
+          if (!this.extraInfo) stepper.next();
         },
         (e) => {
           this.extra_form.enable();

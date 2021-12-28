@@ -1,3 +1,4 @@
+import { FileDto } from 'src/app/shared/models/file.dto';
 import { Asignment } from 'src/app/student/model/week.model';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { ResourceService } from 'src/app/shared/services/resource.service';
@@ -13,8 +14,9 @@ export class AsignmentsDetailComponent implements OnInit {
   @Input() asignment!: Asignment;
   @Input() classId!: number;
   @Output('onBack') _onBack: EventEmitter<void> = new EventEmitter();
+  fileToUpload: FileDto[] = [];
+
   pending: boolean = false;
-  file?: File;
   constructor(
     private asignmentSrv: AssignmentService,
     private resourceSrv: ResourceService,
@@ -30,7 +32,11 @@ export class AsignmentsDetailComponent implements OnInit {
   onSubmit() {
     this.pending = true;
     let formData = new FormData();
-    formData.append('file', this.file ?? '', this.file?.name);
+    formData.append(
+      'file',
+      this.fileToUpload[0].file ?? '',
+      this.fileToUpload[0].name
+    );
     this.asignmentSrv
       .submitSubmission(this.classId, this.asignment.id, formData)
       .subscribe(
@@ -46,13 +52,6 @@ export class AsignmentsDetailComponent implements OnInit {
           this.pending = false;
         }
       );
-  }
-
-  upload(event: any, type = 1) {
-    if (this.pending) return;
-    if (type == 2) event = event.target.files;
-    if (!event[0] || event[0].length == 0) return;
-    this.file = event[0];
   }
 
   onDownload(url: string) {

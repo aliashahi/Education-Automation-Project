@@ -35,7 +35,10 @@
               <ng-container
                 *ngFor="let asignment of week.asignments; let i = index"
               >
-                <mat-list-item class="flex justify-between my-2">
+                <mat-list-item
+                  class="flex justify-between my-2 cursor-pointer hover:bg-gray-100"
+                  (click)="showAsignmentDetails(asignment)"
+                >
                   <span class="text-lg font-bold"
                     >{{ asignment.title | longTextCutter }}
                     <span

@@ -14,7 +14,7 @@
         disabled:opacity-50
       "
       (click)="onSubmit()"
-      [disabled]="pending || !file"
+      [disabled]="pending || fileToUpload.length == 0"
     >
       Submit asignment
     </button>
@@ -44,6 +44,15 @@
   <p class="m-1 p-3 border-2 border-gray-200 rounded-lg text-lg">
     {{ asignment.description }}
   </p>
+  <EAP-file-uploader
+    *ngIf="asignment.file"
+    [files]="asignment.filesToShow"
+    [maxCount]="1"
+    [hasDownload]="true"
+    [hasDelete]="false"
+    [pending]="pending"
+    [hasUpload]="false"
+  ></EAP-file-uploader>
 </div>
 <div class="w-full">
   <nz-divider [nzText]="text1" nzOrientation="left">
@@ -71,42 +80,10 @@
       </span>
     </ng-template>
   </nz-divider>
-  <div class="getImage w-[100% - 1rem] h-80 m-2">
-    <div
-      class="
-        dragField
-        p-2
-        rounded-lg
-        w-full
-        h-full
-        flex
-        justify-center
-        items-center
-        border-dotted border-2 border-gray-400
-      "
-      [ngClass]="{ 'bg-green-50': file }"
-      (click)="input.click()"
-      (fileDropped)="upload($event, 1)"
-      DragDropFileUpload
-    >
-      <span class="block text-center pe-auto">
-        <h2>
-          {{
-            !file
-              ? "choose a file to upload"
-              : "file Added :" + (file?.name ?? "")
-          }}
-        </h2>
-        <h6>(you can also drag and drop)</h6>
-        <button
-          *ngIf="file"
-          mat-icon-button
-          (click)="$event.stopPropagation(); file = undefined"
-        >
-          <mat-icon class="cursor-pointer hover:scale-[0.1]">close </mat-icon>
-        </button>
-      </span>
-    </div>
-    <input class="inputField" #input (change)="upload($event, 2)" type="file" />
-  </div>
+  <EAP-file-uploader
+    [(files)]="fileToUpload"
+    [maxCount]="1"
+    [hasDownload]="true"
+    [pending]="pending"
+  ></EAP-file-uploader>
 </div>

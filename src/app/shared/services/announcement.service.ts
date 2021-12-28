@@ -2,19 +2,20 @@ import { Injectable, Injector } from '@angular/core';
 import { ServiceBase } from '../classes/service-base';
 import { Class } from 'src/app/manager/models/class.model';
 import { TokenDecoderPipe } from '../pipes/token-decoder.pipe';
+import { UserInfoPipe } from '../pipes/user-info.pipe';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnnouncementService extends ServiceBase {
-  tokenPipe!: TokenDecoderPipe;
+  userPipe!: UserInfoPipe;
   constructor(_inject: Injector) {
     super(_inject);
-    this.tokenPipe = _inject.get(TokenDecoderPipe);
+    this.userPipe = _inject.get(UserInfoPipe);
   }
 
   private get personId(): string {
-    return this.tokenPipe.transform('0', 'user_id');
+    return this.userPipe.transform('0', 'id');
   }
 
   private get _AnnouncementBaseUrl(): string {

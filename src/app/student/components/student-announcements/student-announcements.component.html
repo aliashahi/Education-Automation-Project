@@ -119,14 +119,6 @@
         <p style="text-overflow: ellipsis">
           {{ item.description | longTextCutter }}
         </p>
-        <div class="card-actions">
-          <button
-            (click)="onDelete(item)"
-            class="btn glass bg-red-300 rounded-full text-red-600"
-          >
-            Delete
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -134,7 +126,7 @@
 <ng-template #noData>
   <loading-section [loading]="pendding">
     <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
-      <nz-empty></nz-empty> 
+      <nz-empty></nz-empty>
     </div>
   </loading-section>
 </ng-template>
