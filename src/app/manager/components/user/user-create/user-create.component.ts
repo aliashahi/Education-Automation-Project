@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { User } from 'src/app/manager/models/user.model';
@@ -5,7 +6,6 @@ import { UserService } from 'src/app/auth/services/user.service';
 import { createDateFormat } from 'src/app/shared/utils/date.utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'EAP-user-create',
@@ -39,6 +39,7 @@ export class UserCreateComponent implements OnInit {
       let access = this.activeRoute.snapshot.params.access;
       this.pendding = true;
       this.personal_form.disable();
+      this.extra_form.disable();
       this.userSrv.getUserById(id, access).subscribe(
         (res) => {
           let user = res.user;
@@ -52,12 +53,21 @@ export class UserCreateComponent implements OnInit {
             role: user.role,
             password: '************',
           });
+          this.extra_form.setValue({
+            nationalId: res.nationalId,
+            birthDate: new Date(res.birthDate),
+            phoneNumber: res.phoneNumber,
+            mobileNumber: res.mobileNumber,
+            address: res.address,
+          });
           this.pendding = false;
           this.personal_form.enable();
+          this.extra_form.enable();
         },
         (error) => {
           this.pendding = false;
           this.personal_form.enable();
+          this.extra_form.enable();
         }
       );
     }
