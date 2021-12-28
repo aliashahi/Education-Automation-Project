@@ -65,6 +65,9 @@ export class AsignmentsListComponent implements OnInit {
               return true;
             else return false;
           });
+          all_assignments = all_assignments.filter(
+            (i) => !assignments.map((a) => a.id).includes(i.id)
+          );
           w.push({
             week_id: w.length,
             start_date: s_date,
@@ -72,6 +75,12 @@ export class AsignmentsListComponent implements OnInit {
             asignments: assignments,
           });
           s_date = addDays(s_date, 7);
+        }
+        if (all_assignments.length > 0 && w.length > 0) {
+          w[0] = {
+            ...w[0],
+            asignments: [...all_assignments, ...w[0].asignments],
+          };
         }
         this.weeks = w;
       },

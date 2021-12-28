@@ -3,6 +3,7 @@ import {
   differenceInMinutes,
   differenceInCalendarDays,
 } from 'date-fns';
+import { FileDto } from 'src/app/shared/models/file.dto';
 import { Asignment } from 'src/app/student/model/week.model';
 import { createDateFormat } from 'src/app/shared/utils/date.utils';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -21,8 +22,9 @@ export class TeacherAsignmentsDetailComponent implements OnInit {
   @Output('onBack') _onBack: EventEmitter<boolean> = new EventEmitter();
   diffInDays = '0 Days ,0 Hours ,0 Minutes';
   form!: FormGroup;
-  file?: File;
   pending = false;
+  fileToUpload: FileDto[] = [];
+
   constructor(
     private fb: FormBuilder,
     private alertSrv: AlertService,
@@ -78,7 +80,11 @@ export class TeacherAsignmentsDetailComponent implements OnInit {
     this.pending = true;
     let formData = new FormData();
     let data = this.form.value;
-    formData.append('file', this.file ?? '', this.file?.name);
+    formData.append(
+      'file',
+      this.fileToUpload[0].file ?? '',
+      this.fileToUpload[0].name
+    );
     formData.append('title', data.title ?? '');
     formData.append('deadline', createDateFormat(data.deadline));
     formData.append('description', data.description ?? '');
@@ -92,13 +98,6 @@ export class TeacherAsignmentsDetailComponent implements OnInit {
         this.pending = false;
       }
     );
-  }
-
-  upload(event: any, type = 1) {
-    if (this.pending) return;
-    if (type == 2) event = event.target.files;
-    if (!event[0] || event[0].length == 0) return;
-    this.file = event[0];
   }
 
   onBack(reload = false) {
