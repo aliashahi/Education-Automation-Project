@@ -51,36 +51,6 @@ export class StudentAnnouncementsComponent implements OnInit {
     );
   }
 
-  onEdit(item: Announcement) {}
-
-  onDelete(item: Announcement) {
-    this.dialog.open(ConfirmDialog, {
-      data: <ConfirmDialogDto>{
-        cancelText: 'close',
-        submitText: 'delete',
-        message: 'Are you Sure?',
-        submitFn: () => {
-          this.pendding = true;
-          this.annSrv.deleteAnnouncements(item.id).subscribe(
-            (res) => {
-              this.alertSrv.showToaster(
-                'Announcement Deleted Successfully!',
-                'SUCCESS'
-              );
-              this.getData();
-            },
-            (e) => {
-              this.pendding = false;
-            },
-            () => {
-              this.pendding = false;
-            }
-          );
-        },
-      },
-    });
-  }
-
   private _filter(searched: string, item: Announcement): boolean {
     return (
       (item.description
