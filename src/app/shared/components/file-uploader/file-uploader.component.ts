@@ -49,14 +49,24 @@ export class FileUploaderComponent implements OnInit {
     if (this.pending) return;
     if (type == 2) event = event.target.files;
     if (!event[0] || event[0].length == 0) return;
-    if (event[0].size > 500000) {
+    if (event[0].size > 2096576) {
       this.alertService.showToaster(
-        'you cant upload files with size more than 5MB!',
+        'you cant upload files with size more than 2MB!',
         'WARNING'
       );
       return;
     }
-    this.createAPreview(event[0], this.filesToShow.length);
+    if (event[0].name.match(/\.(jpg|jpeg|png|gif)$/))
+      this.createAPreview(event[0], this.filesToShow.length);
+    else {
+      this.filesToShow.push({
+        id: this.filesToShow.length,
+        file: event[0],
+        name: event[0].name,
+        yet_to_upload: true,
+      });
+      this.filesChange.emit(this.filesToShow);
+    }
   }
 
   onDownload(data: any) {

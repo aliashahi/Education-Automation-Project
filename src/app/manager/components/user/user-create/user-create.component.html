@@ -186,6 +186,10 @@
               ></textarea>
             </mat-form-field>
           </div>
+          <EAP-upload-profile-image
+            [(file)]="file"
+            [url]="fileUrl"
+          ></EAP-upload-profile-image>
           <div class="flex w-full justify-end">
             <button
               mat-raised-button
@@ -208,7 +212,6 @@
         <ng-template matStepLabel>Done</ng-template>
         <p class="text-green-600">You are now done.</p>
         <div class="flex w-full justify-end">
-          <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
       </mat-step>

@@ -14,6 +14,7 @@ import { FileUploaderComponent } from './components/file-uploader/file-uploader.
 import { ApexPolarAreaComponent } from './components/dashboard/apex-polar-area/apex-polar-area.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ApexBoxPlotComponent } from './components/dashboard/apex-box-plot/apex-box-plot.component';
+import { UploadProfileImageComponent } from '../shared/components/upload-profile-image/upload-profile-image.component';
 
 const MODULES = [
   FormsModule,
@@ -32,6 +33,7 @@ const COMPONENTS = [
   SplashScreenComponent,
   DashboardComponent,
   FileUploaderComponent,
+  UploadProfileImageComponent,
 ];
 
 @NgModule({

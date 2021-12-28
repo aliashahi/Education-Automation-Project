@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { ResourceService } from 'src/app/shared/services/resource.service';
 
 @Component({
@@ -16,7 +17,10 @@ export class UploadProfileImageComponent implements OnInit {
   }
 
   showImage = true;
-  constructor(private resourceSrv: ResourceService) {}
+  constructor(
+    private resourceSrv: ResourceService,
+    private alertSrv: AlertService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -30,6 +34,8 @@ export class UploadProfileImageComponent implements OnInit {
   upload(event: any, type = 1) {
     if (type == 2) event = event.target.files;
     if (!event[0] || event[0].length == 0) return;
+    if (!event[0].name.match(/\.(jpg|jpeg|png|gif)$/))
+      this.alertSrv.showToaster('please upload image file!', 'WARNING');
     this.createAPreview(event[0]);
   }
 
