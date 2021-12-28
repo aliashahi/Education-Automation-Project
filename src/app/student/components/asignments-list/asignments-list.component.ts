@@ -9,6 +9,7 @@ import { Class } from 'src/app/manager/models/class.model';
 import { ASIGNMENTS_MOCK_DATA } from '../../mocks/asignments.mock';
 import { ClassService } from 'src/app/shared/services/class.service';
 import { AssignmentService } from 'src/app/shared/services/assignment.service';
+import { ResourceService } from 'src/app/shared/services/resource.service';
 
 @Component({
   selector: 'EAP-asignments-list',
@@ -24,6 +25,7 @@ export class AsignmentsListComponent implements OnInit {
 
   constructor(
     private assignmentSrv: AssignmentService,
+    private resourceSrv: ResourceService,
     private classSrv: ClassService
   ) {}
 
@@ -45,12 +47,27 @@ export class AsignmentsListComponent implements OnInit {
     return diff.toString();
   }
 
+  public get imageBaseUrl(): string {
+    return this.resourceSrv.imageBaseUrl;
+  }
+
   private initData() {
     this.pending = true;
     this.assignmentSrv.getAssignments(this.class.id, {}).subscribe(
       (res) => {
         this.pending = false;
-        let all_assignments: Asignment[] = res.results;
+        let all_assignments: Asignment[] = res.results.map((i: any) => {
+          return {
+            ...i,
+            filesToShow: [
+              {
+                id: i.id,
+                name: i.file.split('/')[i.file.split('/').length - 1],
+                file: this.imageBaseUrl + i.file,
+              },
+            ],
+          };
+        });
         let s_date = new Date(this.class.startClassDate);
         let e_date = new Date(this.class.endClassDate);
         let w: Week[] = [];

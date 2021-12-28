@@ -1,3 +1,5 @@
+import { FileDto } from "src/app/shared/models/file.dto";
+
 export enum ASIGNMENT_STATUS {
   SUBMITED = 'Submitted',
   NOT_SUBMITED = 'Not Submitted',
@@ -9,6 +11,7 @@ export interface Asignment {
   title: string;
   description?: string;
   file: string;
+  filesToShow: FileDto[];
   created?: string;
   deadline: string;
   updated?: string;

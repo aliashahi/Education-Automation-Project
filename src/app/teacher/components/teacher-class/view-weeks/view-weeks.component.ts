@@ -82,6 +82,7 @@ export class ViewWeeksComponent implements OnInit {
       title: '',
       file: '',
       deadline: '',
+      filesToShow: [],
     };
     this.tabIndex = 1;
   }
