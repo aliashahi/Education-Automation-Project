@@ -3,10 +3,10 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { NavigationEnd, Router } from '@angular/router';
 import { ProfileDialog } from '../profile-dialog/profile.dialog';
 import { UserService } from 'src/app/auth/services/user.service';
+import { UserInfoPipe } from 'src/app/shared/pipes/user-info.pipe';
 import { BreadcrumpPipe } from 'src/app/shared/pipes/breadcrump.pipe';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UserInfoPipe } from 'src/app/shared/pipes/user-info.pipe';
 
 @Component({
   selector: 'EAP-topnav',
@@ -64,13 +64,15 @@ export class TopnavComponent implements OnInit {
   }
 
   private setBreadCrumps() {
-    this.breadcrump = this.breadcrumbPipe.transform([]).map((i) => {
-      return {
-        name: i && i.name ? i.name : '',
-        url: i && i.url ? i.url : '',
-        value: i && i.value ? i.value : '',
-      };
-    });
+    try {
+      this.breadcrump = this.breadcrumbPipe.transform([]).map((i) => {
+        return {
+          name: i && i.name ? i.name : '',
+          url: i && i.url ? i.url : '',
+          value: i && i.value ? i.value : '',
+        };
+      });
+    } catch {}
   }
 
   onEditProfile(menu: MatMenuTrigger) {

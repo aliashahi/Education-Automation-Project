@@ -16,6 +16,9 @@
       <div class="caption" *ngIf="true">
         <h1>
           {{ "-" | userInfo: "first_name" }} {{ "-" | userInfo: "last_name" }}
+          <button mat-icon-button color="primary" (click)="onEditProfile()">
+            <mat-icon>edit</mat-icon>
+          </button>
         </h1>
         <h3>
           {{ "-" | tokenDecoder: "role" | ACCESS }} ({{
@@ -23,16 +26,7 @@
           }})
         </h3>
       </div>
-      <div class="action mat-typography">
-        <button mat-raised-button color="primary" (click)="onEditProfile()">
-          <mat-icon>edit</mat-icon>
-          Edit Profile
-        </button>
-        <button mat-stroked-button color="warn" (click)="onLogout()">
-          <mat-icon>logout</mat-icon>
-          Logout
-        </button>
-      </div>
+      <div class="action mat-typography"></div>
     </div>
   </div>
   <ng-content></ng-content>
