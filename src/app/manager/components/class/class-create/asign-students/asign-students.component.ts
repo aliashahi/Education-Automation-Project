@@ -43,11 +43,11 @@ export class AsignStudentsComponent implements OnInit {
     this.pending = true;
     this.userSrv
       .addStudentsToClass(this.selection.selected[index].id, {
-        ...this.selection.selected[index],
-        ...this.selection.selected[index].user,
-        id: undefined,
-        profileImage: null,
-        user: this.selection.selected[index].user.id,
+        // // ...this.selection.selected[index],
+        // // ...this.selection.selected[index].user,
+        // // id: undefined,
+        // // profileImage: null,
+        // user: this.selection.selected[index].user.id,
         classroom: +this.classId,
       })
       .subscribe(

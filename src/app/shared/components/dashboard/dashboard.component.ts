@@ -40,4 +40,47 @@ export class DashboardComponent implements OnInit {
     this.alertSrv.showToaster('You loged out Successfully!', 'INFO');
     this.router.navigate(['/auth/login']);
   }
+
+  readonly CARD_CONFIG = [
+    {
+      textClass: 'text-blue-700',
+      classes: ` 
+      from-[#e8fffe]
+      via-[#b3fffd]
+      to-[#adf1ff]
+      `,
+      number: 367,
+      desc: 'Studnets!',
+    },
+    {
+      textClass: 'text-green-700',
+      classes: ` 
+      from-[#e3fff6]
+      via-[#afffe4]
+      to-[#79ffd2]
+      `,
+      number: 24,
+      desc: 'Teachers!',
+    },
+    {
+      textClass: 'text-red-700',
+      classes: ` 
+      from-[#ffd7d7]
+      via-[#ffc9c9]
+      to-[#ffa7a7]
+      `,
+      number: 1,
+      desc: 'Managers!',
+    },
+    {
+      textClass: 'text-purple-700',
+      classes: ` 
+      from-[#f0dcff]
+      via-[#e7c8ff]
+      to-[#d9a7ff]
+      `,
+      number: 102,
+      desc: 'Reward!',
+    },
+  ];
 }

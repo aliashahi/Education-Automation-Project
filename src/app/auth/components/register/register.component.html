@@ -15,9 +15,14 @@
   >
     <div class="max-w-md w-full space-y-8 bg-white rounded-md p-6 shadow-lg">
       <div class="text-center">
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Sign up in
-        </h2>
+        <img
+          class="mx-auto"
+          src="../../../../assets/images/logo/logo_icon.jpg"
+          width="70"
+          height="70"
+          alt=""
+        />
+        <h3 class="text-center font-extrabold text-gray-600">Sign up in</h3>
         <img
           class="w-2/3 m-auto"
           src="../../../../assets/images/logo/logo_full.svg"
@@ -194,8 +199,28 @@
               text-center
             "
           >
+            <svg
+              *ngIf="pendding"
+              class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
             <span (click)="onCancelRequest()" class="px-2"> Sign Up </span>
-            <mat-spinner [diameter]="23" *ngIf="pendding"></mat-spinner>
           </button>
           <div class="text-sm text-start pt-2">
             <a

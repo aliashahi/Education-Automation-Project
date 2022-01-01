@@ -1,8 +1,8 @@
-import { LoginDto, RegisterDto, UpdateProfileDto } from './login.dto';
+import { Subject } from 'rxjs';
+import { UserSearchDto } from './user.dto';
 import { Injectable, Injector } from '@angular/core';
 import { ServiceBase } from 'src/app/shared/classes/service-base';
-import { UserSearchDto } from './user.dto';
-import { Subject } from 'rxjs';
+import { LoginDto, RegisterDto, UpdateProfileDto } from './login.dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -131,7 +131,7 @@ export class UserService extends ServiceBase {
   }
 
   public addStudentsToClass(id: number, model: any) {
-    return this.put$(`school/students/${id}/`, model);
+    return this.patch$(`school/students/${id}/`, model);
   }
 
   public getUserById(id: number, access: string) {

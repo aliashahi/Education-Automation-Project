@@ -16,6 +16,9 @@
       <div class="caption" *ngIf="true">
         <h1>
           {{ "-" | userInfo: "first_name" }} {{ "-" | userInfo: "last_name" }}
+          <button mat-icon-button color="primary" (click)="onEditProfile()">
+            <mat-icon>edit</mat-icon>
+          </button>
         </h1>
         <h3>
           {{ "-" | tokenDecoder: "role" | ACCESS }} ({{
@@ -23,102 +26,34 @@
           }})
         </h3>
       </div>
-      <div class="action mat-typography">
-        <button mat-raised-button color="primary" (click)="onEditProfile()">
-          <mat-icon>edit</mat-icon>
-          Edit Profile
-        </button>
-        <button mat-stroked-button color="warn" (click)="onLogout()">
-          <mat-icon>logout</mat-icon>
-          Logout
-        </button>
-      </div>
+      <div class="action mat-typography"></div>
     </div>
   </div>
   <ng-content></ng-content>
   <div class="w-full flex flex-wrap justify-around items-center">
-    <div class="w-[calc(25%-16px)] m-2 h-48 p-2">
+    <div
+      class="w-[calc(25%-16px)] m-2 h-48 p-2"
+      *ngFor="let item of CARD_CONFIG"
+    >
       <div
         class="
           w-full
           h-full
           bg-white bg-gradient-to-r
-          from-[#e8fffe]
-          via-[#b3fffd]
-          to-[#adf1ff]
+          {{ item.classes }}
           rounded-lg
-          flex
+          flex flex-col
           items-center
           justify-around
           p-2
+          pt-14
           shadow-md
         "
       >
-        <h1 style="font-size: 100px">324</h1>
-        <h2 class="text-gray-600">Studnets are in School!</h2>
-      </div>
-    </div>
-    <div class="w-[calc(25%-16px)] m-2 h-48 p-2">
-      <div
-        class="
-          w-full
-          h-full
-          bg-white bg-gradient-to-r
-          from-[#e3fff6]
-          via-[#afffe4]
-          to-[#79ffd2]
-          rounded-lg
-          flex
-          items-center
-          justify-around
-          p-2
-          shadow-md
-        "
-      >
-        <h1 style="font-size: 100px">23</h1>
-        <h2 class="text-gray-600">Teachers are in School!</h2>
-      </div>
-    </div>
-    <div class="w-[calc(25%-16px)] m-2 h-48 p-2">
-      <div
-        class="
-          w-full
-          h-full
-          bg-white bg-gradient-to-r
-          from-[#ffd7d7]
-          via-[#ffc9c9]
-          to-[#ffa7a7]
-          rounded-lg
-          flex
-          items-center
-          justify-around
-          p-2
-          shadow-md
-        "
-      >
-        <h1 style="font-size: 100px">1</h1>
-        <h2 class="text-gray-600">Manager are in School!</h2>
-      </div>
-    </div>
-    <div class="w-[calc(25%-16px)] m-2 h-48 p-2">
-      <div
-        class="
-          w-full
-          h-full
-          bg-white bg-gradient-to-r
-          from-[#f0dcff]
-          via-[#e7c8ff]
-          to-[#d9a7ff]
-          rounded-lg
-          flex
-          items-center
-          justify-around
-          p-2
-          shadow-md
-        "
-      >
-        <h1 style="font-size: 100px">102</h1>
-        <h2 class="text-gray-600">Reward!</h2>
+        <h1 class="{{ item.textClass }}" style="font-size: 90px">
+          {{ item.number }}
+        </h1>
+        <h2 class="text-gray-500 text-sm">{{ item.desc }}</h2>
       </div>
     </div>
   </div>

@@ -74,7 +74,13 @@
         ></EAP-file-uploader>
         <div class="flex w-full">
           <button
-            class="btn btn-primary ml-auto"
+            class="
+              btn
+              border-0
+              bg-secondary-700
+              disabled:bg-secondary-300 disabled:text-white
+              ml-auto
+            "
             [disabled]="fileToUpload.length != 1 || !title || pending"
             (click)="onSubmit()"
           >
