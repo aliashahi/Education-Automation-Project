@@ -1,26 +1,4 @@
-.selected {
-  background-color: #ecfff5;
-  font-size: 19px;
-  font-family: Poppins, Helvetica, sans-serif !important;
-}
-
-#scheduleContainer::ng-deep.mat-form-field-wrapper {
-  padding: 0;
-  margin: 0;
-}
-
-#scheduleContainer::ng-deep.mat-form-field-outline {
-  background-color: white;
-}
-
-#scheduleContainer::ng-deep.mat-form-field-infix {
-  width: 120px;
-}
-
-td {
-  text-align: center;
-}
-
-tr {
-  height: 60px;
+td,
+th {
+  max-width: 300px !important;
 }
