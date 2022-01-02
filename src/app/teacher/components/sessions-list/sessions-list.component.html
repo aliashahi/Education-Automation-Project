@@ -1,0 +1,18 @@
+<div *ngFor="let class of classes; let i = index" class="classes">
+    <a class="title" (click) = "OnSelectClass(i)" style="margin-top: 10px;"> 
+        class- {{ class.id }}
+    </a>
+    <p class="class-name">
+        Subject: {{ class.name }}
+    </p>
+</div>
+
+  
+<div class="continar"> 
+    <div *ngFor="let session of sessionList; let id = index" class="sessions">
+        <a class="title" (click) = "OnSelectSess(id)"> 
+            session- {{ session.id }}
+        </a>
+    </div>
+</div>
+ 

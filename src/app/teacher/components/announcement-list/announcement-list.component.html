@@ -1,0 +1,46 @@
+<div class="ann-box">
+    <div class="ann-box-title">
+      <div class="add-announcement">
+        <a routerLink="/teacher/announcement"><mat-icon>add</mat-icon></a>
+      </div>
+      <div class="add-announcement">
+        <a
+          ><i
+            class="bi bi-arrow-clockwise"
+            
+          ></i>
+        </a>
+      </div>
+      <div class="ti">Announcement</div>
+    </div>
+
+    <div class="ann">
+      <div class="content">
+        <div
+          *ngFor="let person of allData; let id = index"
+          class="ann-content">
+          <a class="title" href="#">
+            <span
+              (keyup)="changeValue(id, 'tit', $event)"
+              (blur)="updateList(id, 'tit', $event)"
+              contenteditable="true"
+              >{{ person.title }}
+            </span>
+          </a>
+          <p class="pragraph">
+            <span
+              contenteditable="true"
+              (keyup)="changeValue(id, 'ann', $event)"
+              (blur)="updateList(id, 'ann', $event)"
+              >{{ person.description }}</span
+            >
+          </p>
+          <button type="button" size="15px" class="my-0" (click)="remove(id)">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+   
+  </div>
