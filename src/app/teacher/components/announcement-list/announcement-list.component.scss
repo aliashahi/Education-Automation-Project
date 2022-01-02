@@ -1,0 +1,74 @@
+.ann-box {
+	position: relative;
+	right: 2.5%;
+	background-color: white;
+	width: 95%;
+	float: right;
+	margin-top: 20px;
+	/*margin-left: 1%;*/
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	overflow-y: hidden;
+}
+
+.ann-box .ann-box-title {
+	background-color: white;
+	height: 50px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 15px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.ann-box-title .ti {
+	float: left;
+}
+
+.add-announcement a {
+	float: right;
+	font-size: 15px;
+	margin-left: 8px;
+    text-decoration: none; 
+}
+
+.ann {
+	background-color: white;
+	width: 100%;
+	/*height: 450px;*/
+	font-family: Arial, Helvetica, sans-serif;
+	/*overflow-y: scroll;*/
+	overflow-y: hidden;	
+	overflow-x: hidden;
+}
+
+.ann::webkit-scrollbar {
+	display: none;
+}
+
+.ann .title {
+	color: #202020;
+	font-weight: bold;
+}
+.content {
+    margin-left: 0px;
+	
+}
+.ann-content button {
+	float: right;
+	color: red;
+}
+.content div {
+	width: 100%;
+	/*height: 60px;*/
+	padding:10px;
+	background-color: white;
+	border-top: 1px solid #ccc;
+	overflow-y: hidden;
+}
+.content a{
+	text-decoration: none;
+	font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}

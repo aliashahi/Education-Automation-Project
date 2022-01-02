@@ -1,15 +1,39 @@
 .alert1 {
     background-color: rgba($color: #46fd8c, $alpha: 0.3);
-    width: 62%;
+    width: 40%;
     margin-left: 2%;
 }
 .container {
-    width: 80%;
+    width: 100%;
     margin-left: 1%;
     margin-bottom: 20px;
 }
+
+.present input[type="checkbox"]:checked{
+    background-color: rgb(47, 197, 97);
+}
+
+.absent input[type="checkbox"]:checked{
+    background-color: rgb(228, 50, 50);
+}
+
+div.md-form{
+    width: 82%;
+    height: 70px;
+    background-color: white;
+    /*border: 1px solid #ccc;*/
+    border-radius: 10px;
+    margin-left: 1%;
+}
+
+div.col-md-12 mx-auto {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
 .row1 {
-    width: 64%;
+    width: 80%;
     margin-left: 1%;
 }
 .title {
@@ -38,16 +62,16 @@
 .md-form {
     width: 100%;
     margin-top: 10px;
-    /*margin-left: 1%;*/
     float: left;
 }
 .row {
-    width: 100%;
+    width: 95%;
     margin-bottom: 10px;
 }
 .search-input {
-    width: 74%;
-    height: 40px;
+    width: 85%;
+    height: 50px;
+    margin-top: 10px;
     margin-right: 10px;
     margin-left: 1%;
     border: 1px solid #ccc;
@@ -55,9 +79,24 @@
     float: left;
 }
 .save {
-    height: 40px;
+    height: 50px;
+    width: 100px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background-color: rgb(40, 219, 118);
     float: left;
 }
+
+mat-form-field {
+    margin-right: 12px;
+    margin-top: 10px;
+    float: left;
+    height: 40px;
+}
+.example-form-field {
+    height: 40px;
+}
+
 table.rollcall-list {
 	border-collapse: collapse;
 	border: 1px solid #ccc;

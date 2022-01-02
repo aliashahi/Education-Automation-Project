@@ -2,8 +2,17 @@ import {Component, HostListener, ViewChild, OnInit, Input, TemplateRef} from '@a
 import { MdbTableDirective } from 'angular-bootstrap-md';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {NgbAlert} from '@ng-bootstrap/ng-bootstrap';
+import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import {Subject} from 'rxjs';
+import { Class } from 'src/app/manager/models/class.model';
 import {debounceTime} from 'rxjs/operators';
+import {FormGroup, FormControl} from '@angular/forms';
+import { AttendancdService } from 'src/app/shared/services/attendancd.service';
+import { ClassService } from 'src/app/shared/services/class.service';
+import { UserService } from 'src/app/auth/services/user.service';
+import { Attendance } from '../../models/attendance/attendance.module';
+import { SharedAnnService } from '../../services/shared-ann.service';
+
 
 @Component({
   selector: 'EAP-rollcall',
@@ -12,9 +21,25 @@ import {debounceTime} from 'rxjs/operators';
 })
 export class RollcallComponent implements OnInit {
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, private alertSrv : AlertService,
+              private attSer: AttendancdService,
+              private claSer: ClassService,
+              private sharedData: SharedAnnService,
+              private useSer: UserService)
+               {
+                 this.getAttendanceList();
+                 console.log("ya mahdi")
+                // this.updateAtt();
+               }
     modalRef!: BsModalRef;
     message: string | undefined;
+
+    pendding: boolean = false;
+    allData: Class[] = [];
+    list: any[] = [];
+    presentChecked = true;
+   // attendanceList = [{id: "1", session: "2" , student: "3" , present: true }];
+    attendanceList: any[] = [];
 
     time: string = '';
     currentTime = new Date();
@@ -22,7 +47,7 @@ export class RollcallComponent implements OnInit {
     @ViewChild(MdbTableDirective, { static: true })
     mdbTable!: MdbTableDirective;
     elements: any = [];
-    headElements = ['ID', 'First', 'Absence', 'Delay'];
+    headElements = ['ID', 'Student Name', 'Absent', 'Present'];
     searchText: string = '';
     previous: string | undefined;
     //---------
@@ -35,14 +60,24 @@ export class RollcallComponent implements OnInit {
     staticAlert!: NgbAlert;
     @ViewChild('selfClosingAlert', { static: false })
     selfClosingAlert!: NgbAlert;
-  
-    public changeSuccessMessage() { this._success.next(` Saved successfully.`); }
+    public changeSuccessMessage() { this.alertSrv.showToaster( "Saved successfully" , 'SUCCESS'); }
 
     //---------
 
     openModal(template: TemplateRef<any>) {
+      /*
         this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
-       
+        */
+      
+        
+        for (let i =0; i< this.attendanceList.length; i++){
+          this.updateAtt(this.attendanceList[i].id,
+                         this.attendanceList[i].session,
+                         this.attendanceList[i].student,
+                         this.attendanceList[i].present );
+        }
+      
+        this.changeSuccessMessage();
     }
      
      confirm(): void {
@@ -60,47 +95,144 @@ export class RollcallComponent implements OnInit {
     @HostListener('input') oninput() {
         this.searchItems();
     }
-
+    
     ngOnInit(): void {
-        for (let i = 1; i <= 10; i++) {
-            this.elements.push({
-                id: i.toString(), first: 'StudentName ' + i.toString(),  Absence: '', Delay: ''
-            });
-        }
-        this.mdbTable.setDataSource(this.elements);
-        this.previous = this.mdbTable.getDataSource();
-        this.time = this.currentTime.toLocaleDateString();
-
-
-        //------
-        setTimeout(() => this.staticAlert.close(), 20000);
-  
-      this._success.subscribe(message => this.successMessage = message);
-      this._success.pipe(debounceTime(5000)).subscribe(() => {
-        if (this.selfClosingAlert) {
-          this.selfClosingAlert.close();
-        }
-      });
+      this.list = this.sharedData.getCreatedAnnoun();
+      console.log("ya kaima ali mohammad");
+      console.log(this.list[0]);
     }
 
     searchItems() {
         const prev = this.mdbTable.getDataSource();
         if (!this.searchText) {
             this.mdbTable.setDataSource(this.previous);
-            this.elements = this.mdbTable.getDataSource();
+            this.attendanceList = this.mdbTable.getDataSource();
         }
         if (this.searchText) {
-            this.elements = this.mdbTable.searchLocalDataByMultipleFields(this.searchText, ['first', 'last']);
+            this.attendanceList = this.mdbTable.searchLocalDataBy(this.searchText);
             this.mdbTable.setDataSource(prev);
         }
     }
 
-
-    dateDisplay() {
-        
-
+    onchange(event: any) {
+      const id = event.target.value;
+      const isChecked = event.target.checked;
+      for (let i =0; i < this.attendanceList.length; i++) {
+        if (this.attendanceList[i].id == id ) {
+          this.attendanceList[i].present = isChecked;
+          this.presentChecked = isChecked;
+          console.log(this.attendanceList);
+        }
+      }
     }
 
+    onChangeAbsent(event: any){
+      const id = event.target.value;
+      const isChecked = event.target.checked;
+      for (let i =0; i < this.attendanceList.length; i++) {
+        if (this.attendanceList[i].id == id ) {
+          if (isChecked == false){
+            this.attendanceList[i].present = !isChecked;
+          }
+          console.log(this.attendanceList);
+        }
+      }
+    }
+
+    private getAttendanceList() {
+      this.pendding = true;
+      this.attSer.getAttendanceListById(1 , 2).subscribe(
+        (res) => {
+          this.attendanceList = res.results;
+          this.mdbTable.setDataSource(this.attendanceList);
+          this.previous = this.mdbTable.getDataSource();
+        },
+        (e) => {},
+        () => {
+          this.pendding = false;
+        }
+      );
+    }
+
+    private getSessions() {
+      this.pendding = true;
+      this.attSer.getSessionsByClassId(1).subscribe(
+        (res) => {
+          this.attendanceList = res;
+          console.log(res);
+        },
+        (e) => {},
+        () => {
+          this.pendding = false;
+        }
+      );
+    }
    
+    private getClasses() {
+      this.pendding = true;
+      this.claSer.getClassList({}).subscribe(
+        (res) => {
+          this.allData = res;
+          console.log(res);
+        },
+        (e) => {},
+        () => {
+          this.pendding = false;
+        }
+      );
+    }
+
+    private createSes() {
+      this.pendding = true;
+      this.attSer.createSession({
+        "id": 3,
+        "title": "title2",
+        "description": "",
+        "date": "2021-12-24"
+      }).subscribe(
+        (res) => {
+         // this.allData = res;
+         // console.log(res);
+        },
+        (e) => {},
+        () => {
+          this.pendding = false;
+        }
+      );
+    }
+
+    private getStu() {
+      this.pendding = true;
+      this.useSer.getUserFullInfo(1 , "S").subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (e) => {},
+        () => {
+          this.pendding = false;
+        }
+      );
+    }
+
+   //id : any, session: any, student: any, present: any 
+    private updateAtt(id : any, session: any, student: any, present: any) {
+      this.pendding = true;
+      this.attSer.updateAttendance(1, 2, id, {
+        "id": id,
+        "session": session,
+        "student": student,
+        "present": present
+      }).subscribe(
+        (response) => {
+          this.getAttendanceList();
+          console.log("ya mahdi");
+        },
+        (e) => {},
+        () => {
+          this.pendding = false;
+        }
+      );
+    }
+    
 
 }

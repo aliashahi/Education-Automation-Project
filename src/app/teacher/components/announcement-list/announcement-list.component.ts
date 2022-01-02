@@ -1,42 +1,13 @@
-import { Component, Renderer2, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-//import { SharedAnnService } from '../../services/shared-ann.service';
+import { Component, OnInit } from '@angular/core';
 import { Announcement } from 'src/app/manager/models/announcement.model';
-import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { AnnouncementService } from 'src/app/shared/services/announcement.service';
-import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
-
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ChartComponent,
-  ApexDataLabels,
-  ApexXAxis,
-  ApexPlotOptions
-} from "ng-apexcharts";
-
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  xaxis: ApexXAxis;
-};
 
 @Component({
-  selector: 'EAP-teacher-dashboard',
-  templateUrl: './teacher-dashboard.component.html',
-  styleUrls: ['./teacher-dashboard.component.scss'],
+  selector: 'EAP-announcement-list',
+  templateUrl: './announcement-list.component.html',
+  styleUrls: ['./announcement-list.component.scss']
 })
-export class TeacherDashboardComponent implements OnInit {
-  @ViewChild('addannoun')
-  private divAnnoun = {} as ElementRef;
-  //message : string = '';
-  //title : string = '';
-  //announcement : string = '';
-  list!: any[];
-  selected: Date | null | undefined;
-
+export class AnnouncementListComponent implements OnInit {
   showKind: 'list' | 'grid' = 'list';
   searchedValue!: string;
   startDate!: string;
@@ -45,52 +16,11 @@ export class TeacherDashboardComponent implements OnInit {
   filteredData: Announcement[] = [];
   pendding: boolean = false;
 
-  /*---------- cart------------*/
-  @ViewChild("chart")
-  chart!: ChartComponent;
-  public chartOptions: Partial<ChartOptions> | any;
+  constructor(private annSrv: AnnouncementService) {
+    this.getData();
+   }
 
-
-  constructor(
-    private route : Router,
-    private renderer: Renderer2,
-    private annSrv: AnnouncementService) {
-      this.chartOptions = {
-        series: [
-          {
-            name: "basic",
-            data: [6, 14, 20, 3]
-          }
-        ],
-        chart: {
-          type: "bar",
-          height: 200,
-          width: 600
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        xaxis: {
-          categories: [
-            "South Korea",
-            "Canada",
-            "United Kingdom",
-            "Minimum"
-          ]
-        }
-      };
-      this.getData();
-     
-     }
-
- 
-  clickme(){
-    this.route.navigate(['/teacher/sessions']);
+  ngOnInit(): void {
   }
 
   updateList(id: number, property: string, event: any) {
@@ -164,6 +94,6 @@ private _filter(searched: string, item: Announcement): boolean {
 }
 /*------------------------------------------*/
 
-  ngOnInit(): void {}
+ 
+
 }
-  

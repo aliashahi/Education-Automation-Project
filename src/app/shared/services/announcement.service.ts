@@ -1,6 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
 import { ServiceBase } from '../classes/service-base';
-import { Class } from 'src/app/manager/models/class.model';
 import { TokenDecoderPipe } from '../pipes/token-decoder.pipe';
 
 @Injectable({
@@ -18,7 +17,7 @@ export class AnnouncementService extends ServiceBase {
   }
 
   private get _AnnouncementBaseUrl(): string {
-    return `school/announcement/${this.personId}`;
+    return `school/announcement/${1}`;
   }
 
   getAnnouncements(searchModel: any) {

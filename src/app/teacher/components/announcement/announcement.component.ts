@@ -1,6 +1,9 @@
 import { Component, Renderer2, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
-import { SharedAnnService } from '../../services/shared-ann.service';
-
+//import { SharedAnnService } from '../../services/shared-ann.service';
+import { AnnouncementService } from 'src/app/shared/services/announcement.service';
+import { MatStartDate } from '@angular/material/datepicker';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
 @Component({
   selector: 'EAP-announcement',
@@ -13,18 +16,20 @@ export class AnnouncementComponent implements OnInit {
 
     title : string = '';
     explanation : string = '';
-    notific = '';
+    startDate = new Date();
+    time = this.startDate.getFullYear +"-"+ this.startDate.getMonth +"-"+this.startDate.getDay;
+    description = '';
     mesage1 : string = "The notification field can't be empty!... Please enter something.";
     mesage2 : string = "Your notification has been saved";
     isEmpty = true;
     mesage_active = false;
 
     message : string = '';
-    //tit:String;
     list:any;
-    constructor(private renderer: Renderer2, private _userData: SharedAnnService) {
-      
-    
+    constructor(private renderer: Renderer2,
+                private annSrv: AnnouncementService,
+               // private _userData: SharedAnnService,
+                private alertSrv : AlertService) {
     }
     
     addText(){
@@ -33,18 +38,35 @@ export class AnnouncementComponent implements OnInit {
       
     }
 
-    
-/*
-    newMessage() {
-      this.sharedService.nextMessage("Second Message")
+    private createAnnouncement(title : string, des : string, startDate : any){
+      this.annSrv.createAnnouncements(
+        { 
+          "title": title,
+           "description": des,
+           "group": "Stu",
+           "teachers": [ 1 ],
+           "classes": [ 1 ],
+           "start_date": "2021-12-12",
+           "expire_date": "2021-12-20",
+           "has_comment": false,
+           "allTeachers": false,
+           "allClasses": false,
+           "students": [ 2 ],
+           "allStudents": false
+           }
+      
+        ).subscribe(
+        (res) => {
+          
+        },
+        (e) => {},
+        () => {
+         
+        }
+      );
     }
-    
-    shareData(){
-      this.sharedService.sharedMessage.subscribe(message => this.message = message);
-    }
-    */
     submited(){
-        if (this.notific.localeCompare('')==0){
+        if (this.description.localeCompare('')==0){
             this.mesage2 = '';
             this.mesage1 = "The notification field can't be empty!... Please enter something.";
             this.mesage_active = true; 
@@ -52,25 +74,31 @@ export class AnnouncementComponent implements OnInit {
         else{
             this.isEmpty = false;
             this.mesage1 = '';
-            this.mesage2 = "Your notification has been saved";
+            this.changeSuccessMessage();
+            //this.mesage2 = "Your notification has been saved";
             this.mesage_active = true;
         }
         setTimeout(() => {
             this.mesage_active = false;
         }, 10000);
-       this.addAnnouncement();
+        this.createAnnouncement(this.title , this.description , this.startDate);
+        console.log(this.time);
+       //this.addAnnouncement();
     }
     
-    
+    /*
     addAnnouncement(){
       this.list = [
         {name:'Anu',age:'20'}
       ]
-      this.list.push({name: this.title, age: this.notific});
+      this.list.push({name: this.title, age: this.description});
       this._userData.setUserData(this.list);
     }
+    */
 
   ngOnInit(): void {
   }
+
+  public changeSuccessMessage() { this.alertSrv.showToaster( "Saved successfully" , 'INFO'); }
 
 }

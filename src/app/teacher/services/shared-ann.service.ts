@@ -7,7 +7,7 @@ export class SharedAnnService {
   list:any;
   constructor() { }
  
-   getUserData(){ 
+   getCreatedAnnoun(){ 
       return this.list; 
    } 
    setUserData(data:any[]){

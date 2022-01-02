@@ -1,0 +1,38 @@
+
+div.classes {
+    width: 90%;
+    height: 80px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px;
+}
+div.continar {
+    width: 90%;
+    height: auto;
+    margin: 10px;
+}
+
+div.sessions  {
+    width: 100;
+    height: 60px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}  
+
+a {
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+div.classes a.title {
+    margin-top: 10px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+div.classes p {
+    margin-top: 10px;
+    margin-left: 20px;
+}

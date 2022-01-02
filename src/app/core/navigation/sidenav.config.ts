@@ -75,7 +75,7 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
   },
   {
     name: 'Create Announcement',
-    url: '/teacher/announcement-create',
+    url: '/teacher/announcement',
     ACCESS: 'T',
     icon: 'send',
   },
@@ -87,7 +87,7 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
   },
   {
     name: 'Roll Call',
-    url: '/teacher/roll-call',
+    url: '/teacher/sessions',
     ACCESS: 'T',
     icon: 'rule',
   },

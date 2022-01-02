@@ -15,6 +15,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ViewScheduleComponent } from './components/teacher-class/view-schedule/view-schedule.component';
+import { MatIconModule } from '@angular/material/icon';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SessionsListComponent } from './components/sessions-list/sessions-list.component';
+import { MatTreeModule } from '@angular/material/tree';
+import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 
 const routes: Routes = [
   {
@@ -36,6 +42,14 @@ const routes: Routes = [
       {
         path: 'announcement',
         component: AnnouncementComponent,
+      },
+      {
+        path: 'announcement-list',
+        component: AnnouncementListComponent,
+      },
+      {
+        path: 'sessions',
+        component: SessionsListComponent,
       },
       {
         path: 'roll-call',
@@ -62,13 +76,19 @@ const routes: Routes = [
     RollcallComponent,
     ClassListComponent,
     ViewScheduleComponent,
+    SessionsListComponent,
+    AnnouncementListComponent,
   ],
   imports: [
     NgbModule,
     FormsModule,
     CommonModule,
     SharedModule,
+    MatIconModule,
+    NgApexchartsModule,
+    MatDatepickerModule,
     ModalModule.forRoot(),
+    MatTreeModule,
     MDBBootstrapModule.forRoot(),
     RouterModule.forChild(routes),
   ],

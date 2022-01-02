@@ -5,7 +5,6 @@
     <div class="container">
       <div class="not-title">
         <h2>Announcement</h2>
-        <p>Write you notification, then click the submit button to save your notification</p>
       </div>
     
       <form action="/action_page.php">
@@ -21,12 +20,11 @@
       </div>
       <div class="row">
         <div class="col-50">
-          <textarea id="notifi" name="notifi" [(ngModel)]="notific" placeholder="Write something.." style="height:150px"></textarea>
+          <textarea id="notifi" name="notifi" [(ngModel)]="description" placeholder="Write something.." style="height:150px"></textarea>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <label class="select-file"><input type="file" id="myfile" name="myfile"></label>
           <button (click)="submited()" type="submit" class="Submit">submit</button>
         </div>
       </div>
