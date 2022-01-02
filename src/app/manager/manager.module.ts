@@ -12,7 +12,7 @@ import { ClassListComponent } from './components/class/class-list/class-list.com
 import { UserCreateComponent } from './components/user/user-create/user-create.component';
 import { ClassCreateComponent } from './components/class/class-create/class-create.component';
 import { ManagerDashboardComponent } from './components/manager-dashboard/manager-dashboard.component';
-import { ClassPreviewComponent } from './components/class/class-create/class-preview/class-preview.component';
+import { AsignStudentsComponent } from './components/class/class-create/asign-students/asign-students.component';
 import { WeeklyScheduleComponent } from './components/class/class-create/weekly-schedule/weekly-schedule.component';
 import { AnnouncementListComponent } from './components/announcement/announcement-list/announcement-list.component';
 import { AnnouncementCreateComponent } from './components/announcement/announcement-create/announcement-create.component';
@@ -30,6 +30,10 @@ const routes: Routes = [
       },
       {
         path: 'user-create',
+        component: UserCreateComponent,
+      },
+      {
+        path: 'user-create/:access/:id',
         component: UserCreateComponent,
       },
       {
@@ -81,7 +85,7 @@ const routes: Routes = [
     UserCreateComponent,
     DefineMeetingsDialog,
     ClassCreateComponent,
-    ClassPreviewComponent,
+    AsignStudentsComponent,
     WeeklyScheduleComponent,
     ManagerDashboardComponent,
     AnnouncementListComponent,

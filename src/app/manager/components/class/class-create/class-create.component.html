@@ -114,25 +114,11 @@
                 >description is required</mat-error
               >
             </mat-form-field>
-            <ng-container *ngIf="classId">
-              <div class="getImage">
-                <div
-                  class="dragField"
-                  (click)="input.click()"
-                  (fileDropped)="upload($event)"
-                  DragDropFileUpload
-                >
-                  <h3>choose a image for class</h3>
-                  <h6>(you can also drag and drop)</h6>
-                </div>
-                <input
-                  class="inputField"
-                  #input
-                  (change)="upload($event)"
-                  type="file"
-                />
-              </div>
-            </ng-container>
+            <EAP-upload-profile-image
+              [placeholder]="'CLASS'"
+              [(file)]="file"
+              [url]="fileUrl"
+            ></EAP-upload-profile-image>
           </div>
           <div class="flex w-full justify-end">
             <button
@@ -177,6 +163,28 @@
               color="primary"
               class="mx-2"
               (click)="onSubmitSchedule(stepper)"
+            >
+              Next
+            </button>
+          </div>
+        </ng-template>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Asign Students</ng-template>
+        <ng-template matStepContent>
+          <EAP-asign-students
+            *ngIf="classId"
+            [classId]="classId"
+          ></EAP-asign-students>
+          <div class="flex w-full justify-end">
+            <button mat-raised-button color="warn" matStepperPrevious>
+              Back
+            </button>
+            <button
+              mat-raised-button
+              matStepperNext
+              color="primary"
+              class="mx-2"
             >
               Next
             </button>

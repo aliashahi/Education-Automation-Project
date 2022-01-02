@@ -8,29 +8,39 @@
           [linear]="false"
           #stepper
         >
-          <mat-step *ngFor="let week of weeks">
-            <ng-template matStepperIcon="error" matStepLabel
-              >Week {{ week.week_id }} ({{
-                week.asignments.length
-              }}
-              asignments)</ng-template
-            >
+          <mat-step *ngFor="let week of weeks; let i = index">
+            <ng-template matStepperIcon="error" matStepLabel>
+              <div class="w-full flex justify-between">
+                <span>
+                  Week {{ i + 1 }} (<span
+                    class="{{
+                      week.asignments.length != 0
+                        ? 'text-xl text-green-700'
+                        : ''
+                    }}"
+                    >{{
+                      week.asignments.length != 0
+                        ? week.asignments.length
+                        : "no "
+                    }}</span
+                  >
+                  asignments)
+                  <p style="font-size: 10px" class="text-gray-500">
+                    {{ week.start_date | date }} - {{ week.end_date | date }}
+                  </p>
+                </span>
+              </div>
+            </ng-template>
             <mat-list>
               <ng-container
                 *ngFor="let asignment of week.asignments; let i = index"
               >
-                <mat-list-item class="flex justify-between my-2">
+                <mat-list-item
+                  class="flex justify-between my-2 cursor-pointer hover:bg-gray-100"
+                  (click)="showAsignmentDetails(asignment)"
+                >
                   <span class="text-lg font-bold"
-                    >{{ asignment.title }}
-                    <span
-                      class="status"
-                      [class.submitted]="asignment.status === 'Submitted'"
-                      [class.not-submitted]="
-                        asignment.status == 'Not Submitted'
-                      "
-                      [class.expired]="asignment.status == 'Expired'"
-                      >{{ asignment.status }}</span
-                    >
+                    >{{ asignment.title | longTextCutter }}
                     <span
                       class="
                         text-xs
@@ -40,13 +50,13 @@
                         items-center
                       "
                     >
-                      {{ asignment.short_desc }}
+                      {{ asignment.description ?? "" | longTextCutter }}
                     </span>
                   </span>
                   <span class="text-sm text-gray-400 flex items-center">
-                    {{ asignment.expire_date }} (<span
+                    {{ asignment.deadline | date }} (<span
                       class="font-bold text-lg pr-2"
-                      >{{ asignment.left_days }}</span
+                      >{{ getLeftedDays(asignment.deadline) }}</span
                     >
                     days left!)
                     <button
@@ -55,8 +65,8 @@
                       (click)="showAsignmentDetails(asignment)"
                     >
                       <mat-icon class="mx-4 text-black cursor-pointer"
-                        >forward_to_inbox</mat-icon
-                      >
+                        >forward_to_inbox
+                      </mat-icon>
                     </button>
                   </span>
                 </mat-list-item>
@@ -73,6 +83,7 @@
           <EAP-asignments-detail
             *ngIf="selectedAsignment"
             [asignment]="selectedAsignment"
+            [classId]="class.id"
             (onBack)="getBackFromDetail()"
           ></EAP-asignments-detail>
         </ng-template>

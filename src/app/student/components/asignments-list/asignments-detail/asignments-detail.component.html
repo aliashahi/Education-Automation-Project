@@ -3,7 +3,6 @@
   (nzBack)="onBack()"
   nzBackIcon
   nzTitle="{{ asignment.title }}"
-  nzSubtitle="{{ asignment.short_desc }}"
 >
   <nz-page-header-extra>
     <button
@@ -14,29 +13,46 @@
         hover:bg-green-700 hover:text-white
         disabled:opacity-50
       "
+      (click)="onSubmit()"
+      [disabled]="pending || fileToUpload.length == 0"
     >
       Submit asignment
     </button>
   </nz-page-header-extra>
 </nz-page-header>
 <div class="w-full">
-  <nz-divider [nzText]="text2" nzOrientation="left">
-    <ng-template #text2>
+  <nz-divider [nzText]="text" nzOrientation="left">
+    <ng-template #text>
       <span class="flex justify-center items-center">
         <i nz-icon nzType="edit" class="px-2"></i>
-        Asignment Question
+        Question :
+        <span
+          class="cursor-pointer text-secondary-900"
+          (click)="onDownload(imageBaseUrl + asignment.file)"
+        >
+          (click to download resource
+          <i
+            nz-icon
+            nzType="download"
+            class="px-2 text-2xl text-secondary-750"
+          ></i
+          >)
+        </span>
       </span>
     </ng-template>
   </nz-divider>
   <p class="m-1 p-3 border-2 border-gray-200 rounded-lg text-lg">
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet a reiciendis
-    laboriosam sit deleniti libero, excepturi, praesentium nihil eum delectus
-    aliquam similique reprehenderit laudantium assumenda iusto optio doloremque,
-    eius dicta. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet a
-    reiciendis laboriosam sit deleniti libero, excepturi, praesentium nihil eum
-    delectus aliquam similique reprehenderit laudantium assumenda iusto optio
-    doloremque, eius dicta.
+    {{ asignment.description }}
   </p>
+  <EAP-file-uploader
+    *ngIf="asignment.file"
+    [files]="asignment.filesToShow"
+    [maxCount]="1"
+    [hasDownload]="true"
+    [hasDelete]="false"
+    [pending]="pending"
+    [hasUpload]="false"
+  ></EAP-file-uploader>
 </div>
 <div class="w-full">
   <nz-divider [nzText]="text1" nzOrientation="left">
@@ -51,21 +67,23 @@
     <textarea
       matInput
       placeholder="type your solutions ... "
-      rows="15"
+      rows="8"
     ></textarea>
   </mat-form-field>
 </div>
-
 <div class="w-full">
-  <nz-divider [nzText]="text" nzOrientation="left">
-    <ng-template #text>
+  <nz-divider [nzText]="text3" nzOrientation="left">
+    <ng-template #text3>
       <span class="flex justify-center items-center">
-        <i nz-icon nzType="upload" class="px-2"></i>
-        Upload Files
+        <i nz-icon nzType="edit" class="px-2"></i>
+        Upload your asignment *
       </span>
     </ng-template>
   </nz-divider>
-  <div class="w-full border-gray-100 border-2 p-2 rounded-md">
-    <EAP-upload-asignment></EAP-upload-asignment>
-  </div>
+  <EAP-file-uploader
+    [(files)]="fileToUpload"
+    [maxCount]="1"
+    [hasDownload]="true"
+    [pending]="pending"
+  ></EAP-file-uploader>
 </div>

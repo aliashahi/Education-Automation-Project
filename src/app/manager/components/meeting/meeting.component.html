@@ -65,7 +65,7 @@
     </form>
   </fieldset>
 </div>
-<div class="container" *ngIf="data.length > 0; else noData">
+<div class="W-[100% -3px] m-4" *ngIf="data.length > 0; else noData">
   <table mat-table [dataSource]="data" class="mat-elevation-z8">
     <ng-container matColumnDef="endTime">
       <th mat-header-cell *matHeaderCellDef>end Time</th>
@@ -116,7 +116,7 @@
 <ng-template #noData>
   <loading-section [loading]="pending">
     <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
-      <img src="../../../../../assets/images/no_data.png" alt="" />
+      <nz-empty></nz-empty> 
     </div>
   </loading-section>
 </ng-template>

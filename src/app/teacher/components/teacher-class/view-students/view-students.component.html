@@ -1,0 +1,68 @@
+<ng-container *ngIf="students && students.length > 0; else noData">
+  <div class="overflow-x-auto p-2">
+    <table class="table w-full rounded-lg">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>username</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.id }}</td>
+          <td>
+            <div class="flex items-center space-x-3">
+              <div class="avatar">
+                <div class="w-12 h-12 mask mask-squircle">
+                  <img
+                    *ngIf="student.profileImage; else noAvatar"
+                    src="{{ student.profileImage }}"
+                  />
+
+                  <ng-template #noAvatar>
+                    <img
+                      src="../../../../../assets/images/default_profile.png"
+                    />
+                  </ng-template>
+                </div>
+              </div>
+              <div>
+                <div class="font-bold">
+                  {{ student.user.first_name }} {{ student.user.last_name }}
+                </div>
+                <div class="text-sm opacity-50">
+                  {{ student.user.username }}
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            {{
+              student.user.role == "S"
+                ? "Student"
+                : student.user.role == "T"
+                ? "Teacher"
+                : "Manager"
+            }}
+          </td>
+          <td>
+            {{ student.user.username }}
+          </td>
+          <td>
+            {{ student.user.email }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+<ng-template #noData>
+  <loading-section [loading]="false">
+    <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
+      <nz-empty></nz-empty>
+    </div>
+  </loading-section>
+</ng-template>

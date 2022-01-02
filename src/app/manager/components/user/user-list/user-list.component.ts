@@ -5,7 +5,6 @@ import { PageEvent } from '@angular/material/paginator';
 import { User } from 'src/app/manager/models/user.model';
 import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
-import { UserSearchDto } from 'src/app/auth/services/user.dto';
 import { UserService } from 'src/app/auth/services/user.service';
 import { Pagination } from 'src/app/manager/models/pagination.model';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
@@ -72,10 +71,14 @@ export class UserListComponent implements OnInit {
     }
     subject.subscribe(
       (res) => {
-        this.allData = res.map((i: any) => i.user);
+        this.allData = res.results.map((i: any) => {
+          return { ...i.user, profileImage: i.profileImage, role_id: i.id };
+        });
         this.onFilterUsers();
       },
-      () => {},
+      () => {
+        this.pendding = false;
+      },
       () => (this.pendding = false)
     );
   }
@@ -130,13 +133,13 @@ export class UserListComponent implements OnInit {
               );
               this.getData();
             },
-            (e) => {},
+            (e) => {
+              this.pendding = false;
+            },
             () => (this.pendding = false)
           );
         },
       },
     });
   }
-
-  onInfo(user: User) {}
 }

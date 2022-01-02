@@ -1,0 +1,124 @@
+<nz-page-header
+  class="site-page-header"
+  (nzBack)="onBack()"
+  nzBackIcon
+  nzTitle="{{ asignment.title }}"
+  nzSubtitle="{{ asignment.description }}"
+>
+  <nz-page-header-extra>
+    <button
+      mat-raised-button
+      [disabled]="form.invalid || fileToUpload.length == 0 || pending"
+      (click)="onSubmit()"
+      class="
+        bg-green-600
+        text-white
+        hover:bg-green-700 hover:text-white
+        disabled:opacity-50
+      "
+    >
+      {{ asignment.id != -1 ? "update" : "create" }}
+      asignment
+    </button>
+  </nz-page-header-extra>
+</nz-page-header>
+<div>
+  <form [formGroup]="form" class="mt-8 space-y-6">
+    <div class="w-full">
+      <mat-form-field class="w-1/2 px-2" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          formControlName="title"
+          type="text"
+          required
+          [disabled]="pending"
+        />
+        <mat-error
+          *ngIf="
+            form.get('title')?.errors && form.get('title')?.hasError('required')
+          "
+          >title is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-1/2 px-2" appearance="outline">
+        <mat-label>Deadline</mat-label>
+        <input
+          matInput
+          [disabled]="pending"
+          [min]="minDeadline"
+          formControlName="deadline"
+          type="datetime-local"
+          required
+          id="datefield"
+        />
+        <mat-error
+          *ngIf="
+            form.get('deadline')?.errors &&
+            form.get('deadline')?.hasError('required')
+          "
+          >deadline is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+  </form>
+  <div
+    *ngIf="diffInDays"
+    class="
+      w-[100%
+      -
+      20px]
+      p-5
+      mx-5
+      rounded-lg
+      bg-green-50
+      border-2 border-dotted border-secondary-700
+      text-secondary-900
+      flex
+      justify-center
+      items-center
+      text-lg
+    "
+  >
+    {{ diffInDays }}
+  </div>
+</div>
+<div class="w-full">
+  <nz-divider [nzText]="text2" nzOrientation="left">
+    <ng-template #text2>
+      <span class="flex justify-center items-center">
+        <i nz-icon nzType="edit" class="px-2"></i>
+        Asignment Question
+      </span>
+    </ng-template>
+  </nz-divider>
+  <form [formGroup]="form">
+    <mat-form-field class="w-full" appearance="outline">
+      <textarea
+        matInput
+        [disabled]="pending"
+        formControlName="description"
+        placeholder="type your Asignment ... "
+        rows="15"
+      ></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div class="w-full">
+  <nz-divider [nzText]="text" nzOrientation="left">
+    <ng-template #text>
+      <span class="flex justify-center items-center">
+        <i nz-icon nzType="upload" class="px-2"></i>
+        Upload Files
+      </span>
+    </ng-template>
+  </nz-divider>
+  <div class="w-[100% - 20px] border-gray-100 border-2 p-2 rounded-md">
+    <EAP-file-uploader
+      [(files)]="fileToUpload"
+      [maxCount]="1"
+      [hasDownload]="true"
+      [pending]="pending"
+    ></EAP-file-uploader>
+  </div>
+</div>

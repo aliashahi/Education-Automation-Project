@@ -28,7 +28,16 @@ export class MeetingComponent implements OnInit {
     private dialog: MatDialog,
     private alertSrv: AlertService,
     private meetingSrv: MeetingService
-  ) {}
+  ) {
+    // this.mockData(MEETING_MOCK[0], 0);
+  }
+
+  // mockData(model: any, index: number) {
+  //   this.meetingSrv.createMeeting(model).subscribe((res) => {
+  //     if (MEETING_MOCK.length != index + 1)
+  //       this.mockData(MEETING_MOCK[index + 1], index + 1);
+  //   });
+  // }
 
   ngOnInit(): void {
     WEEK_DAYS.forEach((i) => {
@@ -46,10 +55,10 @@ export class MeetingComponent implements OnInit {
     this.pending = true;
     this.meetingSrv.getMeetings({}).subscribe(
       (res) => {
-        this.data = res;
+        this.data = res.results;
+        this.pending = false;
       },
-      (e) => {},
-      () => {
+      (e) => {
         this.pending = false;
       }
     );
@@ -60,12 +69,12 @@ export class MeetingComponent implements OnInit {
     this.meetingSrv.createMeeting(this.meeting_form.value).subscribe(
       (res) => {
         this.alertSrv.showToaster('Meeting Added Successfully!', 'SUCCESS');
+        this.pending = false;
         this.getData();
       },
-      (e) => {},
-      () => {
+      (e) => {
         this.pending = false;
-      }
+      },
     );
   }
 
@@ -83,10 +92,12 @@ export class MeetingComponent implements OnInit {
                 'Meeting Deleted Successfully!',
                 'SUCCESS'
               );
+              this.pending = false;
               this.getData();
             },
-            (e) => {},
-            () => (this.pending = false)
+            (e) => {
+              this.pending = false;
+            }
           );
         },
       },

@@ -1,3 +1,4 @@
+
 import { Component, Renderer2, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 //import { SharedAnnService } from '../../services/shared-ann.service';
@@ -23,11 +24,13 @@ export type ChartOptions = {
   xaxis: ApexXAxis;
 };
 
+
 @Component({
   selector: 'EAP-teacher-dashboard',
   templateUrl: './teacher-dashboard.component.html',
   styleUrls: ['./teacher-dashboard.component.scss'],
 })
+
 export class TeacherDashboardComponent implements OnInit {
   @ViewChild('addannoun')
   private divAnnoun = {} as ElementRef;
@@ -167,3 +170,5 @@ private _filter(searched: string, item: Announcement): boolean {
   ngOnInit(): void {}
 }
   
+export class TeacherDashboardComponent {}
+

@@ -104,16 +104,20 @@
               matInput
               placeholder="17 Shahrivar St."
               formControlName="address"
-              rows="5"
+              rows="1"
             ></textarea>
           </mat-form-field>
         </div>
       </form>
+      <EAP-upload-profile-image
+        [(file)]="file"
+        [url]=" getImageUrl()"
+      ></EAP-upload-profile-image>
     </mat-tab>
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button mat-dialog-close>close</button>
   <button
     *ngIf="tabIndex==0"
     mat-raised-button

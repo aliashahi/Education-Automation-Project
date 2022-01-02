@@ -1,12 +1,12 @@
 import {
-HttpEvent,
-HttpHandler,
-HttpRequest,
-HttpInterceptor,
-HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpRequest,
+  HttpInterceptor,
+  HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError, retry, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -49,7 +49,6 @@ export class HttpsInterceptor implements HttpInterceptor {
       tokenizedRequest = request.clone({
         setHeaders: {
           Authorization: `JWT ${token}`,
-          'Content-Type': 'application/json',
         },
       });
     this.loadingSrv.show();
@@ -68,11 +67,12 @@ export class HttpsInterceptor implements HttpInterceptor {
     this.loadingSrv.hide();
     if (error instanceof HttpErrorResponse && error.status === 500) {
       this.alertSrvc.showToaster('Something Bad Happend right now!', 'DANGER');
-      return EMPTY;
+      return throwError(error);
     }
     if (error instanceof HttpErrorResponse && error.status === 404) {
-      this.alertSrvc.showToaster('Not Found!', 'DANGER');
-      return EMPTY;
+      if (this.showMessage(request))
+        this.alertSrvc.showToaster('Not Found!', 'DANGER');
+      return throwError(error);
     }
 
     if (error instanceof HttpErrorResponse && error.status === 401) {
@@ -81,23 +81,27 @@ export class HttpsInterceptor implements HttpInterceptor {
         localStorage.clear();
         this.router.navigate(['auth/login']);
       }
-      return EMPTY;
+      return throwError(error);
     }
 
     if (error instanceof HttpErrorResponse && error.status === 403) {
       this.alertSrvc.showToaster('You are not Authorized!', 'DANGER');
-      return EMPTY;
+      return throwError(error);
     }
 
     if (error instanceof HttpErrorResponse && error.status === 400) {
       this.create400ErrorMessage(error).forEach((e) => {
         this.alertSrvc.showToaster(e, 'DANGER');
       });
-      return EMPTY;
+      return throwError(error);
     }
 
     this.alertSrvc.showToaster('Something went Wrong !!!', 'DANGER');
-    return EMPTY;
+    return throwError(error);
+  }
+
+  private showMessage(request: HttpRequest<any>): boolean {
+    return !!!request.url.includes('/media/');
   }
 
   private create400ErrorMessage(error: HttpErrorResponse): string[] {

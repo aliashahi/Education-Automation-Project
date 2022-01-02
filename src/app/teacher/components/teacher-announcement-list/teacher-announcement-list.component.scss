@@ -1,0 +1,208 @@
+.button-group {
+  position: relative;
+  right: 2.5%;
+  top: 20px;
+  display: inline;
+}
+.button-group button {
+  width: 23%;
+  height: 60px;
+  margin-left: 1%;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  float: right;
+  font-size: 16px;
+}
+
+.button-group img {
+  margin-left: 40%;
+}
+.button-group .report-button {
+  border-top: 2px solid rgba(248, 192, 105, 1);
+}
+.button-group .report-button:hover {
+  background-color: rgba(248, 192, 105, 1);
+}
+.button-group .class-management-button {
+  border-top: 2px solid #d685f0;
+}
+.button-group .class-management-button:hover {
+  background-color: #d685f0;
+}
+.button-group .atteudance-button {
+  border-top: 2px solid rgba(69, 215, 241, 1);
+}
+.button-group .atteudance-button:hover {
+  background-color: rgba(69, 215, 241, 1);
+}
+.button-group .educational-files-button {
+  border-top: 2px solid rgba(65, 195, 94, 1);
+}
+.button-group .educational-files-button:hover {
+  background-color: rgba(65, 195, 94, 1);
+}
+
+.Class-manaement {
+  font-size: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.column {
+  width: 65%;
+  height: 500px;
+  float: right;
+}
+
+.chart {
+  width: 100%;
+  height: 180px;
+}
+
+.table-border {
+  background-color: white;
+  width: 100%;
+  height: 300px;
+  margin-top: 20px;
+  margin-right: 0%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(153, 152, 152, 0.192),
+    0 6px 20px 0 rgba(160, 160, 160, 0.11);
+}
+.table-title {
+  padding-top: 17px;
+  margin-left: 5px;
+  text-align: left;
+  float: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+table.schedule-table {
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-right: 2%;
+  margin-left: 2%;
+  background-color: rgba(199, 225, 250, 0.39);
+  font-family: Arial, Helvetica, sans-serif;
+  width: 96%;
+  height: 240px;
+  float: right;
+}
+
+td,
+tr,
+th {
+  color: #2e2e2e;
+  border: 4px solid white;
+  font-size: 12px;
+  text-align: center;
+  padding: 2px;
+}
+tr:hover {
+  background-color: #ecebf1;
+}
+th {
+  padding: 8px;
+}
+
+.table-title-div {
+  display: inline;
+  float: left;
+}
+.table-img {
+  float: left;
+  padding-left: 15px;
+  padding-top: 11px;
+  padding-bottom: 10px;
+}
+.class-man {
+  margin-bottom: 20px;
+}
+/*------------------------------------------------*/
+
+.row {
+  position: relative;
+  right: 2.5%;
+  top: 20px;
+  width: 100%;
+  height: 500px;
+  display: inline;
+}
+.ann-box {
+  background-color: white;
+  width: 30%;
+  float: right;
+  margin-top: 20px;
+  margin-left: 1%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow-y: hidden;
+}
+
+.ann-box .ann-box-title {
+  background-color: white;
+  height: 50px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.ann-box-title .ti {
+  float: left;
+}
+
+.add-announcement a {
+  float: right;
+  font-size: 15px;
+  margin-left: 8px;
+  text-decoration: none;
+}
+
+.ann {
+  background-color: white;
+  width: 100%;
+  /*height: 450px;*/
+  font-family: Arial, Helvetica, sans-serif;
+  /*overflow-y: scroll;*/
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.ann::webkit-scrollbar {
+  display: none;
+}
+
+.ann .title {
+  color: #202020;
+}
+.content {
+  margin-left: 0px;
+}
+.ann-content button {
+  float: right;
+  color: red;
+}
+.content div {
+  width: 100%;
+  /*height: 60px;*/
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #ccc;
+  overflow-y: hidden;
+}
+.content a {
+  text-decoration: none;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+hr {
+  border: 1px solid #f2f2f2;
+}

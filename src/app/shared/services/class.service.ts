@@ -21,11 +21,11 @@ export class ClassService extends ServiceBase {
     return this.get$(`school/classes/${id}`);
   }
 
-  createClass(model: Class) {
+  createClass(model: any) {
     return this.post$('school/classes/', model);
   }
 
-  updateClass(id: number, model: Class) {
+  updateClass(id: number, model: any) {
     return this.put$(`school/classes/${id}`, model);
   }
 

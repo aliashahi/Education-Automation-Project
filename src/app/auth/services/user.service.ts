@@ -1,7 +1,8 @@
-import { LoginDto, RegisterDto, UpdateProfileDto } from './login.dto';
+import { Subject } from 'rxjs';
+import { UserSearchDto } from './user.dto';
 import { Injectable, Injector } from '@angular/core';
 import { ServiceBase } from 'src/app/shared/classes/service-base';
-import { UserSearchDto } from './user.dto';
+import { LoginDto, RegisterDto, UpdateProfileDto } from './login.dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -24,15 +25,37 @@ export class UserService extends ServiceBase {
 
   getUserFullInfo(userId: number, userType: 'S' | 'T' | 'M' = 'S') {
     let user = 'students';
+    let subscription;
     switch (userType) {
       case 'M':
         user = 'managers';
+        subscription = this.getManagers({});
         break;
       case 'T':
         user = 'teachers';
+        subscription = this.getTeachers({});
         break;
+      default:
+        subscription = this.getStudents({});
     }
-    return this.get$(`school/${user}/${userId}`);
+    let result = new Subject();
+    subscription.subscribe(
+      (res) => {
+        let foundUser = res.results.find((i: any) => i.user.id == userId);
+        if (foundUser)
+          this.get$(`school/${user}/me`).subscribe(
+            (res2) => {
+              result.next({ ...res2, ...foundUser });
+            },
+            (e) => result.error(e)
+          );
+        else result.error({});
+      },
+      (e) => {
+        result.error(e);
+      }
+    );
+    return result;
   }
 
   public updateUserExtraInfo(model: any, userType: 'S' | 'T' | 'M') {
@@ -46,6 +69,45 @@ export class UserService extends ServiceBase {
         break;
     }
     return this.put$(`school/${user}/me/`, model);
+  }
+
+  public updateUserExtraInfoById(
+    model: any,
+    userId: number,
+    userType: 'S' | 'T' | 'M'
+  ) {
+    let user = 'students';
+    let subscription;
+    switch (userType) {
+      case 'M':
+        user = 'managers';
+        subscription = this.getManagers({});
+        break;
+      case 'T':
+        user = 'teachers';
+        subscription = this.getTeachers({});
+        break;
+      default:
+        subscription = this.getStudents({});
+    }
+    let result = new Subject();
+    subscription.subscribe(
+      (res) => {
+        let foundUser = res.results.find((i: any) => i.user.id == userId);
+        if (foundUser)
+          this.put$(`school/${user}/${foundUser.id}/`, model).subscribe(
+            (res2) => {
+              result.next({ ...res2, ...foundUser });
+            },
+            (e) => result.error(e)
+          );
+        else result.error({});
+      },
+      (e) => {
+        result.error(e);
+      }
+    );
+    return result;
   }
 
   public deleteUser(id: number) {
@@ -66,5 +128,22 @@ export class UserService extends ServiceBase {
 
   public getManagers(model: UserSearchDto) {
     return this.get$('school/managers/', this.createParamList(model));
+  }
+
+  public addStudentsToClass(id: number, model: any) {
+    return this.patch$(`school/students/${id}/`, model);
+  }
+
+  public getUserById(id: number, access: string) {
+    let user = 'students';
+    switch (access) {
+      case 'M':
+        user = 'managers';
+        break;
+      case 'T':
+        user = 'teachers';
+        break;
+    }
+    return this.get$(`school/${user}/${id}/`);
   }
 }

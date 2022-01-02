@@ -1,0 +1,93 @@
+<nz-tabset class="m-2">
+  <nz-tab nzTitle="RESOURCE">
+    <ng-container *ngIf="filesList.length != 0; else noData">
+      <nz-collapse class="m-4">
+        <ng-container *ngFor="let file of filesList">
+          <nz-collapse-panel
+            [nzActive]="true"
+            [nzExtra]="extraTpl"
+            [nzHeader]="file.title"
+          >
+            <p style="margin: 0; overflow: hidden; overflow-y: scroll">
+              {{ file.description }}
+            </p>
+            <EAP-file-uploader
+              *ngIf="file.filesToShow"
+              [files]="file.filesToShow"
+              [maxCount]="1"
+              [hasDownload]="true"
+              [hasDelete]="false"
+              [pending]="pending"
+              [hasUpload]="false"
+            ></EAP-file-uploader>
+          </nz-collapse-panel>
+          <ng-template #extraTpl>
+            <i
+              class="mx-4 text-red-600"
+              nz-icon
+              nzType="delete"
+              nzTheme="outline"
+              (click)="onDelete(file.id)"
+            ></i>
+          </ng-template>
+        </ng-container>
+      </nz-collapse>
+    </ng-container>
+    <ng-template #noData>
+      <nz-empty></nz-empty>
+    </ng-template>
+  </nz-tab>
+  <nz-tab nzTitle="CREATE NEW RESOURCE">
+    <div
+      class="
+        w-[100%
+        -
+        40px]
+        flex
+        items-center
+        rounded-lg
+        bg-gray-100
+        p-2
+        m-5
+        border-[1px] border-solid border-gray-600
+      "
+    >
+      <div class="flex-1">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="title" required [disabled]="pending" />
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <textarea
+            matInput
+            [disabled]="pending"
+            [(ngModel)]="desc"
+            placeholder="description "
+            rows="15"
+          ></textarea>
+        </mat-form-field>
+        <EAP-file-uploader
+          [(files)]="fileToUpload"
+          [maxCount]="1"
+          [hasDownload]="true"
+          [pending]="pending"
+        ></EAP-file-uploader>
+        <div class="flex w-full">
+          <button
+            class="
+              btn
+              border-0
+              bg-secondary-700
+              disabled:bg-secondary-300 disabled:text-white
+              ml-auto
+            "
+            [disabled]="fileToUpload.length != 1 || !title || pending"
+            (click)="onSubmit()"
+          >
+            Add Resource
+          </button>
+        </div>
+      </div>
+    </div>
+  </nz-tab>
+</nz-tabset>

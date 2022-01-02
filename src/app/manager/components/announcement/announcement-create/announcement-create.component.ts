@@ -8,7 +8,6 @@ import { ClassService } from 'src/app/shared/services/class.service';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { AnnouncementService } from 'src/app/shared/services/announcement.service';
 import { SelectDto } from 'src/app/shared/models/select.dto';
-import { ANNOUNCEMENT_MOCK_DATA } from 'src/app/manager/mock/announcement.mock';
 
 @Component({
   selector: 'EAP-announcement-create',
@@ -33,7 +32,7 @@ export class AnnouncementCreateComponent implements OnInit {
   ngOnInit(): void {
     this.initAnnouncementForm();
     this.userSrv.getTeachers({}).subscribe((res) => {
-      this.teachers = res.map((i: any) => {
+      this.teachers = res.results.map((i: any) => {
         return {
           value: i.user.id,
           label: i.user.first_name + ' ' + i.user.last_name,
@@ -41,7 +40,7 @@ export class AnnouncementCreateComponent implements OnInit {
       });
     });
     this.userSrv.getStudents({}).subscribe((res) => {
-      this.students = res.map((i: any) => {
+      this.students = res.results.map((i: any) => {
         return {
           value: i.user.id,
           label: i.user.first_name + ' ' + i.user.last_name,
@@ -49,7 +48,7 @@ export class AnnouncementCreateComponent implements OnInit {
       });
     });
     this.classSrv.getClassList({}).subscribe((res) => {
-      this.classes = res.map((i: any) => {
+      this.classes = res.results.map((i: any) => {
         return {
           label: i.name,
           value: i.id,
@@ -61,7 +60,10 @@ export class AnnouncementCreateComponent implements OnInit {
 
   private initAnnouncementForm() {
     this.announcement_form = new FormGroup({
-      title: new FormControl(null, Validators.required),
+      title: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
       description: new FormControl(null, Validators.required),
       group: new FormControl(null, Validators.required),
       start_date: new FormControl(new Date(), Validators.required),
@@ -90,10 +92,11 @@ export class AnnouncementCreateComponent implements OnInit {
           setTimeout(() => {
             this.router.navigate(['/manager/announcement-list']);
           }, 1000);
+          this.pendding = false;
+          this.announcement_form.enable();
         },
-        (e) => {},
-        () => {
-          this.pendding = true;
+        (e) => {
+          this.pendding = false;
           this.announcement_form.enable();
         }
       );

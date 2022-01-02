@@ -1,0 +1,16 @@
+.uploaded-item {
+  transition: all 500ms;
+  i {
+    display: none;
+  }
+  &:hover {
+    img {
+      opacity: 0.5;
+      transition: all 500ms;
+    }
+    i {
+      display: block;
+      transition: all 500ms;
+    }
+  }
+}

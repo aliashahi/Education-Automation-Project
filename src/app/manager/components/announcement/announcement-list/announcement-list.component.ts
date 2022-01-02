@@ -35,9 +35,9 @@ export class AnnouncementListComponent implements OnInit {
       (res) => {
         this.allData = res;
         this.onFilterAnnouncements();
+        this.pendding = false;
       },
-      (e) => {},
-      () => {
+      (e) => {
         this.pendding = false;
       }
     );
@@ -65,12 +65,13 @@ export class AnnouncementListComponent implements OnInit {
                 'Announcement Deleted Successfully!',
                 'SUCCESS'
               );
+              this.pendding = false;
               this.getData();
             },
-            (e) => {},
-            () => {
+            (e) => {
               this.pendding = false;
-            }
+            },
+            () => {}
           );
         },
       },
@@ -85,13 +86,13 @@ export class AnnouncementListComponent implements OnInit {
         item.title
           .toLocaleLowerCase()
           .includes((searched || '').toLocaleLowerCase()) ||
-        item.subtitle
+        item.title
           .toLocaleLowerCase()
           .includes((searched || '').toLocaleLowerCase())) &&
-      (new Date(item.date) >=
+      (new Date(item.expire_date ?? '') >=
         new Date((this.startDate || '').split('-').join('/')) ||
         !this.startDate) &&
-      (new Date(item.date) <=
+      (new Date(item.expire_date ?? '') <=
         new Date((this.endDate || '').split('-').join('/')) ||
         !this.endDate)
     );

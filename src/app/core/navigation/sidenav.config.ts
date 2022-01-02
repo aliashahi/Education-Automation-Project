@@ -19,27 +19,15 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     hasDividerAfter: true,
   },
   {
-    name: 'Create User',
-    icon: 'person_add',
-    url: '/manager/user-create',
-    ACCESS: 'M',
-  },
-  {
     name: 'User List',
     icon: 'people',
     url: '/manager/user-list',
     ACCESS: 'M',
   },
   {
-    name: 'Manage Meetings',
-    icon: 'watch_later',
-    url: '/manager/meeting-create',
-    ACCESS: 'M',
-  },
-  {
-    name: 'Create Class',
-    icon: 'bookmark_add',
-    url: '/manager/class-create',
+    name: 'Create User',
+    icon: 'person_add',
+    url: '/manager/user-create',
     ACCESS: 'M',
   },
   {
@@ -49,15 +37,27 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     ACCESS: 'M',
   },
   {
-    name: 'Create Announcement',
-    icon: 'send',
-    url: '/manager/announcement-create',
+    name: 'Create Class',
+    icon: 'bookmark_add',
+    url: '/manager/class-create',
+    ACCESS: 'M',
+  },
+  {
+    name: 'Manage Meetings',
+    icon: 'watch_later',
+    url: '/manager/meeting-create',
     ACCESS: 'M',
   },
   {
     name: 'Announcement List',
     icon: 'campaign',
     url: '/manager/announcement-list',
+    ACCESS: 'M',
+  },
+  {
+    name: 'Create Announcement',
+    icon: 'send',
+    url: '/manager/announcement-create',
     ACCESS: 'M',
   },
   //TEACHER CONFIG
@@ -89,7 +89,7 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     name: 'Roll Call',
     url: '/teacher/sessions',
     ACCESS: 'T',
-    icon: 'rule',
+    icon: 'send',
   },
   //TEACHER END
   //STUDENT CONFIG
@@ -117,5 +117,29 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     ACCESS: 'S',
     icon: 'campaign',
   },
+  {
+    name: 'Resources',
+    url: '/student/resources',
+    ACCESS: 'S',
+    icon: 'attach_file',
+  },
   //STUDENT END
+];
+
+export const BREADCRUMP_BASE = [
+  {
+    value: 'teacher',
+    name: 'Home',
+    url: '/teacher/dashboard',
+  },
+  {
+    value: 'manager',
+    name: 'Home',
+    url: '/manager/dashboard',
+  },
+  {
+    value: 'student',
+    name: 'Home',
+    url: '/student/dashboard',
+  },
 ];

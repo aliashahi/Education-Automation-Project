@@ -22,6 +22,13 @@ import { SessionsListComponent } from './components/sessions-list/sessions-list.
 import { MatTreeModule } from '@angular/material/tree';
 import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 
+import { ViewStudentsComponent } from './components/teacher-class/view-students/view-students.component';
+import { ViewWeeksComponent } from './components/teacher-class/view-weeks/view-weeks.component';
+import { TeacherAsignmentsDetailComponent } from './components/teacher-class/view-weeks/teacher-asignments-detail/teacher-asignments-detail.component';
+import { ViewResourcesComponent } from './components/teacher-class/view-resources/view-resources.component';
+import { TeacherAnnouncementListComponent } from './components/teacher-announcement-list/teacher-announcement-list.component';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -40,7 +47,11 @@ const routes: Routes = [
         component: TeacherClassComponent,
       },
       {
-        path: 'announcement',
+        path: 'announcement-list',
+        component: TeacherAnnouncementListComponent,
+      },
+      {
+        path: 'announcement-create',
         component: AnnouncementComponent,
       },
       {
@@ -78,6 +89,11 @@ const routes: Routes = [
     ViewScheduleComponent,
     SessionsListComponent,
     AnnouncementListComponent,
+    ViewStudentsComponent,
+    ViewWeeksComponent,
+    TeacherAsignmentsDetailComponent,
+    ViewResourcesComponent,
+    TeacherAnnouncementListComponent,
   ],
   imports: [
     NgbModule,

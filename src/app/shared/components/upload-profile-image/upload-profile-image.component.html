@@ -1,0 +1,47 @@
+<div class="w-36 h-36 rounded-full flex justify-end items-end bg-gray-400">
+  <img
+    *ngIf="showImage; else noImg"
+    class="absolute h-36 w-36 z-[2] rounded-full"
+    src="{{ url }}"
+    alt="no.image"
+    (error)="showImage = false"
+  />
+  <ng-template #noImg>
+    <img
+      *ngIf="placeholder == 'PROFILE'"
+      src="../../../../assets/images/default_profile.png"
+      class="absolute h-36 w-36 z-[2] rounded-full"
+      alt=""
+    />
+    <img
+      *ngIf="placeholder == 'CLASS'"
+      src="../../../../assets/images/default_class-image.png"
+      class="absolute h-36 w-36 z-[2] rounded-full"
+      alt=""
+    />
+  </ng-template>
+  <div
+    class="
+      add-btn
+      h-10
+      w-10
+      rounded-full
+      flex
+      justify-center
+      items-center
+      cursor-pointer
+      border-[1px] border-gray-200
+      z-20
+    "
+    (click)="input.click()"
+  >
+    <mat-icon>{{ url ? "edit" : "add" }}</mat-icon>
+    <input
+      class="hidden"
+      #input
+      type="image/*"
+      (change)="upload($event, 2)"
+      type="file"
+    />
+  </div>
+</div>

@@ -30,9 +30,9 @@ export class ViewScheduleComponent implements OnInit {
     );
 
     this.meetingSrv.getMeetings({}).subscribe((res) => {
-      this.times = this.extractTimes(res);
-      this.days = this.extractDaysOfWeek(res);
-      this.scheduleMap = this.createScheduleMap(res);
+      this.times = this.extractTimes(res.results);
+      this.days = this.extractDaysOfWeek(res.results);
+      this.scheduleMap = this.createScheduleMap(res.results);
     });
   }
 

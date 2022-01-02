@@ -6,13 +6,13 @@
     tabindex="0"
     class="p-2 shadow menu dropdown-content bg-white rounded-box w-52"
   >
-    <li class="hover:bg-secondary-100" (click)="onFilterChange('ACT')">
+    <li class="hover:bg-green-50" (click)="onFilterChange('ACT')">
       <a>Active</a>
     </li>
-    <li class="hover:bg-secondary-100" (click)="onFilterChange('PAS')">
+    <li class="hover:bg-green-50" (click)="onFilterChange('PAS')">
       <a>Passive</a>
     </li>
-    <li class="hover:bg-secondary-100" (click)="onFilterChange('ARC')">
+    <li class="hover:bg-green-50" (click)="onFilterChange('ARC')">
       <a>Archive</a>
     </li>
   </ul>
@@ -22,7 +22,7 @@
   <div class="flex flex-wrap p-2">
     <div
       *ngFor="let class of filteredClasses; let i = index"
-      class="w-1/3 py-2"
+      class="w-full sm:w-1/2 md:w-1/3 xl:w-1/4 py-2"
     >
       <div class="card border-[1px] shadow-lg m-2 h-[420px]">
         <figure>
@@ -69,7 +69,7 @@
 <ng-template #noData>
   <loading-section [loading]="pending">
     <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
-      <img src="../../../../assets/images/no_data.png" alt="" />
+      <nz-empty></nz-empty> 
     </div>
   </loading-section>
 </ng-template>

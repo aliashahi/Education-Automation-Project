@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { User } from 'src/app/manager/models/user.model';
-import { UserService } from 'src/app/auth/services/user.service';
-import { SUBJECT_MOCK_DATA } from 'src/app/manager/mock/subject.mock';
-import { MeetingService } from 'src/app/shared/services/meeting.service';
 import {
   Meeting,
   WEEK_DAYS,
 } from 'src/app/manager/constants/schedule.constant';
+import { User } from 'src/app/manager/models/user.model';
+import { UserService } from 'src/app/auth/services/user.service';
+import { SUBJECT_MOCK_DATA } from 'src/app/manager/mock/subject.mock';
+import { MeetingService } from 'src/app/shared/services/meeting.service';
 import { ScheduleDataDto } from 'src/app/manager/models/schedule-data.dto';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'EAP-weekly-schedule',
@@ -32,12 +32,12 @@ export class WeeklyScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.meetingSrv.getMeetings({}).subscribe((res) => {
-      this.times = this.extractTimes(res);
-      this.days = this.extractDaysOfWeek(res);
-      this.scheduleMap = this.createScheduleMap(res);
+      this.times = this.extractTimes(res.results);
+      this.days = this.extractDaysOfWeek(res.results);
+      this.scheduleMap = this.createScheduleMap(res.results);
     });
     this.userSrv.getTeachers({}).subscribe((res) => {
-      this.techers = res.map((i: any) => {
+      this.techers = res.results.map((i: any) => {
         return { ...i.user, id: i.id };
       });
     });

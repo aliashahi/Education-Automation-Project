@@ -1,5 +1,17 @@
 <nav class="sticky top-0 bg-gray-100 h-14 w-full z-50">
   <ul class="flex h-full justify-end items-center">
+    <li class="brodcrump pl-4">
+      <nz-breadcrumb>
+        <nz-breadcrumb-item
+          [routerLink]="[item.url]"
+          *ngFor="let item of breadcrump; let i = index"
+        >
+          <a [ngClass]="{ 'text-2xl': i == breadcrump.length - 1 }">
+            {{ item.name }}
+          </a>
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+    </li>
     <li
       class="
         py-2
@@ -12,7 +24,7 @@
         cursor-pointer
       "
     >
-      <button mat-icon-button>
+      <button mat-icon-button (click)="navigateToAnnouncements()">
         <mat-icon>notifications</mat-icon>
       </button>
     </li>
@@ -36,15 +48,24 @@
       </span>
     </li>
     <li
-      class="mx-2 text-white rounded-full hover:bg-secondary-500 cursor-pointer"
+      class="mx-2 text-white rounded-full cursor-pointer"
       [matMenuTriggerFor]="menu"
       #menuTrigger="matMenuTrigger"
     >
       <img
-        class="w-12 h-12 rounded-full border-2 border-black"
-        src="../../../../assets/images/default_profile.png"
+        *ngIf="hasProfileImg; else noImg"
+        class="w-12 h-12 rounded-full border-2 border-gray-300"
+        src="{{ getImageUrl() }}"
         alt=""
+        (error)="hasProfileImg = false"
       />
+      <ng-template #noImg>
+        <img
+          src="../../../../assets/images/default_profile.png"
+          class="w-12 h-12 rounded-full border-2 border-gray-300"
+          alt=""
+        />
+      </ng-template>
     </li>
   </ul>
 </nav>
@@ -59,10 +80,19 @@
   >
     <div class="flex flex-col justify-center items-center p-2 h-full">
       <img
+        *ngIf="hasProfileImg; else noImg2"
         class="w-22 h-22 rounded-full border-2 border-black"
-        src="../../../../assets/images/default_profile.png"
+        src="{{ getImageUrl() }}"
         alt=""
+        (error)="hasProfileImg = false"
       />
+      <ng-template #noImg2>
+        <img
+          class="w-22 h-22 rounded-full border-2 border-black"
+          src="../../../../assets/images/default_profile.png"
+          alt=""
+        />
+      </ng-template>
       <b style="height: 22px" *ngIf="!pendding">
         {{ "-" | userInfo: "username" | longTextCutter: 15 }}
       </b>
@@ -70,11 +100,12 @@
         {{ "-" | userInfo: "email" | longTextCutter: 18 }}
       </p>
       <button
-        mat-stroked-button
+        mat-raised-button
+        color="primary"
         (click)="onEditProfile(menuTrigger)"
         class="mt-auto mb-2 w-full"
       >
-        <mat-icon>edit</mat-icon>Edit profile
+        <mat-icon class="text-white">edit</mat-icon>Edit profile
       </button>
       <button
         class="w-full"

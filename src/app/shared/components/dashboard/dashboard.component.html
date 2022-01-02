@@ -1,0 +1,64 @@
+<div class="bg-gray-100">
+  <div class="w-full head">
+    <div class="head-bg"></div>
+    <div class="head-content bg-gray-100">
+      <div class="profile">
+        <img
+          *ngIf="hasProfileImg; else noImg"
+          src="{{ getImageUrl() }}"
+          alt=""
+          (error)="hasProfileImg = false"
+        />
+        <ng-template #noImg>
+          <img src="../../../../assets/images/default_profile.png" alt="" />
+        </ng-template>
+      </div>
+      <div class="caption" *ngIf="true">
+        <h1>
+          {{ "-" | userInfo: "first_name" }} {{ "-" | userInfo: "last_name" }}
+          <button mat-icon-button color="primary" (click)="onEditProfile()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </h1>
+        <h3>
+          {{ "-" | tokenDecoder: "role" | ACCESS }} ({{
+            "-" | userInfo: "username"
+          }})
+        </h3>
+      </div>
+      <div class="action mat-typography"></div>
+    </div>
+  </div>
+  <ng-content></ng-content>
+  <div class="w-full flex flex-wrap justify-around items-center">
+    <div
+      class="w-[calc(25%-16px)] m-2 h-48 p-2"
+      *ngFor="let item of CARD_CONFIG"
+    >
+      <div
+        class="
+          w-full
+          h-full
+          bg-white bg-gradient-to-r
+          {{ item.classes }}
+          rounded-lg
+          flex flex-col
+          items-center
+          justify-around
+          p-2
+          pt-14
+          shadow-md
+        "
+      >
+        <h1 class="{{ item.textClass }}" style="font-size: 90px">
+          {{ item.number }}
+        </h1>
+        <h2 class="text-gray-500 text-sm">{{ item.desc }}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="w-full flex justify-around items-center">
+    <EAP-apex-polar-area></EAP-apex-polar-area>
+    <EAP-apex-box-plot></EAP-apex-box-plot>
+  </div>
+</div>

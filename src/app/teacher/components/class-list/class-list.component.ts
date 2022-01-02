@@ -27,7 +27,7 @@ export class ClassListComponent implements OnInit {
     this.pending = true;
     this.classSrv.getClassList({}).subscribe(
       (res) => {
-        this.classes = res;
+        this.classes = res.results;
         this.onFilterClass();
         this.pending = false;
       },

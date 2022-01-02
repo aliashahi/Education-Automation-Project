@@ -1,20 +1,18 @@
-<div class="p-3 rounded-lg" id="scheduleContainer">
-  <table class="w-full border-gray-700 rounded-lg">
-    <tr>
-      <th></th>
-      <th class="border-1 p-2 bg-secondary-300" *ngFor="let time of times">
-        {{ time }}
-      </th>
-    </tr>
-    <tr *ngFor="let day of days; let i = index">
-      <th class="border-1 p-2 w-16 bg-secondary-300">{{ day }}</th>
-      <td
-        class="border-1 p-2"
-        *ngFor="let time of scheduleMap[i]"
-        [ngClass]="{ selected: time.show }"
-      >
+<div class="overflow-x-auto">
+  <table class="table w-full">
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let time of times">{{ time }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let day of days; let i = index" class="hover:bg-green-50">
+        <th>{{ day }}</th>
+        <td *ngFor="let time of scheduleMap[i]">
           {{ time.subject | classSubject }}
-      </td>
-    </tr>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
