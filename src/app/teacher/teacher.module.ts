@@ -28,7 +28,6 @@ import { TeacherAsignmentsDetailComponent } from './components/teacher-class/vie
 import { ViewResourcesComponent } from './components/teacher-class/view-resources/view-resources.component';
 import { TeacherAnnouncementListComponent } from './components/teacher-announcement-list/teacher-announcement-list.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -48,10 +47,10 @@ const routes: Routes = [
       },
       {
         path: 'announcement-list',
-        component: TeacherAnnouncementListComponent,
+        component: AnnouncementListComponent,
       },
       {
-        path: 'announcement-create',
+        path: 'announcement',
         component: AnnouncementComponent,
       },
       {

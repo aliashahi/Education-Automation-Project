@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { SelectDto } from 'src/app/shared/models/select.dto';
 import { UserService } from 'src/app/auth/services/user.service';
 import { GROUPS } from 'src/app/manager/constants/groups.constant';
 import { createDateFormat } from 'src/app/shared/utils/date.utils';
@@ -7,7 +8,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClassService } from 'src/app/shared/services/class.service';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { AnnouncementService } from 'src/app/shared/services/announcement.service';
-import { SelectDto } from 'src/app/shared/models/select.dto';
 
 @Component({
   selector: 'EAP-announcement-create',

@@ -5,7 +5,7 @@ import { AnnouncementService } from 'src/app/shared/services/announcement.servic
 @Component({
   selector: 'EAP-announcement-list',
   templateUrl: './announcement-list.component.html',
-  styleUrls: ['./announcement-list.component.scss']
+  styleUrls: ['./announcement-list.component.scss'],
 })
 export class AnnouncementListComponent implements OnInit {
   showKind: 'list' | 'grid' = 'list';
@@ -18,10 +18,9 @@ export class AnnouncementListComponent implements OnInit {
 
   constructor(private annSrv: AnnouncementService) {
     this.getData();
-   }
-
-  ngOnInit(): void {
   }
+
+  ngOnInit(): void {}
 
   updateList(id: number, property: string, event: any) {
     const editField = event.target.textContent;
@@ -33,67 +32,58 @@ export class AnnouncementListComponent implements OnInit {
   }
 
   changeValue(id: number, property: string, event: any) {
-   // this.editField = event.target.textContent;
+    // this.editField = event.target.textContent;
   }
- 
 
-/*---------------------------------*/
-private getData() {
-  this.pendding = true;
-  this.annSrv.getAnnouncements({}).subscribe(
-    (res) => {
-      this.allData = res;
-      console.log(res);
-      this.onFilterAnnouncements();
-    },
-    (e) => {},
-    () => {
-      this.pendding = false;
-    }
-  );
-}
+  /*---------------------------------*/
+  private getData() {
+    this.pendding = true;
+    this.annSrv.getAnnouncements({}).subscribe(
+      (res) => {
+        this.allData = res;
+        this.onFilterAnnouncements();
+      },
+      (e) => {},
+      () => {
+        this.pendding = false;
+      }
+    );
+  }
 
-
-private deleteAnnouncement(id : any) {
-  this.pendding = true;
-  this.annSrv.deleteAnnouncements(id).subscribe(
-    (res) => {
+  private deleteAnnouncement(id: any) {
+    this.pendding = true;
+    this.annSrv.deleteAnnouncements(id).subscribe(
+      (res) => {
         this.getData();
-    },
-    (e) => {},
-    () => {
-      this.pendding = false;
-    }
-  );
-}
+      },
+      (e) => {},
+      () => {
+        this.pendding = false;
+      }
+    );
+  }
 
-onFilterAnnouncements() {
-  this.filteredData = this.allData.filter(
-    this._filter.bind(this, this.searchedValue)
-  );
-}
+  onFilterAnnouncements() {
+    this.filteredData = this.allData.filter(
+      this._filter.bind(this, this.searchedValue)
+    );
+  }
 
-private _filter(searched: string, item: Announcement): boolean {
-  return (
-    (item.description
-      .toLocaleLowerCase()
-      .includes((searched || '').toLocaleLowerCase()) ||
-      item.title
+  private _filter(searched: string, item: Announcement): boolean {
+    return (
+      (item.description
         .toLocaleLowerCase()
         .includes((searched || '').toLocaleLowerCase()) ||
-      item.subtitle
-        .toLocaleLowerCase()
-        .includes((searched || '').toLocaleLowerCase())) &&
-    (new Date(item.date) >=
-      new Date((this.startDate || '').split('-').join('/')) ||
-      !this.startDate) &&
-    (new Date(item.date) <=
-      new Date((this.endDate || '').split('-').join('/')) ||
-      !this.endDate)
-  );
-}
-/*------------------------------------------*/
-
- 
-
+        item.title
+          .toLocaleLowerCase()
+          .includes((searched || '').toLocaleLowerCase())) &&
+      (new Date(item.start_date ?? '') >=
+        new Date((this.startDate || '').split('-').join('/')) ||
+        !this.startDate) &&
+      (new Date(item.start_date ?? '') <=
+        new Date((this.endDate || '').split('-').join('/')) ||
+        !this.endDate)
+    );
+  }
+  /*------------------------------------------*/
 }

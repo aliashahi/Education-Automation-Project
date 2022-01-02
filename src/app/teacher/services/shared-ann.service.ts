@@ -10,6 +10,7 @@ export class SharedAnnService {
    getCreatedAnnoun(){ 
       return this.list; 
    } 
+   
    setUserData(data:any[]){
        this.list = data;
    }

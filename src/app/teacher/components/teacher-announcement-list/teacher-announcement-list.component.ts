@@ -76,7 +76,7 @@ export class TeacherAnnouncementListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.list = this._userData.getUserData();
+    this.list = [];
     if (this.list)
       this.personList.push({ id: 11, tit: this.list[1].name, ann: 24 });
   }
