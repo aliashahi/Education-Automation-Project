@@ -30,7 +30,10 @@
     </div>
   </div>
   <ng-content></ng-content>
-  <div class="w-full flex flex-wrap justify-around items-center">
+  <div
+    class="w-full flex flex-wrap justify-around items-center"
+    *ngIf="!hideCarts"
+  >
     <div
       class="w-[calc(25%-16px)] m-2 h-48 p-2"
       *ngFor="let item of CARD_CONFIG"
@@ -57,7 +60,7 @@
       </div>
     </div>
   </div>
-  <div class="w-full flex justify-around items-center">
+  <div class="w-full flex justify-around items-center" *ngIf="showCharts">
     <EAP-apex-polar-area></EAP-apex-polar-area>
     <EAP-apex-box-plot></EAP-apex-box-plot>
   </div>
