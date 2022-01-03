@@ -1,4 +1,7 @@
-<div class="p-3 w-full h-full bg-gray-200">
+<div
+  class="p-3 w-full h-full bg-gray-200"
+  *ngIf="weeks.length > 0; else nodata"
+>
   <div class="w-full p-2 bg-white">
     <mat-tab-group header-less-tabs [(selectedIndex)]="tabIndex">
       <mat-tab label="First">
@@ -36,7 +39,13 @@
                 *ngFor="let asignment of week.asignments; let i = index"
               >
                 <mat-list-item
-                  class="flex justify-between my-2 cursor-pointer hover:bg-gray-100"
+                  class="
+                    flex
+                    justify-between
+                    my-2
+                    cursor-pointer
+                    hover:bg-gray-100
+                  "
                   (click)="showAsignmentDetails(asignment)"
                 >
                   <span class="text-lg font-bold"
@@ -91,3 +100,6 @@
     </mat-tab-group>
   </div>
 </div>
+<ng-template #nodata>
+  <div class="w-full flex justify-center p-20">You are in no Class yet :/</div>
+</ng-template>
