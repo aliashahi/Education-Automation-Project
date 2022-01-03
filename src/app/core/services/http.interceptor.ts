@@ -1,28 +1,19 @@
 import {
-HttpEvent,
-HttpHandler,
-HttpRequest,
-HttpInterceptor,
-HttpErrorResponse,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+  HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { catchError, retry, tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { LoadingService } from 'src/app/shared/services/loading.service';
+import { catchError, retry } from 'rxjs/operators';
+import { EMPTY, Observable, throwError } from 'rxjs';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class HttpsInterceptor implements HttpInterceptor {
-  FREE_OF_TOKEN = [environment.apiBaseUrl + 'auth/users/'];
-  constructor(
-    private alertSrvc: AlertService,
-    private router: Router,
-    private loadingSrv: LoadingService
-  ) {}
+  constructor(private alertSrvc: AlertService, private router: Router) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -38,38 +29,19 @@ export class HttpsInterceptor implements HttpInterceptor {
 
     let token = localStorage.getItem('Token');
     if (token == null || token == undefined) token = '';
-    let tokenizedRequest!: HttpRequest<any>;
-    if (this.FREE_OF_TOKEN.find((i) => request.url == i))
-      tokenizedRequest = request.clone({
-        setHeaders: {
-          'Content-Type': 'application/json',
-        },
-      });
-    else
-      tokenizedRequest = request.clone({
-        setHeaders: {
-          Authorization: `JWT ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-    this.loadingSrv.show();
+    let tokenizedRequest = request.clone({
+      setHeaders: {
+        Authorization: `JWT ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
     return next.handle(tokenizedRequest).pipe(
       retry(0),
-      tap((i) => {
-        if (i.type != 0) this.loadingSrv.hide();
-      }),
-      catchError((error: HttpErrorResponse) =>
-        this.errorHandler(error, tokenizedRequest)
-      )
+      catchError((error: HttpErrorResponse) => this.errorHandler(error))
     );
   }
 
-  errorHandler(error: HttpErrorResponse, request: HttpRequest<any>) {
-    this.loadingSrv.hide();
-    if (error instanceof HttpErrorResponse && error.status === 500) {
-      this.alertSrvc.showToaster('Something Bad Happend right now!', 'DANGER');
-      return EMPTY;
-    }
+  errorHandler(error: HttpErrorResponse) {
     if (error instanceof HttpErrorResponse && error.status === 404) {
       this.alertSrvc.showToaster('Not Found!', 'DANGER');
       return EMPTY;
@@ -77,10 +49,7 @@ export class HttpsInterceptor implements HttpInterceptor {
 
     if (error instanceof HttpErrorResponse && error.status === 401) {
       this.alertSrvc.showToaster(error.error.detail, 'DANGER');
-      if (!this.router.url.includes('auth')) {
-        localStorage.clear();
-        this.router.navigate(['auth/login']);
-      }
+      this.router.navigate(['/auth/login']);
       return EMPTY;
     }
 
@@ -97,7 +66,7 @@ export class HttpsInterceptor implements HttpInterceptor {
     }
 
     this.alertSrvc.showToaster('Something went Wrong !!!', 'DANGER');
-    return EMPTY;
+    return throwError(error);
   }
 
   private create400ErrorMessage(error: HttpErrorResponse): string[] {

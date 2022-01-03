@@ -1,4 +1,6 @@
-export const CLASS_MOCK_DATA: any[] = [
+import { Class } from '../models/class.model';
+
+export const CLASS_MOCK_DATA: Class[] = [
   {
     id: 1,
     title: 'equate nitetime',

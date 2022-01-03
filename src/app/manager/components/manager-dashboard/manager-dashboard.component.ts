@@ -1,34 +1,30 @@
+import { Component, ViewChild } from '@angular/core';
 import {
+  ApexAxisChartSeries,
   ApexChart,
-  ApexXAxis,
+  ApexDataLabels,
+  ApexNonAxisChartSeries,
+  ApexResponsive,
   ApexStroke,
   ApexTooltip,
-  ApexResponsive,
-  ApexDataLabels,
+  ApexXAxis,
   ChartComponent,
-  ApexAxisChartSeries,
-  ApexNonAxisChartSeries,
 } from 'ng-apexcharts';
-import { Router } from '@angular/router';
-import { Component, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AlertService } from 'src/app/shared/modules/alert/alert.service';
-import { ProfileDialog } from 'src/app/main/components/profile-dialog/profile.dialog';
 
 export type areaChartOptions = {
+  series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
   stroke: ApexStroke;
   tooltip: ApexTooltip;
   dataLabels: ApexDataLabels;
-  series: ApexAxisChartSeries;
 };
 
 export type pieChartOptions = {
-  labels: any;
+  series: ApexNonAxisChartSeries;
   chart: ApexChart;
   responsive: ApexResponsive[];
-  series: ApexNonAxisChartSeries;
+  labels: any;
 };
 @Component({
   selector: 'EAP-manager-dashboard',
@@ -40,11 +36,7 @@ export class ManagerDashboardComponent {
   public areaChart: areaChartOptions;
   public pieChart: pieChartOptions;
 
-  constructor(
-    private router: Router,
-    private dialog: MatDialog,
-    private alertSrv: AlertService
-  ) {
+  constructor() {
     this.areaChart = {
       series: [
         {
@@ -108,13 +100,23 @@ export class ManagerDashboardComponent {
     };
   }
 
-  onEditProfile() {
-    this.dialog.open(ProfileDialog);
-  }
+  // public generateData(
+  //   baseval: number,
+  //   count: number,
+  //   yrange: { min: number; max: number }
+  // ) {
+  //   var i = 0;
+  //   var series = [];
+  //   while (i < count) {
+  //     var x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;
+  //     var y =
+  //       Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+  //     var z = Math.floor(Math.random() * (75 - 15 + 1)) + 15;
 
-  onLogout() {
-    localStorage.clear();
-    this.alertSrv.showToaster('You loged out Successfully!', 'INFO');
-    this.router.navigate(['/auth/login']);
-  }
+  //     series.push([x, y, z]);
+  //     baseval += 86400000;
+  //     i++;
+  //   }
+  //   return series;
+  // }
 }

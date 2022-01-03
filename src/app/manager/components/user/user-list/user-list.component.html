@@ -13,30 +13,6 @@
   "
 >
   <div class="flex items-center">
-    <mat-select
-      class="
-        shadow
-        appearance-none
-        border
-        rounded
-        w-full
-        py-2
-        px-3
-        ml-3
-        text-gray-700
-        leading-tight
-        focus:outline-none focus:shadow-outline
-        bg-white
-      "
-      name="role"
-      id="role"
-      (valueChange)="onChangeUserRole($event)"
-      value="S"
-    >
-      <mat-option value="S">Student</mat-option>
-      <mat-option value="T">Teacher</mat-option>
-      <mat-option value="M">Manager</mat-option>
-    </mat-select>
     <input
       class="
         shadow
@@ -51,8 +27,26 @@
         leading-tight
         focus:outline-none focus:shadow-outline
       "
-      placeholder="name"
-      [(ngModel)]="searchModel.name"
+      placeholder="first name"
+      [(ngModel)]="searchModel.first_name"
+      (input)="onFilterUsers()"
+    />
+    <input
+      class="
+        shadow
+        appearance-none
+        border
+        rounded
+        w-full
+        py-2
+        px-3
+        mx-2
+        text-gray-700
+        leading-tight
+        focus:outline-none focus:shadow-outline
+      "
+      placeholder="last name"
+      [(ngModel)]="searchModel.last_name"
       (input)="onFilterUsers()"
     />
     <input
@@ -93,7 +87,7 @@
     />
   </div>
 </div>
-<div class="container" *ngIf="dataSource.length > 0; else noData">
+<div class="container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
@@ -129,15 +123,7 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef>Role</th>
-      <td mat-cell *matCellDef="let element">
-        {{
-          element.role == "S"
-            ? "Student"
-            : element.role == "T"
-            ? "Teacher"
-            : "Manager"
-        }}
-      </td>
+      <td mat-cell *matCellDef="let element">{{ element.role }}</td>
     </ng-container>
 
     <ng-container matColumnDef="operation">
@@ -146,9 +132,9 @@
         <button mat-button color="warn" (click)="onDelete(element)">
           delete
         </button>
-        <!-- <button mat-button color="assent" (click)="onInfo(element)">
+        <button mat-button color="assent" (click)="onInfo(element)">
           info
-        </button> -->
+        </button>
       </td>
     </ng-container>
 
@@ -175,10 +161,3 @@
     (page)="onPaginationChange($event)"
   ></mat-paginator>
 </div>
-<ng-template #noData>
-  <loading-section [loading]="pendding">
-    <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
-      <img src="../../../../../assets/images/no_data.png" alt="" />
-    </div>
-  </loading-section>
-</ng-template>

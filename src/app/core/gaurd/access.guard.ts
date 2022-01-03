@@ -75,12 +75,12 @@ export class AccessGuard implements CanActivate {
       access_type =
         <ACCESS_TYPE>this.tokenDecoder.transform('S', 'role') || 'S';
     }
-    // if (
-    //   !this.ACCESS_LIST.includes(
-    //     this.tokenDecoder.transform('S', 'role') || 'UNKNOWN'
-    //   )
-    // )
-    //   localStorage.setItem('ACCESS_TYPE', 'S');
+    if (
+      !this.ACCESS_LIST.includes(
+        this.tokenDecoder.transform('S', 'role') || 'UNKNOWN'
+      )
+    )
+      localStorage.setItem('ACCESS_TYPE', 'S');
     this.doNavigation(access_type);
   }
 }

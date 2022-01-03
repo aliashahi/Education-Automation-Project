@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       Validators.minLength(6),
     ]),
+    // role: new FormControl('S'),
   });
   pendding = false;
 
@@ -42,24 +43,18 @@ export class RegisterComponent implements OnInit {
     if (this.forms.valid) {
       this.pendding = true;
       this.forms.disable();
-      this.loginRef$ = this.userSrv
-        .register({ ...this.forms.value, role: 'S', password2: undefined })
-        .subscribe(
-          (response) => {
-            this.alertSrv.showToaster('user created Successfully!', 'SUCCESS');
-            this.router.navigate(['/auth/login']);
-          },
-          (error) => {
-            this.alertSrv.showToaster(
-              'please enter valid information',
-              'DANGER'
-            );
-          },
-          () => {
-            this.pendding = false;
-            this.forms.enable();
-          }
-        );
+      this.loginRef$ = this.userSrv.register(this.forms.value).subscribe(
+        (response) => {
+          this.router.navigate(['/auth/login']);
+          this.pendding = false;
+          this.forms.enable();
+        },
+        (error) => {
+          this.alertSrv.showToaster('please enter valid information', 'DANGER');
+          this.pendding = false;
+          this.forms.enable();
+        }
+      );
     }
   }
 

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'EAP-root',
@@ -7,11 +6,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  showSplash = true;
-  constructor(private router: Router) {
-    if (!localStorage.getItem('Token')) this.router.navigate(['auth/login']);
-    setTimeout(() => {
-      this.showSplash = false;
-    }, 3000);
-  }
+  title = 'Education Automation Project';
 }

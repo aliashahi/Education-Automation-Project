@@ -6,11 +6,12 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { TopnavComponent } from './components/topnav/topnav.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatTreeModule } from '@angular/material/tree';
+import { AlertService } from '../shared/modules/alert/alert.service';
+import { UserService } from '../auth/services/user.service';
 import { HttpsInterceptor } from '../core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccessGuard } from '../core/gaurd/access.guard';
 import { ProfileDialog } from './components/profile-dialog/profile.dialog';
-import { LoadingBarComponent } from './components/loading-bar/loading-bar.component';
 
 const routes: Routes = [
   {
@@ -52,7 +53,6 @@ const routes: Routes = [
     SidenavComponent,
     TopnavComponent,
     ProfileDialog,
-    LoadingBarComponent,
   ],
   imports: [
     CommonModule,

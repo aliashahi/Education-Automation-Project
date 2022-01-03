@@ -8,14 +8,7 @@ import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
 import { UserSearchDto } from 'src/app/auth/services/user.dto';
 import { UserService } from 'src/app/auth/services/user.service';
 import { Pagination } from 'src/app/manager/models/pagination.model';
-import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
-import { Observable } from 'rxjs';
-interface LocalUserSearchDto {
-  name?: string;
-  username?: string;
-  email?: string;
-}
 
 @Component({
   selector: 'EAP-user-list',
@@ -24,7 +17,7 @@ interface LocalUserSearchDto {
 })
 export class UserListComponent implements OnInit {
   pendding: boolean = false;
-  searchModel: LocalUserSearchDto = {};
+  searchModel: UserSearchDto = {};
 
   displayedColumns: string[] = [
     'id',
@@ -46,31 +39,15 @@ export class UserListComponent implements OnInit {
     pageSize: 10,
     pageSizeOptions: [5, 10, 20, 40, 80, 160],
   };
-  constructor(
-    private userSrv: UserService,
-    private dialog: MatDialog,
-    private alertSrv: AlertService
-  ) {}
+  constructor(private userSrv: UserService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getData();
   }
 
-  private getData(role = 'S') {
+  private getData() {
     this.pendding = true;
-    let subject!: Observable<any>;
-    switch (role) {
-      case 'M':
-        subject = this.userSrv.getManagers(this.searchModel);
-        break;
-      case 'T':
-        subject = this.userSrv.getTeachers(this.searchModel);
-        break;
-      default:
-        subject = this.userSrv.getStudents(this.searchModel);
-        break;
-    }
-    subject.subscribe(
+    this.userSrv.getStudents({ ...this.searchModel }).subscribe(
       (res) => {
         this.allData = res.map((i: any) => i.user);
         this.onFilterUsers();
@@ -78,10 +55,6 @@ export class UserListComponent implements OnInit {
       () => {},
       () => (this.pendding = false)
     );
-  }
-
-  onChangeUserRole(role: 'S' | 'T' | 'M' | undefined) {
-    if (role) this.getData(role);
   }
 
   onPaginationChange($event: PageEvent) {
@@ -94,10 +67,10 @@ export class UserListComponent implements OnInit {
       return (
         user.first_name
           ?.toLowerCase()
-          .includes((this.searchModel.name || '').toLowerCase()) &&
+          .includes((this.searchModel.first_name || '').toLowerCase()) &&
         user.last_name
           ?.toLowerCase()
-          .includes((this.searchModel.name || '').toLowerCase()) &&
+          .includes((this.searchModel.last_name || '').toLowerCase()) &&
         user.username
           ?.toLowerCase()
           .includes((this.searchModel.username || '').toLowerCase()) &&
@@ -121,18 +94,8 @@ export class UserListComponent implements OnInit {
         submitText: 'delete',
         message: 'Are you Sure?',
         submitFn: () => {
-          this.pendding = true;
-          this.userSrv.deleteUser(user.id).subscribe(
-            (res) => {
-              this.alertSrv.showToaster(
-                'User Deleted Successfully!',
-                'SUCCESS'
-              );
-              this.getData();
-            },
-            (e) => {},
-            () => (this.pendding = false)
-          );
+          this.allData = this.allData.filter((i) => i.id != user.id);
+          this.onFilterUsers();
         },
       },
     });

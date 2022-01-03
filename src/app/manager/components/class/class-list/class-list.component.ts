@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Class } from 'src/app/manager/models/class.model';
 import { ConfirmDialog } from 'src/app/shared/modules/confirm';
-import { ClassService } from 'src/app/shared/services/class.service';
-import { AlertService } from 'src/app/shared/modules/alert/alert.service';
+import { CLASS_MOCK_DATA } from 'src/app/manager/mock/class.mock';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 
 @Component({
@@ -16,30 +15,11 @@ export class ClassListComponent implements OnInit {
   searchedValue!: string;
   startDate!: string;
   endDate!: string;
-  allData: Class[] = [];
-  filteredData: Class[] = [];
-  pendding: boolean = false;
-  constructor(
-    private dialog: MatDialog,
-    private classSrv: ClassService,
-    private alertSrv: AlertService
-  ) {}
+  allData = CLASS_MOCK_DATA;
+  filteredData = CLASS_MOCK_DATA;
+  constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {
-    this.getData();
-  }
-
-  private getData() {
-    this.pendding = true;
-    this.classSrv.getClassList({}).subscribe(
-      (response: Class[]) => {
-        this.allData = response;
-        this.onFilterAnnouncements();
-      },
-      (e) => {},
-      () => (this.pendding = false)
-    );
-  }
+  ngOnInit(): void {}
 
   onFilterAnnouncements() {
     this.filteredData = this.allData.filter(
@@ -54,20 +34,10 @@ export class ClassListComponent implements OnInit {
       data: <ConfirmDialogDto>{
         cancelText: 'close',
         submitText: 'delete',
-        message: 'Are you Sure ?',
+        message: 'Are you Sure?',
         submitFn: () => {
-          this.pendding = true;
-          this.classSrv.deleteClass(item.id).subscribe(
-            (response) => {
-              this.alertSrv.showToaster(
-                'Class deleted Successfully!',
-                'SUCCESS'
-              );
-              this.getData();
-            },
-            (e) => {},
-            () => (this.pendding = false)
-          );
+          this.allData = this.allData.filter((i) => i.id != item.id);
+          this.onFilterAnnouncements();
         },
       },
     });
@@ -75,19 +45,19 @@ export class ClassListComponent implements OnInit {
 
   private _filter(searched: string, item: Class): boolean {
     return (
-      item.description
+      (item.description
         .toLocaleLowerCase()
         .includes((searched || '').toLocaleLowerCase()) ||
-      item.name
-        .toLocaleLowerCase()
-        .includes((searched || '').toLocaleLowerCase()) ||
-      (item.grade.includes(searched) &&
-        (new Date(item.startClassDate) >=
-          new Date((this.startDate || '').split('-').join('/')) ||
-          !this.startDate) &&
-        (new Date(item.endClassDate) <=
-          new Date((this.endDate || '').split('-').join('/')) ||
-          !this.endDate))
+        item.title
+          .toLocaleLowerCase()
+          .includes((searched || '').toLocaleLowerCase()) ||
+        item.grade == (!isNaN(+searched) ? 10 : +searched)) &&
+      (new Date(item.start_date) >=
+        new Date((this.startDate || '').split('-').join('/')) ||
+        !this.startDate) &&
+      (new Date(item.end_date) <=
+        new Date((this.endDate || '').split('-').join('/')) ||
+        !this.endDate)
     );
   }
 }

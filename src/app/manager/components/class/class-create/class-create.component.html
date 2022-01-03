@@ -1,11 +1,11 @@
 <div class="p-3 w-full h-full bg-gray-200">
   <div class="w-full rounded-md p-2">
-    <mat-stepper [linear]="!!!classId" #stepper>
+    <mat-stepper linear #stepper>
       <mat-step [stepControl]="class_info_form" [editable]="isEditable">
         <form [formGroup]="class_info_form" class="mt-8 space-y-6">
           <ng-template matStepLabel>Class Information</ng-template>
           <div class="w-full">
-            <mat-form-field class="w-1/2 pr-2" appearance="outline">
+            <mat-form-field class="w-full" appearance="outline">
               <mat-label>Class Title</mat-label>
               <input
                 matInput
@@ -21,81 +21,21 @@
                 >class title is required</mat-error
               >
             </mat-form-field>
-            <mat-form-field class="w-1/2 pl-2" appearance="outline">
-              <mat-label>Class Grade</mat-label>
-              <mat-select formControlName="grade" name="grade">
-                <mat-option
-                  *ngFor="let grade of getClassGrades"
-                  [value]="grade.value"
-                >
-                  {{ grade.label }}
-                </mat-option>
-              </mat-select>
+            <mat-form-field class="w-full" appearance="outline">
+              <mat-label>capacity</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="30"
+                formControlName="capacity"
+                required
+              />
               <mat-error
                 *ngIf="
-                  class_info_form.get('grade')?.errors &&
-                  class_info_form.get('grade')?.hasError('required')
+                  class_info_form.get('capacity')?.errors &&
+                  class_info_form.get('capacity')?.hasError('required')
                 "
-                >grade is required</mat-error
-              >
-            </mat-form-field>
-            <mat-form-field class="w-1/2 pr-2" appearance="outline">
-              <mat-label>status</mat-label>
-              <mat-select formControlName="status" name="status">
-                <mat-option
-                  *ngFor="let status of getClassStatus"
-                  [value]="status.value"
-                >
-                  {{ status.label }}
-                </mat-option>
-              </mat-select>
-              <mat-error
-                *ngIf="
-                  class_info_form.get('status')?.errors &&
-                  class_info_form.get('status')?.hasError('required')
-                "
-                >status is required</mat-error
-              >
-            </mat-form-field>
-            <mat-form-field class="w-1/2 pl-2" appearance="outline">
-              <mat-label>Enter a date range</mat-label>
-              <mat-date-range-input
-                [formGroup]="class_info_form"
-                [rangePicker]="picker"
-              >
-                <input
-                  matStartDate
-                  formControlName="startClassDate"
-                  placeholder="Start date"
-                />
-                <input
-                  matEndDate
-                  formControlName="endClassDate"
-                  placeholder="End date"
-                />
-              </mat-date-range-input>
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-date-range-picker #picker></mat-date-range-picker>
-              <mat-error
-                *ngIf="
-                  class_info_form.get('startClassDate')?.errors &&
-                  class_info_form
-                    .get('startClassDate')
-                    ?.hasError('matStartDateInvalid')
-                "
-                >Invalid start date</mat-error
-              >
-              <mat-error
-                *ngIf="
-                  class_info_form.get('endClassDate')?.errors &&
-                  class_info_form
-                    .get('endClassDate')
-                    ?.hasError('matEndDateInvalid')
-                "
-                >Invalid end date</mat-error
+                >capacity is required</mat-error
               >
             </mat-form-field>
             <mat-form-field class="w-full" appearance="outline">
@@ -114,84 +54,45 @@
                 >description is required</mat-error
               >
             </mat-form-field>
-            <ng-container *ngIf="classId">
-              <div class="getImage">
-                <div
-                  class="dragField"
-                  (click)="input.click()"
-                  (fileDropped)="upload($event)"
-                  DragDropFileUpload
-                >
-                  <h3>choose a image for class</h3>
-                  <h6>(you can also drag and drop)</h6>
-                </div>
-                <input
-                  class="inputField"
-                  #input
-                  (change)="upload($event)"
-                  type="file"
-                />
-              </div>
-            </ng-container>
           </div>
           <div class="flex w-full justify-end">
-            <button
-              mat-raised-button
-              class="
-                bg-green-600
-                text-white
-                hover:bg-green-700 hover:text-white
-                disabled:opacity-50
-              "
-              color="primary"
-              [disabled]="class_info_form.invalid || pendding"
-              (click)="onSubmitBaseInfo(stepper)"
-            >
-              {{ classId ? "update" : "create" }}
+            <button mat-raised-button color="primary" matStepperNext>
+              Next
             </button>
           </div>
         </form>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Weekly schedule</ng-template>
-        <ng-template matStepContent>
-          <EAP-weekly-schedule
-            *ngIf="showWeekSchedule && classId != 0"
-            [classId]="classId"
-            [(scheduleData)]="scheduleData"
-          ></EAP-weekly-schedule>
-          <div class="flex w-full justify-end">
-            <button
-              mat-raised-button
-              color="accent"
-              (click)="openDefineMeetingDialog()"
-              class="mx-2"
-            >
-              add Meeting
-            </button>
-            <button mat-raised-button color="warn" matStepperPrevious>
-              Back
-            </button>
-            <button
-              mat-raised-button
-              color="primary"
-              class="mx-2"
-              (click)="onSubmitSchedule(stepper)"
-            >
-              Next
-            </button>
-          </div>
-        </ng-template>
+        <EAP-weekly-schedule></EAP-weekly-schedule>
+        <div class="flex w-full justify-end">
+          <button mat-raised-button color="warn" matStepperPrevious>
+            Back
+          </button>
+          <button mat-raised-button color="primary" class="mx-2" matStepperNext>
+            Next
+          </button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>overview</ng-template>
+        <p>class_info_form:{{ class_info_form.value | json }}</p>
+        <p>teachers:{{ teacher_info_form.value | json }}</p>
+        <p>students:{{ student_info_form.value | json }}</p>
+        <div class="flex w-full justify-end">
+          <button mat-raised-button color="warn" matStepperPrevious>
+            Back
+          </button>
+          <button mat-raised-button color="primary" class="mx-2" matStepperNext>
+            Done
+          </button>
+        </div>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <p class="text-green-600">Class created Successfully!</p>
         <div class="flex w-full justify-end">
-          <button
-            mat-raised-button
-            color="warn"
-            (click)="stepper.reset(); resetSchedule()"
-          >
+          <button mat-raised-button color="warn" (click)="stepper.reset()">
             Reset
           </button>
         </div>

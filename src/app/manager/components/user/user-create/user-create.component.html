@@ -76,17 +76,17 @@
                 matInput
                 placeholder="doe"
                 formControlName="password"
-                [type]="hidePass ? 'password' : 'text'"
+                [type]="true ? 'password' : 'text'"
                 required
               />
               <button
                 mat-icon-button
                 matSuffix
                 [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hidePass"
+                [attr.aria-pressed]="true"
               >
-                <mat-icon (click)="hidePass = !hidePass">{{
-                  hidePass ? "visibility_off" : "visibility"
+                <mat-icon>{{
+                  true ? "visibility_off" : "visibility"
                 }}</mat-icon>
               </button>
               <mat-error
@@ -97,19 +97,12 @@
                 >password is required</mat-error
               >
             </mat-form-field>
-            <div
-              class="inline-block w-1/2 pr-2 text-center"
-              style="margin-top: 0"
-            >
-              <mat-radio-group
-                formControlName="role"
-                class="flex justify-around"
-              >
-                <mat-radio-button value="S">Student</mat-radio-button>
-                <mat-radio-button value="T">Teacher</mat-radio-button>
-                <mat-radio-button value="M">Manager</mat-radio-button>
-              </mat-radio-group>
-            </div>
+          </div>
+          <div class="w-1/2 text-center" style="margin-top: 0">
+            <mat-radio-group formControlName="role" class="flex justify-around">
+              <mat-radio-button value="S">Student</mat-radio-button>
+              <mat-radio-button value="T">Teacher</mat-radio-button>
+            </mat-radio-group>
           </div>
           <div class="flex w-full justify-end">
             <button
@@ -129,77 +122,22 @@
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="extra_form" [editable]="isEditable">
-        <form [formGroup]="extra_form" class="mt-8 space-y-6">
-          <div class="w-full">
-            <ng-template matStepLabel>Extra Information</ng-template>
-            <mat-form-field class="w-1/2 pr-2" appearance="outline">
-              <mat-label>National ID</mat-label>
-              <input
-                matInput
-                placeholder="1234343434"
-                formControlName="nationalId"
-                required
-              />
-            </mat-form-field>
-            <mat-form-field class="w-1/2 pl-2" appearance="outline">
-              <mat-label>Birth Date</mat-label>
-              <input
-                matInput
-                formControlName="birthDate"
-                [matDatepicker]="picker"
-                required
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="w-1/2 pr-2" appearance="outline">
-              <mat-label>phone Number</mat-label>
-              <input
-                matInput
-                placeholder="021 33432101"
-                type="tel"
-                formControlName="phoneNumber"
-                required
-              />
-            </mat-form-field>
-            <mat-form-field class="w-1/2 pl-2" appearance="outline">
-              <mat-label>mobile Number</mat-label>
-              <input
-                matInput
-                placeholder="0912 123 4567"
-                type="tel"
-                formControlName="mobileNumber"
-                required
-              />
-            </mat-form-field>
-            <mat-form-field class="w-full" appearance="outline">
-              <mat-label>Address</mat-label>
-              <textarea
-                matInput
-                placeholder="17 Shahrivar St."
-                formControlName="address"
-                rows="5"
-              ></textarea>
-            </mat-form-field>
-          </div>
+      <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Extra Information</ng-template>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Address</mat-label>
+            <input
+              matInput
+              formControlName="secondCtrl"
+              placeholder="Ex. 1 Main St, New York, NY"
+              required
+            />
+          </mat-form-field>
           <div class="flex w-full justify-end">
-            <button
-              mat-raised-button
-              class="
-                bg-green-600
-                text-white
-                hover:bg-green-700 hover:text-white
-                disabled:opacity-50
-              "
-              type="submit"
-              [disabled]="extra_form.invalid || pendding"
-              (click)="onupdateExtraInfo(stepper)"
-            >
-              Submit
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-stroked-button class="primary" matStepperNext>
+              Next
             </button>
           </div>
         </form>

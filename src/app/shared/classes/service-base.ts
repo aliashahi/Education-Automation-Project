@@ -1,8 +1,9 @@
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ParamDto } from './param.dto';
 import { Injector } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { filter, map, tap } from 'rxjs/operators';
 import { AlertService } from '../modules/alert/alert.service';
 
 export abstract class ServiceBase {

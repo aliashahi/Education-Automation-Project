@@ -4,8 +4,6 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 
 const MODULES = [
   CommonModule,
@@ -13,8 +11,6 @@ const MODULES = [
   NzIconModule,
   NzUploadModule,
   NzDividerModule,
-  NzCardModule,
-  NzAvatarModule,
 ];
 
 @NgModule({

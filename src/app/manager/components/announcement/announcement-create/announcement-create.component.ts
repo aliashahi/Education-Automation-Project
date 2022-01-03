@@ -1,14 +1,10 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/auth/services/user.service';
-import { GROUPS } from 'src/app/manager/constants/groups.constant';
-import { createDateFormat } from 'src/app/shared/utils/date.utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ClassService } from 'src/app/shared/services/class.service';
+import { Router } from '@angular/router';
+import { GROUPS } from 'src/app/manager/constants/groups.constant';
+import { USER_MOCK_DATA } from 'src/app/manager/mock/user.mock';
+import { User } from 'src/app/manager/models/user.model';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
-import { AnnouncementService } from 'src/app/shared/services/announcement.service';
-import { SelectDto } from 'src/app/shared/models/select.dto';
-import { ANNOUNCEMENT_MOCK_DATA } from 'src/app/manager/mock/announcement.mock';
 
 @Component({
   selector: 'EAP-announcement-create',
@@ -17,107 +13,27 @@ import { ANNOUNCEMENT_MOCK_DATA } from 'src/app/manager/mock/announcement.mock';
 })
 export class AnnouncementCreateComponent implements OnInit {
   announcement_form!: FormGroup;
-  groups: SelectDto[] = GROUPS;
-  teachers: SelectDto[] = [];
-  students: SelectDto[] = [];
-  classes: SelectDto[] = [];
-  pendding: boolean = false;
-  constructor(
-    private router: Router,
-    private userSrv: UserService,
-    private classSrv: ClassService,
-    private alertService: AlertService,
-    private annSrv: AnnouncementService
-  ) {}
+  groups: { value: number; label: string }[] = GROUPS;
+  teachers: User[] = USER_MOCK_DATA;
+  constructor(private alertService: AlertService, private router: Router) {}
 
   ngOnInit(): void {
     this.initAnnouncementForm();
-    this.userSrv.getTeachers({}).subscribe((res) => {
-      this.teachers = res.map((i: any) => {
-        return {
-          value: i.user.id,
-          label: i.user.first_name + ' ' + i.user.last_name,
-        };
-      });
-    });
-    this.userSrv.getStudents({}).subscribe((res) => {
-      this.students = res.map((i: any) => {
-        return {
-          value: i.user.id,
-          label: i.user.first_name + ' ' + i.user.last_name,
-        };
-      });
-    });
-    this.classSrv.getClassList({}).subscribe((res) => {
-      this.classes = res.map((i: any) => {
-        return {
-          label: i.name,
-          value: i.id,
-        };
-      });
-    });
-    // this.mock(0);
   }
 
   private initAnnouncementForm() {
     this.announcement_form = new FormGroup({
       title: new FormControl(null, Validators.required),
+      subtitle: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
-      group: new FormControl(null, Validators.required),
-      start_date: new FormControl(new Date(), Validators.required),
-      expire_date: new FormControl(new Date(), Validators.required),
-      allTeachers: new FormControl(false),
-      teachers: new FormControl([]),
-      allStudents: new FormControl(false),
-      students: new FormControl([]),
-      allClasses: new FormControl(false),
-      classes: new FormControl([]),
+      group: new FormControl([1, 2, 3], Validators.required),
     });
   }
 
   onSubmit() {
-    this.pendding = true;
-    this.announcement_form.disable();
-    this.annSrv
-      .createAnnouncements({
-        ...this.announcement_form.value,
-        start_date: createDateFormat(this.announcement_form.value.start_date),
-        expire_date: createDateFormat(this.announcement_form.value.expire_date),
-      })
-      .subscribe(
-        (res) => {
-          this.alertService.showToaster('Announcement Created!!!', 'SUCCESS');
-          setTimeout(() => {
-            this.router.navigate(['/manager/announcement-list']);
-          }, 1000);
-        },
-        (e) => {},
-        () => {
-          this.pendding = true;
-          this.announcement_form.enable();
-        }
-      );
+    this.alertService.showToaster('Announcement Created!!!', 'SUCCESS');
+    setTimeout(() => {
+      this.router.navigate(['/manager/announcement-list']);
+    }, 1000);
   }
-
-  // mock(index: number) {
-  //   if (index > 100) return;
-  //   let i = ANNOUNCEMENT_MOCK_DATA[index];
-  //   this.annSrv
-  //     .createAnnouncements({
-  //       title: i.title,
-  //       description: i.description,
-  //       group: ['Tea', 'Stu', 'cla'][Math.floor(Math.random() * 3)],
-  //       start_date: i.date.split('/').join('-'),
-  //       expire_date: i.date.split('/').join('-'),
-  //       allTeachers: Math.floor(Math.random() * 3) % 4 == 2,
-  //       teachers: [],
-  //       allStudents: Math.floor(Math.random() * 3) % 4 == 2,
-  //       students: [],
-  //       allClasses: Math.floor(Math.random() * 3) % 4 == 2,
-  //       classes: [],
-  //     })
-  //     .subscribe((res) => {
-  //       this.mock(index + 1);
-  //     });
-  // }
 }

@@ -6,7 +6,6 @@ export interface SidenavNode {
   icon: string;
   ACCESS: ACCESS_TYPE;
   children?: SidenavNode[];
-  hasDividerAfter?: boolean;
 }
 
 export const SIDENAV_CONFIG: SidenavNode[] = [
@@ -16,7 +15,6 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     url: '/manager/dashboard',
     ACCESS: 'M',
     icon: 'dashboard',
-    hasDividerAfter: true,
   },
   {
     name: 'Create User',
@@ -28,12 +26,6 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     name: 'User List',
     icon: 'people',
     url: '/manager/user-list',
-    ACCESS: 'M',
-  },
-  {
-    name: 'Manage Meetings',
-    icon: 'watch_later',
-    url: '/manager/meeting-create',
     ACCESS: 'M',
   },
   {
@@ -66,30 +58,6 @@ export const SIDENAV_CONFIG: SidenavNode[] = [
     url: '/teacher/dashboard',
     ACCESS: 'T',
     icon: 'dashboard',
-  },
-  {
-    name: 'Classes',
-    url: '/teacher/class-list',
-    ACCESS: 'T',
-    icon: 'class',
-  },
-  {
-    name: 'Create Announcement',
-    url: '/teacher/announcement-create',
-    ACCESS: 'T',
-    icon: 'send',
-  },
-  {
-    name: 'Announcement list',
-    url: '/teacher/announcement-list',
-    ACCESS: 'T',
-    icon: 'campaign',
-  },
-  {
-    name: 'Roll Call',
-    url: '/teacher/roll-call',
-    ACCESS: 'T',
-    icon: 'rule',
   },
   //TEACHER END
   //STUDENT CONFIG

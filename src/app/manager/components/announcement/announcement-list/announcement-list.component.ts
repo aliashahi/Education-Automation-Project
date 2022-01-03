@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialog } from 'src/app/shared/modules/confirm';
+import { ANNOUNCEMENT_MOCK_DATA } from 'src/app/manager/mock/announcement.mock';
 import { Announcement } from 'src/app/manager/models/announcement.model';
-import { AlertService } from 'src/app/shared/modules/alert/alert.service';
-import { AnnouncementService } from 'src/app/shared/services/announcement.service';
+import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 
 @Component({
@@ -16,32 +15,11 @@ export class AnnouncementListComponent implements OnInit {
   searchedValue!: string;
   startDate!: string;
   endDate!: string;
-  allData: Announcement[] = [];
-  filteredData: Announcement[] = [];
-  pendding: boolean = false;
-  constructor(
-    private dialog: MatDialog,
-    private alertSrv: AlertService,
-    private annSrv: AnnouncementService
-  ) {}
+  allData = ANNOUNCEMENT_MOCK_DATA;
+  filteredData = ANNOUNCEMENT_MOCK_DATA;
+  constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {
-    this.getData();
-  }
-
-  private getData() {
-    this.pendding = true;
-    this.annSrv.getAnnouncements({}).subscribe(
-      (res) => {
-        this.allData = res;
-        this.onFilterAnnouncements();
-      },
-      (e) => {},
-      () => {
-        this.pendding = false;
-      }
-    );
-  }
+  ngOnInit(): void {}
 
   onFilterAnnouncements() {
     this.filteredData = this.allData.filter(
@@ -58,20 +36,8 @@ export class AnnouncementListComponent implements OnInit {
         submitText: 'delete',
         message: 'Are you Sure?',
         submitFn: () => {
-          this.pendding = true;
-          this.annSrv.deleteAnnouncements(item.id).subscribe(
-            (res) => {
-              this.alertSrv.showToaster(
-                'Announcement Deleted Successfully!',
-                'SUCCESS'
-              );
-              this.getData();
-            },
-            (e) => {},
-            () => {
-              this.pendding = false;
-            }
-          );
+          this.allData = this.allData.filter((i) => i.id != item.id);
+          this.onFilterAnnouncements();
         },
       },
     });

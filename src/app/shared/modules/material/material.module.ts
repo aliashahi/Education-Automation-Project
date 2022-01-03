@@ -22,9 +22,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 const MODULES = [
   CommonModule,
@@ -50,9 +47,6 @@ const MODULES = [
   MatSelectModule,
   MatButtonToggleModule,
   MatMenuModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatTooltipModule,
 ];
 
 @NgModule({

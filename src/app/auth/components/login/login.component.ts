@@ -31,9 +31,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('Token')) {
-      this.router.navigate(['/']);
-    }
+    localStorage.removeItem('Token');
   }
 
   onLogin() {
@@ -54,15 +52,7 @@ export class LoginComponent implements OnInit {
             'You are Successfully loged in!',
             'SUCCESS'
           );
-          this.userSrv.getMyInfo().subscribe(
-            (res) => {
-              localStorage.setItem('USER_INFO', JSON.stringify(res));
-            },
-            (e) => {},
-            () => {
-              this.router.navigate(['/']);
-            }
-          );
+          this.router.navigate(['/']);
         },
         (error) => {},
         () => {

@@ -1,63 +1,10 @@
-h1,
-h3 {
-  font-family: Poppins, Helvetica, sans-serif !important;
-}
-article {
-  margin: auto 10px;
-  margin-top: 40px;
-  margin-bottom: 50px;
+#areaChart {
+  max-width: 650px;
+  margin: 35px auto;
 }
 
-.chart {
-  margin: 16px;
-  margin-left: 90px;
-  margin-right: 90px;
-}
-
-.head {
-  padding: 10px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  .head-bg {
-    border-radius: 15px;
-    background-image: url("../../../../assets/images/background/dashboard.jpg");
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    height: 200px;
-  }
-
-  .head-content {
-    height: 110px;
-    display: flex;
-    border-radius: 16px;
-    .profile {
-      width: 200px;
-      height: 200px;
-      transform: translateY(-90px);
-      margin-left: 40px;
-      padding: 5px;
-      border-radius: 50%;
-      background-color: white;
-      img {
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .caption {
-      padding: 10px;
-      h1 {
-        font-weight: 600;
-        margin-bottom: 3px;
-      }
-    }
-    .action {
-      margin: 10px;
-      margin-left: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-  }
+#pieChart {
+  max-width: 380px;
+  margin: 35px auto;
+  padding: 0;
 }

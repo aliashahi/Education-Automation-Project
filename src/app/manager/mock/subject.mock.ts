@@ -1,34 +1,58 @@
-export const SUBJECT_MOCK_DATA: { label: string; value: string }[] = [
+export const SUBJECT_MOCK_DATA: { label: string; value: number }[] = [
   {
-    value: 'M',
-    label: 'Mathematics',
+    value: 1,
+    label: 'Literature',
   },
   {
-    value: 'P',
-    label: 'Physics',
+    value: 2,
+    label: 'Algebra',
   },
   {
-    value: 'C',
-    label: 'Chemistry',
+    value: 3,
+    label: 'Algebra II',
   },
   {
-    value: 'B',
+    value: 4,
+    label: 'Geometry',
+  },
+  {
+    value: 5,
+    label: 'Statistics',
+  },
+  {
+    value: 6,
+    label: 'Calculus',
+  },
+  {
+    value: 7,
     label: 'Biology',
   },
   {
-    value: 'F',
-    label: 'Farsi',
+    value: 8,
+    label: 'Chemistry',
   },
   {
-    value: 'E',
-    label: 'English',
+    value: 9,
+    label: 'Space sciences',
   },
   {
-    value: 'A',
-    label: 'Arabic',
+    value: 10,
+    label: 'Physics',
   },
   {
-    value: 'R',
-    label: 'Religion',
+    value: 11,
+    label: 'Economics',
+  },
+  {
+    value: 12,
+    label: 'Geography',
+  },
+  {
+    value: 13,
+    label: 'History',
+  },
+  {
+    value: 14,
+    label: 'French',
   },
 ];
