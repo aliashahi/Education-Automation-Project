@@ -13,6 +13,7 @@ import { ProfileDialog } from 'src/app/main/components/profile-dialog/profile.di
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  new_date = new Date();
   gridStyle = {
     width: '50%',
     textAlign: 'center',
@@ -34,7 +35,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.showCharts = this.userPipe.transform('', 'role') == 'M';
-    this.hideCarts = this.userPipe.transform('', 'role') == 'T';
+    this.hideCarts = this.userPipe.transform('', 'role') == 'S';
     if (this.showCharts) {
       forkJoin(
         this.userService.getStudents({}),
