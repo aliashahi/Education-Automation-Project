@@ -5,6 +5,7 @@ import { Announcement } from 'src/app/manager/models/announcement.model';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { AnnouncementService } from 'src/app/shared/services/announcement.service';
 import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
+import { AnnouncementDetailDialog } from './announcement-detail/announcement-detail.component';
 
 @Component({
   selector: 'EAP-announcement-list',
@@ -49,7 +50,11 @@ export class AnnouncementListComponent implements OnInit {
     );
   }
 
-  onEdit(item: Announcement) {}
+  openMoreDialog(item: Announcement) {
+    this.dialog.open(AnnouncementDetailDialog, {
+      data: item,
+    });
+  }
 
   onDelete(item: Announcement) {
     this.dialog.open(ConfirmDialog, {

@@ -160,13 +160,11 @@ export class UserCreateComponent implements OnInit {
       .subscribe(
         (res) => {
           this.alertSrv.showToaster('User updated Successfully!', 'SUCCESS');
-          if (!this.extraInfo) stepper.next();
-        },
-        (e) => {
+          stepper.next();
           this.extra_form.enable();
           this.pendding = false;
         },
-        () => {
+        (e) => {
           this.extra_form.enable();
           this.pendding = false;
         }
