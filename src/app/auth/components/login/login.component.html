@@ -40,13 +40,7 @@
           alt=""
         />
       </div>
-      <form
-        [formGroup]="forms"
-        (ngSubmit)="onLogin()"
-        class="mt-8 space-y-6"
-        action="#"
-        method="POST"
-      >
+      <form [formGroup]="forms" (ngSubmit)="onLogin()" class="mt-8 space-y-6">
         <div class="rounded-md shadow-sm -space-y-px">
           <div class="w-full">
             <mat-form-field class="w-full" appearance="outline">
