@@ -9,13 +9,19 @@
     <tr *ngFor="let day of days; let i = index">
       <th class="border-1 p-2 w-16 bg-secondary-300">{{ day }}</th>
       <td
-        class="border-1 p-2"
+        class="border-1 p-2 relative"
         *ngFor="let time of scheduleMap[i]; let j = index"
         [ngClass]="{ selected: time.teacher && time.subject }"
         (click)="time.day = i; time.time = j"
         [style.background-color]="!time.isEnable ? '#dedede' : null"
       >
         <ng-container *ngIf="time.isEnable; else notDefiend">
+          <button
+            class="top-0 left-0 absolute cursor-pointer"
+            (click)="time.teacher = null; time.subject = null"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
           <mat-form-field appearance="outline">
             <mat-select
               [(ngModel)]="time.teacher"

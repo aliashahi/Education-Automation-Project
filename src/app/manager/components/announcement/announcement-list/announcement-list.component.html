@@ -108,7 +108,7 @@
         'lg:card-side': showKind == 'list'
       }"
     >
-      <figure class="p-2">
+      <figure class="p-2 justify-center" [class.flex]="showKind == 'grid'">
         <img
           src="../../../../../assets/images/image-placeholder.jpg"
           class="rounded-lg shadow-lg w-[340px]"
@@ -117,7 +117,7 @@
       <div class="max-w-md card-body text-black">
         <h2 class="card-title">{{ item.title | longTextCutter: 30 }}</h2>
         <p style="text-overflow: ellipsis">
-          {{ item.description | longTextCutter }}
+          {{ item.description | longTextCutter: (showKind == "grid" ? 30 : 0) }}
         </p>
         <div class="card-actions">
           <button
@@ -125,6 +125,9 @@
             class="btn glass bg-red-300 rounded-full text-red-600"
           >
             Delete
+          </button>
+          <button (click)="openMoreDialog(item)" class="btn glass bg-green-300 rounded-full text-green-600">
+            More
           </button>
         </div>
       </div>
@@ -134,7 +137,7 @@
 <ng-template #noData>
   <loading-section [loading]="pendding">
     <div class="m-auto w-1/2 text-center p-10 rounded-lg font-extrabold">
-      <nz-empty></nz-empty> 
+      <nz-empty></nz-empty>
     </div>
   </loading-section>
 </ng-template>

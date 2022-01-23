@@ -163,7 +163,7 @@ export class WeeklyScheduleComponent implements OnInit {
             ?.times.push(item.times[0]);
         } else commonOut.push(item);
       });
-      this.scheduleData = schedules;
+      this.scheduleData = commonOut;
       this.scheduleDataChange.emit(this.scheduleData);
     }, 0);
   }

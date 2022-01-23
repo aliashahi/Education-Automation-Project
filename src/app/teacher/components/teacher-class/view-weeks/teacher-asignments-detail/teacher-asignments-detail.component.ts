@@ -5,7 +5,6 @@ import {
 } from 'date-fns';
 import { FileDto } from 'src/app/shared/models/file.dto';
 import { Asignment } from 'src/app/student/model/week.model';
-import { createDateFormat } from 'src/app/shared/utils/date.utils';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -51,14 +50,20 @@ export class TeacherAsignmentsDetailComponent implements OnInit {
     this.form = this.fb.group({
       title: [null, Validators.required],
       description: null,
-      deadline: [new Date(), Validators.required],
+      deadline: [
+        this.asignment.deadline
+          ? this.asignment.deadline.split('T')[0]
+          : new Date(),
+        Validators.required,
+      ],
     });
     if (this.asignment.id != -1) {
       this.form.setValue({
         title: this.asignment.title ?? '',
         description: this.asignment.description ?? '',
-        deadline: new Date(this.asignment.deadline),
+        deadline: this.asignment.deadline.split('T')[0],
       });
+      this.onFormDataChange();
     }
     this.form.valueChanges.subscribe(this.onFormDataChange.bind(this));
   }
@@ -86,7 +91,7 @@ export class TeacherAsignmentsDetailComponent implements OnInit {
       this.fileToUpload[0].name
     );
     formData.append('title', data.title ?? '');
-    formData.append('deadline', createDateFormat(data.deadline));
+    formData.append('deadline', data.deadline);
     formData.append('description', data.description ?? '');
     this.asignmentSrv.createAssignment(this.classId, formData).subscribe(
       (res) => {

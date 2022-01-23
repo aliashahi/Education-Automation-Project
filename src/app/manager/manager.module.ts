@@ -18,6 +18,7 @@ import { AnnouncementListComponent } from './components/announcement/announcemen
 import { AnnouncementCreateComponent } from './components/announcement/announcement-create/announcement-create.component';
 import { DefineMeetingsDialog } from './components/class/class-create/weekly-schedule/define-meetings-dialog/define-meetings.dialog';
 import { SelectedTeacherListComponent } from './components/class/class-create/selected-teacher-list/selected-teacher-list.component';
+import { AnnouncementDetailDialog } from './components/announcement/announcement-list/announcement-detail/announcement-detail.component';
 
 const routes: Routes = [
   {
@@ -91,6 +92,7 @@ const routes: Routes = [
     AnnouncementListComponent,
     AnnouncementCreateComponent,
     SelectedTeacherListComponent,
+    AnnouncementDetailDialog,
   ],
   imports: [
     CommonModule,

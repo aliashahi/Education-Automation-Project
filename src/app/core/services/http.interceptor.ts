@@ -110,6 +110,7 @@ export class HttpsInterceptor implements HttpInterceptor {
       if (typeof e[1] == 'string') list.push(String(e[1]));
       if (Array.isArray(e[1])) list.push(...e[1]);
     });
+    if (list.length > 0) list = [list[0]];
     return list;
   }
 }

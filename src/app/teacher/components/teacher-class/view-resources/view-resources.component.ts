@@ -1,10 +1,11 @@
 import { MatDialog } from '@angular/material/dialog';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FileDto } from 'src/app/shared/models/file.dto';
 import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { Resource } from 'src/app/teacher/models/resource.model';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { ResourceService } from 'src/app/shared/services/resource.service';
+import { NzTabSetComponent } from 'ng-zorro-antd/tabs';
 
 @Component({
   selector: 'EAP-view-resources',
@@ -12,6 +13,7 @@ import { ResourceService } from 'src/app/shared/services/resource.service';
   styleUrls: ['./view-resources.component.scss'],
 })
 export class ViewResourcesComponent implements OnInit {
+  @ViewChild('tabs') tabs!: NzTabSetComponent;
   @Input() classId!: number;
   filesList: Resource[] = [];
   fileToUpload: FileDto[] = [];
@@ -75,6 +77,7 @@ export class ViewResourcesComponent implements OnInit {
         this.pending = false;
         this.alertSrv.showToaster('Resource added Successfully!', 'SUCCESS');
         this.getData();
+        this.tabs.setSelectedIndex(0);
       },
       (e) => {
         this.pending = false;
