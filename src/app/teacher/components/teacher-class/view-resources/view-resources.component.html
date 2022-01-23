@@ -1,4 +1,4 @@
-<nz-tabset class="m-2">
+<nz-tabset #tabs class="m-2">
   <nz-tab nzTitle="RESOURCE">
     <ng-container *ngIf="filesList.length != 0; else noData">
       <nz-collapse class="m-4">
@@ -40,16 +40,14 @@
   <nz-tab nzTitle="CREATE NEW RESOURCE">
     <div
       class="
-        w-[100%
-        -
-        40px]
+        w-[100%-40px]
         flex
         items-center
         rounded-lg
         bg-gray-100
         p-2
         m-5
-        border-[1px] border-solid border-gray-600
+        border-[1px] border-solid border-gray-100
       "
     >
       <div class="flex-1">
