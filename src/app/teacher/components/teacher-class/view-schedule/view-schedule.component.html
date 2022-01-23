@@ -9,8 +9,14 @@
     <tbody>
       <tr *ngFor="let day of days; let i = index" class="hover:bg-green-50">
         <th>{{ day }}</th>
-        <td *ngFor="let time of scheduleMap[i]">
-          {{ time.subject | classSubject }}
+        <td class="text-center p-auto" *ngFor="let time of scheduleMap[i]">
+          <p
+            [class]="
+              time.subject ? 'px-4 py-2 m-auto rounded-md bg-green-200' : ''
+            "
+          >
+            {{ time.subject | classSubject }}
+          </p>
         </td>
       </tr>
     </tbody>
