@@ -35,7 +35,7 @@ export class ClassCreateComponent implements OnInit {
   scheduleData: ScheduleDataDto[] = [];
   classId: number = 0;
 
-  file!: File | string;
+  file!: File | string | undefined;
   fileUrl: string = '';
 
   constructor(
@@ -233,5 +233,7 @@ export class ClassCreateComponent implements OnInit {
     this.showWeekSchedule = false;
     this.scheduleData = [];
     this.showWeekSchedule = true;
+    this.file = undefined;
+    this.fileUrl = '';
   }
 }

@@ -21,7 +21,7 @@ export class ProfileDialog implements OnInit {
   user_form!: FormGroup;
   extra_form!: FormGroup;
   pendding: boolean = false;
-  file!: File | string;
+  file!: File | string | undefined;
   fileUrl: string = '';
   needReload = false;
 

@@ -8,7 +8,7 @@ import { AnnouncementService } from 'src/app/shared/services/announcement.servic
   styleUrls: ['./announcement-list.component.scss'],
 })
 export class AnnouncementListComponent implements OnInit {
-  showKind: 'list' | 'grid' = 'list';
+  showKind: 'list' | 'grid' = 'grid';
   searchedValue!: string;
   startDate!: string;
   endDate!: string;

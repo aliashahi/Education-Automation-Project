@@ -20,7 +20,7 @@ article {
   display: flex;
   flex-direction: column;
   .head-bg {
-    border-radius: 15px;
+    border-radius: 15px 15px 0 0;
     background-image: url("../../../../assets/images/background/dashboard.jpg");
     background-size: 100% auto;
     background-repeat: no-repeat;

@@ -128,7 +128,7 @@
               [disabled]="personal_form.invalid || pendding"
               (click)="onRegisterUser(stepper)"
             >
-              Create user
+              {{ !user?.id ? "Create user" : "Update user" }}
             </button>
           </div>
         </form>

@@ -19,9 +19,10 @@ export class UserCreateComponent implements OnInit {
   pendding = false;
   user!: User;
   hidePass: boolean = true;
-  file!: File | string;
+  file!: File | string | undefined;
   fileUrl: string = '';
   extraInfo: any = {};
+  studentId: any = null;
   constructor(
     private userSrv: UserService,
     private alertSrv: AlertService,
@@ -36,12 +37,12 @@ export class UserCreateComponent implements OnInit {
 
   private checkAndStartEditMode() {
     if (this.activeRoute.snapshot.params.id) {
-      let id = this.activeRoute.snapshot.params.id;
+      this.studentId = this.activeRoute.snapshot.params.id;
       let access = this.activeRoute.snapshot.params.access;
       this.pendding = true;
       this.personal_form.disable();
       this.extra_form.disable();
-      this.userSrv.getUserById(id, access).subscribe(
+      this.userSrv.getUserById(this.studentId, access).subscribe(
         (res) => {
           this.extraInfo = res;
           let user = res.user;
@@ -120,21 +121,27 @@ export class UserCreateComponent implements OnInit {
   onRegisterUser(stepper: MatStepper) {
     this.personal_form.disable();
     this.pendding = true;
-    this.userSrv.register({ ...this.personal_form.value }).subscribe(
-      (res) => {
-        this.user = res;
-        this.alertSrv.showToaster('User created Successfully!', 'SUCCESS');
-        stepper.next();
-      },
-      (e) => {
-        this.personal_form.enable();
-        this.pendding = false;
-      },
-      () => {
-        this.personal_form.enable();
-        this.pendding = false;
-      }
-    );
+    this.userSrv
+      .register({
+        ...this.personal_form.value,
+        ...this.user,
+        id: this.studentId,
+      })
+      .subscribe(
+        (res) => {
+          this.user = res;
+          this.alertSrv.showToaster('User created Successfully!', 'SUCCESS');
+          stepper.next();
+        },
+        (e) => {
+          this.personal_form.enable();
+          this.pendding = false;
+        },
+        () => {
+          this.personal_form.enable();
+          this.pendding = false;
+        }
+      );
   }
 
   onupdateExtraInfo(stepper: MatStepper) {
@@ -145,7 +152,7 @@ export class UserCreateComponent implements OnInit {
     let model = this.extra_form.value;
     Object.entries({
       user: this.user.id,
-      profileImage: this.file,
+      profileImage: this.file && (<any>this.file).name ? this.file : null,
       nationalId: model.nationalId,
       birthDate: createDateFormat(model.birthDate),
       phoneNumber: model.phoneNumber,
@@ -153,7 +160,7 @@ export class UserCreateComponent implements OnInit {
       address: model.address,
       classroom: this.extraInfo.classroom ? this.extraInfo.classroom.id : null,
     }).forEach((i) => {
-      formData.append(i[0], i[1]);
+      if (i[1] != null) formData.append(i[0], i[1]);
     });
     this.userSrv
       .updateUserExtraInfoById(formData, this.user.id, <any>userType)
