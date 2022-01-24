@@ -158,7 +158,10 @@
             {{ student.email }}
           </td>
           <th>
-            <button class="btn ml-2 border-0 bg-red-200 text-red-700 btn-xs">
+            <button
+              class="btn ml-2 border-0 bg-red-200 text-red-700 btn-xs"
+              (click)="onDelete(student)"
+            >
               delete
             </button>
             <button
