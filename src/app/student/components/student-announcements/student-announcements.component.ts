@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialog } from 'src/app/shared/modules/confirm';
 import { Announcement } from 'src/app/manager/models/announcement.model';
 import { AlertService } from 'src/app/shared/modules/alert/alert.service';
 import { AnnouncementService } from 'src/app/shared/services/announcement.service';
-import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-dialog.dto';
 
 @Component({
   selector: 'EAP-student-announcements',
@@ -12,7 +10,7 @@ import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-
   styleUrls: ['./student-announcements.component.scss'],
 })
 export class StudentAnnouncementsComponent implements OnInit {
-  showKind: 'list' | 'grid' = 'list';
+  showKind: 'list' | 'grid' = 'grid';
   searchedValue!: string;
   startDate!: string;
   endDate!: string;

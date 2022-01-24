@@ -15,7 +15,11 @@ export class UserService extends ServiceBase {
     return this.post$('auth/jwt/create/', model);
   }
 
-  public register(model: RegisterDto) {
+  public register(model: any) {
+    if (model.id) {
+      delete model['password'];
+      return this.put$(`auth/users/${model.id}`, model);
+    }
     return this.post$('auth/users/', model);
   }
 

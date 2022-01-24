@@ -12,7 +12,7 @@ import { ConfirmDialogDto } from 'src/app/shared/modules/confirm/models/confirm-
   styleUrls: ['./class-list.component.scss'],
 })
 export class ClassListComponent implements OnInit {
-  showKind: 'list' | 'grid' = 'list';
+  showKind: 'list' | 'grid' = 'grid';
   searchedValue!: string;
   startDate!: string;
   endDate!: string;

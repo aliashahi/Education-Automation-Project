@@ -8,9 +8,10 @@ import { ResourceService } from 'src/app/shared/services/resource.service';
   styleUrls: ['./upload-profile-image.component.scss'],
 })
 export class UploadProfileImageComponent implements OnInit {
-  @Input() file!: File | string;
+  @Input() file!: File | string | undefined;
   @Input() placeholder: 'PROFILE' | 'CLASS' = 'PROFILE';
-  @Output() fileChange: EventEmitter<File | string> = new EventEmitter();
+  @Output() fileChange: EventEmitter<File | string | undefined> =
+    new EventEmitter();
   url!: string;
   @Input('url') set setUrl(v: string) {
     this.url = v;

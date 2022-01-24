@@ -99,11 +99,19 @@
       <p *ngIf="!pendding">
         {{ "-" | userInfo: "email" | longTextCutter: 18 }}
       </p>
+      <!-- mat-raised-button -->
       <button
-        mat-raised-button
         color="primary"
         (click)="onEditProfile(menuTrigger)"
-        class="mt-auto mb-2 w-full"
+        class="
+          btn
+          flex flex-nowrap
+          items-center
+          justify-around
+          mb-2
+          mt-0
+          w-full
+        "
       >
         <mat-icon class="text-white">edit</mat-icon>Edit profile
       </button>
